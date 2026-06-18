@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sentarse, Caminar, Permanecer en Pie — Watchman Nee</title>
+
+<script type="application/json" id="libro-meta">
+{
+  "titulo": "Sentarse, Caminar, Permanecer en Pie",
+  "subtitulo": "La postura del creyente ante Dios, el mundo y el enemigo",
+  "autor": "Watchman Nee",
+  "anio": 1957,
+  "anio_autor": "1903–1972",
+  "paginas_virtuales": 8,
+  "capitulos": 3,
+  "expedicion": "mentalidad",
+  "sub_expedicion": "identidad",
+  "color_acento": "#7C5A1E",
+  "color_portada_inicio": "#1A1208",
+  "color_portada_fin": "#A67C3A",
+  "tiempo_lectura_total_min": 32,
+  "archivo": "libros/sit-walk-stand.html"
+}
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --c-acento:        #7C5A1E;
+    --c-acento-medio:  #9B7232;
+    --c-acento-suave:  #C49A52;
+    --c-acento-claro:  #DDB96E;
+    --c-acento-palido: #F5EDD8;
+    --c-acento-bg:     #E8D4A8;
+
+    --portada-grad: linear-gradient(155deg, #0D0A04 0%, #1A1208 30%, #3D2A0C 65%, #7C5A1E 100%);
+    --header-grad:  linear-gradient(135deg, #1A1208 0%, #3D2A0C 100%);
+
+    --font-serif:  'Cormorant Garamond', Georgia, serif;
+    --font-body:   'Source Serif 4', Georgia, serif;
+
+    --c-accion:     #1E9E75;
+    --c-accion-bg:  #062E26;
+    --c-accion-txt: #D9F3EB;
+    --c-bg:         #F7F3EE;
+    --c-surface:    #FDFAF5;
+    --c-border:     #E5DDD0;
+    --c-texto:      #1C1710;
+    --c-texto-2:    #5A4E3A;
+    --c-texto-3:    #9E8E6E;
+    --radio:        6px;
+    --radio-lg:     10px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; }
+  body { font-family: var(--font-body); color: var(--c-texto); background: var(--c-bg); }
+
+  /* ── PÁGINAS ── */
+  .pagina { position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow-y: auto; transition: opacity 0.4s ease, transform 0.4s ease; }
+  .pagina.oculta  { opacity: 0; pointer-events: none; transform: translateY(20px); }
+  .pagina.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+  /* ── BARRA PROGRESO ── */
+  #barra-progreso { position: fixed; top: 0; left: 0; z-index: 10000; height: 3px; width: 0%; background: linear-gradient(90deg, var(--c-acento-suave), var(--c-accion)); display: none; border-radius: 0 2px 2px 0; }
+
+  /* ── PORTADA ── */
+  #portada .c1 { position: absolute; top: -100px; right: -100px; width: 480px; height: 480px; border-radius: 50%; background: rgba(255,255,255,0.02); pointer-events: none; animation: flotar 9s ease-in-out infinite; }
+  #portada .c2 { position: absolute; bottom: -120px; left: -80px; width: 520px; height: 520px; border-radius: 50%; background: rgba(255,255,255,0.015); pointer-events: none; animation: flotar 11s ease-in-out infinite reverse; }
+  #portada .c3 { position: absolute; top: 50%; right: -180px; transform: translateY(-50%); width: 350px; height: 350px; border-radius: 50%; border: 1px solid rgba(196,154,82,0.08); pointer-events: none; animation: rotar 35s linear infinite; }
+
+  @keyframes flotar { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-20px) scale(1.015); } }
+  @keyframes rotar { from { transform: translateY(-50%) rotate(0deg); } to { transform: translateY(-50%) rotate(360deg); } }
+
+  .portada-inner { position: relative; z-index: 1; max-width: 580px; display: flex; flex-direction: column; align-items: center; opacity: 0; transform: translateY(28px); animation: entrar 1s cubic-bezier(0.22,1,0.36,1) 0.2s forwards; }
+  @keyframes entrar { to { opacity: 1; transform: translateY(0); } }
+
+  .p-eyebrow { font-family: var(--font-body); font-size: 10px; letter-spacing: 0.38em; text-transform: uppercase; color: #8B6E42; margin-bottom: 2.75rem; opacity: 0; animation: entrar 0.8s ease 0.5s forwards; }
+  .p-ornament { font-size: 1.2rem; color: rgba(196,154,82,0.3); letter-spacing: 0.8em; margin-bottom: 1.5rem; opacity: 0; animation: entrar 0.8s ease 0.65s forwards; }
+  .p-titulo { font-family: var(--font-serif); font-size: clamp(2.4rem, 6vw, 3.8rem); font-weight: 300; color: #F0E8D8; line-height: 1.18; text-align: center; letter-spacing: 0.02em; opacity: 0; animation: entrar 0.9s ease 0.75s forwards; }
+  .p-titulo strong { font-weight: 600; color: #DDB96E; display: block; }
+  .p-rule { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--c-acento-suave), transparent); margin: 2rem 0; opacity: 0; animation: entrar 0.8s ease 0.9s forwards; }
+  .p-autor { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 300; color: #A68550; letter-spacing: 0.18em; margin-bottom: 0.35rem; opacity: 0; animation: entrar 0.8s ease 1s forwards; }
+  .p-fechas { font-size: 0.82rem; color: #5A4530; letter-spacing: 0.08em; margin-bottom: 3rem; font-family: var(--font-body); opacity: 0; animation: entrar 0.8s ease 1.05s forwards; }
+  .p-badge { border: 1px solid rgba(196,154,82,0.22); color: #8B6E42; font-size: 9.5px; letter-spacing: 0.24em; padding: 6px 18px; border-radius: 40px; text-transform: uppercase; margin-bottom: 3.5rem; font-family: var(--font-body); opacity: 0; animation: entrar 0.8s ease 1.15s forwards; }
+  .btn-leer { display: inline-flex; align-items: center; gap: 10px; background: var(--c-acento-suave); color: #1A1208; font-family: var(--font-serif); font-size: 1.05rem; font-weight: 600; padding: 1rem 2.75rem; border-radius: 4px; letter-spacing: 0.06em; box-shadow: 0 4px 24px rgba(0,0,0,0.35); transition: all 0.2s; border: none; cursor: pointer; opacity: 0; animation: entrar 0.9s cubic-bezier(0.22,1,0.36,1) 1.3s forwards; }
+  .btn-leer:hover { background: #DDB96E; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+  .p-footer { position: absolute; bottom: 1.75rem; left: 0; right: 0; text-align: center; font-size: 9.5px; letter-spacing: 0.2em; color: #3A2E1A; text-transform: uppercase; font-family: var(--font-body); opacity: 0; animation: entrar 0.8s ease 1.5s forwards; }
+
+  /* ── LAYOUT CONTENIDO ── */
+  .page { max-width: 720px; margin: 0 auto; background: var(--c-surface); border-radius: var(--radio); box-shadow: 0 4px 32px rgba(0,0,0,0.08); overflow: hidden; }
+  .libro-header { background: var(--header-grad); padding: 1.75rem 3rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .libro-header-titulo { font-family: var(--font-serif); font-style: italic; font-size: 1rem; color: #C49A52; font-weight: 300; }
+  .libro-header-paso { font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #7C5A1E; background: rgba(255,255,255,0.06); padding: 4px 12px; border-radius: 20px; white-space: nowrap; font-family: var(--font-body); }
+  .lectura-meta { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1.5rem; background: rgba(0,0,0,0.04); border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 10.5px; letter-spacing: 0.12em; color: var(--c-texto-3); text-transform: uppercase; font-family: var(--font-body); }
+  .lectura-meta span { color: var(--c-acento-medio); font-weight: 600; }
+  .body { padding: 2.75rem 3.5rem 3.5rem; }
+
+  /* ── TOC ── */
+  .toc { background: var(--c-acento-palido); border-radius: var(--radio-lg); padding: 1.5rem 1.75rem; margin-bottom: 3rem; }
+  .toc-titulo { font-family: var(--font-body); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-acento-medio); margin-bottom: 1rem; }
+  .toc-grid { display: flex; flex-direction: column; gap: 7px; }
+  .toc-btn { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid var(--c-acento-bg); border-radius: var(--radio); padding: 9px 12px; text-decoration: none; color: var(--c-texto); font-size: 15px; font-family: var(--font-body); transition: all 0.15s; cursor: pointer; }
+  .toc-btn:hover { background: var(--c-acento-palido); border-color: var(--c-acento-suave); transform: translateX(4px); }
+  .toc-num { width: 26px; height: 26px; border-radius: 50%; background: var(--c-acento-palido); border: 1px solid var(--c-acento-bg); color: var(--c-acento); font-size: 11px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: var(--font-body); }
+  .toc-arrow { margin-left: auto; color: var(--c-acento-claro); font-size: 12px; }
+
+  hr.rule { border: none; text-align: center; margin: 2.5rem 0; }
+  hr.rule::before { content: '— ✦ —'; font-size: 11px; color: var(--c-acento-bg); letter-spacing: 0.3em; }
+
+  .eyebrow { font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--c-acento-medio); margin-bottom: 0.6rem; display: block; padding-top: 0.4rem; font-family: var(--font-body); }
+
+  .filtro-header { border-left: 3px solid var(--c-acento-suave); padding: 0.85rem 1.35rem; background: var(--c-acento-palido); border-radius: 0 var(--radio) var(--radio) 0; margin-bottom: 2.25rem; }
+  .filtro-label { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-acento-medio); margin-bottom: 4px; font-family: var(--font-body); }
+  .filtro-title { font-family: var(--font-serif); font-size: 1.1rem; font-style: italic; font-weight: 300; color: var(--c-texto); line-height: 1.55; }
+
+  .author-card { display: flex; gap: 1.25rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radio); padding: 1.2rem 1.4rem; margin-bottom: 1.5rem; align-items: flex-start; }
+  .author-monogram { width: 52px; height: 52px; border-radius: 50%; background: var(--c-acento-palido); border: 1.5px solid var(--c-acento-bg); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 1.3rem; font-style: italic; color: var(--c-acento); flex-shrink: 0; }
+  .author-name { font-family: var(--font-serif); font-size: 1rem; font-weight: 600; color: var(--c-texto); margin-bottom: 5px; }
+  .author-bio { font-size: inherit; line-height: 1.75; }
+
+  .problema { background: #FAF7F2; border: 1px solid var(--c-border); border-radius: var(--radio); padding: 1.1rem 1.4rem; font-size: inherit; line-height: 1.8; }
+
+  .tesis-block { background: var(--c-acento-palido); border-radius: var(--radio-lg); padding: 2rem 2.25rem; margin: 1.25rem 0; position: relative; overflow: hidden; }
+  .tesis-block::before { content: '\201C'; font-family: var(--font-serif); font-size: 7rem; color: var(--c-acento-suave); opacity: 0.2; position: absolute; top: -10px; left: 12px; line-height: 1; pointer-events: none; }
+  .tesis-label { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-acento-medio); margin-bottom: 0.75rem; position: relative; z-index: 1; font-family: var(--font-body); }
+  .tesis-text { font-family: var(--font-serif); font-size: 1.12rem; font-style: italic; font-weight: 300; color: #2A1F0E; line-height: 1.78; position: relative; z-index: 1; }
+
+  .idea { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start; }
+  .idea-num { width: 30px; height: 30px; border-radius: 50%; background: var(--c-acento-palido); border: 1px solid var(--c-acento-bg); color: var(--c-acento); font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 3px; }
+  .idea-body { flex: 1; }
+  .idea-text { font-size: inherit; line-height: 1.8; }
+
+  .dato-card { background: var(--c-accion-bg); border-radius: var(--radio-lg); padding: 1.75rem 2rem; margin: 1.25rem 0; }
+  .dato-label { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #5DCAA5; margin-bottom: 0.75rem; font-family: var(--font-body); }
+  .dato-text { font-family: var(--font-serif); font-size: 1.06rem; font-style: italic; font-weight: 300; color: var(--c-accion-txt); line-height: 1.8; }
+
+  .accion-card { background: var(--c-surface); border: 1px solid #C8E6D8; border-top: 3px solid var(--c-accion); border-radius: var(--radio); padding: 1.5rem 1.75rem; margin: 1.25rem 0; }
+  .accion-label { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #0F6E56; margin-bottom: 0.75rem; font-family: var(--font-body); }
+  .accion-text { font-size: inherit; line-height: 1.8; }
+  .accion-question { font-family: var(--font-serif); font-style: italic; font-weight: 300; font-size: 1.05rem; color: #0F6E56; line-height: 1.7; border-left: 2.5px solid var(--c-accion); padding-left: 1rem; margin: 0.9rem 0; }
+
+  .alerta-card { background: #FFF8F0; border: 1px solid #F0D8A8; border-left: 3px solid var(--c-acento-suave); border-radius: var(--radio); padding: 1.25rem 1.5rem; margin: 1.25rem 0; }
+  .alerta-label { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-acento-medio); margin-bottom: 0.6rem; font-family: var(--font-body); }
+  .alerta-text { font-size: inherit; line-height: 1.75; font-style: italic; }
+
+  .veredicto-card { background: linear-gradient(135deg, #1A1208 0%, #2A1C0A 100%); border-radius: var(--radio-lg); padding: 2rem 2.25rem; margin: 1.25rem 0; }
+  .veredicto-label { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-acento-claro); margin-bottom: 0.6rem; font-family: var(--font-body); }
+  .veredicto-badge { display: inline-block; background: var(--c-acento); color: #fff; font-family: var(--font-serif); font-style: italic; font-size: 1rem; border-radius: 3px; padding: 4px 14px; margin-bottom: 1rem; }
+  .veredicto-text { font-size: inherit; line-height: 1.85; }
+
+  .eval-grid { display: flex; flex-direction: column; gap: 1rem; margin: 1.25rem 0; }
+  .eval-item { background: #FAF7F2; border: 1px solid var(--c-border); border-radius: var(--radio); padding: 1rem 1.25rem; }
+  .eval-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
+  .eval-titulo { font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; color: var(--c-texto); }
+  .eval-scores { display: flex; gap: 0.5rem; }
+  .eval-score { font-size: 0.78rem; padding: 2px 8px; border-radius: 20px; font-family: var(--font-body); font-weight: 600; }
+  .eval-score.fid { background: var(--c-acento-palido); color: var(--c-acento); }
+  .eval-score.apl { background: #E8F5EE; color: #0F6E56; }
+  .eval-text { font-size: inherit; line-height: 1.7; }
+
+  .com-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1.25rem 0; }
+  .com-item { background: #FAF7F2; border: 1px solid var(--c-border); border-radius: var(--radio); padding: 0.9rem 1rem; }
+  .com-dim { font-size: 0.75rem; font-weight: 600; color: var(--c-texto-3); margin-bottom: 0.3rem; font-family: var(--font-body); }
+  .com-score { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 600; color: var(--c-acento); margin-bottom: 0.3rem; }
+  .com-obs { font-size: 0.82em; line-height: 1.55; }
+
+  .nav-final { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; padding: 2rem 3rem 2.5rem; border-top: 1px solid var(--c-border); }
+  .btn-nav { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-serif); font-style: italic; font-weight: 300; font-size: 1rem; padding: 0.8rem 1.75rem; border-radius: 4px; border: none; cursor: pointer; transition: all 0.15s; }
+  .btn-regresar { background: var(--c-acento-palido); color: var(--c-acento); border: 1px solid var(--c-acento-bg); }
+  .btn-regresar:hover { background: var(--c-acento-bg); transform: translateY(-1px); }
+  .btn-siguiente { background: var(--c-acento); color: #fff; box-shadow: 0 3px 12px rgba(124,90,30,0.3); }
+  .btn-siguiente:hover { background: #5A3E10; transform: translateY(-1px); }
+
+  .book-footer { background: #1A1208; padding: 1rem 3rem; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+  .footer-title { font-family: var(--font-serif); font-style: italic; font-weight: 300; font-size: 0.88rem; color: var(--c-acento-suave); }
+  .footer-tag { font-size: 10px; letter-spacing: 0.15em; color: #4A3820; text-transform: uppercase; font-family: var(--font-body); }
+  .footer-firma { font-size: 11px; color: #3A2E1A; font-family: var(--font-body); letter-spacing: 0.04em; margin-top: 0.15rem; }
+
+  /* ── CONTROL TAMAÑO DE LETRA ── */
+  #ctrl-fuente {
+    position: fixed; bottom: 8.5rem; right: 1.5rem; z-index: 9999;
+    display: none; flex-direction: column; align-items: center;
+    background: #1A1208; border: 1.5px solid rgba(196,154,82,0.3);
+    border-radius: 6px; overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .ctrl-fuente-btn {
+    width: 44px; height: 36px; background: none; border: none;
+    color: #C49A52; cursor: pointer; font-family: var(--font-body);
+    font-size: 0.85rem; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s; line-height: 1;
+  }
+  .ctrl-fuente-btn:hover { background: rgba(196,154,82,0.1); }
+  .ctrl-fuente-sep { width: 28px; height: 1px; background: rgba(196,154,82,0.15); }
+  .ctrl-fuente-nivel {
+    font-size: 9px; color: #5A4530; font-family: var(--font-body);
+    letter-spacing: 0.1em; padding: 3px 0 4px;
+  }
+  body.dark #ctrl-fuente { background: #FAF7F2; border-color: var(--c-acento-bg); }
+  body.dark .ctrl-fuente-btn { color: var(--c-acento); }
+  body.dark .ctrl-fuente-btn:hover { background: var(--c-acento-palido); }
+  body.dark .ctrl-fuente-nivel { color: var(--c-texto-3); }
+  body.dark .ctrl-fuente-sep { background: var(--c-border); }
+
+  /* Tamaños aplicables solo al cuerpo de lectura */
+  /* Tamaño de letra — escala todo el body de lectura */
+  .body { --escala: 1; font-size: calc(16px * var(--escala)); }
+  .body.fuente-s  { --escala: 0.875; }
+  .body.fuente-m  { --escala: 1; }
+  .body.fuente-l  { --escala: 1.125; }
+  .body.fuente-xl { --escala: 1.25; }
+
+  /* Todos los textos del body heredan la escala */
+  .body .problema      { font-size: inherit; }
+  .body .idea-text     { font-size: inherit; }
+  .body .tesis-text    { font-size: 1.05em; }
+  .body .filtro-title  { font-size: 1.05em; }
+  .body .dato-text     { font-size: inherit; }
+  .body .accion-text   { font-size: inherit; }
+  .body .accion-question { font-size: 1em; }
+  .body .alerta-text   { font-size: inherit; }
+  .body .veredicto-text { font-size: inherit; }
+  .body .eval-text     { font-size: inherit; }
+  .body .author-bio    { font-size: inherit; }
+  .body .author-name   { font-size: 1em; }
+  .body .eval-titulo   { font-size: 0.9em; }
+  .body .com-obs       { font-size: 0.82em; }
+
+  /* ── BOTÓN CONFIGURACIÓN ── */
+  #btn-config {
+    position: fixed; top: 1rem; right: 1rem; z-index: 9999;
+    width: 44px; height: 44px; border-radius: 4px;
+    background: rgba(26,18,8,0.88); border: 1px solid rgba(196,154,82,0.28);
+    backdrop-filter: blur(8px); color: #C49A52; font-size: 1.05rem;
+    display: none; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  #btn-config:hover { background: rgba(61,42,12,0.95); }
+  body.dark #btn-config { background: rgba(250,247,242,0.92); color: var(--c-acento); border-color: var(--c-acento-bg); }
+
+  /* ── PANEL CONFIGURACIÓN ── */
+  #config-overlay { position: fixed; inset: 0; z-index: 9998; background: rgba(0,0,0,0.2); opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+  #config-overlay.activo { opacity: 1; pointer-events: auto; }
+
+  #config-panel {
+    position: fixed; top: 4rem; right: 1rem; z-index: 9999;
+    width: 210px; background: #1A1208;
+    border: 1px solid rgba(196,154,82,0.22);
+    border-radius: 8px; box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+    display: none; flex-direction: column; overflow: hidden;
+    transform: translateY(-6px); opacity: 0;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  #config-panel.visible { display: flex; }
+  #config-panel.abierto { transform: translateY(0); opacity: 1; }
+  body.dark #config-panel { background: #FAF7F2; border-color: var(--c-acento-bg); }
+
+  .config-seccion-label {
+    font-size: 8.5px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #5A4530; padding: 0.75rem 1rem 0.3rem; font-family: var(--font-body);
+  }
+  body.dark .config-seccion-label { color: var(--c-texto-3); }
+
+  .config-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.5rem 1rem 0.75rem; gap: 0.5rem;
+  }
+  .config-row-label {
+    font-size: 13px; color: #C8B890; font-family: var(--font-body);
+  }
+  body.dark .config-row-label { color: var(--c-texto-2); }
+
+  /* Toggle switch */
+  .toggle-wrap { position: relative; width: 40px; height: 22px; flex-shrink: 0; }
+  .toggle-wrap input { opacity: 0; width: 0; height: 0; position: absolute; }
+  .toggle-track {
+    position: absolute; inset: 0; background: #3A2A10;
+    border-radius: 22px; cursor: pointer; transition: background 0.2s;
+    border: 1px solid rgba(196,154,82,0.15);
+  }
+  .toggle-wrap input:checked + .toggle-track { background: var(--c-acento); }
+  .toggle-track::after {
+    content: ''; position: absolute; width: 16px; height: 16px;
+    background: #C8B890; border-radius: 50%; top: 2px; left: 2px;
+    transition: transform 0.2s;
+  }
+  .toggle-wrap input:checked + .toggle-track::after { transform: translateX(18px); background: #fff; }
+  body.dark .toggle-track { background: var(--c-border); border-color: var(--c-border); }
+  body.dark .toggle-track::after { background: var(--c-texto-3); }
+  body.dark .toggle-wrap input:checked + .toggle-track { background: var(--c-acento); }
+  body.dark .toggle-wrap input:checked + .toggle-track::after { background: #fff; }
+
+  /* Fuente control */
+  .fuente-ctrl { display: flex; align-items: center; gap: 0; border: 1px solid rgba(196,154,82,0.2); border-radius: 4px; overflow: hidden; }
+  .fuente-btn {
+    width: 32px; height: 28px; background: none; border: none;
+    color: #C49A52; cursor: pointer; font-family: var(--font-body);
+    font-size: 0.82rem; font-weight: 600; transition: background 0.15s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .fuente-btn:hover { background: rgba(196,154,82,0.12); }
+  .fuente-val {
+    min-width: 28px; text-align: center; font-size: 11px;
+    color: #8B6E42; font-family: var(--font-body); border-left: 1px solid rgba(196,154,82,0.15); border-right: 1px solid rgba(196,154,82,0.15); padding: 0 4px;
+  }
+  body.dark .fuente-btn { color: var(--c-acento); }
+  body.dark .fuente-val { color: var(--c-texto-3); border-color: var(--c-border); }
+  body.dark .fuente-ctrl { border-color: var(--c-border); }
+
+  .config-sep { height: 1px; background: rgba(196,154,82,0.1); margin: 0 0.75rem; }
+  body.dark .config-sep { background: var(--c-border); }
+
+  /* ── MENÚ ── */
+  #menu-btn { position: fixed; top: 1rem; left: 1rem; z-index: 9999; width: 44px; height: 44px; border-radius: 4px; background: rgba(26,18,8,0.85); border: 1px solid rgba(196,154,82,0.25); backdrop-filter: blur(8px); color: #C49A52; font-size: 1rem; display: none; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+  #menu-btn:hover { background: rgba(61,42,12,0.9); }
+
+  #menu-overlay { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.4); opacity: 0; pointer-events: none; transition: opacity 0.28s ease; }
+  #menu-overlay.activo { opacity: 1; pointer-events: auto; }
+
+  #menu-panel { position: fixed; top: 0; left: 0; bottom: 0; width: 290px; z-index: 10000; background: #1A1208; box-shadow: 4px 0 32px rgba(0,0,0,0.4); transform: translateX(-100%); transition: transform 0.28s cubic-bezier(0.4,0,0.2,1); display: flex; flex-direction: column; overflow-y: auto; }
+  #menu-panel.abierto { transform: translateX(0); }
+
+  .menu-header { padding: 1.5rem 1.5rem 1rem; border-bottom: 1px solid rgba(196,154,82,0.12); display: flex; align-items: center; justify-content: space-between; }
+  .menu-titulo { font-family: var(--font-serif); font-style: italic; font-weight: 300; font-size: 0.95rem; color: var(--c-acento-suave); }
+  .menu-close { background: none; border: none; cursor: pointer; color: var(--c-acento-medio); font-size: 1.1rem; padding: 4px; line-height: 1; }
+  .menu-seccion { padding: 0.5rem 0; border-bottom: 1px solid rgba(196,154,82,0.08); }
+  .menu-seccion-label { font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: #5A4530; padding: 0.5rem 1.5rem 0.25rem; font-family: var(--font-body); }
+  .menu-item { display: flex; align-items: center; gap: 0.85rem; width: 100%; padding: 0.7rem 1.5rem; background: none; border: none; cursor: pointer; text-align: left; transition: background 0.15s; font-family: var(--font-body); }
+  .menu-item:hover { background: rgba(196,154,82,0.06); }
+  .menu-item.activo { background: rgba(196,154,82,0.1); }
+  .menu-item-num { width: 26px; height: 26px; border-radius: 3px; flex-shrink: 0; background: rgba(196,154,82,0.1); border: 1px solid rgba(196,154,82,0.2); color: var(--c-acento-suave); font-size: 11px; display: flex; align-items: center; justify-content: center; }
+  .menu-item.activo .menu-item-num { background: var(--c-acento); border-color: var(--c-acento); color: #fff; }
+  .menu-item-titulo { font-size: 14px; color: #C8B890; line-height: 1.3; }
+  .menu-item-sub { font-size: 11px; color: #5A4530; margin-top: 1px; font-style: italic; }
+
+  /* ── MENÚ ── */
+  body.dark { background: #0D0A04; color: #C8B890; }
+  body.dark .page { background: #1A1208; box-shadow: 0 4px 32px rgba(0,0,0,0.5); }
+  body.dark .libro-header { background: linear-gradient(135deg, #0D0A04 0%, #1A1208 100%); }
+  body.dark .body { background: #1A1208; }
+  body.dark .filtro-header { background: #221808; border-left-color: var(--c-acento-suave); }
+  body.dark .filtro-title { color: #C8B890; }
+  body.dark .tesis-block { background: #221808; }
+  body.dark .tesis-text { color: #C8B890; }
+  body.dark .problema { background: #221808; border-color: #3A2A10; color: #A89870; }
+  body.dark .idea-num { background: #2A1C0A; border-color: #4A3420; color: var(--c-acento-suave); }
+  body.dark .idea-text { color: #A89870; }
+  body.dark .toc { background: #221808; }
+  body.dark .toc-btn { background: #1A1208; border-color: #3A2A10; color: #C8B890; }
+  body.dark .toc-btn:hover { background: #2A1C0A; }
+  body.dark .toc-num { background: #2A1C0A; border-color: #4A3420; color: var(--c-acento-suave); }
+  body.dark .accion-card { background: #0A1A12; border-color: #1A3A28; }
+  body.dark .alerta-card { background: #221808; border-color: #3A2A10; }
+  body.dark .alerta-text { color: #A89870; }
+  body.dark .eval-item { background: #221808; border-color: #3A2A10; }
+  body.dark .eval-text { color: #A89870; }
+  body.dark .com-item { background: #221808; border-color: #3A2A10; }
+  body.dark .com-obs { color: #A89870; }
+  body.dark .nav-final { border-top-color: #3A2A10; background: #1A1208; }
+  body.dark .btn-regresar { background: #2A1C0A; color: var(--c-acento-suave); border-color: #4A3420; }
+  body.dark #btn-config { background: rgba(250,247,242,0.92); color: var(--c-acento); border-color: var(--c-acento-bg); }
+  body.dark hr.rule::before { color: #3A2A10; }
+  body.dark .author-card { background: #1A1208; border-color: #3A2A10; }
+  body.dark .author-name { color: #C8B890; }
+  body.dark .author-bio { color: #A89870; }
+
+  body.modo-lectura .libro-header { display: none; }
+  body.modo-lectura .lectura-meta { display: none; }
+  body.modo-lectura .book-footer { display: none; }
+  body.modo-lectura .nav-final { display: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 780px) { .page { border-radius: 0; } .body { padding: 2rem 2rem 3rem; } .libro-header { padding: 1.4rem 2rem; } .nav-final { padding: 1.75rem 2rem; } .book-footer { padding: 1rem 2rem; } .com-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 600px) { .p-titulo { font-size: clamp(1.9rem, 7vw, 2.4rem); } .page { border-radius: 0; box-shadow: none; } .libro-header { padding: 1rem 1.25rem; flex-direction: column; align-items: flex-start; gap: 0.5rem; } .body { padding: 1.4rem 1.1rem 2rem; } .filtro-title { font-size: 1rem; } .tesis-text { font-size: 1rem; } .problema { font-size: 14.5px; } .idea-text { font-size: 14px; } .nav-final { padding: 1.4rem 1.1rem; gap: 0.75rem; } .btn-nav { font-size: 0.9rem; padding: 0.7rem 1.3rem; flex: 1; justify-content: center; } .book-footer { padding: 1rem 1.25rem; flex-direction: column; text-align: center; gap: 0.4rem; } #config-panel { right: 0.5rem; width: 195px; } }
+</style>
+</head>
+<body>
+
+<div id="menu-overlay" onclick="cerrarMenu()"></div>
+
+<div id="menu-panel">
+  <div class="menu-header">
+    <span class="menu-titulo">Sentarse, Caminar, Permanecer en Pie</span>
+    <button class="menu-close" onclick="cerrarMenu()">✕</button>
+  </div>
+  <div class="menu-seccion">
+    <div class="menu-seccion-label">Resumen</div>
+    <button class="menu-item" onclick="irA('filtro')" data-page="filtro">
+      <span class="menu-item-num">F</span>
+      <span class="menu-item-texto"><div class="menu-item-titulo">Filtro de Lectura</div><div class="menu-item-sub">Resumen ejecutivo</div></span>
+    </button>
+    <button class="menu-item" onclick="irA('intro')" data-page="intro">
+      <span class="menu-item-num">·</span>
+      <span class="menu-item-texto"><div class="menu-item-titulo">Introducción</div><div class="menu-item-sub">El orden divino</div></span>
+    </button>
+  </div>
+  <div class="menu-seccion">
+    <div class="menu-seccion-label">Capítulos</div>
+    <button class="menu-item" onclick="irA('cap1')" data-page="cap1">
+      <span class="menu-item-num">1</span>
+      <span class="menu-item-texto"><div class="menu-item-titulo">Sentarse</div><div class="menu-item-sub">La obra ya terminada</div></span>
+    </button>
+    <button class="menu-item" onclick="irA('cap2')" data-page="cap2">
+      <span class="menu-item-num">2</span>
+      <span class="menu-item-texto"><div class="menu-item-titulo">Caminar</div><div class="menu-item-sub">La vida de Cristo expresada</div></span>
+    </button>
+    <button class="menu-item" onclick="irA('cap3')" data-page="cap3">
+      <span class="menu-item-num">3</span>
+      <span class="menu-item-texto"><div class="menu-item-titulo">Permanecer en Pie</div><div class="menu-item-sub">La guerra ya ganada</div></span>
+    </button>
+  </div>
+  <div class="menu-seccion">
+    <div class="menu-seccion-label">Evaluación</div>
+    <button class="menu-item" onclick="irA('evaluacion')" data-page="evaluacion">
+      <span class="menu-item-num">E</span>
+      <span class="menu-item-texto"><div class="menu-item-titulo">Solidez y Aplicabilidad</div><div class="menu-item-sub">Curaduría de ideas</div></span>
+    </button>
+    <button class="menu-item" onclick="irA('comunicador')" data-page="comunicador">
+      <span class="menu-item-num">C</span>
+      <span class="menu-item-texto"><div class="menu-item-titulo">Nee como Comunicador</div><div class="menu-item-sub">Evaluación del autor</div></span>
+    </button>
+  </div>
+  <div class="menu-seccion">
+    <div class="menu-seccion-label">Consolidación</div>
+    <button class="menu-item" onclick="irA('resumen')" data-page="resumen">
+      <span class="menu-item-num">★</span>
+      <span class="menu-item-texto"><div class="menu-item-titulo">Resumen Final</div><div class="menu-item-sub">Consolidación del libro</div></span>
+    </button>
+  </div>
+</div>
+
+<button id="menu-btn" onclick="abrirMenu()">☰</button>
+<button id="btn-config" onclick="toggleConfig()">⚙︎</button>
+
+<div id="config-overlay" onclick="cerrarConfig()"></div>
+<div id="config-panel">
+  <div class="config-seccion-label">Apariencia</div>
+  <div class="config-row">
+    <span class="config-row-label">Modo oscuro</span>
+    <label class="toggle-wrap">
+      <input type="checkbox" id="toggle-dark" onchange="toggleDark()">
+      <span class="toggle-track"></span>
+    </label>
+  </div>
+  <div class="config-sep"></div>
+  <div class="config-row">
+    <span class="config-row-label">Lectura limpia</span>
+    <label class="toggle-wrap">
+      <input type="checkbox" id="toggle-lectura" onchange="toggleLectura()">
+      <span class="toggle-track"></span>
+    </label>
+  </div>
+  <div class="config-sep"></div>
+  <div class="config-seccion-label">Tamaño de letra</div>
+  <div class="config-row">
+    <span class="config-row-label">Texto</span>
+    <div class="fuente-ctrl">
+      <button class="fuente-btn" onclick="cambiarFuente(-1)">A−</button>
+      <span class="fuente-val" id="fuente-nivel">M</span>
+      <button class="fuente-btn" onclick="cambiarFuente(1)">A+</button>
+    </div>
+  </div>
+</div>
+
+<div id="barra-progreso"></div>
+
+<!-- ══ PORTADA ══ -->
+<div id="portada" class="pagina visible">
+<section style="min-height:100vh;background:var(--portada-grad);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem 2rem;position:relative;overflow:hidden;">
+  <div class="c1"></div><div class="c2"></div><div class="c3"></div>
+  <div class="portada-inner">
+    <div class="p-eyebrow">Resumen Editorial · Mentor de Conocimiento</div>
+    <div class="p-ornament">— ✦ —</div>
+    <div class="p-titulo"><strong>Sentarse · Caminar</strong>Permanecer en Pie</div>
+    <div class="p-rule"></div>
+    <div class="p-autor">Watchman Nee</div>
+    <div class="p-fechas">1903 – 1972</div>
+    <div class="p-badge">Mentalidad · Identidad</div>
+    <button class="btn-leer" onclick="irA('filtro')">Leer resumen &nbsp;→</button>
+  </div>
+  <div class="p-footer">Sentarse, Caminar, Permanecer en Pie · Watchman Nee · 1957</div>
+</section>
+</div>
+
+<!-- ══ FILTRO DE LECTURA ══ -->
+<div id="filtro" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Sentarse, Caminar, Permanecer en Pie · Watchman Nee</div>
+      <div class="libro-header-paso">Filtro de Lectura</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>5 min</span></div>
+    <div class="body">
+
+      <div class="toc">
+        <div class="toc-titulo">Contenido</div>
+        <div class="toc-grid">
+          <button class="toc-btn" onclick="irA('intro')"><span class="toc-num">·</span>Introducción<span class="toc-arrow">↓</span></button>
+          <button class="toc-btn" onclick="irA('cap1')"><span class="toc-num">1</span>Sentarse — La obra ya terminada<span class="toc-arrow">↓</span></button>
+          <button class="toc-btn" onclick="irA('cap2')"><span class="toc-num">2</span>Caminar — La vida de Cristo expresada<span class="toc-arrow">↓</span></button>
+          <button class="toc-btn" onclick="irA('cap3')"><span class="toc-num">3</span>Permanecer en Pie — La guerra ya ganada<span class="toc-arrow">↓</span></button>
+          <button class="toc-btn" onclick="irA('evaluacion')"><span class="toc-num">E</span>Solidez y Aplicabilidad<span class="toc-arrow">↓</span></button>
+          <button class="toc-btn" onclick="irA('comunicador')"><span class="toc-num">C</span>Nee como Comunicador<span class="toc-arrow">↓</span></button>
+          <button class="toc-btn" onclick="irA('resumen')"><span class="toc-num">★</span>Resumen Final<span class="toc-arrow">↓</span></button>
+        </div>
+      </div>
+
+      <div class="filtro-header">
+        <div class="filtro-label">Filtro de Lectura</div>
+        <div class="filtro-title">Para discernir si este libro tiene peso real, claridad espiritual y valor transformador</div>
+      </div>
+
+      <span class="eyebrow">§ 1 · Sobre el Autor</span>
+      <div class="author-card">
+        <div class="author-monogram">N</div>
+        <div>
+          <div class="author-name">Watchman Nee — Nee To-sheng (1903–1972)</div>
+          <div class="author-bio">Teólogo y maestro bíblico chino, fundador del movimiento de las Asambleas Locales en China. Escribió desde la experiencia pastoral y la persecución real: fue encarcelado por el régimen comunista chino en 1952 y murió en prisión en 1972. Es considerado uno de los maestros bíblicos más influyentes del siglo XX en Asia y en el mundo evangélico global. Escribe desde la teología reformada-paulina con profunda convicción espiritual y evidencia de vida vivida en consecuencia.</div>
+        </div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">§ 2 · Tesis Central</span>
+      <div class="tesis-block">
+        <div class="tesis-label">Tesis</div>
+        <div class="tesis-text">La vida cristiana no comienza con el esfuerzo sino con el descanso en lo que Cristo ya hizo; solo quien primero se sienta puede después caminar con poder y finalmente mantenerse en pie ante el enemigo.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">§ 3 · Ideas Clave</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text"><strong>Sentarse antes de caminar.</strong> La mayoría de los creyentes intenta producir una vida espiritual antes de haber descansado en la obra terminada de Cristo. Esto invierte el orden divino y produce derrota segura. El descanso no es pasividad; es transferir todo el peso sobre lo que Dios ya hizo en Cristo.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text"><strong>La vida cristiana es espontánea, no actuada.</strong> Cuando el creyente vive desde Cristo y no desde su propio esfuerzo, la santidad, el amor y la obediencia fluyen naturalmente, del mismo modo que uno habla su lengua materna sin esfuerzo consciente. Cualquier "espiritualidad" que requiera gran tensión revela que algo está mal en la base.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text"><strong>Caminar es la expresión terrena de una posición celestial.</strong> Una vez establecida la postura de descanso, el creyente está llamado a vivir en el mundo con un comportamiento que refleje esa realidad: en el hogar, en el trabajo, en las relaciones. La prueba de si realmente estás sentado con Cristo es cómo tratas a tu cónyuge y a tus vecinos.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text"><strong>El estándar cristiano no es la justicia sino la Cruz.</strong> La pregunta del creyente nunca debe ser "¿tengo razón?" sino "¿qué haría la gracia?". Exigir justicia y defender derechos es el principio de los gentiles; dar más de lo que corresponde es el principio de la filiación divina.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text"><strong>Mantenerse en pie no es atacar sino conservar terreno ganado.</strong> La victoria sobre el enemigo espiritual ya fue obtenida por Cristo. El creyente no lucha para ganar; lucha desde la victoria. Toda oración que suplica vencer al enemigo, si no está saturada de alabanza, revela que el creyente ya cedió su posición.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text"><strong>La autoridad espiritual depende de la unión con Cristo.</strong> El nombre de Jesús no es una fórmula; es una delegación real de autoridad que Dios entrega solo a quienes caminan en plena obediencia y alineamiento con su propósito. Dios se "compromete" con sus siervos cuando la obra es concebida por Él, ejecutada por su poder y orientada a su gloria.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">§ 4 · Dato más Impactante</span>
+      <div class="dato-card">
+        <div class="dato-label">Giro Central</div>
+        <div class="dato-text">El libro propone que Adán no trabajó para llegar al descanso de Dios —nació directamente en el séptimo día— y que esa es exactamente la posición del creyente en Cristo: no ganar el reposo, sino comenzar desde él.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">§ 5 · Acción Inmediata</span>
+      <div class="accion-card">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-question">Identifica una relación donde actualmente estás "caminando antes de sentarte" —exigiendo, esforzándote, defendiendo— y practica hoy no hacer nada en esa situación, sino declarar en silencio: Él ya lo resolvió en la Cruz.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">§ 6 · Veredicto de Lectura</span>
+      <div class="veredicto-card">
+        <div class="veredicto-label">Veredicto</div>
+        <div class="veredicto-badge">Lectura Completa</div>
+        <div class="veredicto-text">Léelo completo. Es breve, denso y cada capítulo tiene peso real. El orden de los tres conceptos construye una arquitectura espiritual que no puede fraccionarse sin perder su impacto.</div>
+      </div>
+
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('portada')" class="btn-nav btn-regresar">← Portada</button>
+      <button onclick="irA('intro')" class="btn-nav btn-siguiente">Introducción →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Sentarse, Caminar, Permanecer en Pie · Watchman Nee</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Filtro de Lectura</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ══ INTRODUCCIÓN ══ -->
+<div id="intro" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Sentarse, Caminar, Permanecer en Pie · Watchman Nee</div>
+      <div class="libro-header-paso">Introducción</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>4 min</span></div>
+    <div class="body">
+
+      <div class="filtro-header">
+        <div class="filtro-label">Introducción</div>
+        <div class="filtro-title">El orden divino para la vida cristiana completa</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Promesa Central</div>
+        <div class="tesis-text">Descubrir el orden correcto de la vida cristiana —descanso, conducta y guerra espiritual— a través de tres palabras clave extraídas de la carta a los Efesios.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">El punto de partida</span>
+      <div class="problema">
+        Watchman Nee abre su libro con una pregunta que parece sencilla pero que tiene el peso de toda la carta a los Efesios detrás de ella: ¿desde dónde comienza realmente la vida cristiana? Demasiado a menudo, dice, colocamos el énfasis en algún detalle particular de nuestra conducta o de nuestro servicio, y por eso nunca apreciamos ni la extensión del ajuste que Dios requiere ni el punto desde el cual ese ajuste debe comenzar. Dios mide todo, de principio a fin, por las perfecciones de Su Hijo.
+        <br><br>
+        La carta a los Efesios, que sirve de telón de fondo a todo el libro, se divide naturalmente en dos grandes bloques: uno doctrinal (capítulos 1 al 3) que trata de las grandes realidades de la redención que Dios ha obrado para nosotros en Cristo, y otro práctico (capítulos 4 al 6) que expone las demandas de Dios sobre nuestra conducta y nuestro celo a la luz de esa redención. El bloque práctico, a su vez, puede subdividirse entre nuestra vida en el mundo (capítulos 4 al 6:9) y nuestra actitud hacia el enemigo (capítulos 6:10 al final). Así emergen tres grandes realidades: nuestra posición en Cristo, nuestra vida en el mundo y nuestra actitud hacia el adversario.
+        <br><br>
+        De cada una de estas tres secciones, Nee extrae una sola palabra que captura su idea central. De la primera: <em>sentarse</em> (Ef. 2:6). De la segunda: <em>caminar</em> (Ef. 4:1). De la tercera: <em>permanecer en pie</em> (Ef. 6:11). Estas tres palabras, tomadas en ese orden exacto, no son accidentales. Son la secuencia divina de la vida cristiana. Nee insiste en que el orden es decisivo: no se puede caminar bien si no se ha aprendido primero a sentarse, y no se puede permanecer en pie si no se ha caminado desde el descanso. Invertir esta secuencia produce, inevitablemente, derrota.
+        <br><br>
+        El objetivo del libro no es un estudio exhaustivo de Efesios. Es, más bien, iluminar estos tres principios en su orden y en su conexión, de modo que el creyente comprenda no solo qué se le pide, sino desde dónde se le pide. La vida del creyente tiene tres aspectos inevitables: hacia Dios, hacia los hombres y hacia los poderes satánicos. Nee sostiene que quien subestime cualquiera de los tres no alcanza lo que Dios tiene diseñado para él.
+      </div>
+
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('filtro')" class="btn-nav btn-regresar">← Filtro</button>
+      <button onclick="irA('cap1')" class="btn-nav btn-siguiente">Capítulo 1 →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Sentarse, Caminar, Permanecer en Pie · Watchman Nee</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Introducción</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ══ CAPÍTULO 1: SENTARSE ══ -->
+<div id="cap1" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Sentarse, Caminar, Permanecer en Pie · Watchman Nee</div>
+      <div class="libro-header-paso">Capítulo 1 · Sentarse</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>7 min</span></div>
+    <div class="body">
+
+      <div class="filtro-header">
+        <div class="filtro-label">Capítulo 1</div>
+        <div class="filtro-title">Sentarse — La obra ya terminada es el punto de partida, no la meta a alcanzar</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">Toda la vida cristiana comienza en el reposo de una obra ya completada. El error fundamental del creyente promedio es invertir el orden divino: trabaja para poder descansar, cuando en realidad debe descansar para poder trabajar.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa del Capítulo</span>
+      <div class="problema">
+        La vida cristiana no comienza con el caminar; comienza con el sentarse. Esto no es metáfora piadosa: es la lógica interna del evangelio. Dios hizo a Cristo sentarse a Su diestra en los lugares celestiales, y en ese mismo acto nos hizo sentar con Él. <em>Por gracia habéis sido salvos mediante la fe, y eso no de vosotros mismos: es don de Dios; no por obras, para que nadie se gloríe</em> (Ef. 2:6-9). Si la salvación no comenzó con lo que yo hice sino con lo que Él hizo, ¿por qué habría de ser diferente el resto de la vida cristiana?
+        <br><br>
+        El problema es que nuestra razón natural protesta. Si no caminamos, ¿cómo llegaremos a algún lado? Si no hacemos algo, ¿cómo progresaremos? El cristianismo, sin embargo, no comienza con un gran HACER sino con un gran HECHO. Efesios abre con la declaración de que Dios ya nos ha bendecido con toda bendición espiritual en los lugares celestiales en Cristo (Ef. 1:3). Nos invita, desde el primer versículo, a sentarnos y disfrutar lo que Él ha hecho para nosotros, no a salir a intentar conquistarlo por nuestra cuenta.
+        <br><br>
+        Sentarse es una postura de descanso. Algo ha terminado, el trabajo se detiene, y uno se sienta. Cuando caminamos o estamos de pie, cargamos sobre nuestros propios pies todo el peso de nuestro cuerpo. Cuando nos sentamos, ese peso descansa sobre algo externo. En el ámbito espiritual, sentarse significa simplemente descansar todo el peso sobre el Señor: nuestra carga, nosotros mismos, nuestro futuro, todo. Dejamos que Él cargue la responsabilidad y dejamos de llevarla nosotros. Este es el principio que Dios estableció desde el principio: Adán fue creado el sexto día, de modo que el primer día de su vida fue el séptimo día de Dios, el día del descanso. Mientras Dios trabajó primero y descansó después, el hombre debe entrar primero al descanso de Dios, y desde allí trabajar. El evangelio declara que Dios ha completado también la obra de la redención, y que podemos entrar por fe directamente en los valores de esa obra terminada.
+        <br><br>
+        Así funciona en cada área. La santificación no se logra luchando contra el pecado: se recibe como algo ya realizado. <em>Nuestro viejo hombre fue crucificado juntamente con Él</em> (Ro. 6:6). Eso no es una exhortación a luchar; es historia: nuestra historia, escrita en Cristo antes de que naciéramos. Cuando un hombre lleva dos años luchando por perdonar a quienes lo traicionaron, haciendo promesas cada día que quiebra cada noche, el problema no es que no se esfuerce suficiente; el problema es que está intentando caminar antes de sentarse. La solución no es más esfuerzo: es reconocer que ese yo que no puede perdonar fue crucificado en Cristo, que no hay nada que ese yo deba seguir intentando, y descansar en que la vida de Cristo en él puede amar donde él no puede. <em>Deja de hacer</em>, dijo Nee al ingeniero destrozado que no podía perdonar a su esposa infiel. <em>Dios espera a que tus fuerzas se agoten para poder actuar.</em> El hombre se sentó, comprendió, y se fue con el rostro lleno de gozo.
+        <br><br>
+        La parábola del hijo pródigo ilumina esto con una precisión inesperada. No es el hijo mayor —que trabaja incansablemente para el padre— quien alegra el corazón de Dios, sino el hijo menor, que permite que el padre lo dé todo. El padre no tuvo una palabra de reproche por lo malgastado; solo se alegró por la oportunidad de dar más. Dios es tan rico que su principal deleite es dar. Es un dolor para Él cuando pretendemos proveerle algo, porque Él es tan abundante que le produce gozo verdadero cuando simplemente le dejamos dar. <em>Deja de dar, y descubrirás qué clase de Dador es Dios. Deja de hacer, y descubrirás qué clase de Hacedor es Él.</em>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">El séptimo día fue el primer día de Adán: el hombre fue creado para comenzar con el descanso de Dios, no para ganárselo.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Nee distingue un "gran DO" (hacer) de un "gran DONE" (hecho): el evangelio es siempre lo segundo.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Buscar la santificación como una virtud separada de Cristo es como buscar calor separado del fuego: imposible y vacío.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La imagen del ahogado: mientras tenga fuerzas, arrastrará consigo al rescatador. Dios espera que el hombre deje de luchar antes de poder rescatarlo.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La postura de sentarse no es quietismo: es el punto de partida de toda la vida espiritual real, no el final de ella.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">Nee señala que todas las declaraciones sobre nuestra co-crucifixión, co-sepultura y co-resurrección con Cristo en el Nuevo Testamento están en tiempo aoristo griego (pasado puntual): son hechos históricos consumados, no metas espirituales futuras.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿En qué área de tu vida espiritual estás, en este momento, trabajando para obtener lo que Dios ya te ha dado?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Elige una situación donde hayas estado esforzándote espiritualmente —intentar amar, perdonar, servir, creer— y en lugar de intentarlo una vez más, siéntate literalmente durante diez minutos en silencio y dile a Dios:</div>
+        <div class="accion-question">"No puedo, y dejo de fingir que puedo. Cuento contigo."</div>
+      </div>
+
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('intro')" class="btn-nav btn-regresar">← Introducción</button>
+      <button onclick="irA('cap2')" class="btn-nav btn-siguiente">Capítulo 2 →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Sentarse, Caminar, Permanecer en Pie · Watchman Nee</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 1 · Sentarse</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ══ CAPÍTULO 2: CAMINAR ══ -->
+<div id="cap2" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Sentarse, Caminar, Permanecer en Pie · Watchman Nee</div>
+      <div class="libro-header-paso">Capítulo 2 · Caminar</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>7 min</span></div>
+    <div class="body">
+
+      <div class="filtro-header">
+        <div class="filtro-label">Capítulo 2</div>
+        <div class="filtro-title">Caminar — Vivir dignamente en el mundo no es moralismo: es la vida de Cristo expresándose a través de nosotros</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">El caminar cristiano es el fruto natural del sentarse, no un esfuerzo añadido al descanso. Pero ese caminar tiene un estándar que va mucho más allá de "lo correcto versus lo incorrecto": es el estándar de la Cruz y de la perfección del Padre.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa del Capítulo</span>
+      <div class="problema">
+        Una vez que hemos aprendido a sentarnos, aprendemos también a caminar. El sentarse describe nuestra posición con Cristo en los cielos; el caminar es la expresión práctica de esa posición celestial aquí en la tierra. Somos un pueblo celestial, y como tal se nos pide que llevemos la marca de esa celestialidad en nuestra conducta terrenal. Pablo usa la palabra "caminar" ocho veces en Efesios, y cada vez apunta a nuestra conducta ordenada: cómo nos relacionamos con los vecinos, los cónyuges, los hijos, los empleadores. El cuerpo de Cristo no es algo remoto y etéreo que solo existe en términos celestes; se prueba en las cocinas, en las oficinas, en los matrimonios.
+        <br><br>
+        Pero el estándar del caminar cristiano no es el de los gentiles —que preguntan "¿qué es correcto?"— sino el de la Cruz. Nada ha hecho más daño al testimonio cristiano que nuestro empeño en tener razón y en exigir razón a los demás. Nos preocupamos por si nos han tratado justamente, como si eso fuera nuestro punto de partida. Pero para nosotros el punto de partida no es el árbol del conocimiento del bien y del mal: es Cristo, que es el árbol de la vida. La pregunta no es "¿tengo razón?" sino "¿qué haría el Padre?" Jesús mismo lo establece con una claridad que sacude toda ética natural: <em>seréis perfectos como vuestro Padre celestial es perfecto</em> (Mt. 5:48). No "mejores que los demás" sino a la altura del Padre mismo. Un hermano en el sur de China que bombeaba agua para su propio campo, cuyo vecino lo drenaba noche tras noche, no se preguntó quién tenía razón: al siguiente amanecer bombeó agua para los dos campos del vecino, y en la tarde para el suyo. El vecino quedó perplejo, preguntó la razón, y con el tiempo se convirtió.
+        <br><br>
+        Ahora bien, ¿de dónde viene la fuerza para ese nivel de vida? No de nuestra propia resolución. El secreto del cristiano es su descanso en Cristo. Su fuerza se deriva de su posición dada por Dios. Así como un reloj no funciona por moverse a sí mismo sino por ser movido por una fuerza exterior, así la vida del creyente no es un esfuerzo propio sino el flujo de la vida de Otro. El poder que actúa en nosotros (Ef. 3:20) no es algo que buscamos; es algo que se libera cuando dejamos de resistirlo. Nee confiesa que durante dos años buscó acumular virtudes —humildad, amor, paciencia— como mercancías separadas, y no encontró nada. Hasta que en 1933 la luz rompió desde el cielo y comprendió: Cristo mismo es hecho para nosotros todo lo que jamás necesitaremos (1 Co. 1:30). Desde entonces, la santidad se escribe con S mayúscula y el amor con A mayúscula: Él mismo es la respuesta en nosotros a todas las demandas de Dios.
+        <br><br>
+        La consecuencia práctica es que la vida cristiana auténtica es espontánea: no actuada sino natural. Demasiados creyentes viven una vida "espiritual" fabricada, forzando su conducta con pura voluntad, y la fatiga misma de ese esfuerzo debería revelarles que algo está mal. Cuando uno habla su propio idioma no necesita hacer esfuerzo; fluye. Así debe fluir la vida de Cristo en quien verdaderamente descansa en Él. La regla no es "intentar" sino "confiar". El creyente no busca amor como objeto separado; va al hermano difícil contando con que la ley de esa vida dentro de mí es amar, y descubre, para su propia sorpresa, que amó sin haberse esforzado en ello.
+        <br><br>
+        El capítulo cierra con una dimensión adicional del caminar: redimir el tiempo. Nee observa que en la parábola de las diez vírgenes, las necias no eran falsas sino simplemente tardías. Todas eran vírgenes; todas tenían aceite; la diferencia fue que las sabias tenían reserva en sus vasijas para cuando el novio tardara. La pregunta no es si alcanzaremos la madurez —Dios lo garantiza— sino cuándo. Los primeros frutos son distintos de la cosecha no en calidad sino en tiempo. La sabiduría no consiste en lograr más sino en no postergar. El Señor busca herramientas listas en Su mano ahora. Los días son malos, el tiempo es breve, y la urgencia no es egoísta —qué obtengo yo— sino vocacional: qué necesita el Señor ahora.
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">El estándar cristiano no es "lo correcto" sino el Padre perfecto: una barra que ningún moralismo puede alcanzar por propia fuerza.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Nee describe la vida de muchos creyentes como "actuación": hablan idioma espiritual, adoptan posturas espirituales, pero lo hacen completamente solos.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La operación de la vida de Cristo en nosotros es espontánea: el esfuerzo constante es la señal de que algo está equivocado, no de que se está progresando.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La distinción entre primicias y cosecha no es de calidad sino de tiempo: todos maduran, pero los sabios maduran a tiempo.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Nee pregunta: "¿Puede Dios confiarte lo que Él quiere hacer?" No se trata de tus capacidades, sino de tu disponibilidad presente.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="alerta-card">
+        <div class="alerta-label">Señal de Alerta</div>
+        <div class="alerta-text">Cuando la vida espiritual requiere un esfuerzo constante y agotador para sostenerse, es señal de que se está intentando caminar sin haber aprendido a sentarse primero.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿Qué diferencia hay entre buscar amor de Dios como un "paquete separado" y confiar en que la vida de Cristo en ti ya contiene ese amor?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Esta semana, antes de una interacción difícil, no te prepares con resoluciones ni estrategias. En cambio, declara en silencio:</div>
+        <div class="accion-question">"La vida que está en mí es la vida de Cristo, y la ley de esa vida es amar."</div>
+        <div class="accion-text" style="margin-top:0.5rem;">Entra en la conversación contando con eso, sin esforzarte conscientemente, y observa qué sucede.</div>
+      </div>
+
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap1')" class="btn-nav btn-regresar">← Capítulo 1</button>
+      <button onclick="irA('cap3')" class="btn-nav btn-siguiente">Capítulo 3 →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Sentarse, Caminar, Permanecer en Pie · Watchman Nee</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 2 · Caminar</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ══ CAPÍTULO 3: PERMANECER EN PIE ══ -->
+<div id="cap3" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Sentarse, Caminar, Permanecer en Pie · Watchman Nee</div>
+      <div class="libro-header-paso">Capítulo 3 · Permanecer en Pie</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>7 min</span></div>
+    <div class="body">
+
+      <div class="filtro-header">
+        <div class="filtro-label">Capítulo 3</div>
+        <div class="filtro-title">Permanecer en Pie — La guerra espiritual no es conquistar terreno sino mantener el que ya es nuestro</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">El tercer movimiento de la vida cristiana es la guerra espiritual, pero esta guerra tiene una naturaleza completamente distinta de lo que solemos imaginar. No es ofensiva sino defensiva. No luchamos para obtener la victoria; luchamos desde la victoria ya ganada.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa del Capítulo</span>
+      <div class="problema">
+        Ahora llegamos al tercer movimiento. Solo los que saben sentarse pueden ponerse de pie. Solo los que han aprendido a caminar desde el descanso pueden resistir al enemigo desde ese mismo reposo. Si alguien es deficiente en cualquiera de los dos primeros movimientos, toda la conversación sobre guerra espiritual será solo palabras: no conocerá su realidad. Pero quien ha aprendido el valor del reposo de Cristo y quien camina en el Espíritu, está listo para comprender lo que Pablo llama nuestra lucha con los espíritus del mal.
+        <br><br>
+        El texto de Efesios 6 es claro en una cosa que solemos ignorar: el arma principal no es el avance sino la posición. <em>Permaneced en pie. Resistid. Y habiendo acabado todo, permaneced firmes.</em> El verbo griego "estar firme contra" en el versículo 11 significa literalmente mantener el terreno que se ocupa. No es una orden de invasión; los ejércitos que invaden marchan. Dios no dice que marchemos: dice que nos mantengamos. Porque el terreno que el enemigo disputa es ya nuestro. No necesitamos luchar para obtenerlo. Necesitamos rehusarnos a cederlo.
+        <br><br>
+        Aquí reside una de las distinciones más importantes del libro entero. La guerra del Señor Jesús fue ofensiva: luchó contra Satanás para ganar la victoria. A través de la Cruz llevó esa guerra hasta el umbral mismo del Hades, y de allí <em>llevó cautiva la cautividad</em> (Ef. 4:8-9). Pero la guerra que nosotros libramos hoy es defensiva: luchamos para mantener y consolidar la victoria que Él ya obtuvo. Por la resurrección, Dios declaró a Su Hijo victorioso sobre todo el reino de las tinieblas, y el terreno que Cristo ganó nos lo ha entregado a nosotros. No necesitamos luchar para obtenerlo; solo necesitamos mantenerlo contra todo el que lo desafíe. <em>No luchamos por la victoria; luchamos desde la victoria. Los vencedores son los que descansan en el triunfo que su Dios ya les ha dado.</em>
+        <br><br>
+        Esto cambia radicalmente la manera de orar en tiempos de ataque espiritual. Si oras para obtener la victoria, ya has perdido la batalla desde el inicio, porque has declarado con tu oración misma que la victoria aún no es tuya. Cuando Satanás ataca, cuando las dificultades se acumulan y la situación parece imposible, el creyente no debe luchar para llegar a la victoria: debe alabar porque la victoria ya existe. Si creemos en el Señor, no oraremos tanto sino que alabaremos más. Cuanto más simple y clara sea nuestra fe en Él, menos oraremos con ese tipo de súplica angustiada y más le alabaremos desde el descanso.
+        <br><br>
+        La segunda dimensión del "permanecer en pie" se extiende al trabajo de Dios encomendado a nosotros: el uso del nombre de Jesús. Ese nombre no es una contraseña; es autoridad delegada. El nombre de Jesús en los hechos de los apóstoles no era un eslogan sino el ejercicio de una posición real. Pedro no se arrodilló para pedir instrucciones antes de decirle al cojo "levántate y anda": sencillamente usó el nombre con la naturalidad de quien sabe que le ha sido confiado. Pablo hizo lo mismo con el espíritu en Filipos. Los exorcistas ambulantes de Hechos 19 intentaron usarlo y recibieron una advertencia directa del espíritu maligno: <em>A Jesús conozco, y sé quién es Pablo; pero vosotros, ¿quiénes sois?</em> La diferencia no estaba en las palabras sino en la vida que las respaldaba.
+        <br><br>
+        Para que Dios pueda comprometerse con lo que hacemos en Su nombre, Nee señala cuatro condiciones: que el trabajo esté iluminado por la revelación del propósito eterno de Dios; que haya sido concebido por Dios y no por nosotros; que dependa para su continuidad solo del poder de Dios —no del talento natural del obrero— y que tenga como fin exclusivo la gloria de Dios.
+        <br><br>
+        Y cuando esas condiciones se cumplen, Nee lo dice con la convicción de quien lo ha vivido: Dios se compromete de maneras que asombran. Lo probó en una isla del sur de China, donde un joven de dieciséis años prometió impulsivamente que lloverá el día del festival del dios local, un dios que en 286 años nunca había fallado en dar un día sin lluvia. Nee y sus seis compañeros oraron, recibieron la palabra "¿Dónde está el Dios de Elías?" y descansaron. Y llovió, con torrencial, exactamente a la hora anunciada. No una vez: dos veces. No porque rogaron con angustia; sino porque descansaron en la victoria de Quien ya había ganado.
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La distinción clave: Jesús libró una guerra ofensiva; nosotros libramos una guerra defensiva. No ganamos; mantenemos lo ganado.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Orar para obtener la victoria es renunciar a la posición de victoria que ya se ocupa.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">El objetivo primario de Satanás no es hacernos pecar; es sacarnos del terreno de reposo en Cristo para que pecar sea más fácil.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">"Jesús conozco, y sé quién es Pablo": los poderes del infierno distinguen entre quienes tienen autoridad real y quienes simplemente repiten palabras.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Cuatro condiciones para que Dios se comprometa con un trabajo: propósito revelado, iniciativa divina, dependencia del poder de Dios solamente, y gloria exclusiva para Dios.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">El nombre de Jesús es el mayor legado de Dios a Su Iglesia: cuando se usa desde una posición real, Dios mismo toma responsabilidad por lo que se hace en ese nombre.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">La lluvia sobre la isla del sur de China no vino cuando Nee y sus hermanos oraron con angustia pidiendo que lloviera: vino cuando dejaron de pedir y comenzaron a descansar en que Dios ya se había comprometido. La diferencia entre súplica y alabanza no es estilística; es teológica.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿En tu guerra espiritual actual, estás peleando para obtener la victoria o estás desde una victoria que ya ha sido ganada? ¿Tu postura espiritual en este momento es de avance angustiado o de resistencia firme desde el reposo?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Ante la próxima situación de ataque espiritual —ya sea tentación, oposición, conflicto o carga— en lugar de orar suplicando victoria, ofrece alabanza por la victoria ya ganada.</div>
+        <div class="accion-question">"Señor, Tú ya has vencido esto. Me mantengo en ese terreno. Gracias."</div>
+        <div class="accion-text" style="margin-top:0.5rem;">Y observa la diferencia.</div>
+      </div>
+
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap2')" class="btn-nav btn-regresar">← Capítulo 2</button>
+      <button onclick="irA('evaluacion')" class="btn-nav btn-siguiente">Evaluación →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Sentarse, Caminar, Permanecer en Pie · Watchman Nee</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 3 · Permanecer en Pie</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ══ EVALUACIÓN ══ -->
+<div id="evaluacion" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Sentarse, Caminar, Permanecer en Pie · Watchman Nee</div>
+      <div class="libro-header-paso">Solidez y Aplicabilidad</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>5 min</span></div>
+    <div class="body">
+
+      <div class="filtro-header">
+        <div class="filtro-label">Curaduría de la Información</div>
+        <div class="filtro-title">Evaluación de Solidez y Aplicabilidad — Cada idea evaluada con fiabilidad bíblica y valor formativo</div>
+      </div>
+
+      <div class="eval-grid">
+
+        <div class="eval-item">
+          <div class="eval-header">
+            <div class="eval-titulo">1. La obra terminada de Cristo como fundamento</div>
+            <div class="eval-scores"><span class="eval-score fid">Fid. 9/10</span><span class="eval-score apl">Apl. 9/10</span></div>
+          </div>
+          <div class="eval-text">Esta idea tiene respaldo bíblico sólido y consistente, especialmente en Efesios, Romanos 6 y Hebreos 1:3. La lógica paulina del indicativo antes del imperativo —"eres" antes del "haz"— es un principio teológico bien fundado y ampliamente reconocido en la teología reformada y en la pneumatología evangélica. No es especulación: es la estructura de la mayor parte de las cartas paulinas. El ejemplo del ingeniero que no podía perdonar ilustra bien cómo el cambio de postura produce una transformación real que el esfuerzo repetido no lograba.</div>
+        </div>
+
+        <div class="eval-item">
+          <div class="eval-header">
+            <div class="eval-titulo">2. Cristo como nuestra santificación total</div>
+            <div class="eval-scores"><span class="eval-score fid">Fid. 8/10</span><span class="eval-score apl">Apl. 8/10</span></div>
+          </div>
+          <div class="eval-text">Tiene base bíblica clara en 1 Co. 1:30 y en la teología de la unión con Cristo. Sin embargo, Nee presenta esto de una manera que puede minimizar la dimensión de la cooperación activa del creyente con el Espíritu (Fil. 2:12-13), que la Escritura también enseña. La verdad de que Cristo es nuestra santidad no elimina la responsabilidad humana; las dos se sostienen en tensión bíblica real. Genuinamente transformador para creyentes atrapados en el moralismo; puede mal aplicarse en quienes interpretan el "descanso" como pasividad.</div>
+        </div>
+
+        <div class="eval-item">
+          <div class="eval-header">
+            <div class="eval-titulo">3. La guerra espiritual como defensa y no como conquista</div>
+            <div class="eval-scores"><span class="eval-score fid">Fid. 7/10</span><span class="eval-score apl">Apl. 8/10</span></div>
+          </div>
+          <div class="eval-text">La distinción ofensivo/defensivo de Nee tiene respaldo en Efesios 6, donde "permanecer en pie" es la postura predominante y las armas descritas son mayormente defensivas. Sin embargo, el Nuevo Testamento también contiene imágenes de avance espiritual que Nee no integra en este capítulo (atar y desatar, Mt. 18:18; avanzar ante las puertas del Hades, Mt. 16:18). La presentación de Nee es poderosa pero parcialmente unilateral. Corrige un error frecuente: creyentes que oran angustiadamente "para obtener" victorias que ya les fueron dadas.</div>
+        </div>
+
+        <div class="eval-item">
+          <div class="eval-header">
+            <div class="eval-titulo">4. La espontaneidad como señal de vida espiritual genuina</div>
+            <div class="eval-scores"><span class="eval-score fid">Fid. 6/10</span><span class="eval-score apl">Apl. 7/10</span></div>
+          </div>
+          <div class="eval-text">Nee usa esta idea de manera sugerente: la vida de Cristo fluye naturalmente, como un idioma materno. Sin embargo, la Escritura también valida la disciplina deliberada (1 Co. 9:27, 1 Ti. 4:7-8), y la santificación incluye componentes de hábito y formación intencional que la idea de "espontaneidad pura" puede oscurecer. El punto de Nee es correcto como corrección al legalismo, pero no completo como descripción de la vida espiritual madura. Muy útil para liberar a creyentes que han convertido la vida cristiana en pura actuación forzada.</div>
+        </div>
+
+        <div class="eval-item">
+          <div class="eval-header">
+            <div class="eval-titulo">5. La urgencia del tiempo: primicias versus cosecha</div>
+            <div class="eval-scores"><span class="eval-score fid">Fid. 7/10</span><span class="eval-score apl">Apl. 8/10</span></div>
+          </div>
+          <div class="eval-text">La distinción entre primicias y cosecha tomada de Apocalipsis 14 y Mateo 25 es creativa pero interpretativa; no todos los expositores bíblicos concuerdan en que estas imágenes se refieren a diferentes niveles de madurez espiritual dentro de los creyentes. La hermenéutica de Nee en este punto es particular a su escuela teológica y debe tomarse como lectura plausible, no como doctrina bíblica establecida. El llamado a la urgencia espiritual —no porque la salvación esté en juego sino porque el Señor necesita herramientas disponibles ahora— es formativa y prácticamente valiosa.</div>
+        </div>
+
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Evaluación Global</div>
+        <div class="dato-text">Fiabilidad Global: 7.5/10 · Aplicabilidad Global: 8/10
+          <br><br>
+          Sentarse, Caminar, Permanecer en Pie es un libro con sólida raíz bíblica y alta capacidad de transformar creyentes atrapados en el agotamiento del esfuerzo propio. Sus ideas más fuertes —el descanso en la obra terminada de Cristo, la vida espontánea del Espíritu, la guerra espiritual defensiva— están bien sustentadas en el texto paulino y producen fruto real cuando se entienden y aplican correctamente. Sus puntos de mayor fragilidad son la tendencia a minimizar la cooperación activa del creyente y algunos usos interpretativos específicos de pasajes proféticos que no son concluyentes. No es un libro para aceptar sin pensarlo, pero es definitivamente uno para leer con atención y humildad: tiene más que dar que la mayoría de libros de doce veces su extensión.</div>
+      </div>
+
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap3')" class="btn-nav btn-regresar">← Capítulo 3</button>
+      <button onclick="irA('comunicador')" class="btn-nav btn-siguiente">Nee como Comunicador →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Sentarse, Caminar, Permanecer en Pie · Watchman Nee</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Evaluación · Solidez y Aplicabilidad</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ══ COMUNICADOR ══ -->
+<div id="comunicador" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Sentarse, Caminar, Permanecer en Pie · Watchman Nee</div>
+      <div class="libro-header-paso">Nee como Comunicador</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>4 min</span></div>
+    <div class="body">
+
+      <div class="filtro-header">
+        <div class="filtro-label">Evaluación del Autor</div>
+        <div class="filtro-title">Watchman Nee como Comunicador — 10 dimensiones evaluadas</div>
+      </div>
+
+      <div class="com-grid">
+        <div class="com-item"><div class="com-dim">1. Tesis Central</div><div class="com-score">10/10</div><div class="com-obs">La tesis es inamovible y atraviesa todo el libro. Quien estudie a Nee debe aprender a construir libros donde todo capítulo sirve a una sola idea vertebral.</div></div>
+        <div class="com-item"><div class="com-dim">2. Estructura Narrativa</div><div class="com-score">9/10</div><div class="com-obs">La estructura tripartita tomada directamente de Efesios es de una elegancia rara: simple, bíblica y con lógica interna imparable.</div></div>
+        <div class="com-item"><div class="com-dim">3. Densidad de Contenido</div><div class="com-score">9/10</div><div class="com-obs">Casi no hay relleno. Cada párrafo añade carga real. La brevedad total y la densidad conceptual son una lección en sí mismas.</div></div>
+        <div class="com-item"><div class="com-dim">4. Recursos Retóricos</div><div class="com-score">8/10</div><div class="com-obs">Nee usa analogías domésticas con maestría: el ahogado, el reloj, el cheque bancario, las naranjas de Fukien, la lluvia en la isla. No adornan: demuestran.</div></div>
+        <div class="com-item"><div class="com-dim">5. Conexión Emocional</div><div class="com-score">8/10</div><div class="com-obs">Las anécdotas personales —el ingeniero traicionado, la experiencia en la isla— tienen peso porque son reales y no están infladas.</div></div>
+        <div class="com-item"><div class="com-dim">6. Rigor de Fuentes</div><div class="com-score">7/10</div><div class="com-obs">El uso del texto bíblico es sólido en los capítulos 1 y 2. En el capítulo 3, algunas interpretaciones de Apocalipsis 14 son específicas de su escuela teológica.</div></div>
+        <div class="com-item"><div class="com-dim">7. Aplicabilidad</div><div class="com-score">9/10</div><div class="com-obs">Cada capítulo termina con aplicaciones concretas que no son genéricas. La acción propuesta siempre brota de la idea central.</div></div>
+        <div class="com-item"><div class="com-dim">8. Autenticidad</div><div class="com-score">10/10</div><div class="com-obs">Nee escribió desde el centro de su propia vida en una China donde la fe tenía consecuencias reales. No hay ningún punto donde la voz suene académica o distante.</div></div>
+        <div class="com-item"><div class="com-dim">9. Manejo del Lenguaje</div><div class="com-score">8/10</div><div class="com-obs">La prosa es limpia, directa, sin exceso de ornamento. El ritmo es uniforme. Aprende el valor de la frase corta con peso conceptual.</div></div>
+        <div class="com-item"><div class="com-dim">10. Impacto Formativo</div><div class="com-score">9/10</div><div class="com-obs">Este libro no solo informa: reordena la vida interior del lector. Hay evidencia histórica de su impacto generacional.</div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="tesis-block">
+        <div class="tesis-label">Fortaleza Dominante</div>
+        <div class="tesis-text">La capacidad de Nee para construir una tesis teológica profunda con analogías completamente domésticas y accesibles, sin sacrificar un gramo de la sustancia teológica. Sus ilustraciones no simplifican: iluminan.</div>
+      </div>
+
+      <div class="alerta-card" style="margin-top:1rem;">
+        <div class="alerta-label">Área de Desarrollo</div>
+        <div class="alerta-text">Nee debería haber integrado más explícitamente la tensión entre descanso activo y disciplina espiritual intencional. Al no hacerlo, deja abierta la puerta a una interpretación pasiva que él mismo no habría aprobado pero que el texto —leído rápido— puede fomentar.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Puntaje Total</div>
+        <div class="dato-text">87 / 100</div>
+      </div>
+
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('evaluacion')" class="btn-nav btn-regresar">← Evaluación</button>
+      <button onclick="irA('resumen')" class="btn-nav btn-siguiente">Resumen Final →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Sentarse, Caminar, Permanecer en Pie · Watchman Nee</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Nee como Comunicador</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ══ RESUMEN FINAL ══ -->
+<div id="resumen" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Sentarse, Caminar, Permanecer en Pie · Watchman Nee</div>
+      <div class="libro-header-paso">Resumen Final · Consolidación</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>5 min</span></div>
+    <div class="body">
+
+      <div class="filtro-header">
+        <div class="filtro-label">Resumen Final</div>
+        <div class="filtro-title">Todo lo que este libro dice — en una sola lectura</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Madre</div>
+        <div class="tesis-text">La vida cristiana completa no es una escalera que asciende por esfuerzo propio, sino un orden divino: primero reposar en lo que Cristo ya hizo, luego vivir espontáneamente desde ese reposo, y finalmente resistir al enemigo desde esa misma posición de victoria heredada.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Mapa de las Grandes Ideas</span>
+      <div style="display:flex;flex-direction:column;gap:1rem;margin:1.25rem 0;">
+        <div class="idea"><div class="idea-num">1</div><div class="idea-body"><div class="idea-text" style="font-weight:600;margin-bottom:0.3rem;color:var(--c-texto);">Sentarse es el punto de partida, no la meta.</div><div class="idea-text">La mayoría de creyentes vive intentando ganarse el reposo que Dios ya ofrece como punto de inicio. Adán no trabajó para descansar: comenzó su vida con el descanso de Dios. El evangelio es siempre un "HECHO" antes de un "HACER".</div></div></div>
+        <div class="idea"><div class="idea-num">2</div><div class="idea-body"><div class="idea-text" style="font-weight:600;margin-bottom:0.3rem;color:var(--c-texto);">La salvación, la santificación y la vida espiritual se reciben, no se construyen.</div><div class="idea-text">Co-crucificados, co-sepultados, co-resucitados con Cristo: todos en tiempo pasado consumado. Nuestra liberación del pecado está basada en lo que Él ya hizo. El esfuerzo sostenido es señal de que no se ha entrado en este descanso.</div></div></div>
+        <div class="idea"><div class="idea-num">3</div><div class="idea-body"><div class="idea-text" style="font-weight:600;margin-bottom:0.3rem;color:var(--c-texto);">Cristo no da virtudes separadas: Él mismo es cada virtud.</div><div class="idea-text">No busques amor, paciencia o humildad como objetos separables. Cristo es hecho para nosotros sabiduría, justicia, santificación y redención (1 Co. 1:30). La vida cristiana auténtica es la vida de Cristo expresándose espontáneamente.</div></div></div>
+        <div class="idea"><div class="idea-num">4</div><div class="idea-body"><div class="idea-text" style="font-weight:600;margin-bottom:0.3rem;color:var(--c-texto);">El estándar del caminar no es la ética sino la Cruz.</div><div class="idea-text">No preguntamos "¿quién tiene razón?" sino "¿qué haría el Padre perfecto?" Defender nuestros derechos nos pone bajo la lógica del árbol del conocimiento. La vida cristiana opera bajo la lógica del árbol de la vida.</div></div></div>
+        <div class="idea"><div class="idea-num">5</div><div class="idea-body"><div class="idea-text" style="font-weight:600;margin-bottom:0.3rem;color:var(--c-texto);">La guerra espiritual no conquista lo que no tiene: mantiene lo que ya posee.</div><div class="idea-text">La victoria de Cristo es un hecho histórico. El creyente no lucha para obtenerla; la administra. Orar angustiadamente "para ganar" es declarar que aún no se tiene la victoria, lo cual es renunciar al terreno desde el principio.</div></div></div>
+        <div class="idea"><div class="idea-num">6</div><div class="idea-body"><div class="idea-text" style="font-weight:600;margin-bottom:0.3rem;color:var(--c-texto);">El tiempo es una variable espiritual decisiva.</div><div class="idea-text">No todos los creyentes maduran al mismo ritmo, pero Dios llama a cada uno a no postergar lo que puede recibir hoy. Los "primeros frutos" no son mejores que la cosecha; simplemente están listos antes, y eso tiene valor en el reino de Dios.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Lo que este libro cambia</span>
+      <div class="problema" style="margin-top:1rem;">
+        Quien entiende Sentarse, Caminar, Permanecer en Pie deja de percibir la vida cristiana como una escalada de esfuerzo hacia la santidad y comienza a verla como una expresión de una posición ya ocupada. El agotamiento espiritual —ese estado crónico de intentar y fallar y volver a intentar— pierde su legitimidad: no es señal de esfuerzo devoto sino de un malentendido fundamental. El descanso deja de ser pereza y se convierte en la postura más teológicamente correcta que un creyente puede tener. La guerra espiritual deja de ser aterradora y se convierte en algo que ya se ha ganado y solo necesita ser mantenido.
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Tres frases que deben quedar vivas</span>
+      <div style="display:flex;flex-direction:column;gap:0.75rem;margin:1.25rem 0;">
+        <div class="accion-card"><div class="accion-question">"El cristianismo no comienza con un gran HACER sino con un gran HECHO."</div></div>
+        <div class="accion-card"><div class="accion-question">"Solo los que saben sentarse pueden mantenerse en pie."</div></div>
+        <div class="accion-card"><div class="accion-question">"No luchamos para obtener la victoria; luchamos desde la victoria."</div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Si solo recordara una cosa</div>
+        <div class="dato-text">"El reposo en la obra terminada de Cristo no es el final del camino espiritual: es el único punto de partida válido para todo lo demás."</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Aplicación Maestra</div>
+        <div class="accion-text">Audita tu vida espiritual esta semana con una sola pregunta:</div>
+        <div class="accion-question">"¿Estoy intentando obtener de Dios lo que Él ya me ha dado?"</div>
+        <div class="accion-text" style="margin-top:0.5rem;">Donde la respuesta sea sí, detén el esfuerzo, siéntate con Él en silencio, y comienza desde ahí.</div>
+      </div>
+
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('comunicador')" class="btn-nav btn-regresar">← Comunicador</button>
+      <button onclick="irA('portada')" class="btn-nav btn-siguiente">Volver al inicio →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Sentarse, Caminar, Permanecer en Pie · Watchman Nee</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Resumen Final · Consolidación</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<script>
+  var FUENTES = ['fuente-s','fuente-m','fuente-l','fuente-xl'];
+  var FUENTE_LABELS = ['S','M','L','XL'];
+  var fuenteIdx = 1;
+
+  var PAGINAS = ['portada','filtro','intro','cap1','cap2','cap3','evaluacion','comunicador','resumen'];
+  var paginaActual = 'portada';
+  var TIEMPOS = { 'filtro':'5 min','intro':'4 min','cap1':'7 min','cap2':'7 min','cap3':'7 min','evaluacion':'5 min','comunicador':'4 min','resumen':'5 min' };
+
+  function toggleConfig() {
+    var panel = document.getElementById('config-panel');
+    var overlay = document.getElementById('config-overlay');
+    if (panel.classList.contains('abierto')) {
+      cerrarConfig();
+    } else {
+      panel.classList.add('visible');
+      overlay.classList.add('activo');
+      requestAnimationFrame(function() { panel.classList.add('abierto'); });
+    }
+  }
+
+  function cerrarConfig() {
+    var panel = document.getElementById('config-panel');
+    panel.classList.remove('abierto');
+    document.getElementById('config-overlay').classList.remove('activo');
+    setTimeout(function() { panel.classList.remove('visible'); }, 200);
+  }
+
+  function toggleDark() {
+    var dark = document.body.classList.toggle('dark');
+    document.getElementById('toggle-dark').checked = dark;
+  }
+
+  function toggleLectura() {
+    var lectura = document.body.classList.toggle('modo-lectura');
+    document.getElementById('toggle-lectura').checked = lectura;
+  }
+
+  function cambiarFuente(dir) {
+    var nuevo = Math.max(0, Math.min(FUENTES.length - 1, fuenteIdx + dir));
+    if (nuevo === fuenteIdx) return;
+    fuenteIdx = nuevo;
+    document.querySelectorAll('.body').forEach(function(b) {
+      FUENTES.forEach(function(c) { b.classList.remove(c); });
+      b.classList.add(FUENTES[fuenteIdx]);
+    });
+    document.getElementById('fuente-nivel').textContent = FUENTE_LABELS[fuenteIdx];
+  }
+
+  function abrirMenu() {
+    document.getElementById('menu-panel').classList.add('abierto');
+    document.getElementById('menu-overlay').classList.add('activo');
+    cerrarConfig();
+  }
+
+  function cerrarMenu() {
+    document.getElementById('menu-panel').classList.remove('abierto');
+    document.getElementById('menu-overlay').classList.remove('activo');
+  }
+
+  function irA(id) {
+    document.querySelectorAll('.pagina').forEach(function(p) {
+      p.classList.remove('visible'); p.classList.add('oculta');
+    });
+    var d = document.getElementById(id);
+    d.classList.remove('oculta'); d.classList.add('visible'); d.scrollTop = 0;
+    paginaActual = id;
+    var esPortada = id === 'portada';
+    document.getElementById('menu-btn').style.display = esPortada ? 'none' : 'flex';
+    document.getElementById('btn-config').style.display = esPortada ? 'none' : 'flex';
+    var barra = document.getElementById('barra-progreso');
+    barra.style.display = esPortada ? 'none' : 'block';
+    barra.style.width = '0%';
+    if (TIEMPOS[id]) { var m = d.querySelector('.lectura-meta span'); if (m) m.textContent = TIEMPOS[id]; }
+    document.querySelectorAll('.menu-item').forEach(function(b) { b.classList.toggle('activo', b.dataset.page === id); });
+    cerrarMenu();
+    cerrarConfig();
+    d.onscroll = function() {
+      var s = d.scrollHeight - d.clientHeight;
+      if (s <= 0) { barra.style.width = '100%'; return; }
+      barra.style.width = Math.min(100, Math.round((d.scrollTop / s) * 100)) + '%';
+    };
+  }
+
+  var sx = 0, sy = 0, sm = false;
+  document.addEventListener('touchstart', function(e) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; sm = false; }, { passive: true });
+  document.addEventListener('touchmove', function() { sm = true; }, { passive: true });
+  document.addEventListener('touchend', function(e) {
+    if (!sm) return;
+    var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    if (document.getElementById('menu-panel').classList.contains('abierto')) return;
+    if (document.getElementById('config-panel').classList.contains('abierto')) return;
+    var idx = PAGINAS.indexOf(paginaActual);
+    if (dx < 0 && idx < PAGINAS.length - 1) irA(PAGINAS[idx + 1]);
+    else if (dx > 0 && idx > 0) irA(PAGINAS[idx - 1]);
+  }, { passive: true });
+
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var h = a.getAttribute('href');
+    if (h === '#') return;
+    var t = document.querySelector(h);
+    if (t) {
+      e.preventDefault();
+      var pv = document.querySelector('.pagina.visible');
+      if (!pv) return;
+      pv.scrollTo({ top: t.getBoundingClientRect().top - pv.getBoundingClientRect().top + pv.scrollTop - 16, behavior: 'smooth' });
+    }
+  });
+</script>
+</body>
+</html>
