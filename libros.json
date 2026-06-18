@@ -16,5 +16,19 @@
       "archivo": "libros/el-regreso-del-hijo-prodigo.html",
       "descripcion": "El camino espiritual recorrido a través de los tres personajes de la parábola: el hijo que huye, el hijo que juzga y el padre que ama sin condición."
     }
+    {
+      "titulo": "Sentarse, Caminar, Permanecer en Pie",
+      "autor": "Watchman Nee",
+      "anio": 1957,
+      "expedicion": "mentalidad",
+      "sub_expedicion": "identidad",
+      "color_acento": "#7C5A1E",
+      "color_portada_inicio": "#1A1208",
+      "color_portada_fin": "#A67C3A",
+      "tiempo_lectura_min": 32,
+      "capitulos": 3,
+      "archivo": "libros/sit-walk-stand.html",
+      "descripcion": "La vida cristiana no comienza con el esfuerzo sino con el descanso: solo quien primero se sienta puede después caminar con poder y mantenerse en pie ante el enemigo."
+    }
   ]
 }
