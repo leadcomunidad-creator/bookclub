@@ -1,0 +1,20 @@
+{
+  "proyecto": "Mentor de Conocimiento",
+  "version": "1.0",
+  "libros": [
+    {
+      "titulo": "El Regreso del Hijo Pródigo",
+      "autor": "Henri J. M. Nouwen",
+      "anio": 1992,
+      "expedicion": "mentalidad",
+      "sub_expedicion": "identidad",
+      "color_acento": "#312C8A",
+      "color_portada_inicio": "#0F0D33",
+      "color_portada_fin": "#4E3DBB",
+      "tiempo_lectura_min": 48,
+      "capitulos": 12,
+      "archivo": "libros/el-regreso-del-hijo-prodigo.html",
+      "descripcion": "El camino espiritual recorrido a través de los tres personajes de la parábola: el hijo que huye, el hijo que juzga y el padre que ama sin condición."
+    }
+  ]
+}

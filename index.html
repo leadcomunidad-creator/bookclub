@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentor de Conocimiento — Biblioteca</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  /* ══════════════════════════════
+     TOKENS
+  ══════════════════════════════ */
+  :root {
+    --bg:           #FAFAF7;
+    --surface:      #FFFFFF;
+    --border:       #E8E8E3;
+    --border-strong:#CCCCC5;
+    --text:         #111110;
+    --text-2:       #555550;
+    --text-3:       #999990;
+    --acento:       #3730A3;
+    --acento-suave: #EEF0FF;
+
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body:    'Inter', system-ui, sans-serif;
+
+    --radio:  6px;
+    --radio-lg: 10px;
+    --sombra: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+    --sombra-hover: 0 4px 8px rgba(0,0,0,0.08), 0 12px 32px rgba(0,0,0,0.08);
+  }
+
+  /* ── Dark ── */
+  body.dark {
+    --bg:           #0F0F0E;
+    --surface:      #1A1A18;
+    --border:       #2A2A26;
+    --border-strong:#3A3A34;
+    --text:         #F0F0EB;
+    --text-2:       #A0A098;
+    --text-3:       #606058;
+    --acento:       #818CF8;
+    --acento-suave: #1E1F3A;
+    --sombra: 0 1px 3px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.2);
+    --sombra-hover: 0 4px 8px rgba(0,0,0,0.4), 0 12px 32px rgba(0,0,0,0.3);
+  }
+
+  /* ── Reset ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  /* ══════════════════════════════
+     HEADER
+  ══════════════════════════════ */
+  .header {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    backdrop-filter: blur(12px);
+  }
+  .header-marca {
+    display: flex; align-items: baseline; gap: 0.6rem;
+  }
+  .header-marca-titulo {
+    font-family: var(--font-display);
+    font-size: 1.1rem; font-weight: 600;
+    color: var(--text); letter-spacing: -0.01em;
+  }
+  .header-marca-sep {
+    color: var(--border-strong); font-size: 1rem;
+  }
+  .header-marca-sub {
+    font-size: 0.78rem; font-weight: 400;
+    color: var(--text-3); letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .header-acciones {
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .btn-icon {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-2); font-size: 0.95rem;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.15s;
+  }
+  .btn-icon:hover { border-color: var(--border-strong); color: var(--text); }
+
+  /* ══════════════════════════════
+     HERO
+  ══════════════════════════════ */
+  .hero {
+    max-width: 960px; margin: 0 auto;
+    padding: 4rem 2rem 2.5rem;
+  }
+  .hero-eyebrow {
+    font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--acento); margin-bottom: 1rem;
+  }
+  .hero-titulo {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300; line-height: 1.2;
+    color: var(--text); letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+  .hero-titulo em {
+    font-style: italic; font-weight: 300;
+  }
+  .hero-desc {
+    font-size: 0.95rem; color: var(--text-2);
+    line-height: 1.7; max-width: 480px;
+  }
+
+  /* ══════════════════════════════
+     BÚSQUEDA
+  ══════════════════════════════ */
+  .busqueda-wrap {
+    max-width: 960px; margin: 0 auto;
+    padding: 0 2rem 1.5rem;
+  }
+  .busqueda {
+    position: relative; max-width: 400px;
+  }
+  .busqueda-icon {
+    position: absolute; left: 12px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-3); font-size: 0.85rem;
+    pointer-events: none;
+  }
+  .busqueda input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radio);
+    padding: 0.6rem 0.75rem 0.6rem 2.25rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem; color: var(--text);
+    transition: border-color 0.15s, box-shadow 0.15s;
+    outline: none;
+  }
+  .busqueda input::placeholder { color: var(--text-3); }
+  .busqueda input:focus {
+    border-color: var(--acento);
+    box-shadow: 0 0 0 3px rgba(55,48,163,0.08);
+  }
+  body.dark .busqueda input:focus {
+    box-shadow: 0 0 0 3px rgba(129,140,248,0.12);
+  }
+
+  /* ══════════════════════════════
+     FILTROS
+  ══════════════════════════════ */
+  .filtros-wrap {
+    max-width: 960px; margin: 0 auto;
+    padding: 0 2rem 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .filtros-label {
+    font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-3); margin-bottom: 0.75rem;
+  }
+  .filtros-grupo {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-bottom: 0.6rem;
+  }
+  .filtro-btn {
+    font-family: var(--font-body);
+    font-size: 0.83rem; font-weight: 500;
+    padding: 0.4rem 0.85rem;
+    border-radius: 40px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-2);
+    cursor: pointer; transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .filtro-btn:hover {
+    border-color: var(--border-strong);
+    color: var(--text);
+  }
+  .filtro-btn.activo {
+    background: var(--text);
+    border-color: var(--text);
+    color: var(--bg);
+  }
+  .filtro-btn.sub {
+    font-size: 0.78rem; font-weight: 400;
+    padding: 0.3rem 0.75rem;
+    background: transparent;
+  }
+  .filtro-btn.sub.activo {
+    background: var(--acento-suave);
+    border-color: var(--acento);
+    color: var(--acento);
+  }
+  .subfiltros {
+    display: none; flex-wrap: wrap; gap: 0.4rem;
+    margin-top: 0.5rem;
+  }
+  .subfiltros.visible { display: flex; }
+
+  /* ══════════════════════════════
+     GRID DE LIBROS
+  ══════════════════════════════ */
+  .grid-wrap {
+    max-width: 960px; margin: 0 auto;
+    padding: 2rem 2rem 4rem;
+  }
+  .grid-meta {
+    font-size: 0.8rem; color: var(--text-3);
+    margin-bottom: 1.5rem;
+  }
+  .grid-meta span { color: var(--text); font-weight: 500; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+  }
+
+  /* ── Tarjeta ── */
+  .tarjeta {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radio-lg);
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex; flex-direction: column;
+    transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+    box-shadow: var(--sombra);
+  }
+  .tarjeta:hover {
+    box-shadow: var(--sombra-hover);
+    transform: translateY(-3px);
+    border-color: var(--border-strong);
+  }
+
+  /* Banda de color del libro */
+  .tarjeta-banda {
+    height: 6px;
+    flex-shrink: 0;
+    transition: height 0.2s;
+  }
+  .tarjeta:hover .tarjeta-banda { height: 9px; }
+
+  /* Mini portada */
+  .tarjeta-portada {
+    height: 120px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 1.25rem;
+    position: relative; overflow: hidden;
+  }
+  .tarjeta-portada-titulo {
+    font-family: var(--font-display);
+    font-size: 1rem; font-weight: 600; font-style: italic;
+    color: rgba(255,255,255,0.92);
+    text-align: center; line-height: 1.3;
+    position: relative; z-index: 1;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.25);
+  }
+  .tarjeta-portada-overlay {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.08);
+  }
+
+  /* Cuerpo */
+  .tarjeta-cuerpo {
+    padding: 1.1rem 1.25rem 1.25rem;
+    flex: 1; display: flex; flex-direction: column; gap: 0.6rem;
+  }
+  .tarjeta-autor {
+    font-size: 0.78rem; font-weight: 500;
+    color: var(--text-3); letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .tarjeta-titulo {
+    font-family: var(--font-display);
+    font-size: 1.05rem; font-weight: 400;
+    color: var(--text); line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+  .tarjeta-desc {
+    font-size: 0.82rem; color: var(--text-2);
+    line-height: 1.6; flex: 1;
+  }
+  .tarjeta-footer {
+    display: flex; align-items: center;
+    justify-content: space-between;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+  }
+  .tarjeta-tags {
+    display: flex; gap: 0.4rem; flex-wrap: wrap;
+  }
+  .tarjeta-tag {
+    font-size: 0.7rem; font-weight: 500;
+    padding: 2px 8px; border-radius: 20px;
+    background: var(--acento-suave);
+    color: var(--acento);
+    letter-spacing: 0.03em;
+  }
+  .tarjeta-meta {
+    font-size: 0.72rem; color: var(--text-3);
+    white-space: nowrap;
+  }
+
+  /* ══════════════════════════════
+     VACÍO
+  ══════════════════════════════ */
+  .vacio {
+    display: none;
+    flex-direction: column; align-items: center;
+    padding: 5rem 2rem; text-align: center;
+  }
+  .vacio.visible { display: flex; }
+  .vacio-icon { font-size: 2.5rem; margin-bottom: 1.25rem; opacity: 0.3; }
+  .vacio-titulo {
+    font-family: var(--font-display);
+    font-size: 1.25rem; font-weight: 300; font-style: italic;
+    color: var(--text-2); margin-bottom: 0.5rem;
+  }
+  .vacio-sub { font-size: 0.88rem; color: var(--text-3); }
+
+  /* ══════════════════════════════
+     FOOTER
+  ══════════════════════════════ */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+    text-align: center;
+    font-size: 0.78rem; color: var(--text-3);
+  }
+
+  /* ══════════════════════════════
+     RESPONSIVE
+  ══════════════════════════════ */
+  @media (max-width: 600px) {
+    .header { padding: 0 1rem; }
+    .header-marca-sub { display: none; }
+    .hero { padding: 2.5rem 1rem 1.5rem; }
+    .busqueda-wrap { padding: 0 1rem 1.25rem; }
+    .busqueda { max-width: 100%; }
+    .filtros-wrap { padding: 0 1rem 1.5rem; }
+    .grid-wrap { padding: 1.5rem 1rem 3rem; }
+    .grid { grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+    .tarjeta-portada { height: 90px; }
+    .tarjeta-portada-titulo { font-size: 0.85rem; }
+    .tarjeta-cuerpo { padding: 0.85rem 1rem 1rem; }
+    .tarjeta-titulo { font-size: 0.92rem; }
+    .tarjeta-desc { display: none; }
+  }
+  @media (max-width: 380px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-marca">
+    <span class="header-marca-titulo">Mentor de Conocimiento</span>
+    <span class="header-marca-sep">·</span>
+    <span class="header-marca-sub">Biblioteca</span>
+  </div>
+  <div class="header-acciones">
+    <button class="btn-icon" onclick="toggleDark()" id="btn-dark" title="Modo oscuro">☽</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">The Way · College</div>
+  <h1 class="hero-titulo">Lecturas que <em>forman</em><br>el camino</h1>
+  <p class="hero-desc">Resúmenes profundos de libros seleccionados para cada etapa del proceso de formación.</p>
+</div>
+
+<!-- BÚSQUEDA -->
+<div class="busqueda-wrap">
+  <div class="busqueda">
+    <span class="busqueda-icon">⌕</span>
+    <input type="text" id="input-busqueda" placeholder="Buscar por título o autor…" autocomplete="off">
+  </div>
+</div>
+
+<!-- FILTROS -->
+<div class="filtros-wrap">
+  <div class="filtros-label">Expedición</div>
+  <div class="filtros-grupo" id="filtros-principales">
+    <button class="filtro-btn activo" data-filtro="todos">Todos</button>
+    <button class="filtro-btn" data-filtro="mentalidad">Mentalidad</button>
+    <button class="filtro-btn" data-filtro="capacidad">Capacidad</button>
+    <button class="filtro-btn" data-filtro="habilidad">Habilidad</button>
+  </div>
+
+  <!-- Subfiltros Mentalidad -->
+  <div class="subfiltros" id="sub-mentalidad">
+    <button class="filtro-btn sub activo" data-sub="todos-mentalidad">Todas</button>
+    <button class="filtro-btn sub" data-sub="identidad">Identidad</button>
+    <button class="filtro-btn sub" data-sub="sanidad">Sanidad</button>
+    <button class="filtro-btn sub" data-sub="renovacion">Renovación</button>
+  </div>
+
+  <!-- Subfiltros Capacidad -->
+  <div class="subfiltros" id="sub-capacidad">
+    <button class="filtro-btn sub activo" data-sub="todos-capacidad">Todas</button>
+    <button class="filtro-btn sub" data-sub="espiritual">Inteligencia Espiritual</button>
+    <button class="filtro-btn sub" data-sub="emocional">Inteligencia Emocional</button>
+    <button class="filtro-btn sub" data-sub="fisica">Inteligencia Física</button>
+  </div>
+
+  <!-- Subfiltros Habilidad -->
+  <div class="subfiltros" id="sub-habilidad">
+    <button class="filtro-btn sub activo" data-sub="todos-habilidad">Todas</button>
+    <button class="filtro-btn sub" data-sub="personal">Personal</button>
+    <button class="filtro-btn sub" data-sub="relacional">Relacional</button>
+    <button class="filtro-btn sub" data-sub="vocacional">Vocacional</button>
+  </div>
+</div>
+
+<!-- GRID -->
+<div class="grid-wrap">
+  <div class="grid-meta" id="grid-meta">Cargando…</div>
+  <div class="grid" id="grid"></div>
+  <div class="vacio" id="vacio">
+    <div class="vacio-icon">◎</div>
+    <div class="vacio-titulo">Sin resultados</div>
+    <div class="vacio-sub">Prueba con otro término o filtro</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  Mentor de Conocimiento · The Way College
+</footer>
+
+<script>
+  /* ══════════════════════════════
+     ESTADO
+  ══════════════════════════════ */
+  var libros = [];
+  var filtroActivo = 'todos';
+  var subFiltroActivo = null;
+  var busqueda = '';
+
+  /* ══════════════════════════════
+     DARK MODE
+  ══════════════════════════════ */
+  function toggleDark() {
+    var dark = document.body.classList.toggle('dark');
+    document.getElementById('btn-dark').textContent = dark ? '☀' : '☽';
+  }
+
+  /* ══════════════════════════════
+     CARGAR DATOS
+  ══════════════════════════════ */
+  fetch('libros.json')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      libros = data.libros;
+      renderizar();
+    })
+    .catch(function() {
+      // Fallback con datos de ejemplo si no encuentra el JSON
+      libros = [
+        {
+          titulo: "El Regreso del Hijo Pródigo",
+          autor: "Henri J. M. Nouwen",
+          anio: 1992,
+          expedicion: "mentalidad",
+          sub_expedicion: "identidad",
+          color_acento: "#312C8A",
+          color_portada_inicio: "#0F0D33",
+          color_portada_fin: "#4E3DBB",
+          tiempo_lectura_min: 48,
+          capitulos: 12,
+          archivo: "libros/el-regreso-del-hijo-prodigo.html",
+          descripcion: "El camino espiritual recorrido a través de los tres personajes de la parábola: el hijo que huye, el hijo que juzga y el padre que ama sin condición."
+        }
+      ];
+      renderizar();
+    });
+
+  /* ══════════════════════════════
+     FILTROS
+  ══════════════════════════════ */
+  document.getElementById('filtros-principales').addEventListener('click', function(e) {
+    var btn = e.target.closest('.filtro-btn');
+    if (!btn) return;
+    var f = btn.dataset.filtro;
+
+    // Actualizar botones principales
+    document.querySelectorAll('#filtros-principales .filtro-btn').forEach(function(b) {
+      b.classList.toggle('activo', b.dataset.filtro === f);
+    });
+
+    filtroActivo = f;
+    subFiltroActivo = null;
+
+    // Mostrar/ocultar subfiltros
+    ['mentalidad','capacidad','habilidad'].forEach(function(exp) {
+      var el = document.getElementById('sub-' + exp);
+      if (exp === f) {
+        el.classList.add('visible');
+        // Reset subfiltro activo
+        el.querySelectorAll('.filtro-btn').forEach(function(b, i) {
+          b.classList.toggle('activo', i === 0);
+        });
+      } else {
+        el.classList.remove('visible');
+      }
+    });
+
+    renderizar();
+  });
+
+  // Subfiltros
+  ['mentalidad','capacidad','habilidad'].forEach(function(exp) {
+    document.getElementById('sub-' + exp).addEventListener('click', function(e) {
+      var btn = e.target.closest('.filtro-btn');
+      if (!btn) return;
+      var sub = btn.dataset.sub;
+
+      this.querySelectorAll('.filtro-btn').forEach(function(b) {
+        b.classList.toggle('activo', b.dataset.sub === sub);
+      });
+
+      subFiltroActivo = sub.startsWith('todos-') ? null : sub;
+      renderizar();
+    });
+  });
+
+  /* ══════════════════════════════
+     BÚSQUEDA
+  ══════════════════════════════ */
+  document.getElementById('input-busqueda').addEventListener('input', function() {
+    busqueda = this.value.toLowerCase().trim();
+    renderizar();
+  });
+
+  /* ══════════════════════════════
+     RENDERIZAR
+  ══════════════════════════════ */
+  function renderizar() {
+    var filtrados = libros.filter(function(l) {
+      // Filtro expedición
+      if (filtroActivo !== 'todos' && l.expedicion !== filtroActivo) return false;
+      // Subfiltro
+      if (subFiltroActivo && l.sub_expedicion !== subFiltroActivo) return false;
+      // Búsqueda
+      if (busqueda) {
+        var haystack = (l.titulo + ' ' + l.autor).toLowerCase();
+        if (!haystack.includes(busqueda)) return false;
+      }
+      return true;
+    });
+
+    var grid = document.getElementById('grid');
+    var vacio = document.getElementById('vacio');
+    var meta = document.getElementById('grid-meta');
+
+    if (filtrados.length === 0) {
+      grid.innerHTML = '';
+      vacio.classList.add('visible');
+      meta.innerHTML = '';
+    } else {
+      vacio.classList.remove('visible');
+      var total = filtrados.length;
+      meta.innerHTML = '<span>' + total + '</span> ' + (total === 1 ? 'libro' : 'libros');
+      grid.innerHTML = filtrados.map(tarjetaHTML).join('');
+    }
+  }
+
+  function tarjetaHTML(libro) {
+    var grad = 'linear-gradient(145deg, ' + libro.color_portada_inicio + ' 0%, ' + libro.color_portada_fin + ' 100%)';
+    var subLabel = etiquetaSub(libro.expedicion, libro.sub_expedicion);
+    var expLabel = etiquetaExp(libro.expedicion);
+
+    return '<a class="tarjeta" href="' + libro.archivo + '">' +
+      '<div class="tarjeta-banda" style="background:' + libro.color_acento + '"></div>' +
+      '<div class="tarjeta-portada" style="background:' + grad + '">' +
+        '<div class="tarjeta-portada-overlay"></div>' +
+        '<div class="tarjeta-portada-titulo">' + libro.titulo + '</div>' +
+      '</div>' +
+      '<div class="tarjeta-cuerpo">' +
+        '<div class="tarjeta-autor">' + libro.autor + ' · ' + libro.anio + '</div>' +
+        '<div class="tarjeta-titulo">' + libro.titulo + '</div>' +
+        '<div class="tarjeta-desc">' + libro.descripcion + '</div>' +
+        '<div class="tarjeta-footer">' +
+          '<div class="tarjeta-tags">' +
+            (expLabel ? '<span class="tarjeta-tag">' + expLabel + '</span>' : '') +
+            (subLabel ? '<span class="tarjeta-tag">' + subLabel + '</span>' : '') +
+          '</div>' +
+          '<div class="tarjeta-meta">' + libro.tiempo_lectura_min + ' min</div>' +
+        '</div>' +
+      '</div>' +
+    '</a>';
+  }
+
+  function etiquetaExp(exp) {
+    var map = { mentalidad: 'Mentalidad', capacidad: 'Capacidad', habilidad: 'Habilidad' };
+    return map[exp] || '';
+  }
+
+  function etiquetaSub(exp, sub) {
+    var map = {
+      identidad: 'Identidad', sanidad: 'Sanidad', renovacion: 'Renovación',
+      espiritual: 'Int. Espiritual', emocional: 'Int. Emocional', fisica: 'Int. Física',
+      personal: 'Personal', relacional: 'Relacional', vocacional: 'Vocacional'
+    };
+    return map[sub] || '';
+  }
+</script>
+</body>
+</html>
