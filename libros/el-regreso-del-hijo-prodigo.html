@@ -1,0 +1,2407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Regreso del Hijo Pródigo — Henri Nouwen</title>
+
+<!-- ═══════════════════════════════════════
+     METADATOS DEL LIBRO (para la biblioteca futura)
+═══════════════════════════════════════ -->
+<script type="application/json" id="libro-meta">
+{
+  "titulo": "El Regreso del Hijo Pródigo",
+  "subtitulo": "Meditaciones frente a un cuadro de Rembrandt",
+  "autor": "Henri J. M. Nouwen",
+  "anio": 1992,
+  "anio_autor": "1932–1996",
+  "paginas": 16,
+  "capitulos": 12,
+  "color_acento": "#312C8A",
+  "color_portada_inicio": "#0F0D33",
+  "color_portada_fin": "#4E3DBB",
+  "categoria": "Espiritualidad",
+  "paso": 1,
+  "tiempo_lectura_total_min": 48
+}
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+
+  /* ═══════════════════════════════════════
+     SISTEMA DE DISEÑO — VARIABLES
+     (Cambia solo esto para dar identidad
+      a cada nuevo resumen)
+  ═══════════════════════════════════════ */
+  :root {
+    /* Paleta del libro */
+    --c-acento:        #312C8A;
+    --c-acento-medio:  #5048A6;
+    --c-acento-suave:  #7066CC;
+    --c-acento-claro:  #ABA5E8;
+    --c-acento-palido: #ECEAF9;
+    --c-acento-bg:     #C9C4F2;
+
+    /* Portada */
+    --portada-grad: linear-gradient(160deg, #0F0D33 0%, #1E1860 35%, #312C8A 65%, #4E3DBB 100%);
+
+    /* Texto */
+    --c-texto:      #1C1A2E;
+    --c-texto-2:    #4A4660;
+    --c-texto-3:    #8880C8;
+
+    /* Superficie */
+    --c-bg:         #F5F3EE;
+    --c-surface:    #FDFCF9;
+    --c-border:     #E3E0F0;
+
+    /* Acción / verde */
+    --c-accion:     #1E9E75;
+    --c-accion-bg:  #062E26;
+    --c-accion-txt: #D9F3EB;
+
+    /* Header libro */
+    --header-grad: linear-gradient(135deg, #1B1747 0%, #312C8A 100%);
+
+    /* Tipografías */
+    --font-serif:  'Playfair Display', Georgia, serif;
+    --font-body:   'EB Garamond', Georgia, serif;
+
+    /* Espaciado */
+    --radio:       8px;
+    --radio-lg:    10px;
+  }
+
+  /* ── Reset ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--c-texto);
+    background: var(--c-bg);
+  }
+
+  /* ════════════════════════════
+     SISTEMA DE PÁGINAS
+  ════════════════════════════ */
+  .pagina {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    overflow-y: auto;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .pagina.oculta  { opacity: 0; pointer-events: none; transform: translateY(20px); }
+  .pagina.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+  /* ════════════════════════════
+     BARRA DE PROGRESO DE LECTURA
+  ════════════════════════════ */
+  #barra-progreso {
+    position: fixed; top: 0; left: 0; z-index: 10000;
+    height: 3px; width: 0%;
+    background: linear-gradient(90deg, var(--c-acento-suave), var(--c-accion));
+    transition: width 0.1s linear;
+    display: none;
+    border-radius: 0 2px 2px 0;
+  }
+
+  /* ════════════════════════════
+     PORTADA — ANIMACIÓN
+  ════════════════════════════ */
+  #portada .c1 {
+    position: absolute; top: -120px; right: -120px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: rgba(255,255,255,0.03); pointer-events: none;
+    animation: flotar 8s ease-in-out infinite;
+  }
+  #portada .c2 {
+    position: absolute; bottom: -140px; left: -100px;
+    width: 560px; height: 560px; border-radius: 50%;
+    background: rgba(255,255,255,0.025); pointer-events: none;
+    animation: flotar 10s ease-in-out infinite reverse;
+  }
+  #portada .c3 {
+    position: absolute; top: 50%; left: -200px;
+    transform: translateY(-50%);
+    width: 380px; height: 380px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.04); pointer-events: none;
+    animation: rotar 30s linear infinite;
+  }
+
+  @keyframes flotar {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50%       { transform: translateY(-24px) scale(1.02); }
+  }
+  @keyframes rotar {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to   { transform: translateY(-50%) rotate(360deg); }
+  }
+
+  /* Animación de entrada de la portada */
+  .portada-inner {
+    position: relative; z-index: 1;
+    max-width: 560px;
+    display: flex; flex-direction: column; align-items: center;
+    opacity: 0; transform: translateY(32px);
+    animation: entrar 1s cubic-bezier(0.22,1,0.36,1) 0.2s forwards;
+  }
+  @keyframes entrar {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .p-eyebrow {
+    font-size: 11px; letter-spacing: 0.32em;
+    text-transform: uppercase; color: #9C95E0;
+    margin-bottom: 2.5rem;
+    opacity: 0; animation: entrar 0.8s ease 0.5s forwards;
+  }
+  .p-ornament {
+    font-size: 1.4rem; color: rgba(156,149,224,0.35);
+    letter-spacing: 0.6em; margin-bottom: 1.75rem;
+    opacity: 0; animation: entrar 0.8s ease 0.65s forwards;
+  }
+  .p-titulo {
+    font-family: var(--font-serif);
+    font-size: clamp(2.6rem, 6vw, 4rem);
+    font-weight: 700; font-style: italic;
+    color: #ffffff; line-height: 1.15; margin-bottom: 0.5rem;
+    opacity: 0; animation: entrar 0.9s ease 0.75s forwards;
+  }
+  .p-rule {
+    width: 72px; height: 1.5px;
+    background: linear-gradient(90deg, transparent, var(--c-acento-suave), transparent);
+    margin: 1.75rem 0;
+    opacity: 0; animation: entrar 0.8s ease 0.9s forwards;
+  }
+  .p-autor {
+    font-size: 1.15rem; color: #ABA5E8;
+    letter-spacing: 0.14em; margin-bottom: 0.4rem;
+    opacity: 0; animation: entrar 0.8s ease 1s forwards;
+  }
+  .p-fechas {
+    font-size: 0.88rem; color: #5E58A8;
+    letter-spacing: 0.06em; margin-bottom: 3rem;
+    opacity: 0; animation: entrar 0.8s ease 1.05s forwards;
+  }
+  .p-badge {
+    border: 1px solid rgba(171,165,232,0.28);
+    color: #9C95E0; font-size: 10.5px;
+    letter-spacing: 0.22em; padding: 7px 20px;
+    border-radius: 40px; text-transform: uppercase; margin-bottom: 4rem;
+    opacity: 0; animation: entrar 0.8s ease 1.15s forwards;
+  }
+  .btn-leer {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #ffffff; color: #1B1747;
+    font-family: var(--font-serif);
+    font-size: 1.08rem; font-style: italic; font-weight: 500;
+    padding: 1.1rem 3rem; border-radius: 50px;
+    text-decoration: none; letter-spacing: 0.04em;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.28);
+    transition: background 0.2s, color 0.2s, transform 0.15s, box-shadow 0.2s;
+    border: none; cursor: pointer;
+    opacity: 0; animation: entrar 0.9s cubic-bezier(0.22,1,0.36,1) 1.3s forwards;
+  }
+  .btn-leer:hover {
+    background: #ECEAF9; color: #312C8A;
+    transform: translateY(-3px); box-shadow: 0 10px 36px rgba(0,0,0,0.35);
+  }
+  .p-footer {
+    position: absolute; bottom: 1.75rem; left: 0; right: 0;
+    text-align: center; font-size: 10.5px; letter-spacing: 0.18em;
+    color: #3A3570; text-transform: uppercase;
+    opacity: 0; animation: entrar 0.8s ease 1.5s forwards;
+  }
+
+  /* ════════════════════════════
+     CONTENIDO
+  ════════════════════════════ */
+  .page {
+    max-width: 720px; margin: 0 auto;
+    background: var(--c-surface); border-radius: var(--radio);
+    box-shadow: 0 4px 32px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.05);
+    overflow: hidden;
+  }
+  .libro-header {
+    background: var(--header-grad);
+    padding: 2rem 3rem;
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  }
+  .libro-header-titulo {
+    font-family: var(--font-serif);
+    font-style: italic; font-size: 1.05rem; color: #C9C4F2;
+  }
+  .libro-header-paso {
+    font-size: 10px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--c-acento-suave);
+    background: rgba(255,255,255,0.07);
+    padding: 5px 14px; border-radius: 20px; white-space: nowrap;
+  }
+
+  /* Tiempo de lectura */
+  .lectura-meta {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.55rem 1.5rem;
+    background: rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 11px; letter-spacing: 0.12em;
+    color: rgba(171,165,232,0.6);
+    text-transform: uppercase;
+  }
+  .lectura-meta span { color: rgba(171,165,232,0.9); font-weight: 500; }
+
+  .body { padding: 2.75rem 3.5rem 3.5rem; }
+
+  /* TABLA DE CONTENIDO */
+  .toc { background: var(--c-acento-palido); border-radius: var(--radio-lg); padding: 1.6rem 1.75rem; margin-bottom: 3rem; }
+  .toc-titulo {
+    font-family: var(--font-serif); font-size: 0.78rem; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--c-acento-medio); margin-bottom: 1.1rem;
+  }
+  .toc-grid { display: flex; flex-direction: column; gap: 8px; }
+  .toc-btn {
+    display: flex; align-items: center; gap: 10px;
+    background: #ffffff; border: 1px solid var(--c-acento-bg);
+    border-radius: var(--radio); padding: 10px 14px;
+    text-decoration: none; color: var(--c-texto);
+    font-size: 15.5px; font-family: var(--font-body);
+    transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    cursor: pointer;
+  }
+  .toc-btn:hover { background: var(--c-acento-palido); border-color: var(--c-acento-suave); transform: translateX(4px); }
+  .toc-num {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--c-acento-palido); border: 1px solid var(--c-acento-bg);
+    color: var(--c-acento); font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .toc-arrow { margin-left: auto; color: var(--c-acento-claro); font-size: 13px; }
+
+  hr.rule { border: none; text-align: center; margin: 2.75rem 0; }
+  hr.rule::before { content: '✦  ✦  ✦'; font-size: 10px; color: var(--c-acento-bg); letter-spacing: 0.4em; }
+
+  .eyebrow {
+    font-size: 10.5px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--c-acento-medio); margin-bottom: 0.65rem;
+    display: block; padding-top: 0.5rem;
+  }
+  .filtro-header {
+    border-left: 3.5px solid var(--c-acento-suave); padding: 0.9rem 1.4rem;
+    background: #F5F3FF; border-radius: 0 var(--radio) var(--radio) 0; margin-bottom: 2.5rem;
+  }
+  .filtro-label { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-acento-medio); margin-bottom: 5px; }
+  .filtro-title { font-family: var(--font-serif); font-size: 1.1rem; font-style: italic; color: var(--c-texto); line-height: 1.55; }
+
+  .author-card {
+    display: flex; gap: 1.25rem; background: var(--c-surface);
+    border: 1px solid var(--c-border); border-radius: var(--radio);
+    padding: 1.2rem 1.4rem; margin-bottom: 1.5rem; align-items: flex-start;
+  }
+  .author-monogram {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--c-acento-palido); border: 1.5px solid var(--c-acento-bg);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-serif); font-size: 1.35rem; font-style: italic;
+    color: var(--c-acento); flex-shrink: 0;
+  }
+  .author-name { font-family: var(--font-serif); font-size: 1rem; font-weight: 500; color: var(--c-texto); margin-bottom: 5px; }
+  .author-bio { font-size: 15.5px; color: var(--c-texto-2); line-height: 1.75; }
+
+  .problema {
+    background: #FAFAF7; border: 1px solid var(--c-border);
+    border-radius: var(--radio); padding: 1.1rem 1.4rem;
+    font-size: 16px; color: #2E2B45; line-height: 1.78;
+  }
+  .problema strong { font-family: var(--font-serif); font-weight: 500; color: var(--c-texto); }
+
+  .tesis-block {
+    background: var(--c-acento-palido); border-radius: var(--radio-lg);
+    padding: 2rem 2.25rem; margin: 1.25rem 0; position: relative; overflow: hidden;
+  }
+  .tesis-block::before {
+    content: '\201C'; font-family: var(--font-serif);
+    font-size: 7rem; color: var(--c-acento-suave); opacity: 0.15;
+    position: absolute; top: -10px; left: 12px; line-height: 1; pointer-events: none;
+  }
+  .tesis-label { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-acento-medio); margin-bottom: 0.75rem; position: relative; z-index: 1; }
+  .tesis-text { font-family: var(--font-serif); font-size: 1.12rem; font-style: italic; color: #1B1747; line-height: 1.78; position: relative; z-index: 1; }
+
+  .ideas-heading { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 500; color: var(--c-texto); border-bottom: 1px solid var(--c-border); padding-bottom: 0.7rem; margin: 1.25rem 0 1.6rem; }
+  .idea { display: flex; gap: 1rem; margin-bottom: 1.6rem; align-items: flex-start; }
+  .idea-num { width: 30px; height: 30px; border-radius: 50%; background: var(--c-acento-palido); border: 1px solid var(--c-acento-bg); color: var(--c-acento); font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 3px; }
+  .idea-body { flex: 1; }
+  .idea-title { font-family: var(--font-serif); font-size: 1rem; font-style: italic; font-weight: 500; color: var(--c-texto); margin-bottom: 5px; line-height: 1.45; }
+  .idea-text { font-size: 15.5px; color: var(--c-texto-2); line-height: 1.8; }
+
+  .dato-card { background: var(--c-accion-bg); border-radius: var(--radio-lg); padding: 1.75rem 2rem; margin: 1.25rem 0; }
+  .dato-label { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #5DCAA5; margin-bottom: 0.75rem; }
+  .dato-text { font-family: var(--font-serif); font-size: 1.08rem; font-style: italic; color: var(--c-accion-txt); line-height: 1.8; }
+
+  .accion-card { background: var(--c-surface); border: 1px solid #C8E6D8; border-top: 3.5px solid var(--c-accion); border-radius: var(--radio); padding: 1.5rem 1.75rem; margin: 1.25rem 0; }
+  .accion-label { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #0F6E56; margin-bottom: 0.75rem; }
+  .accion-text { font-size: 16px; color: var(--c-texto); line-height: 1.8; }
+  .accion-question { font-family: var(--font-serif); font-style: italic; font-size: 1.05rem; color: #0F6E56; line-height: 1.7; border-left: 2.5px solid var(--c-accion); padding-left: 1rem; margin: 0.9rem 0; }
+
+  .veredicto-card { background: linear-gradient(135deg, #1B1747 0%, #2A2570 100%); border-radius: var(--radio-lg); padding: 2rem 2.25rem; margin: 1.25rem 0; }
+  .veredicto-label { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-acento-claro); margin-bottom: 0.6rem; }
+  .veredicto-badge { display: inline-block; background: var(--c-acento-medio); color: #ffffff; font-family: var(--font-serif); font-style: italic; font-size: 1rem; border-radius: 4px; padding: 5px 16px; margin-bottom: 1.1rem; }
+  .veredicto-text { font-size: 15.5px; color: #C9C4F2; line-height: 1.85; }
+
+  .nav-final { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; padding: 2.25rem 3rem 2.75rem; border-top: 1px solid var(--c-border); }
+  .btn-nav { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-serif); font-style: italic; font-size: 1rem; padding: 0.85rem 1.85rem; border-radius: 40px; text-decoration: none; border: none; cursor: pointer; transition: background 0.15s, transform 0.12s, box-shadow 0.15s; }
+  .btn-regresar { background: var(--c-acento-palido); color: var(--c-acento); border: 1px solid var(--c-acento-bg); }
+  .btn-regresar:hover { background: #DDD9F7; transform: translateY(-2px); }
+  .btn-siguiente { background: var(--c-acento); color: #ffffff; box-shadow: 0 3px 14px rgba(49,44,138,0.25); }
+  .btn-siguiente:hover { background: #1B1747; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(49,44,138,0.35); }
+
+  .book-footer { background: #1C1A2E; padding: 1.25rem 3rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .footer-title { font-family: var(--font-serif); font-style: italic; font-size: 0.88rem; color: var(--c-acento-suave); }
+  .footer-tag { font-size: 10.5px; letter-spacing: 0.15em; color: #4A4675; text-transform: uppercase; }
+
+  /* ════════════════════════════
+     MODO LECTURA LIMPIO
+  ════════════════════════════ */
+  #btn-lectura {
+    position: fixed; bottom: 5rem; right: 1.5rem; z-index: 9999;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,0.92);
+    border: 1px solid var(--c-border);
+    color: var(--c-acento); font-size: 1rem;
+    display: none; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.2s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  }
+  #btn-lectura:hover { transform: scale(1.1); background: var(--c-acento-palido); }
+  body.modo-lectura .libro-header { display: none; }
+  body.modo-lectura .lectura-meta { display: none; }
+  body.modo-lectura .book-footer { display: none; }
+  body.modo-lectura .nav-final { display: none; }
+  body.modo-lectura #btn-lectura { background: var(--c-acento); color: #fff; border-color: var(--c-acento); }
+  body.dark #btn-lectura { background: rgba(28,26,46,0.92); color: var(--c-acento-claro); border-color: #312C6A; }
+
+  /* ════════════════════════════
+     RESPONSIVE
+  ════════════════════════════ */
+  @media (max-width: 780px) {
+    .page { border-radius: 0; }
+    .body { padding: 2.25rem 2rem 3rem; }
+    .libro-header { padding: 1.5rem 2rem; }
+    .nav-final { padding: 2rem; }
+    .book-footer { padding: 1.1rem 2rem; }
+  }
+  @media (max-width: 600px) {
+    .p-titulo { font-size: clamp(2rem, 8vw, 2.6rem); }
+    .p-eyebrow { font-size: 9.5px; letter-spacing: 0.22em; margin-bottom: 1.75rem; }
+    .p-badge { font-size: 9px; letter-spacing: 0.16em; padding: 6px 14px; margin-bottom: 2.5rem; }
+    .btn-leer { padding: 0.95rem 1.75rem; font-size: 0.97rem; }
+    .p-footer { font-size: 9px; }
+    .page { border-radius: 0; box-shadow: none; }
+    .libro-header { padding: 1.1rem 1.25rem; flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+    .libro-header-titulo { font-size: 0.92rem; }
+    .body { padding: 1.5rem 1.1rem 2rem; }
+    .filtro-title { font-size: 1rem; }
+    .tesis-text { font-size: 1rem; }
+    .problema { font-size: 15px; padding: 1rem 1.1rem; line-height: 1.75; }
+    .author-bio { font-size: 14.5px; }
+    .idea-text { font-size: 14.5px; }
+    .accion-text { font-size: 15px; }
+    .accion-question { font-size: 0.97rem; }
+    .dato-text { font-size: 1rem; }
+    .veredicto-text { font-size: 14.5px; }
+    .tesis-block { padding: 1.4rem 1.25rem; }
+    .tesis-block::before { font-size: 5rem; }
+    .dato-card { padding: 1.25rem 1.4rem; }
+    .accion-card { padding: 1.1rem 1.25rem; }
+    .veredicto-card { padding: 1.4rem 1.4rem; }
+    .filtro-header { padding: 0.8rem 1rem; margin-bottom: 1.75rem; }
+    .author-card { flex-direction: row; gap: 0.9rem; padding: 1rem 1.1rem; }
+    .author-monogram { width: 44px; height: 44px; font-size: 1.1rem; }
+    .toc { padding: 1.2rem 1.1rem; }
+    .toc-btn { font-size: 14.5px; padding: 9px 11px; }
+    .idea { gap: 0.75rem; margin-bottom: 1.25rem; }
+    .idea-num { width: 26px; height: 26px; font-size: 12px; }
+    .nav-final { padding: 1.5rem 1.1rem; gap: 0.75rem; }
+    .btn-nav { font-size: 0.92rem; padding: 0.75rem 1.4rem; }
+    .btn-regresar, .btn-siguiente { flex: 1; justify-content: center; }
+    .book-footer { padding: 1rem 1.25rem; flex-direction: column; text-align: center; gap: 0.4rem; }
+    .footer-title { font-size: 0.82rem; }
+    .footer-tag { font-size: 9.5px; }
+    #btn-dark, #btn-lectura { bottom: 1rem; right: 1rem; width: 40px; height: 40px; font-size: 1rem; }
+    #btn-lectura { bottom: 4rem; }
+  }
+  @media (max-width: 380px) {
+    .body { padding: 1.25rem 0.9rem 1.75rem; }
+    .p-titulo { font-size: 1.85rem; }
+    .btn-nav { font-size: 0.85rem; padding: 0.7rem 1rem; }
+  }
+
+  /* ══════════════════
+     BOTÓN MODO OSCURO
+  ══════════════════ */
+  #btn-dark {
+    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9999;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(8px);
+    color: #ffffff; font-size: 1.15rem;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  }
+  #btn-dark:hover { background: rgba(255,255,255,0.22); transform: scale(1.1); }
+
+  /* ══════════════════
+     MODO OSCURO
+  ══════════════════ */
+  body.dark { background: #131120; color: #D4D0F0; }
+
+  /* Páginas de contenido */
+  body.dark section[style*="background:#F5F3EE"] { background: #131120 !important; }
+  body.dark .page {
+    background: #1C1A2E;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.5);
+  }
+  body.dark .libro-header {
+    background: linear-gradient(135deg, #0D0B22 0%, #1B1747 100%);
+  }
+  body.dark .body { background: #1C1A2E; }
+  body.dark .filtro-header {
+    background: #221F3A; border-left-color: #7066CC;
+  }
+  body.dark .filtro-title { color: #D4D0F0; }
+  body.dark .filtro-label { color: #9C95E0; }
+  body.dark .tesis-block { background: #221F3A; }
+  body.dark .tesis-text { color: #C9C4F2; }
+  body.dark .tesis-label { color: #9C95E0; }
+  body.dark .eyebrow { color: #9C95E0; }
+  body.dark .problema {
+    background: #221F3A; border-color: #312C6A; color: #C9C4F2;
+  }
+  body.dark .idea-num {
+    background: #2A2550; border-color: #4A4690; color: #ABA5E8;
+  }
+  body.dark .idea-text { color: #ABA5E8; }
+  body.dark .ideas-heading { color: #D4D0F0; border-color: #312C6A; }
+  body.dark .accion-card {
+    background: #0F1E18; border-color: #1A4A36;
+    border-top-color: #1E9E75;
+  }
+  body.dark .accion-text { color: #C9E8DA; }
+  body.dark .author-card {
+    background: #1C1A2E; border-color: #312C6A;
+  }
+  body.dark .author-name { color: #D4D0F0; }
+  body.dark .author-bio { color: #ABA5E8; }
+  body.dark .author-monogram {
+    background: #2A2550; border-color: #4A4690; color: #ABA5E8;
+  }
+  body.dark .toc { background: #221F3A; }
+  body.dark .toc-titulo { color: #9C95E0; }
+  body.dark .toc-btn {
+    background: #1C1A2E; border-color: #312C6A; color: #D4D0F0;
+  }
+  body.dark .toc-btn:hover { background: #2A2550; border-color: #7066CC; }
+  body.dark .toc-num {
+    background: #2A2550; border-color: #4A4690; color: #ABA5E8;
+  }
+  body.dark .nav-final { border-top-color: #312C6A; background: #1C1A2E; }
+  body.dark .btn-regresar {
+    background: #2A2550; color: #C9C4F2; border-color: #4A4690;
+  }
+  body.dark .btn-regresar:hover { background: #312C8A; }
+  body.dark .book-footer { background: #0D0B22; }
+  body.dark hr.rule::before { color: #4A4690; }
+
+  /* Botón dark — visible en modo día con fondo oscuro */
+  #btn-dark {
+    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9999;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: #1C1A2E;
+    border: 1.5px solid #4A4675;
+    color: #ABA5E8; font-size: 1.15rem;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  #btn-dark:hover { background: #312C8A; transform: scale(1.1); }
+  body.dark #btn-dark {
+    background: #F5F3EE;
+    border-color: #C9C4F2;
+    color: #312C8A;
+  }
+  body.dark #btn-dark:hover { background: #ECEAF9; }
+
+  body.dark #barra-progreso {
+    background: linear-gradient(90deg, #7066CC, #5DCAA5);
+  }
+
+  /* ══════════════════
+     MENÚ HAMBURGUESA
+  ══════════════════ */
+  #menu-btn {
+    position: fixed; top: 1rem; left: 1rem; z-index: 9999;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(8px);
+    color: #ffffff; font-size: 1.1rem;
+    display: none; /* oculto en portada */
+    align-items: center; justify-content: center;
+    cursor: pointer; transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  }
+  #menu-btn:hover { background: rgba(255,255,255,0.22); transform: scale(1.08); }
+  body.dark #menu-btn {
+    background: rgba(30,25,60,0.85);
+    border-color: rgba(100,90,200,0.4);
+    color: #C9C4F2;
+  }
+
+  /* Panel lateral */
+  #menu-panel {
+    position: fixed; top: 0; left: 0; bottom: 0;
+    width: 280px; z-index: 10000;
+    background: #ffffff;
+    box-shadow: 4px 0 32px rgba(0,0,0,0.18);
+    transform: translateX(-100%);
+    transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+    display: flex; flex-direction: column;
+    overflow-y: auto;
+  }
+  #menu-panel.abierto { transform: translateX(0); }
+  body.dark #menu-panel { background: #1C1A2E; }
+
+  #menu-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(0,0,0,0.35);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.28s ease;
+  }
+  #menu-overlay.activo { opacity: 1; pointer-events: auto; }
+
+  .menu-header {
+    padding: 1.5rem 1.5rem 1rem;
+    border-bottom: 1px solid #E3E0F0;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  body.dark .menu-header { border-bottom-color: #312C6A; }
+  .menu-titulo {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 0.95rem; color: #1B1747;
+  }
+  body.dark .menu-titulo { color: #C9C4F2; }
+  .menu-close {
+    background: none; border: none; cursor: pointer;
+    color: #8880C8; font-size: 1.2rem; padding: 4px;
+    line-height: 1;
+  }
+  body.dark .menu-close { color: #7066CC; }
+
+  .menu-seccion {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #F0EEF8;
+  }
+  body.dark .menu-seccion { border-bottom-color: #221F3A; }
+  .menu-seccion-label {
+    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #9C95E0; padding: 0.5rem 1.5rem 0.25rem;
+  }
+
+  .menu-item {
+    display: flex; align-items: center; gap: 0.85rem;
+    width: 100%; padding: 0.7rem 1.5rem;
+    background: none; border: none; cursor: pointer;
+    text-align: left; transition: background 0.15s;
+    font-family: 'EB Garamond', serif;
+  }
+  .menu-item:hover { background: #F5F3FF; }
+  body.dark .menu-item:hover { background: #221F3A; }
+  .menu-item.activo { background: #ECEAF9; }
+  body.dark .menu-item.activo { background: #2A2550; }
+  .menu-item-num {
+    width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+    background: #ECEAF9; border: 1px solid #C9C4F2;
+    color: #312C8A; font-size: 11px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'EB Garamond', serif;
+  }
+  .menu-item.activo .menu-item-num {
+    background: #312C8A; border-color: #312C8A; color: #fff;
+  }
+  body.dark .menu-item-num { background: #2A2550; border-color: #4A4690; color: #ABA5E8; }
+  body.dark .menu-item.activo .menu-item-num { background: #5048A6; border-color: #7066CC; color: #fff; }
+  .menu-item-texto { flex: 1; }
+  .menu-item-titulo {
+    font-size: 14.5px; color: #1C1A2E; line-height: 1.3;
+  }
+  body.dark .menu-item-titulo { color: #D4D0F0; }
+  .menu-item-sub {
+    font-size: 11.5px; color: #8880C8; margin-top: 1px;
+    font-style: italic;
+  }
+
+  @media (max-width: 480px) {
+    #menu-panel { width: 88vw; }
+  }
+</style>
+</head>
+<body>
+
+<!-- OVERLAY -->
+<div id="menu-overlay" onclick="cerrarMenu()"></div>
+
+<!-- PANEL MENÚ -->
+<div id="menu-panel">
+  <div class="menu-header">
+    <span class="menu-titulo">El Regreso del Hijo Pródigo</span>
+    <button class="menu-close" onclick="cerrarMenu()">✕</button>
+  </div>
+
+  <div class="menu-seccion">
+    <div class="menu-seccion-label">Resumen</div>
+    <button class="menu-item" onclick="irA('contenido')" data-page="contenido">
+      <span class="menu-item-num">P</span>
+      <span class="menu-item-texto">
+        <div class="menu-item-titulo">Filtro de Lectura</div>
+        <div class="menu-item-sub">Índice y tesis</div>
+      </span>
+    </button>
+    <button class="menu-item" onclick="irA('intro')" data-page="intro">
+      <span class="menu-item-num">·</span>
+      <span class="menu-item-texto">
+        <div class="menu-item-titulo">Introducción</div>
+        <div class="menu-item-sub">Contexto del libro</div>
+      </span>
+    </button>
+  </div>
+
+  <div class="menu-seccion">
+    <div class="menu-seccion-label">Capítulos</div>
+    <button class="menu-item" onclick="irA('cap1')" data-page="cap1">
+      <span class="menu-item-num">1</span>
+      <span class="menu-item-texto">
+        <div class="menu-item-titulo">Prólogo</div>
+        <div class="menu-item-sub">Encuentro con un cuadro</div>
+      </span>
+    </button>
+    <button class="menu-item" onclick="irA('cap2')" data-page="cap2">
+      <span class="menu-item-num">2</span>
+      <span class="menu-item-texto">
+        <div class="menu-item-titulo">Introducción</div>
+        <div class="menu-item-sub">Los tres personajes</div>
+      </span>
+    </button>
+    <button class="menu-item" onclick="irA('cap3')" data-page="cap3">
+      <span class="menu-item-num">3</span>
+      <span class="menu-item-texto">
+        <div class="menu-item-titulo">Rembrandt y el Hijo Menor</div>
+        <div class="menu-item-sub">Lo que el pintor vio en sí mismo</div>
+      </span>
+    </button>
+    <button class="menu-item" onclick="irA('cap4')" data-page="cap4">
+      <span class="menu-item-num">4</span>
+      <span class="menu-item-texto">
+        <div class="menu-item-titulo">El Hijo Menor se Marcha</div>
+        <div class="menu-item-sub">Un "no" al amor</div>
+      </span>
+    </button>
+    <button class="menu-item" onclick="irA('cap5')" data-page="cap5">
+      <span class="menu-item-num">5</span>
+      <span class="menu-item-texto">
+        <div class="menu-item-titulo">El Regreso del Hijo Menor</div>
+        <div class="menu-item-sub">El fondo no es el final</div>
+      </span>
+    </button>
+    <button class="menu-item" onclick="irA('cap6')" data-page="cap6">
+      <span class="menu-item-num">6</span>
+      <span class="menu-item-texto">
+        <div class="menu-item-titulo">Rembrandt y el Hijo Mayor</div>
+        <div class="menu-item-sub">La cara de virtud</div>
+      </span>
+    </button>
+    <button class="menu-item" onclick="irA('cap7')" data-page="cap7">
+      <span class="menu-item-num">7</span>
+      <span class="menu-item-texto">
+        <div class="menu-item-titulo">El Hijo Mayor se Marcha</div>
+        <div class="menu-item-sub">El resentimiento silencioso</div>
+      </span>
+    </button>
+    <button class="menu-item" onclick="irA('cap8')" data-page="cap8">
+      <span class="menu-item-num">8</span>
+      <span class="menu-item-texto">
+        <div class="menu-item-titulo">Rembrandt y el Padre</div>
+        <div class="menu-item-sub">El amor que nace de la ruina</div>
+      </span>
+    </button>
+    <button class="menu-item" onclick="irA('cap9')" data-page="cap9">
+      <span class="menu-item-num">9</span>
+      <span class="menu-item-texto">
+        <div class="menu-item-titulo">El Padre: Ser Padre</div>
+        <div class="menu-item-sub">El destino del camino</div>
+      </span>
+    </button>
+    <button class="menu-item" onclick="irA('cap10')" data-page="cap10">
+      <span class="menu-item-num">10</span>
+      <span class="menu-item-texto">
+        <div class="menu-item-titulo">El Padre da la Bienvenida</div>
+        <div class="menu-item-sub">Sin comparar, sin guardar cuentas</div>
+      </span>
+    </button>
+    <button class="menu-item" onclick="irA('cap11')" data-page="cap11">
+      <span class="menu-item-num">11</span>
+      <span class="menu-item-texto">
+        <div class="menu-item-titulo">El Padre Organiza una Fiesta</div>
+        <div class="menu-item-sub">La alegría como disciplina</div>
+      </span>
+    </button>
+    <button class="menu-item" onclick="irA('cap12')" data-page="cap12">
+      <span class="menu-item-num">✦</span>
+      <span class="menu-item-texto">
+        <div class="menu-item-titulo">Conclusión y Epílogo</div>
+        <div class="menu-item-sub">Convertirse en el Padre</div>
+      </span>
+    </button>
+  </div>
+
+  <div class="menu-seccion">
+    <div class="menu-seccion-label">Consolidación</div>
+    <button class="menu-item" onclick="irA('resumen')" data-page="resumen">
+      <span class="menu-item-num">★</span>
+      <span class="menu-item-texto">
+        <div class="menu-item-titulo">Resumen Final</div>
+        <div class="menu-item-sub">Consolidación del libro</div>
+      </span>
+    </button>
+  </div>
+</div>
+
+<!-- BOTÓN HAMBURGUESA -->
+<button id="menu-btn" onclick="abrirMenu()" title="Índice">☰</button>
+
+<!-- BOTÓN MODO OSCURO -->
+<button id="btn-dark" onclick="toggleDark()" title="Modo oscuro">☽</button>
+
+<!-- BOTÓN MODO LECTURA -->
+<button id="btn-lectura" onclick="toggleLectura()" title="Modo lectura">📖</button>
+
+<!-- BARRA DE PROGRESO -->
+<div id="barra-progreso"></div>
+
+<!-- ══════════════════════════════
+     PÁGINA 1 — PORTADA
+══════════════════════════════ -->
+<div id="portada" class="pagina visible">
+<section id="portada-inner-wrap" style="min-height:100vh;background:linear-gradient(160deg,#0F0D33 0%,#1E1860 35%,#312C8A 65%,#4E3DBB 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem 2rem;position:relative;overflow:hidden;">
+  <div class="c1"></div>
+  <div class="c2"></div>
+  <div class="c3"></div>
+
+  <div class="portada-inner">
+    <div class="p-eyebrow">Resumen Editorial · Mentor de Conocimiento</div>
+    <div class="p-ornament">— ✦ —</div>
+    <div class="p-titulo">El Regreso del<br>Hijo Pródigo</div>
+    <div class="p-rule"></div>
+    <div class="p-autor">Henri J. M. Nouwen</div>
+    <div class="p-fechas">1932 – 1996</div>
+    <div class="p-badge">Filtro de Lectura · Paso 1</div>
+    <button class="btn-leer" onclick="mostrarContenido()">Leer resumen &nbsp;→</button>
+  </div>
+
+  <div class="p-footer">El Regreso del Hijo Pródigo · Henri J. M. Nouwen</div>
+</section>
+</div>
+
+<!-- ══════════════════════════════
+     PÁGINA 2 — CONTENIDO
+══════════════════════════════ -->
+<div id="contenido" class="pagina oculta">
+<section id="contenido-inner-wrap" style="background:#F5F3EE;padding:3rem 1rem 5rem;">
+  <div class="page">
+
+    <div class="libro-header">
+      <div class="libro-header-titulo">El Regreso del Hijo Pródigo · Henri Nouwen</div>
+      <div class="libro-header-paso">Paso 1 · Filtro de Lectura</div>
+    </div>
+
+    <div class="body">
+
+      <!-- TABLA DE CONTENIDO -->
+      <div class="toc">
+        <div class="toc-titulo">Contenido</div>
+        <div class="toc-grid">
+          <a href="#s1" class="toc-btn">
+            <span class="toc-num">1</span>
+            <span>Sobre el autor y el problema central</span>
+            <span class="toc-arrow">↓</span>
+          </a>
+          <a href="#s2" class="toc-btn">
+            <span class="toc-num">2</span>
+            <span>Tesis central</span>
+            <span class="toc-arrow">↓</span>
+          </a>
+          <a href="#s3" class="toc-btn">
+            <span class="toc-num">3</span>
+            <span>Ideas clave — siete ideas que estructuran el libro</span>
+            <span class="toc-arrow">↓</span>
+          </a>
+          <a href="#s4" class="toc-btn">
+            <span class="toc-num">4</span>
+            <span>Dato, giro o hallazgo más impactante</span>
+            <span class="toc-arrow">↓</span>
+          </a>
+          <a href="#s5" class="toc-btn">
+            <span class="toc-num">5</span>
+            <span>Acción inmediata</span>
+            <span class="toc-arrow">↓</span>
+          </a>
+          <a href="#s6" class="toc-btn">
+            <span class="toc-num">6</span>
+            <span>Veredicto de lectura</span>
+            <span class="toc-arrow">↓</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- FILTRO HEADER -->
+      <div class="filtro-header">
+        <div class="filtro-label">Filtro de Lectura</div>
+        <div class="filtro-title">Para discernir si este libro tiene peso real, claridad espiritual y valor transformador</div>
+      </div>
+
+      <!-- § 1 -->
+      <span id="s1" class="eyebrow">§ 1 · Sobre el autor</span>
+      <div class="author-card">
+        <div class="author-monogram">N</div>
+        <div>
+          <div class="author-name">Henri J. M. Nouwen (1932–1996)</div>
+          <div class="author-bio">Fue sacerdote católico, psicólogo y uno de los escritores espirituales más influyentes del siglo XX. Nacido en los Países Bajos, fue profesor en Notre Dame, Yale y Harvard, cargos que abandonó voluntariamente para vivir en L'Arche Daybreak, una comunidad en Toronto dedicada a personas con discapacidad intelectual. Escribió más de cuarenta libros traducidos a decenas de idiomas. Su vida fue una búsqueda honesta y a veces dolorosa de pertenencia y de hogar.</div>
+        </div>
+      </div>
+
+      <div class="problema">
+        <strong>El problema central que aborda:</strong> ¿Por qué el ser humano vive sintiéndose lejos de casa, ya sea huyendo como el hijo menor o resentido como el hijo mayor, y qué se necesita para convertirse en el padre que ama sin condiciones?
+      </div>
+
+      <hr class="rule">
+
+      <!-- § 2 -->
+      <span id="s2" class="eyebrow">§ 2 · Tesis Central</span>
+      <div class="tesis-block">
+        <div class="tesis-label">Tesis Central</div>
+        <div class="tesis-text">Todos somos simultáneamente el hijo que huye, el hijo que juzga y el padre que está llamado a amar sin condición, y el camino espiritual es recorrer esas tres identidades hasta llegar a la última.</div>
+      </div>
+
+      <hr class="rule">
+
+      <!-- § 3 -->
+      <span id="s3" class="eyebrow">§ 3 · Ideas Clave</span>
+      <div class="ideas-heading">Siete ideas que estructuran el libro</div>
+
+      <div class="idea">
+        <div class="idea-num">1</div>
+        <div class="idea-body">
+          <div class="idea-title">El cuadro antes que el libro.</div>
+          <div class="idea-text">Nouwen no escribe desde la teoría sino desde una experiencia concreta: ver una reproducción del cuadro de Rembrandt en un pasillo en Francia y quedar detenido, sin poder seguir. La contemplación de una obra de arte se convierte en el detonante de un viaje espiritual de años. Eso ya dice algo sobre el método del libro: aquí se piensa con los ojos y se siente con la mente.</div>
+        </div>
+      </div>
+
+      <div class="idea">
+        <div class="idea-num">2</div>
+        <div class="idea-body">
+          <div class="idea-title">El hijo menor es el que huye buscando libertad y encuentra esclavitud.</div>
+          <div class="idea-text">Nouwen no moraliza. No condena al hijo menor. Lo reconoce en sí mismo: el profesional exitoso, el hombre admirado, el que busca en los aplausos lo que solo el hogar puede dar. La marcha al "país lejano" no es solo física; es la búsqueda de identidad fuera de quien realmente somos.</div>
+        </div>
+      </div>
+
+      <div class="idea">
+        <div class="idea-num">3</div>
+        <div class="idea-body">
+          <div class="idea-title">El hijo mayor es más peligroso porque ni siquiera sabe que está perdido.</div>
+          <div class="idea-text">Es el que se quedó en casa pero con el corazón resentido. Cumple todo, obedece todo, y por eso siente que merece más. Nouwen se ve a sí mismo en él con mayor claridad aún: el académico que acumula logros esperando reconocimiento, el religioso que sirve pero guarda cuentas. El resentimiento es una cárcel con aspecto de virtud.</div>
+        </div>
+      </div>
+
+      <div class="idea">
+        <div class="idea-num">4</div>
+        <div class="idea-body">
+          <div class="idea-title">El padre no reacciona: él actúa desde adentro.</div>
+          <div class="idea-text">El padre corre hacia el hijo cuando todavía está lejos. No espera disculpas completas. No negocia el regreso. Esta imagen es el corazón teológico del libro: Dios no espera que estemos bien para recibirnos. Ya está corriendo hacia nosotros mientras todavía somos un desastre.</div>
+        </div>
+      </div>
+
+      <div class="idea">
+        <div class="idea-num">5</div>
+        <div class="idea-body">
+          <div class="idea-title">Rembrandt pintó este cuadro al final de su vida, habiendo perdido todo.</div>
+          <div class="idea-text">Sus manos sobre el hijo pródigo —una masculina y firme, la otra femenina y suave— son las manos de alguien que ya no tiene nada que demostrar. Nouwen ve en eso la madurez espiritual real: dar amor desde la pobreza propia, no desde la abundancia.</div>
+        </div>
+      </div>
+
+      <div class="idea">
+        <div class="idea-num">6</div>
+        <div class="idea-body">
+          <div class="idea-title">La llamada última no es volver a casa: es convertirse en el padre.</div>
+          <div class="idea-text">Esta es la gran sorpresa del libro. El destino del camino espiritual no es solo recibir amor, sino volverse capaz de darlo sin condición. Convertirse en el padre es el objetivo final de toda madurez humana y espiritual.</div>
+        </div>
+      </div>
+
+      <div class="idea">
+        <div class="idea-num">7</div>
+        <div class="idea-body">
+          <div class="idea-title">Este libro no es un estudio bíblico, es una autobiografía espiritual disfrazada de comentario de arte.</div>
+          <div class="idea-text">Nouwen escribe desde sus propias heridas, sus propias fugas, su propio resentimiento. Eso lo hace extraordinariamente honesto y cercano. Habla de sí mismo para que el lector pueda hablar de sí mismo.</div>
+        </div>
+      </div>
+
+      <hr class="rule">
+
+      <!-- § 4 -->
+      <span id="s4" class="eyebrow">§ 4 · Dato, Giro o Hallazgo Más Impactante</span>
+      <div class="dato-card">
+        <div class="dato-label">Hallazgo más impactante</div>
+        <div class="dato-text">Nouwen renunció a su cátedra en Harvard —una de las universidades más prestigiosas del mundo— para ir a limpiar pisos y cuidar personas con discapacidad intelectual, y dice que eso fue "volver a casa".</div>
+      </div>
+
+      <hr class="rule">
+
+      <!-- § 5 -->
+      <span id="s5" class="eyebrow">§ 5 · Acción Inmediata</span>
+      <div class="accion-card">
+        <div class="accion-label">Acción Inmediata</div>
+        <div class="accion-text">Siéntate hoy cinco minutos con esta pregunta sin escaparte de ella:</div>
+        <div class="accion-question">¿Estoy más cerca del hijo menor, del hijo mayor, o del padre en este momento de mi vida?</div>
+        <div class="accion-text">No respondas rápido. Deja que incomode.</div>
+      </div>
+
+      <hr class="rule">
+
+      <!-- § 6 -->
+      <span id="s6" class="eyebrow">§ 6 · Veredicto de Lectura</span>
+      <div class="veredicto-card">
+        <div class="veredicto-label">Veredicto</div>
+        <div class="veredicto-badge">Léelo por completo</div>
+        <div class="veredicto-text">
+          Una IA jamás podría resumir ni igualar la experiencia de lo que quiso transmitir el autor.<br><br>
+          Este libro no se puede resumir sin perder su alma. Nouwen escribe de una manera que va depositando capas sobre el lector sin que este lo note. El ritmo, la honestidad, la forma en que se desnuda sin que parezca exhibicionismo espiritual, hacen de este texto una experiencia, no solo una información. Leerlo en resumen es como que alguien te cuente lo que vio en el Hermitage: puedes entender la historia, pero no quedas parado frente al cuadro.
+        </div>
+      </div>
+
+    </div><!-- /body -->
+
+    <!-- NAVEGACIÓN FINAL -->
+    <div class="nav-final">
+      <button onclick="irA('portada')" class="btn-nav btn-regresar">← Regresar a la portada</button>
+      <button onclick="irA('intro')" class="btn-nav btn-siguiente">Introducción →</button>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="book-footer">
+      <div class="footer-title">El Regreso del Hijo Pródigo · Henri J. M. Nouwen</div>
+      <div class="footer-tag">Paso 1 completado · Filtro de Lectura</div>
+    </div>
+
+  </div><!-- /page -->
+</section>
+</div><!-- /pagina contenido -->
+
+<!-- ══════════════════════════════
+     PÁGINA 3 — INTRODUCCIÓN
+══════════════════════════════ -->
+<div id="intro" class="pagina oculta">
+<section style="background:#F5F3EE;padding:3rem 1rem 5rem;">
+  <div class="page">
+
+    <div class="libro-header">
+      <div class="libro-header-titulo">El Regreso del Hijo Pródigo · Henri Nouwen</div>
+      <div class="libro-header-paso">Introducción</div>
+    </div>
+
+    <div class="body">
+
+      <div class="filtro-header">
+        <div class="filtro-label">Introducción</div>
+        <div class="filtro-title">El cansancio como puerta — Cuando el vacío se convierte en el mejor momento posible</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Tesis Central</div>
+        <div class="tesis-text">Todos somos el hijo que huye, el hijo que juzga y el padre que está llamado a amar sin condición — y el camino espiritual es recorrer esas tres identidades hasta llegar a la última.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Contexto del libro</span>
+      <div class="problema">
+        Nouwen llega al libro no desde la certeza sino desde el cansancio. Acaba de terminar seis semanas de conferencias por los Estados Unidos, hablando de justicia y paz en América Central, y cuando por fin se detiene, descubre que está vacío. No agotado de manera romántica, sino vacío de verdad: solo, inseguro, necesitado. Es en ese estado cuando una amiga le muestra una reproducción del cuadro de Rembrandt pegada en la puerta de su oficina. Y algo se rompe por dentro, de la mejor manera posible.
+        <br><br>
+        Lo que Nouwen ve en ese cuadro no es arte religioso. Ve una escena que lo describe a él. Ve a un hombre arrodillado, desgastado, con las sandalias rotas y la cabeza rapada —señal de humillación extrema en la época—, recibiendo las manos de un anciano sobre los hombros. Y esas manos lo detienen. Una mano es firme, masculina, de padre. La otra es suave, femenina, de madre. Juntas forman un abrazo que no pide explicaciones. Que no negocia el regreso. Que simplemente acoge.
+        <br><br>
+        Desde ese momento, el libro se convierte en una meditación de años. Nouwen viaja a San Petersburgo para ver el original en el Hermitage. Se sienta frente al lienzo de dos metros y medio durante horas, en distintas sesiones, observando cómo cambia la luz sobre las figuras a medida que avanza la tarde. Y cada vez que mira, encuentra algo nuevo: no en el cuadro, sino en sí mismo. Eso es lo que hace este libro diferente. No es un comentario bíblico. Es un espejo que Nouwen sostiene frente a sí mismo, y que termina siendo un espejo que el lector sostiene frente a él también.
+        <br><br>
+        La estructura del libro sigue a los tres personajes centrales de la parábola: el hijo menor, el hijo mayor y el padre. Pero Nouwen hace algo inesperado. No los trata como tipos morales —el malo, el bueno y el perfecto—. Los trata como etapas. Como umbrales del alma. Y dice que todos los hemos habitado, que algunos los habitamos simultáneamente, y que el destino final del camino espiritual no es solo ser recibido como hijo, sino volverse capaz de abrazar como padre.
+      </div>
+
+      <hr class="rule">
+
+      <div class="tesis-block">
+        <div class="tesis-label">A quién va dirigido</div>
+        <div class="tesis-text">A todo ser humano que en algún momento sintió que no pertenece, que debe ganarse el amor, o que carga con el resentimiento silencioso de quien creyó que su fidelidad merecía más recompensa. Promete esto: que hay un hogar real, que el Padre ya está corriendo hacia ti, y que un día serás capaz de correr tú también.</div>
+      </div>
+
+    </div><!-- /body -->
+
+    <div class="nav-final">
+      <button onclick="irA('contenido')" class="btn-nav btn-regresar">← Paso 1</button>
+      <button onclick="irA('cap1')" class="btn-nav btn-siguiente">Capítulo 1 →</button>
+    </div>
+
+    <div class="book-footer">
+      <div class="footer-title">El Regreso del Hijo Pródigo · Henri J. M. Nouwen</div>
+      <div class="footer-tag">Introducción</div>
+    </div>
+
+  </div><!-- /page -->
+</section>
+</div><!-- /intro -->
+
+<!-- ══════════════════════════════
+     PÁGINA 4 — CAPÍTULO 1: PRÓLOGO
+══════════════════════════════ -->
+<div id="cap1" class="pagina oculta">
+<section style="background:#F5F3EE;padding:3rem 1rem 5rem;">
+  <div class="page">
+
+    <div class="libro-header">
+      <div class="libro-header-titulo">El Regreso del Hijo Pródigo · Henri Nouwen</div>
+      <div class="libro-header-paso">Capítulo 1 · Prólogo</div>
+    </div>
+
+    <div class="body">
+
+      <div class="filtro-header">
+        <div class="filtro-label">Prólogo</div>
+        <div class="filtro-title">Encuentro con un cuadro — La imagen que te cambia sin pedirte permiso</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">La gracia puede llegar disfrazada de una reproducción barata colgada en la puerta de un despacho, y cuando llega, no da opciones: se instala.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa · En voz del autor</span>
+      <div class="problema">
+        Yo no busqué este cuadro. Me encontró él a mí, en el peor momento, que resultó ser el mejor momento posible. Había pasado seis semanas hablando de Dios a otros, y cuando el ruido se detuvo, descubrí que yo mismo no tenía nada. Estaba tan vacío como el hijo que regresa, tan necesitado como alguien que nunca hubiera aprendido que hay un hogar al que volver. Y fue entonces —precisamente entonces— cuando mis ojos cayeron sobre ese cuadro.
+        <br><br>
+        Vi unas manos. Antes que cualquier otra cosa, vi las manos de un anciano sobre los hombros de un muchacho arrodillado. Y algo dentro de mí dijo: <em>eso es lo que necesito</em>. No un argumento. No una conferencia. No una nueva certeza teológica. Sino eso: ser tocado así. Ser sostenido sin que me pidan que primero explique por qué estoy arrodillado.
+        <br><br>
+        Esa imagen me persiguió. Conseguí una reproducción. La colgué. La miré durante dos años. Renuncié a Harvard. Viajé a San Petersburgo. Y me senté durante horas frente al original en el Hermitage, viendo cómo la luz de la tarde iba cambiando las proporciones de la escena, haciendo que los personajes del fondo aparecieran desde la sombra, que el abrazo central se volviera más luminoso con cada hora que pasaba.
+        <br><br>
+        Rembrandt pintó este cuadro al final de su vida. Había perdido a su esposa, a sus hijos, su fortuna, su reputación. Lo pintó desde la pobreza total. Y por eso lo pintó con una verdad que ninguna prosperidad podría haber producido. Las manos sobre los hombros del hijo son las manos de alguien que ya no tiene nada que perder, y por eso puede dar todo. Eso es lo que vi. Eso es lo que quiero contarte.
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+        <div class="idea">
+          <div class="idea-num">·</div>
+          <div class="idea-body"><div class="idea-text">Nouwen dejó Harvard —una de las instituciones más prestigiosas del mundo— para limpiar pisos en una comunidad de personas con discapacidad intelectual, y lo llama "volver a casa".</div></div>
+        </div>
+        <div class="idea">
+          <div class="idea-num">·</div>
+          <div class="idea-body"><div class="idea-text">El cuadro original mide dos metros y medio de alto: la escena del abrazo es, literalmente, más grande que una persona real.</div></div>
+        </div>
+        <div class="idea">
+          <div class="idea-num">·</div>
+          <div class="idea-body"><div class="idea-text">Rembrandt pintó al padre con una mano masculina y una femenina: Dios como padre y madre al mismo tiempo, una decisión pictórica deliberada y teológicamente enorme.</div></div>
+        </div>
+        <div class="idea">
+          <div class="idea-num">·</div>
+          <div class="idea-body"><div class="idea-text">Nouwen observó el cuadro en múltiples sesiones de horas, y dice que cada vez veía algo diferente —no en el lienzo, sino en sí mismo.</div></div>
+        </div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">El cuadro no es el tema del libro. Es el método: aprender a contemplar algo con paciencia hasta que te revela lo que no sabías que llevabas dentro.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿Hubo alguna vez una imagen, una escena, una frase que te detuvo sin que pudieras explicar exactamente por qué? ¿Qué te estaba mostrando de ti mismo que aún no habías querido ver?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Busca hoy el cuadro "El Regreso del Hijo Pródigo" de Rembrandt en alta resolución. No lo analices. Siéntate con él cinco minutos. Observa las manos del padre. Pregúntate:</div>
+        <div class="accion-question">¿Qué parte de este cuadro me habla a mí?</div>
+      </div>
+
+    </div><!-- /body -->
+
+    <div class="nav-final">
+      <button onclick="irA('contenido')" class="btn-nav btn-regresar">← Paso 1</button>
+      <button onclick="irA('cap2')" class="btn-nav btn-siguiente">Capítulo 2 →</button>
+    </div>
+
+    <div class="book-footer">
+      <div class="footer-title">El Regreso del Hijo Pródigo · Henri J. M. Nouwen</div>
+      <div class="footer-tag">Capítulo 1 · Prólogo</div>
+    </div>
+
+  </div><!-- /page -->
+</section>
+</div><!-- /cap1 -->
+
+<!-- ══════════════════════════════
+     PÁGINA 4 — CAPÍTULO 2: INTRODUCCIÓN
+══════════════════════════════ -->
+<div id="cap2" class="pagina oculta">
+<section style="background:#F5F3EE;padding:3rem 1rem 5rem;">
+  <div class="page">
+
+    <div class="libro-header">
+      <div class="libro-header-titulo">El Regreso del Hijo Pródigo · Henri Nouwen</div>
+      <div class="libro-header-paso">Capítulo 2 · Introducción</div>
+    </div>
+
+    <div class="body">
+
+      <div class="filtro-header">
+        <div class="filtro-label">Introducción</div>
+        <div class="filtro-title">El hijo menor, el hijo mayor y el padre — Tres personajes, una sola pregunta: ¿cuál eres tú hoy?</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">La parábola no tiene un villano, un héroe y un juez. Tiene tres espejos, y cada uno revela una forma distinta de estar lejos de casa.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa · En voz del autor</span>
+      <div class="problema">
+        Cuando me siento frente al cuadro de Rembrandt durante horas, me doy cuenta de que no puedo elegir con cuál de los tres personajes identificarme. Primero me veo en el hijo menor: el que se fue, el que derrochó, el que volvió en vergüenza. Pero luego, inevitablemente, me veo en el hijo mayor: el que se quedó, el que acumuló méritos, el que no puede festejar el regreso del otro porque siente que su propio esfuerzo nunca fue suficientemente celebrado. Y al final, temeroso y esperanzado al mismo tiempo, vislumbro la posibilidad de convertirme en el padre: en alguien capaz de correr hacia el que vuelve sin importar lo que hizo, sin guardar el conteo de los errores.
+        <br><br>
+        Estos no son tres tipos de personas. Son tres estados del alma, tres posiciones que el ser humano ocupa en distintos momentos de su vida, y a veces en la misma tarde. La pregunta no es "¿cuál eres tú?" como si fuera una clasificación permanente. La pregunta es "¿cuál eres tú <em>ahora mismo</em>, en este momento de tu vida?"
+        <br><br>
+        La parábola, tal como Jesús la contó, no tiene un final claro para el hijo mayor. El texto simplemente termina: el padre le habla, el hijo escucha, y no sabemos qué decide. Creo que eso es deliberado. La pregunta queda abierta para cada uno de nosotros. ¿Voy a quedarme afuera, resentido, contando lo que merezco? ¿O voy a entrar a la fiesta?
+        <br><br>
+        Y luego está el padre. El personaje que todos mencionamos como el héroe pero que casi nadie se atreve a desear ser. Porque ser el padre significa algo exigente y hermoso a la vez: significa haber sufrido tanto que ya no puedes guardarle rencor a nadie. Significa que tu amor ya no depende de si el otro lo merece. Significa que cuando ves a alguien venir de lejos, corres hacia él antes de que llegue, porque ya no tienes miedo de que te vuelvan a decepcionar.
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+        <div class="idea">
+          <div class="idea-num">·</div>
+          <div class="idea-body"><div class="idea-text">La parábola en Lucas 15 no concluye el arco del hijo mayor: Jesús la deja abierta deliberadamente, esperando que cada lector la complete con su propia decisión.</div></div>
+        </div>
+        <div class="idea">
+          <div class="idea-num">·</div>
+          <div class="idea-body"><div class="idea-text">Hay tres formas de estar "lejos de casa": huir (hijo menor), quedarse con resentimiento (hijo mayor), o no haberse dado cuenta todavía de que el Padre ya está corriendo (los dos).</div></div>
+        </div>
+        <div class="idea">
+          <div class="idea-num">·</div>
+          <div class="idea-body"><div class="idea-text">Nouwen propone que la madurez espiritual real no es "ser recibido como hijo" sino "volverse capaz de abrazar como padre."</div></div>
+        </div>
+        <div class="idea">
+          <div class="idea-num">·</div>
+          <div class="idea-body"><div class="idea-text">El padre en la parábola no da un discurso ni establece condiciones: simplemente corre, abraza y organiza una fiesta. Eso es todo.</div></div>
+        </div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">El hijo mayor nunca se fue físicamente, pero llevaba años ausente de adentro: sirviendo sin alegría, obedeciendo sin amor, cumpliendo sin pertenecer.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿En qué áreas de tu vida estás "sirviendo sin alegría"? ¿Hay algo que estás haciendo bien por fuera pero desde un lugar resentido por dentro?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Escribe hoy en una hoja tres columnas: <strong>"Hijo menor"</strong>, <strong>"Hijo mayor"</strong>, <strong>"Padre"</strong>. En cada una escribe una situación concreta de tu vida donde estás actuando desde esa posición.</div>
+        <div class="accion-question">No juzgues lo que aparece. Solo nómbralo.</div>
+      </div>
+
+    </div><!-- /body -->
+
+    <div class="nav-final">
+      <button onclick="irA('cap1')" class="btn-nav btn-regresar">← Capítulo 1</button>
+      <button onclick="irA('cap3')" class="btn-nav btn-siguiente">Capítulo 3 →</button>
+    </div>
+
+    <div class="book-footer">
+      <div class="footer-title">El Regreso del Hijo Pródigo · Henri J. M. Nouwen</div>
+      <div class="footer-tag">Capítulo 2 · Introducción</div>
+    </div>
+
+  </div><!-- /page -->
+</section>
+</div><!-- /cap2 -->
+
+<!-- ══════════════════════════════
+     PÁGINA 5 — CAPÍTULO 3: REMBRANDT Y EL HIJO MENOR
+══════════════════════════════ -->
+<div id="cap3" class="pagina oculta">
+<section style="background:#F5F3EE;padding:3rem 1rem 5rem;">
+  <div class="page">
+
+    <div class="libro-header">
+      <div class="libro-header-titulo">El Regreso del Hijo Pródigo · Henri Nouwen</div>
+      <div class="libro-header-paso">Capítulo 3 · Rembrandt y el Hijo Menor</div>
+    </div>
+
+    <div class="body">
+
+      <div class="filtro-header">
+        <div class="filtro-label">Capítulo 3</div>
+        <div class="filtro-title">Rembrandt y el Hijo Menor — Lo que el pintor vio en sí mismo antes de pintarlo</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">Rembrandt no pintó al hijo pródigo desde afuera, como moralista. Lo pintó desde adentro, como alguien que conocía muy bien el sabor de la ruina y la gracia.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa · En voz del autor</span>
+      <div class="problema">
+        Cuanto más estudio la vida de Rembrandt, más me convenzo de que no podría haber pintado este cuadro en su juventud. El joven Rembrandt —brillante, exitoso, reconocido en Ámsterdam, casado con la bella Saskia— habría pintado algo técnicamente perfecto y emocionalmente vacío. Porque el joven Rembrandt todavía creía que era el protagonista de su propia historia de éxito. Aún no había aprendido lo que solo la pérdida puede enseñar.
+        <br><br>
+        Perdió todo. Su esposa murió joven. Luego murió su hijo. Su reputación se fue desmoronando. Quebró. Y fue en ese estado de ruina acumulada que pintó El Regreso del Hijo Pródigo, como una de sus últimas obras. Lo pintó como alguien que ya sabía qué se siente al tocar fondo. Como alguien que necesitaba creer, con urgencia real, que el padre corre hacia el que vuelve.
+        <br><br>
+        Lo que hace a este cuadro único no es solo la técnica, aunque la técnica es extraordinaria: la forma en que la luz emerge desde el interior de las figuras en vez de caer sobre ellas desde afuera, rasgo característico de la última etapa de Rembrandt. Lo que lo hace único es la <em>ternura</em>. Esas manos sobre los hombros del hijo no son las manos de alguien que da una lección. Son las manos de alguien que ha sufrido tanto que ya no puede sino abrazar.
+        <br><br>
+        El hijo que vuelve en el cuadro está en el estado más humillante posible. Tiene la cabeza rapada —signo de esclavitud o de castigo extremo en el siglo XVII—. Sus ropas son harapos. Sus sandalias están deshachas. Una planta del pie está completamente expuesta, sucia, herida. Rembrandt pintó la historia de alguien que llegó al límite donde ya no hay nada más que perder, y fue ahí donde el padre lo encontró. No antes. Ahí.
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+        <div class="idea">
+          <div class="idea-num">·</div>
+          <div class="idea-body"><div class="idea-text">Rembrandt pintó este cuadro después de haber perdido a su esposa, a su hijo, su fortuna y su reputación: lo pintó desde la ruina, no desde el éxito.</div></div>
+        </div>
+        <div class="idea">
+          <div class="idea-num">·</div>
+          <div class="idea-body"><div class="idea-text">La técnica de luz interior que usa Rembrandt en sus últimas obras —la luz que viene de adentro de las figuras— es teológicamente perfecta: el amor del Padre no ilumina desde afuera, transforma desde dentro.</div></div>
+        </div>
+        <div class="idea">
+          <div class="idea-num">·</div>
+          <div class="idea-body"><div class="idea-text">La cabeza rapada del hijo en el cuadro no es un detalle decorativo: en la época, significaba esclavitud o humillación máxima. Rembrandt pintó la vergüenza total, no una versión suavizada.</div></div>
+        </div>
+        <div class="idea">
+          <div class="idea-num">·</div>
+          <div class="idea-body"><div class="idea-text">Las plantas de los pies del hijo —pintadas con detalle inusual— cuentan, por sí solas, la historia del viaje: la distancia recorrida, la dureza del camino, la degradación progresiva.</div></div>
+        </div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">Rembrandt se pintó a sí mismo, en sus años de juventud, como el hijo pródigo en una taberna, con Saskia en sus brazos y una copa en la mano: sabía exactamente de qué estaba hablando cuando pintó el regreso.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿Hay algo que hayas perdido —una ilusión, una identidad, una certeza— que en su momento viviste como un fracaso pero que hoy reconoces como el comienzo de algo más verdadero?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Piensa en el período de mayor pérdida o fracaso de tu vida. Escribe una sola oración que describa lo que esa experiencia te enseñó que ningún éxito hubiera podido darte.</div>
+        <div class="accion-question">No la idealices: nómbrala con honestidad.</div>
+      </div>
+
+    </div><!-- /body -->
+
+    <div class="nav-final">
+      <button onclick="irA('cap2')" class="btn-nav btn-regresar">← Capítulo 2</button>
+      <button onclick="irA('cap4')" class="btn-nav btn-siguiente">Capítulo 4 →</button>
+    </div>
+
+    <div class="book-footer">
+      <div class="footer-title">El Regreso del Hijo Pródigo · Henri J. M. Nouwen</div>
+      <div class="footer-tag">Capítulo 3 · Rembrandt y el Hijo Menor</div>
+    </div>
+
+  </div><!-- /page -->
+</section>
+</div><!-- /cap3 -->
+
+<!-- ══════════════════════════════
+     PÁGINA 7 — CAPÍTULO 4
+══════════════════════════════ -->
+<div id="cap4" class="pagina oculta">
+<section style="background:#F5F3EE;padding:3rem 1rem 5rem;">
+  <div class="page">
+
+    <div class="libro-header">
+      <div class="libro-header-titulo">El Regreso del Hijo Pródigo · Henri Nouwen</div>
+      <div class="libro-header-paso">Capítulo 4 · El Hijo Menor se Marcha</div>
+    </div>
+
+    <div class="body">
+
+      <div class="filtro-header">
+        <div class="filtro-label">Capítulo 4</div>
+        <div class="filtro-title">El hijo menor se marcha — Irse no es solo un viaje: es un "no" dicho al amor antes de saber lo que se rechaza</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">Pedir la herencia en vida del padre no era una rebeldía adolescente; era, en la cultura de la época, equivalente a desear su muerte. El "país lejano" no es un lugar: es el estado interior de quien dejó de creer que en casa hay amor suficiente.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa · En voz del autor</span>
+      <div class="problema">
+        Para entender la alegría del regreso hay que mirar de frente la oscuridad de la partida. El cuadro de Rembrandt muestra el abrazo, pero ese abrazo solo tiene el peso que tiene porque detrás hay una herida real. No fue una escapada romántica de juventud. Fue una traición.
+        <br><br>
+        En los contextos del Medio Oriente antiguo, pedir la herencia antes de la muerte del padre era una afrenta sin precedente. Los eruditos que han preguntado en comunidades del Mediterráneo, de Turquía a Marruecos, durante décadas, siempre reciben la misma respuesta: nadie lo haría jamás. Significaba, en el fondo: <em>padre, no puedo esperar a que mueras</em>. Y sin embargo el padre no reacciona con violencia. Divide la herencia. Deja ir. Ese silencio del padre ante la ofensa es ya la primera señal del amor que veremos después.
+        <br><br>
+        Lo que más me interpela no es la rebeldía del hijo sino la mía propia. Nunca me reconocí en ese gesto descarado. Yo no huí de ningún hogar físicamente. Pero sí me he vuelto sordo, una y otra vez, a la voz que me dice "eres mi hijo amado". Y cuando esa voz queda sepultada por las otras voces —las que me piden que demuestre, que produzca, que logre, que impresione— me marcho. Silenciosamente. Sin equipaje. Pero me marcho.
+        <br><br>
+        El "país lejano" no está en el mapa. Está en el interior. Es el estado de quien busca amor condicional porque ya no cree en el incondicional. El mundo ofrece infinitos "síes", pero todos tienen condiciones: te quiero si produces, si gustas, si ganas. Y esos "síes" condicionales nos esclavizan precisamente porque son imposibles de satisfacer todos al mismo tiempo. Nos volvemos adictos a la aprobación del mundo y nos alejamos más y más de la única voz que nos ama sin pedir nada a cambio.
+        <br><br>
+        Soy el hijo pródigo cada vez que busco amor incondicional donde no puede encontrarse. Y lo sigo haciendo. Siempre hay una tentación nueva, un nuevo espejo donde buscar confirmación de que valgo. Y cada vez que caigo en esa trampa, vuelvo a escuchar las mismas voces oscuras: <em>no eres suficiente, demuéstralo, gánate el derecho a ser amado</em>. Dejar la tierra lejana comienza en el momento en que uno reconoce esas voces por lo que son: mentiras seductoras.
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+        <div class="idea">
+          <div class="idea-num">·</div>
+          <div class="idea-body"><div class="idea-text">En culturas del Medio Oriente antiguo, pedir la herencia en vida del padre equivalía culturalmente a desearle la muerte: la parábola comienza con una traición de magnitud enorme, no con una rebeldía menor.</div></div>
+        </div>
+        <div class="idea">
+          <div class="idea-num">·</div>
+          <div class="idea-body"><div class="idea-text">La voz del amor de Dios es siempre suave: no truena, no exige, no se impone. Por eso es tan fácil ahogarla con el ruido del mundo.</div></div>
+        </div>
+        <div class="idea">
+          <div class="idea-num">·</div>
+          <div class="idea-body"><div class="idea-text">Nouwen identifica "el país lejano" con la adicción: ambos ofrecen lo que prometen nunca dar, y ambos atrapan en un ciclo de búsqueda que no termina.</div></div>
+        </div>
+        <div class="idea">
+          <div class="idea-num">·</div>
+          <div class="idea-body"><div class="idea-text">Judas y Pedro cometieron traiciones similares. Judas eligió la muerte porque no pudo reclamar su condición de hijo. Pedro eligió volver. La diferencia no estaba en la gravedad del error, sino en si creyeron o no que seguían siendo hijos.</div></div>
+        </div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">El padre no retiene al hijo por la fuerza, aunque podría haberlo hecho. Fue el amor lo que le permitió dejarle ir, sabiendo el dolor que eso causaría en ambos.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿Qué voces estás escuchando hoy más fuerte que la voz que te dice "eres amado"? ¿Qué tan lejos te han llevado ya?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Hoy, escribe en una hoja las tres voces que más frecuentemente te alejan de casa: las que te dicen que debes ganarte el amor, el respeto o el valor. Ponles nombre concreto. Luego escribe debajo de cada una:</div>
+        <div class="accion-question">"Esta voz miente."</div>
+      </div>
+
+    </div><!-- /body -->
+
+    <div class="nav-final">
+      <button onclick="irA('cap3')" class="btn-nav btn-regresar">← Capítulo 3</button>
+      <button onclick="irA('cap5')" class="btn-nav btn-siguiente">Capítulo 5 →</button>
+    </div>
+
+    <div class="book-footer">
+      <div class="footer-title">El Regreso del Hijo Pródigo · Henri J. M. Nouwen</div>
+      <div class="footer-tag">Capítulo 4 · El Hijo Menor se Marcha</div>
+    </div>
+
+  </div><!-- /page -->
+</section>
+</div><!-- /cap4 -->
+
+<!-- ══════════════════════════════
+     PÁGINA 8 — CAPÍTULO 5
+══════════════════════════════ -->
+<div id="cap5" class="pagina oculta">
+<section style="background:#F5F3EE;padding:3rem 1rem 5rem;">
+  <div class="page">
+
+    <div class="libro-header">
+      <div class="libro-header-titulo">El Regreso del Hijo Pródigo · Henri Nouwen</div>
+      <div class="libro-header-paso">Capítulo 5 · El Regreso del Hijo Menor</div>
+    </div>
+
+    <div class="body">
+
+      <div class="filtro-header">
+        <div class="filtro-label">Capítulo 5</div>
+        <div class="filtro-title">El regreso del hijo menor — El fondo no es el final: es el lugar donde uno recuerda que todavía es hijo</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">El regreso no comienza con arrepentimiento perfecto ni con un discurso bien preparado. Comienza cuando, en medio de la ruina total, el hijo recuerda que aún tiene algo que el mundo no pudo quitarle: su nombre de hijo.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa · En voz del autor</span>
+      <div class="problema">
+        El hombre que se arrodilla en el cuadro de Rembrandt lo ha perdido todo. La cabeza rapada —signo de esclavitud o humillación máxima en la época—, los harapos que apenas cubren el cuerpo, las plantas de los pies que cuentan con su propia piel la historia de un camino demasiado largo y demasiado duro. Y sin embargo, hay algo que no vendió: la espada al costado. Ese pequeño símbolo de su origen noble que podría haber vendido cuando ya no tenía nada. Y no lo hizo. Porque en algún lugar muy profundo, sabía que todavía era el hijo de alguien.
+        <br><br>
+        El regreso comienza ahí. No en el arrepentimiento perfecto. No en el discurso bien ensayado que el hijo mentalmente prepara mientras camina. Comienza en el momento en que, en el fondo del pozo, en el corral de los cerdos, en la humillación más completa, uno dice: <em>todavía soy hijo</em>. Esa mínima chispa de identidad que no se apagó del todo es lo que hace posible dar media vuelta.
+        <br><br>
+        Pero yo conozco muy bien la confusión de ese camino de regreso. Uno empieza a moverse en la dirección correcta y sin embargo sigue preparando argumentos, elaborando disculpas, calculando qué castigo merecerá. Eso me revela algo sobre mi imagen de Dios: todavía lo imagino como un padre severo que tal vez me perdone, pero que seguramente me recordará cada tanto lo que hice. Y mientras tengamos esa imagen, el regreso será siempre a medias. Nos conformamos con pedir ser jornaleros porque no nos atrevemos a creer que podemos ser hijos completos.
+        <br><br>
+        Y sin embargo el padre corre. Corre antes de que el discurso comience. Corre cuando todavía el hijo está <em>lejos</em>. No espera las palabras correctas, no evalúa la calidad del arrepentimiento, no pone condiciones al abrazo. Simplemente corre. Y al abrazar al hijo, interrumpe el discurso preparado: el hijo empieza a decir "ya no merezco llamarme hijo tuyo" y el padre ni siquiera deja que termine. Pide el mejor vestido, el anillo, las sandalias. La restauración completa de la dignidad, sin negociación.
+        <br><br>
+        Hay algo más que quiero decir aquí, y que me tomó años ver: Jesús mismo es el hijo pródigo. Él que dejó la casa del Padre, se marchó a un "país lejano" llamado humanidad, lo gastó todo en nosotros, llegó al fondo en la cruz, y volvió. El hijo arrodillado en el cuadro no es solo cada uno de nosotros: es también Él. Y el abrazo del padre no es solo lo que nos espera a nosotros: es lo que ya ocurrió, en la resurrección, cuando el Padre recibió al Hijo que regresaba cargado con todos nuestros extravíos.
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+        <div class="idea">
+          <div class="idea-num">·</div>
+          <div class="idea-body"><div class="idea-text">La espada que el hijo no vendió es el símbolo teológico más poderoso del capítulo: en el fondo de la ruina, algo en él recordó que todavía pertenecía a alguien.</div></div>
+        </div>
+        <div class="idea">
+          <div class="idea-num">·</div>
+          <div class="idea-body"><div class="idea-text">Hay dos formas de arrepentimiento: el que busca sobrevivir ("trátame como jornalero") y el que nace del amor del Padre ("soy tu hijo"). El primero produce conformismo religioso; el segundo produce libertad real.</div></div>
+        </div>
+        <div class="idea">
+          <div class="idea-num">·</div>
+          <div class="idea-body"><div class="idea-text">Judas y Pedro ilustran la misma disyuntiva que el hijo menor: ¿creo que sigo siendo hijo o me quedo con la culpa hasta que me destruya?</div></div>
+        </div>
+        <div class="idea">
+          <div class="idea-num">·</div>
+          <div class="idea-body"><div class="idea-text">La "segunda inocencia" que describe Nouwen no es ingenuidad: es la inocencia que se gana después de haber elegido conscientemente volver, a pesar de todo.</div></div>
+        </div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">El padre interrumpe el discurso del hijo. No lo deja terminar. Porque el amor del Padre no necesita que el arrepentimiento sea perfecto para actuar.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿Hay algo de lo que crees que Dios todavía no te ha perdonado del todo? ¿O algo de lo que tú mismo no te has perdonado? ¿Estás pidiendo ser jornalero cuando el Padre ya te tiene preparado el anillo?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Escribe hoy el discurso que llevas preparado para Dios. El que ensayas mentalmente cuando te sientes culpable. Cuando lo tengas en papel, léelo despacio. Luego escribe al lado lo que el padre dice en la parábola antes de que el discurso termine:</div>
+        <div class="accion-question">"Traigan el mejor vestido." — Quédate con eso.</div>
+      </div>
+
+    </div><!-- /body -->
+
+    <div class="nav-final">
+      <button onclick="irA('cap4')" class="btn-nav btn-regresar">← Capítulo 4</button>
+      <button onclick="irA('cap6')" class="btn-nav btn-siguiente">Capítulo 6 →</button>
+    </div>
+
+    <div class="book-footer">
+      <div class="footer-title">El Regreso del Hijo Pródigo · Henri J. M. Nouwen</div>
+      <div class="footer-tag">Capítulo 5 · El Regreso del Hijo Menor</div>
+    </div>
+
+  </div><!-- /page -->
+</section>
+</div><!-- /cap5 -->
+
+<!-- ══════════════════════════════
+     PÁGINA 9 — CAPÍTULO 6
+══════════════════════════════ -->
+<div id="cap6" class="pagina oculta">
+<section style="background:#F5F3EE;padding:3rem 1rem 5rem;">
+  <div class="page">
+
+    <div class="libro-header">
+      <div class="libro-header-titulo">El Regreso del Hijo Pródigo · Henri Nouwen</div>
+      <div class="libro-header-paso">Capítulo 6 · Rembrandt y el Hijo Mayor</div>
+    </div>
+
+    <div class="body">
+
+      <div class="filtro-header">
+        <div class="filtro-label">Capítulo 6</div>
+        <div class="filtro-title">Rembrandt y el hijo mayor — El más difícil de reconocer porque lleva cara de virtud</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">El hijo mayor es el personaje más peligroso de la parábola porque ni siquiera sabe que está perdido. Cumplió todo, obedeció todo, y sin embargo vive con el corazón resentido de quien siente que el amor debería ser una recompensa al mérito.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa · En voz del autor</span>
+      <div class="problema">
+        Cuando me senté frente al cuadro en el Hermitage y dejé que la tarde avanzara sobre él, tarde o temprano mis ojos fueron inevitablemente a la figura del hijo mayor. Está de pie. Rígido. Un poco apartado de la escena central. Observa el abrazo pero no participa en él. Y en su postura hay algo que reconozco inmediatamente, con una incomodidad que no me da ninguna satisfacción: me veo a mí mismo.
+        <br><br>
+        Rembrandt pintó al hijo mayor ya viejo. No es el hermano celoso de la versión juvenil y agresiva que uno podría imaginar. Es un hombre maduro, con años de servicio encima, que ha cumplido con todo. Y en sus ojos hay algo más oscuro que la envidia simple: hay una queja que viene de muy adentro. La queja de quien creyó, durante toda una vida, que la fidelidad sería recompensada de cierta manera. Y que ahora, al ver la fiesta que se organiza para el que se fue, siente que las cuentas no cuadran.
+        <br><br>
+        Yo me he reconocido en él muchas veces. En los años de Harvard, acumulando logros académicos, esperando —sin confesar que esperaba— que esos logros me asegurarían el tipo de amor y reconocimiento que más necesitaba. Trabajando más duro que nadie para demostrar que merecía estar donde estaba. Cumpliendo. Sirviendo. Y guardando, en algún rincón que prefería no visitar, un archivo de lo que sentía que merecía y no había recibido.
+        <br><br>
+        El resentimiento es la firma del hijo mayor. No es un pecado escandaloso. No destruye fortunas ni termina en corrales de cerdos. Es mucho más discreto. Se instala en las personas responsables, en los que cumplen, en los que sirven. Y cuando llega la pregunta de por qué el otro recibe lo que yo también merezco, la respuesta del corazón resentido es siempre la misma: <em>no es justo</em>.
+        <br><br>
+        Lo que Nouwen descubre —y que duele porque es verdad— es que el hijo mayor nunca se fue físicamente, pero llevaba años ausente de adentro. Estaba en la casa del padre pero no en la intimidad del padre. Servía sin gozar de la presencia. Obedecía sin habitar la relación. Y eso, dice Rembrandt con su pintura, es también una forma de "país lejano".
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+        <div class="idea">
+          <div class="idea-num">·</div>
+          <div class="idea-body"><div class="idea-text">Rembrandt pintó al hijo mayor como un hombre mayor, no como un joven celoso: el resentimiento que describe no es una emoción adolescente sino una postura de toda una vida de servicio sin alegría.</div></div>
+        </div>
+        <div class="idea">
+          <div class="idea-num">·</div>
+          <div class="idea-body"><div class="idea-text">El hijo mayor tiene acceso a todo lo que el padre tiene: "todo lo mío es tuyo", le dice el padre. Pero no lo disfruta. Tener acceso al amor y no poder recibirlo es también una forma de pobreza.</div></div>
+        </div>
+        <div class="idea">
+          <div class="idea-num">·</div>
+          <div class="idea-body"><div class="idea-text">Nouwen confiesa: se reconoció más en el hijo mayor que en el menor. El exitoso académico, el sacerdote fiel, el hombre que hacía todo bien —y guardaba cuentas.</div></div>
+        </div>
+        <div class="idea">
+          <div class="idea-num">·</div>
+          <div class="idea-body"><div class="idea-text">La frase del hijo mayor es reveladora: llama al hermano "ese hijo tuyo", no "mi hermano". El resentimiento comenzó robándole el vínculo familiar con su propio hermano antes de afectar su relación con el padre.</div></div>
+        </div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">La parábola no cierra el arco del hijo mayor. No sabemos si entró a la fiesta. Jesús lo dejó abierto deliberadamente: la pregunta es para cada lector.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿Hay alguien en tu vida a quien llamas "ese" en vez de nombrarlo como tuyo? ¿Hay alguna área donde sirves pero guardas cuentas secretas de lo que crees que mereces?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Piensa en una situación donde sientes que alguien recibió algo que tú también merecías y no recibiste. No lo justifiques ni lo niegues. Escríbelo con honestidad. Luego lee en voz alta la frase del padre:</div>
+        <div class="accion-question">"Hijo, tú estás siempre conmigo, y todo lo mío es tuyo." — Deja que esa frase y tu resentimiento se miren a los ojos.</div>
+      </div>
+
+    </div><!-- /body -->
+
+    <div class="nav-final">
+      <button onclick="irA('cap5')" class="btn-nav btn-regresar">← Capítulo 5</button>
+      <button onclick="irA('cap7')" class="btn-nav btn-siguiente">Capítulo 7 →</button>
+    </div>
+
+    <div class="book-footer">
+      <div class="footer-title">El Regreso del Hijo Pródigo · Henri J. M. Nouwen</div>
+      <div class="footer-tag">Capítulo 6 · Rembrandt y el Hijo Mayor</div>
+    </div>
+
+  </div><!-- /page -->
+</section>
+</div><!-- /cap6 -->
+
+<!-- ══════════════════════════════
+     PÁGINA 10 — CAPÍTULO 7
+══════════════════════════════ -->
+<div id="cap7" class="pagina oculta">
+<section style="background:#F5F3EE;padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">El Regreso del Hijo Pródigo · Henri Nouwen</div>
+      <div class="libro-header-paso">Capítulo 7 · El Hijo Mayor se Marcha</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>5 min</span></div>
+    <div class="body">
+
+      <div class="filtro-header">
+        <div class="filtro-label">Capítulo 7</div>
+        <div class="filtro-title">El hijo mayor se marcha — El resentimiento que crece en silencio es la forma de extravío que nadie detecta a tiempo</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">El hijo mayor no se marchó físicamente, pero su corazón lleva años ausente. Su extravío es más peligroso que el del hermano menor precisamente porque lleva máscara de virtud, y salir de él no depende del esfuerzo propio sino de elegir confiar y ser agradecido.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa · En voz del autor</span>
+      <div class="problema">
+        Cuando mi amigo Bart me dijo que yo me parecía más al hermano mayor que al menor, algo en mí se resistió. El hijo menor tiene un extravío que al menos se puede señalar, describir, contar en una historia. El hijo mayor no tiene historia: tiene queja. Y la queja no se cuenta, se acumula.
+        <br><br>
+        Me reconozco en ese hombre de pie, rígido, con el bastón entre las manos. Soy hijo mayor en mi propia familia, y lo he sido en casi todos los contextos en que me he movido. He hecho todo lo que se esperaba de mí: estudié, obedecí, cumplí, serví. Y en el fondo de todo ese cumplimiento, guardé un archivo silencioso de lo que sentía que merecía y no llegaba. No es un resentimiento dramático. Es un resentimiento discreto, casi invisible, que se instala en las personas responsables y fieles, en los que nunca se fueron, en los que siempre estuvieron.
+        <br><br>
+        Lo que el cuadro de Rembrandt me reveló fue la diferencia de luz entre el padre y el hijo mayor. Los dos tienen barba, los dos llevan túnica roja. Son parecidos en apariencia. Pero las manos del padre están abiertas, extendidas, tocando. Las del hijo mayor están cerradas, cogidas a la altura del pecho, en la sombra. La misma posición exterior, postura interior opuesta. Eso soy yo cuando sirvo sin alegría: me parezco al padre por fuera, me comporto como el hijo resentido por dentro.
+        <br><br>
+        La salida de este extravío no puede ser por esfuerzo propio. Lo intenté. Cuanto más intentaba arrancar el resentimiento, más profundas echaba las raíces. No podía perdonarme a mí mismo, no podía fabricar amor donde había ira. Pero sí podía hacer dos cosas: confiar y agradecer. Confiar es elegir creer, contra la voz oscura que dice lo contrario, que el Padre también me busca a mí, que no soy menos amado por ser fiel. Y agradecer es decidir ver la vida como don antes de sentirla como don. La gratitud no espera el sentimiento: lo genera. Cada acto de gratitud consciente abre la puerta un poco más, hasta que un día la luz entra por sí sola.
+        <br><br>
+        Estuve a punto de morir en un accidente. Y en el hospital, al borde de todo, descubrí que ni siquiera era libre para morir: todavía estaba aferrado a la queja de que mi padre humano no me había amado suficientemente. Cuando él voló desde Holanda para verme, le dije por primera vez que lo amaba. Fue el regreso del hijo mayor. No espectacular. Sin fiesta. Pero real.
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">El resentimiento del hijo mayor está "misteriosamente ligado a sus virtudes": cuanto más generoso quiere ser, más lo atrapa la queja de que los demás no dan igual que él.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Alegría y resentimiento no pueden coexistir: cuando el hijo mayor oye la música de la fiesta, no siente alegría sino mayor resentimiento. La queja convierte incluso la celebración en fuente de dolor.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La frase "ese hijo tuyo" revela el nivel de extravío: el hijo mayor ya no llama "mi hermano" al hermano ni "mi padre" al padre. Los ha vuelto extraños.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Confiar y agradecer son disciplinas, no sentimientos: Nouwen no dice "siéntete agradecido", dice "elige ser agradecido aunque no lo sientas", porque la práctica produce la realidad.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Hay un dicho estonio que Nouwen cita: quien no es agradecido en lo poco, tampoco lo será en lo mucho. Cada pequeño acto de gratitud multiplica la capacidad de verlo todo como don.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">El padre sale a buscar al hijo mayor exactamente igual que salió a recibir al menor. El amor del padre no distingue entre el que se fue y el que se quedó resentido: busca a los dos con la misma intensidad.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿Cuándo fue la última vez que elegiste ser agradecido en un momento donde lo que sentías era queja? ¿Qué pasó después de esa elección?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Durante los próximos siete días, escribe cada noche tres cosas concretas por las que estás agradecido, incluyendo una de las que normalmente te quejas. No las sientas: simplemente escríbelas.</div>
+        <div class="accion-question">Observa al final de los siete días si algo en tu percepción cambió.</div>
+      </div>
+
+    </div><!-- /body -->
+    <div class="nav-final">
+      <button onclick="irA('cap6')" class="btn-nav btn-regresar">← Capítulo 6</button>
+      <button onclick="irA('cap8')" class="btn-nav btn-siguiente">Capítulo 8 →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">El Regreso del Hijo Pródigo · Henri J. M. Nouwen</div>
+      <div class="footer-tag">Capítulo 7 · El Hijo Mayor se Marcha</div>
+    </div>
+  </div><!-- /page -->
+</section>
+</div><!-- /cap7 -->
+
+<!-- ══════════════════════════════
+     PÁGINA 11 — CAPÍTULO 8
+══════════════════════════════ -->
+<div id="cap8" class="pagina oculta">
+<section style="background:#F5F3EE;padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">El Regreso del Hijo Pródigo · Henri Nouwen</div>
+      <div class="libro-header-paso">Capítulo 8 · Rembrandt y el Padre</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>5 min</span></div>
+    <div class="body">
+
+      <div class="filtro-header">
+        <div class="filtro-label">Capítulo 8</div>
+        <div class="filtro-title">Rembrandt y el Padre — El amor más poderoso es el que nace después de haberlo perdido todo</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">El padre del cuadro de Rembrandt no fue pintado desde la prosperidad sino desde la ruina, y por eso sus manos tienen la ternura que solo da el sufrimiento bien atravesado. Lo más divino se hace visible en lo más humano.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa · En voz del autor</span>
+      <div class="problema">
+        Cuántas veces habrán pasado turistas frente a este cuadro sin detenerse más de un minuto. Los guías dicen: "un padre compasivo, una de las últimas obras de Rembrandt". Y siguen. Pero si te quedas, si te obligas a quedarte en silencio frente al anciano medio ciego que pone sus manos sobre el hijo arrodillado, algo muy diferente empieza a suceder.
+        <br><br>
+        Este padre no fue pintado desde la autoridad. Fue pintado desde las ruinas. Rembrandt lo sabía bien: ya había perdido a Saskia, a su hijo, su fortuna, su reputación. Y en esa pobreza acumulada encontró lo único que no se puede comprar ni acumular: la capacidad de dar sin pedir nada a cambio. El padre del cuadro tiene los ojos casi cerrados, como el casi ciego Simeón que Rembrandt pintó muchas veces en sus últimos años. No ve con los ojos del cuerpo. Ve con los del corazón.
+        <br><br>
+        Lo que me detiene son las manos. Una mano firme, ancha, masculina: la del padre que sostiene. Otra mano suave, delicada, femenina: la de la madre que acoge. Juntas forman el abrazo más completo que un ser humano puede imaginar. Dios como padre y madre al mismo tiempo, sosteniendo y acogiendo, con la misma intensidad. Y esas manos no están sobre la cabeza del hijo para bendecir en la distancia: están sobre sus hombros. Lo tocan. Lo sostienen. Están en contacto real con la vergüenza real de ese cuerpo exhausto.
+        <br><br>
+        El genio de Rembrandt fue exactamente ese: lo espiritual no flota sobre lo humano, lo habita. La compasión infinita se hace visible en el gesto finito y concreto de dos manos sobre unos hombros. Y la luz no cae desde arriba sobre las figuras: emerge desde adentro. Como si el amor del padre no fuera un reflejo exterior sino una fuente interior que ilumina todo lo que toca. Tiempo y eternidad se cruzan en ese punto exacto donde las manos del anciano tocan los hombros del hijo arrodillado.
+        <br><br>
+        Así entiendo por qué Rembrandt eligió pintar este momento con quietud y no con movimiento dramático. En su juventud lo habría pintado dinámico: el padre corriendo, los brazos abiertos, el polvo del camino. Pero al final de su vida lo pintó con una serenidad que solo se alcanza cuando ya no queda nada que demostrar. El padre no corre en el cuadro final de Rembrandt. Sostiene. Y en ese sostener silencioso hay más amor que en todos los gestos grandiosos que pintó antes.
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Rembrandt pintó el amor de Dios con un anciano casi ciego: su argumento es que ver con los ojos del corazón es ver más que con los del cuerpo. La ceguera exterior revela la visión interior más profunda.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Una mano masculina y una femenina sobre los hombros del hijo: decisión pictórica deliberada. Rembrandt pinta a Dios más allá del género, como la suma de lo que un padre y una madre pueden dar juntos.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La luz en este cuadro emerge desde el interior de las figuras, no cae sobre ellas desde afuera: metáfora teológica exacta del amor que transforma desde dentro.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Nouwen escribe que en este cuadro "tiempo y eternidad se cruzan, pecado y perdón se abrazan, lo divino y lo humano se hacen uno." Es la encarnación pintada.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Lo espiritual extrae su acento más fuerte de la carne. No a pesar del cuerpo, sino a través de él.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">El cuadro podría haberse llamado "La Bienvenida del Padre Misericordioso" en vez de "El Regreso del Hijo Pródigo". El protagonista real siempre fue el padre.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿Cómo es la imagen de Dios que tienes realmente, en la práctica, no en la teoría? ¿Es un padre que espera con los brazos abiertos o un juez que evalúa la calidad del regreso?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Siéntate hoy con las manos sobre tus propios muslos, abiertas hacia arriba. Quédate así cinco minutos. Mientras las sientes abiertas, di en voz baja:</div>
+        <div class="accion-question">"Soy hijo. Soy bienvenido. No tengo que ganarme esto." — No analices. Solo recibe.</div>
+      </div>
+
+    </div><!-- /body -->
+    <div class="nav-final">
+      <button onclick="irA('cap7')" class="btn-nav btn-regresar">← Capítulo 7</button>
+      <button onclick="irA('cap9')" class="btn-nav btn-siguiente">Capítulo 9 →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">El Regreso del Hijo Pródigo · Henri J. M. Nouwen</div>
+      <div class="footer-tag">Capítulo 8 · Rembrandt y el Padre</div>
+    </div>
+  </div><!-- /page -->
+</section>
+</div><!-- /cap8 -->
+
+<!-- ══════════════════════════════
+     PÁGINA 12 — CAPÍTULO 9
+══════════════════════════════ -->
+<div id="cap9" class="pagina oculta">
+<section style="background:#F5F3EE;padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">El Regreso del Hijo Pródigo · Henri Nouwen</div>
+      <div class="libro-header-paso">Capítulo 9 · El Padre: Ser Padre</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>5 min</span></div>
+    <div class="body">
+
+      <div class="filtro-header">
+        <div class="filtro-label">Capítulo 9</div>
+        <div class="filtro-title">El Padre: Ser Padre — El destino del camino espiritual no es solo ser recibido: es volverse capaz de abrazar</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">La llamada más alta no es volver como hijo sino madurar hasta convertirse en padre: en alguien que ama sin condición, que bendice sin recibir garantías, y que puede sostener el dolor ajeno sin pretender resolverlo.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa · En voz del autor</span>
+      <div class="problema">
+        Durante años me identifiqué con el hijo que vuelve. Era la imagen que más me consolaba: el padre corriendo, el abrazo, la fiesta. Pero llegó un momento en que algo cambió. Una amiga muy querida, Sue Mosteller, me dijo con una claridad que aún resuena: "Henri, puede que hayas pasado mucho tiempo identificándote con el hijo pródigo, pero ya es hora de que te conviertas en el padre." Esas palabras me detuvieron. No como una crítica, sino como una revelación.
+        <br><br>
+        Convertirse en el padre significa algo que asusta: significa que ya no puedo depender de que otros me sostengan. El padre del cuadro no busca a nadie que lo abrace a él. Es él quien abraza. No espera ser consolado: consuela. No guarda sus propias heridas como argumento: las ha transformado en fuente de compasión. Y eso es exactamente lo que la madurez espiritual exige: dejar de necesitar ser el hijo recibido para empezar a ser el padre que recibe.
+        <br><br>
+        Esto no significa negar las propias heridas. Significa algo más profundo: haberlas atravesado tanto que ya no me definen. El padre del cuadro ha sufrido. Lo sé porque Rembrandt lo pintó así: anciano, cansado, medio ciego. Pero ese sufrimiento no lo volvió amargo sino compasivo. Esa es la diferencia entre el sufrimiento que destruye y el sufrimiento que transforma: el primero nos convierte en hijos mayores resentidos, el segundo nos convierte en padres que pueden sostener sin pedir.
+        <br><br>
+        Ser padre también significa bendecir. Y bendecir es algo muy preciso: no es aprobar todo lo que el otro hace, ni eliminar el dolor del camino. Bendecir es afirmar la bondad del otro más allá de sus errores, es decirle con palabras y con gestos que lo que es —no lo que hace— tiene valor. Los padres que no recibieron bendición tienen una dificultad enorme para darla. Y aquí está el ciclo más doloroso: los hijos que no fueron bendecidos buscan bendición en los aplausos, en los logros, en la aprobación ajena, y cuando no la encuentran, se vuelven hijos mayores que sirven esperando que el servicio los bendiga. Romper ese ciclo es la tarea más profunda del camino espiritual.
+        <br><br>
+        Me pregunto si soy capaz de esto. Me pregunto si alguna vez podré sentarme como ese anciano en el cuadro, con las manos abiertas, sosteniendo sin controlar, amando sin garantías. No lo sé con certeza. Pero sé que es hacia allá donde apunta la travesía completa. El hijo que vuelve, el hijo que deja el resentimiento, y luego —un día, si el camino se recorre con honestidad— el padre que abraza. No como posición de autoridad sino como expresión de amor que ya no necesita ser correspondido para seguir fluyendo.
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Sue Mosteller le dijo a Nouwen: "Ya es hora de que te conviertas en el padre." Esa frase reorientó el libro entero. El destino no era solo ser recibido, sino aprender a recibir a otros.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Ser padre no significa no tener heridas. Significa haberlas transformado en fuente de compasión en vez de fuente de resentimiento.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Bendecir es una acción específica: afirmar la bondad del otro más allá de sus errores. No es aprobar todo sino sostener la dignidad del otro cuando él mismo la ha perdido de vista.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Los que no fueron bendecidos buscan bendición en los logros, los aplausos y la aprobación: ese es el ciclo que el camino espiritual viene a romper.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">El padre del cuadro tiene los ojos casi cerrados: no necesita ver al hijo para reconocerlo. Lo conoce por el peso de sus hombros bajo sus manos. Ese es el amor que ya no necesita pruebas.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">Nouwen concluye que la llamada más alta de la parábola no es la del hijo que regresa sino la del ser humano que madura hasta poder abrazar como el padre abraza: sin condiciones, sin cuentas, sin garantías de reciprocidad.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿A quién en tu vida estás esperando que te bendiga primero, antes de tú bendecirlo? ¿Qué pasaría si decidieras bendecir sin esperar?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Identifica hoy a una persona en tu vida que necesita ser afirmada en su valor, no en sus logros. Escríbele o dile en persona una sola oración que afirme quién es, no lo que hace.</div>
+        <div class="accion-question">Sin esperar respuesta. Sin guardar la cuenta.</div>
+      </div>
+
+    </div><!-- /body -->
+    <div class="nav-final">
+      <button onclick="irA('cap8')" class="btn-nav btn-regresar">← Capítulo 8</button>
+      <button onclick="irA('cap10')" class="btn-nav btn-siguiente">Capítulo 10 →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">El Regreso del Hijo Pródigo · Henri J. M. Nouwen</div>
+      <div class="footer-tag">Capítulo 9 · El Padre: Ser Padre</div>
+    </div>
+  </div><!-- /page -->
+</section>
+</div><!-- /cap9 -->
+
+<!-- ══════════════════════════════
+     PÁGINA 13 — CAPÍTULO 10
+══════════════════════════════ -->
+<div id="cap10" class="pagina oculta">
+<section style="background:#F5F3EE;padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">El Regreso del Hijo Pródigo · Henri Nouwen</div>
+      <div class="libro-header-paso">Capítulo 10 · El Padre da la Bienvenida a Casa</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>5 min</span></div>
+    <div class="body">
+
+      <div class="filtro-header">
+        <div class="filtro-label">Capítulo 10</div>
+        <div class="filtro-title">El Padre da la Bienvenida a Casa — El Padre que no compara, no controla y no guarda cuentas</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">El padre ama a los dos hijos de manera total e individual al mismo tiempo, sin hacer comparaciones. Y ese amor que no compara es la única fuerza capaz de liberar al hijo mayor del resentimiento y al hijo menor de la vergüenza.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa · En voz del autor</span>
+      <div class="problema">
+        Todo mi problema con Dios se reduce a uno solo: no puedo creer de verdad que me ama sin comparar. Cuando oigo que alguien es "el hijo predilecto" de alguien, mi reacción inmediata es que el resto tiene que ser menos querido. No puedo comprender cómo todos los hijos de Dios pueden ser predilectos al mismo tiempo. Es matemáticamente imposible para mí. Y sin embargo, ahí está el padre del cuadro, saliendo a recibir al hijo menor con fiesta, y saliendo también a recibir al hijo mayor con súplica. A los dos. Sin calcular cuál merece más.
+        <br><br>
+        Esta incapacidad mía de creer en un amor que no hace comparaciones es la raíz de casi todos mis problemas emocionales. Vengo de un mundo que clasifica, gradúa, evalúa y estadística todo. Siempre hay alguien más inteligente, más atractivo, más exitoso. Y cuando oigo alabar a alguien, mi reacción casi automática es preguntarme si yo soy tan bueno como él. El hijo mayor tenía este mismo problema: la alegría de su padre por el regreso del hermano le parecía, automáticamente, una señal de que él era menos amado. Pero el padre dice algo que debería cambiar todo: "Tú estás siempre conmigo, y todo lo mío es tuyo." No hay escasez en el amor del padre. La fiesta del hermano menor no le quita nada al mayor.
+        <br><br>
+        Esto me lleva a la pregunta más profunda de mi vida espiritual, la que Nouwen formula con una precisión que duele: no es "¿Cómo puedo encontrar a Dios?" sino "¿Cómo puedo dejar que Dios me encuentre?" No es "¿Cómo puedo conocer a Dios?" sino "¿Cómo puedo dejar que Dios me conozca?" Y no es "¿Cómo voy a amar a Dios?" sino "¿Cómo voy a dejarme amar por Dios?" El giro es completo. Toda mi vida espiritual la construí sobre la iniciativa mía. Y la parábola dice que la iniciativa siempre fue del padre. Yo no elegí a Dios. Dios me eligió. Estaba "tatuado en su palma" antes de que yo supiera que existía.
+        <br><br>
+        El padre del cuadro no tiene un marcador celestial. No lleva la cuenta de quién trabajó más, quién sufrió más, quién merece más fiesta. Su amor no funciona con esa lógica. Y cuando intento aplicar mi lógica de comparación al amor de Dios, lo que hago es quedarme fuera de la fiesta como el hijo mayor, enfadado con una generosidad que no entiendo porque nunca he experimentado antes un amor así.
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La pregunta que reorienta toda la vida espiritual: no "¿Cómo encuentro a Dios?" sino "¿Cómo me dejo encontrar por Dios?" El sujeto de la búsqueda siempre fue el Padre, no el hijo.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">"Todo lo mío es tuyo": el padre le dice al hijo mayor que nunca hubo escasez. La fiesta del hermano no quitó nada. El amor de Dios no es un pastel que se divide: es una fuente que no se agota.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La baja autoestima no es virtud: Nouwen descubre que durante años creyó que despreciarse era humildad. Ahora ve que negar el amor de Dios hacia uno mismo es el verdadero pecado.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Dios no es el guardián de un marcador celestial: es el padre que sale corriendo antes de que el hijo llegue, que organiza la fiesta antes de que el discurso comience.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La parábola de los obreros de la viña tiene el mismo corazón: el amo esperaba que su generosidad con los que llegaron tarde produjera alegría, no celos, en los que trabajaron todo el día.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">Nouwen descubre que el núcleo de su lucha espiritual no era el pecado sino el autorechazo: la convicción profunda, casi irracional, de que no merece que lo busquen.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿Hay alguien en tu vida cuyo éxito o bendición interpretas automáticamente como señal de que tú vales menos? ¿Qué dice eso de la imagen de Dios que llevas dentro?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Elige hoy a alguien cuyo éxito o reconocimiento te produce, honestamente, una pizca de envidia. Escribe una oración genuina pidiendo que le vaya bien. Hazlo aunque no lo sientas.</div>
+        <div class="accion-question">Eso es elegir la lógica del padre en vez de la del hijo mayor.</div>
+      </div>
+
+    </div><!-- /body -->
+    <div class="nav-final">
+      <button onclick="irA('cap9')" class="btn-nav btn-regresar">← Capítulo 9</button>
+      <button onclick="irA('cap11')" class="btn-nav btn-siguiente">Capítulo 11 →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">El Regreso del Hijo Pródigo · Henri J. M. Nouwen</div>
+      <div class="footer-tag">Capítulo 10 · El Padre da la Bienvenida</div>
+    </div>
+  </div><!-- /page -->
+</section>
+</div><!-- /cap10 -->
+
+<!-- ══════════════════════════════
+     PÁGINA 14 — CAPÍTULO 11
+══════════════════════════════ -->
+<div id="cap11" class="pagina oculta">
+<section style="background:#F5F3EE;padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">El Regreso del Hijo Pródigo · Henri Nouwen</div>
+      <div class="libro-header-paso">Capítulo 11 · El Padre Organiza una Fiesta</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>5 min</span></div>
+    <div class="body">
+
+      <div class="filtro-header">
+        <div class="filtro-label">Capítulo 11</div>
+        <div class="filtro-title">El Padre organiza una fiesta — La alegría no espera que todo esté bien: celebra cada regreso como si fuera el único</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">La alegría de Dios no depende de que el mundo esté arreglado sino de que uno de sus hijos que estaba perdido ha sido encontrado. Y vivir esa alegría es una disciplina, no un sentimiento espontáneo.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa · En voz del autor</span>
+      <div class="problema">
+        Nunca me imaginé a Dios organizando fiestas. Lo imaginé serio, evaluando, decidiendo. La fiesta no cuadraba con la imagen que tenía de él. Pero Jesús describe el reino de Dios casi siempre como un banquete. Los invitados son llamados. La mesa está preparada. Hay música y baile. El padre no espera que todos los problemas del mundo estén resueltos para mandar matar el ternero: lo manda matar en cuanto ve a su hijo venir por el camino. La alegría no espera las condiciones perfectas. La alegría responde a la presencia, no a la perfección.
+        <br><br>
+        Me he acostumbrado a recibir malas noticias. Estoy entrenado para esperar guerras, violencias, fracasos, depresiones. Cuando alguien llega a visitarme, espero que me cuente sus problemas. Y en ese estado de alerta ante la tristeza, he ido perdiendo la sensibilidad para ver la alegría pequeña y real que existe en los rincones del mundo. La alegría de Dios es discreta, como el flautista que pintó Rembrandt en la esquina del cuadro, casi invisible: está ahí, pero hay que querer verlo.
+        <br><br>
+        Tengo un amigo que viaja mucho y siempre regresa hablando de pequeños milagros: una mujer que perdonó en medio del conflicto, un grupo que mantuvo la fe en el desorden, un niño que sonrió donde nadie esperaba sonrisas. Yo siempre espero las "noticias de periódico". Él siempre encuentra la alegría escondida. La diferencia es que él eligió verla. La alegría es también una disciplina. Se elige. Se practica. Se construye acto por acto.
+        <br><br>
+        Y aquí está la trampa del cinismo: el cínico siempre tiene razón estadísticamente. El mundo sí está lleno de injusticia, de dolor, de guerra. Pero al despreciar la alegría de Dios, su oscuridad produce más oscuridad. La persona que ha aprendido a ver la alegría de Dios no niega la tristeza, pero no vive dentro de ella. Ve un destello aquí, otro allá, y los nombra. Los celebra. Y al celebrarlos, los multiplica. Cada acto de alegría elegida prepara el corazón para más alegría.
+        <br><br>
+        El padre organiza la fiesta con todo lo mejor que tiene. La túnica de invitado distinguido. El anillo de heredero. Las sandalias de hombre libre. Nada a medias. El amor del Padre no da lo mínimo necesario para que el hijo sobreviva: da lo mejor que tiene para que el hijo viva en plenitud. Esa es la generosidad que yo estoy llamado a imitar. No dar lo que sobra sino dar lo mejor que tengo, porque el que tengo delante es familia, es gen, es de los míos.
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La alegría de Dios no es proporcional al número de conversiones ni al estado del mundo: se activa con el regreso de uno solo. Estadísticamente no es interesante; espiritualmente lo es todo.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">El cinismo produce más oscuridad: no porque sea mentira, sino porque al señalar solo la oscuridad, la amplifica. La alegría elegida, aunque pequeña, disipa más oscuridad de lo que parece.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La túnica, el anillo y las sandalias son símbolos precisos de restauración total: la túnica es honor, el anillo es herencia y autoridad, las sandalias distinguen al hijo libre del esclavo descalzo.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La alegría y la tristeza coexisten en Dios: Jesús es el hombre de las tristezas y también el hombre de la alegría completa. En Dios no se excluyen, y eso libera al creyente de esperar que todo esté bien para alegrarse.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">"Generosidad" viene del latín <em>genus</em>: pertenecer a una clase, a una familia. Ser generoso es actuar desde el convencimiento de que el otro, aunque me haya ofendido, es mi pariente.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">Nouwen descubrió la alegría de Dios más clara y concretamente en la comunidad L'Arche, entre personas con discapacidad intelectual que lo abrazaban sin pedirle credenciales: la bienvenida más real que recibió en su vida llegó de los que el mundo consideraría "menos".</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿Cuándo fue la última vez que celebraste un regreso pequeño, una alegría discreta, un milagro invisible? ¿O estás tan acostumbrado a las malas noticias que ya no tienes ojos para ver lo que el Padre celebra?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Esta semana, identifica un "regreso pequeño" en tu entorno: alguien que dio un paso hacia adelante, una relación que se reparó, un momento de paz inesperada. Nómbralo en voz alta, escríbelo, cuéntaselo a alguien.</div>
+        <div class="accion-question">Practica la alegría como disciplina, no como sentimiento.</div>
+      </div>
+
+    </div><!-- /body -->
+    <div class="nav-final">
+      <button onclick="irA('cap10')" class="btn-nav btn-regresar">← Capítulo 10</button>
+      <button onclick="irA('cap12')" class="btn-nav btn-siguiente">Conclusión →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">El Regreso del Hijo Pródigo · Henri J. M. Nouwen</div>
+      <div class="footer-tag">Capítulo 11 · El Padre Organiza una Fiesta</div>
+    </div>
+  </div><!-- /page -->
+</section>
+</div><!-- /cap11 -->
+
+<!-- ══════════════════════════════
+     PÁGINA 15 — CONCLUSIÓN Y EPÍLOGO
+══════════════════════════════ -->
+<div id="cap12" class="pagina oculta">
+<section style="background:#F5F3EE;padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">El Regreso del Hijo Pródigo · Henri Nouwen</div>
+      <div class="libro-header-paso">Conclusión · Convertirse en el Padre</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>5 min</span></div>
+    <div class="body">
+
+      <div class="filtro-header">
+        <div class="filtro-label">Conclusión y Epílogo</div>
+        <div class="filtro-title">Convertirse en el Padre — El camino no termina en volver a casa: termina en aprender a tener los brazos abiertos</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">La llamada más alta y más solitaria del camino espiritual es dejar de ser el hijo que vuelve para convertirse en el padre que espera, abraza y organiza la fiesta. Esto requiere dolor, perdón y generosidad como disciplinas permanentes, no como emociones ocasionales.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa · En voz del autor</span>
+      <div class="problema">
+        Durante mucho tiempo, el padre fue "el otro" en mi camino espiritual. El destino. La meta. El que me recibiría cuando yo llegara lo suficientemente arrepentido. Pero poco a poco, y a veces de manera dolorosa, fui comprendiendo que mientras el padre siguiera siendo el destino y no el modelo, mi camino espiritual nunca estaría completo. No estoy llamado solo a ser recibido como hijo. Estoy llamado a convertirme en el padre que recibe.
+        <br><br>
+        Sue Mosteller me lo dijo con claridad cuando más la necesitaba: "Henri, ya es hora de que te conviertas en el padre." Y esa frase me asustó. Porque convertirse en el padre significa algo muy concreto: significa no poder seguir dependiendo de que otros te sostengan. Significa que cuando alguien viene hacia ti destruido, tú eres la presencia estable. Significa que tu amor no puede depender de si el otro lo merece, lo agradece o lo devuelve. Significa extender las manos sobre los hombros del que llega, sin preguntar cuánto tiempo estuvo fuera, sin negociar las condiciones del regreso.
+        <br><br>
+        ¿Cómo se llega a eso? Rembrandt me lo mostró: por pérdida. El padre del cuadro no fue pintado desde la prosperidad sino desde la ruina acumulada de décadas. Lo que hace tiernas esas manos no es la bondad natural sino el sufrimiento bien atravesado. La paternidad espiritual no se alcanza por mérito ni por acumulación de virtudes. Se alcanza cuando ya no queda nada que defender, cuando el ego ha sido lo suficientemente vaciado como para que el amor pueda fluir sin obstáculos.
+        <br><br>
+        Hay tres caminos que conducen a esa paternidad. El primero es el dolor: aprender a llorar por el dolor ajeno sin distancia, sin análisis, sin la protección de la teoría. El segundo es el perdón: no como sentimiento sino como decisión repetida, como el salto por encima del muro de resentimiento que uno construyó, hasta encontrar al otro al otro lado. El tercero es la generosidad: dar no lo que sobra sino lo mejor que uno tiene, porque el que recibe no es un extraño sino parte de la misma familia humana, del mismo gen.
+        <br><br>
+        Y al final, en el epílogo, Nouwen dice algo que me golpeó con fuerza: la bienvenida más real que recibió en su vida no llegó de colegas académicos ni de personas influyentes. Llegó de personas con discapacidad intelectual en L'Arche, que lo abrazaban sin pedirle que fuera alguien. Que lo bendecían con las manos simplemente puestas sobre él, sin condiciones. Y en esos abrazos, encontró el cuadro de Rembrandt hecho carne. No en una galería. En una comunidad de los que el mundo llama "menores". Ahí estaba el Padre. Ahí estaban las manos.
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">"Convertirse en el padre" es la conclusión que Nouwen no esperaba cuando comenzó el libro: empezó identificándose con el hijo y terminó comprendiendo que la llamada final es ser el padre.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La paternidad espiritual no tiene nada que ver con el poder: es exactamente lo opuesto. El padre del cuadro no controla; sostiene. No exige; espera. No evalúa; abraza.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Tres disciplinas de la paternidad espiritual: dolor (llorar por el pecado ajeno hasta que el corazón se ablande), perdón (saltar el muro de resentimiento una y otra vez) y generosidad (dar lo mejor, no lo que sobra).</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La afirmación más radical de Jesús, según Nouwen: "Sed misericordiosos, como vuestro Padre es misericordioso." No es solo una descripción de Dios. Es una invitación a ser como él.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">L'Arche fue donde Nouwen encontró el cuadro de Rembrandt hecho carne: la bienvenida más real de su vida llegó de los que el mundo consideraría "menores".</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">Nouwen concluye que la pregunta final no es "¿Cuándo podré descansar en la casa del Padre?" sino "¿Cuándo podré extender mis propias manos y bendecir a los que llegan?" Ese es el fin del camino.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿A quién en tu vida estás llamado a recibir sin condiciones en este momento? No en abstracto: alguien concreto, con nombre, cuyo regreso o llegada te pide que extiendas los brazos antes de pedir explicaciones.</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica Final</div>
+        <div class="accion-text">Piensa en alguien que ha estado "lejos" de ti — por conflicto, distancia, error, silencio. Escríbele hoy una sola oración que no pida explicaciones, no exija disculpas, no ponga condiciones.</div>
+        <div class="accion-question">"Estoy aquí. Eres bienvenido." — No esperes sentirlo. Hazlo como disciplina. Como el padre que sale corriendo antes de que el discurso comience.</div>
+      </div>
+
+    </div><!-- /body -->
+    <div class="nav-final">
+      <button onclick="irA('cap11')" class="btn-nav btn-regresar">← Capítulo 11</button>
+      <button onclick="irA('portada')" class="btn-nav btn-siguiente">Volver al inicio →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">El Regreso del Hijo Pródigo · Henri J. M. Nouwen</div>
+      <div class="footer-tag">Conclusión · Convertirse en el Padre</div>
+    </div>
+  </div><!-- /page -->
+</section>
+</div><!-- /cap12 -->
+
+<!-- ══════════════════════════════
+     PÁGINA 16 — RESUMEN FINAL
+══════════════════════════════ -->
+<div id="resumen" class="pagina oculta">
+<section style="background:#F5F3EE;padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">El Regreso del Hijo Pródigo · Henri Nouwen</div>
+      <div class="libro-header-paso">Resumen Final · Consolidación</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>5 min</span></div>
+    <div class="body">
+
+      <div class="filtro-header">
+        <div class="filtro-label">Resumen Final</div>
+        <div class="filtro-title">Todo lo que este libro dice — en una sola lectura</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Madre</div>
+        <div class="tesis-text">El ser humano vive exiliado de sí mismo hasta que descubre que no es el héroe de su propia búsqueda de Dios, sino el objeto de la búsqueda de un Padre que ya está corriendo hacia él, y que la madurez espiritual no termina en ser recibido como hijo sino en volverse capaz de abrazar como padre.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Mapa de las Grandes Ideas</span>
+
+      <div style="display:flex;flex-direction:column;gap:1.1rem;margin:1.25rem 0;">
+
+        <div class="idea">
+          <div class="idea-num">1</div>
+          <div class="idea-body">
+            <div class="idea-text" style="font-weight:600;margin-bottom:0.35rem;color:#1C1A2E;">El país lejano está dentro, no en el mapa.</div>
+            <div class="idea-text">La huida del hijo menor fue interior: es el estado de quien busca amor incondicional donde no puede encontrarse. La adicción, el desempeño, la aprobación ajena — todo es el mismo "país lejano" con distintos nombres. El regreso comienza cuando, en el fondo de la ruina, algo recuerda que todavía se es hijo.</div>
+          </div>
+        </div>
+
+        <div class="idea">
+          <div class="idea-num">2</div>
+          <div class="idea-body">
+            <div class="idea-text" style="font-weight:600;margin-bottom:0.35rem;color:#1C1A2E;">El resentimiento es el extravío sin escándalo.</div>
+            <div class="idea-text">El hijo mayor sirve, cumple, obedece — y guarda cuentas. El resentimiento se instala silenciosamente en las personas responsables y fieles, y las va vaciando de alegría hasta que sirven por miedo, no por amor. Salir requiere confiar y agradecer como disciplinas, no como sentimientos.</div>
+          </div>
+        </div>
+
+        <div class="idea">
+          <div class="idea-num">3</div>
+          <div class="idea-body">
+            <div class="idea-text" style="font-weight:600;margin-bottom:0.35rem;color:#1C1A2E;">El Padre no espera que el arrepentimiento sea perfecto para actuar.</div>
+            <div class="idea-text">Corre cuando el hijo todavía está lejos. Interrumpe el discurso preparado. No negocia el regreso. Dios no es el juez que evalúa la calidad del arrepentimiento antes de abrir la puerta. Es el padre que ya está en el camino.</div>
+          </div>
+        </div>
+
+        <div class="idea">
+          <div class="idea-num">4</div>
+          <div class="idea-body">
+            <div class="idea-text" style="font-weight:600;margin-bottom:0.35rem;color:#1C1A2E;">Las manos del padre son padre y madre al mismo tiempo.</div>
+            <div class="idea-text">Una mano firme que sostiene, otra suave que acoge. Rembrandt pintó a Dios más allá del género, como la suma de todo lo que un padre y una madre pueden dar juntos. No una doctrina sino un gesto concreto, físico, humano.</div>
+          </div>
+        </div>
+
+        <div class="idea">
+          <div class="idea-num">5</div>
+          <div class="idea-body">
+            <div class="idea-text" style="font-weight:600;margin-bottom:0.35rem;color:#1C1A2E;">La alegría de Dios no espera que el mundo esté arreglado.</div>
+            <div class="idea-text">Se activa con el regreso de uno. Es discreta, como el flautista pintado en la esquina del cuadro. Y es una disciplina: se elige, se practica, se construye acto por acto. Cada vez que elegimos nombrar la alegría pequeña, nos parecemos un poco más al padre.</div>
+          </div>
+        </div>
+
+        <div class="idea">
+          <div class="idea-num">6</div>
+          <div class="idea-body">
+            <div class="idea-text" style="font-weight:600;margin-bottom:0.35rem;color:#1C1A2E;">La llamada más alta no es volver a casa sino convertirse en el padre.</div>
+            <div class="idea-text">Quedarse en la identidad de hijo recibido es detenerse a mitad del camino. La madurez exige extender las manos — con dolor, con perdón, con generosidad — sobre los hombros de los que llegan, sin pedir explicaciones, sin guardar el conteo.</div>
+          </div>
+        </div>
+
+        <div class="idea">
+          <div class="idea-num">7</div>
+          <div class="idea-body">
+            <div class="idea-text" style="font-weight:600;margin-bottom:0.35rem;color:#1C1A2E;">El sufrimiento bien atravesado produce compasión; mal digerido, resentimiento.</div>
+            <div class="idea-text">Rembrandt pintó este cuadro desde la ruina total. Lo que hace tiernas esas manos no es la bondad natural sino las pérdidas acumuladas. La diferencia no está en la intensidad del dolor sino en si se atraviesa hacia adentro o se proyecta hacia afuera.</div>
+          </div>
+        </div>
+
+        <div class="idea">
+          <div class="idea-num">8</div>
+          <div class="idea-body">
+            <div class="idea-text" style="font-weight:600;margin-bottom:0.35rem;color:#1C1A2E;">L'Arche fue donde el cuadro se hizo carne.</div>
+            <div class="idea-text">Nouwen no encontró el abrazo del padre en una conferencia académica ni en un libro de teología. Lo encontró en personas con discapacidad intelectual que lo abrazaban sin pedirle credenciales. Eso no es un detalle biográfico: es la tesis encarnada del libro.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Lo que este libro cambia</span>
+      <div class="problema" style="margin-top:1rem;">
+        Este libro no cambia lo que uno sabe sobre Dios. Cambia la postura desde la que uno se para frente a él. Después de leerlo, ya no es posible seguir viendo la vida espiritual como una búsqueda personal de un Dios que se esconde. La imagen se invierte: el Padre siempre estuvo corriendo. La pregunta ya no es "¿Cómo lo encuentro?" sino "¿Por qué sigo escondiéndome?"
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Tres frases que deben quedar vivas</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+        <div class="accion-card">
+          <div class="accion-question">"La cuestión no es cómo puedo encontrar a Dios, sino cómo puedo dejar que Dios me encuentre."</div>
+        </div>
+        <div class="accion-card">
+          <div class="accion-question">"El hijo mayor nunca se fue físicamente, pero llevaba años ausente de adentro: servía sin alegría, obedecía sin amor, cumplía sin pertenecer."</div>
+        </div>
+        <div class="accion-card">
+          <div class="accion-question">"Las manos que perdonan, consuelan, curan y ofrecen un banquete tienen que ser las mías."</div>
+        </div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Si solo recordara una cosa</div>
+        <div class="dato-text">El Padre ya está corriendo hacia ti. La pregunta es si vas a dejar de esconderte.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Aplicación Maestra</div>
+        <div class="accion-text">Cada mañana esta semana, antes de comenzar el día, hazte en silencio esta sola pregunta:</div>
+        <div class="accion-question">¿Voy a vivir hoy como hijo menor que busca aprobación, como hijo mayor que guarda cuentas, o como padre que tiene los brazos abiertos?</div>
+        <div class="accion-text" style="margin-top:0.75rem;">No la respondas rápido. Deja que incomode. Luego actúa en consecuencia con una sola decisión concreta antes del mediodía.</div>
+      </div>
+
+    </div><!-- /body -->
+    <div class="nav-final">
+      <button onclick="irA('cap12')" class="btn-nav btn-regresar">← Conclusión</button>
+      <button onclick="irA('portada')" class="btn-nav btn-siguiente">Volver al inicio →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">El Regreso del Hijo Pródigo · Henri J. M. Nouwen</div>
+      <div class="footer-tag">Resumen Final · Consolidación</div>
+    </div>
+  </div><!-- /page -->
+</section>
+</div><!-- /resumen -->
+
+<script>
+  // ── TIEMPOS DE LECTURA POR PÁGINA ──
+  var TIEMPOS = {
+    'contenido': '3 min', 'intro': '4 min',
+    'cap1': '4 min', 'cap2': '4 min', 'cap3': '5 min',
+    'cap4': '5 min', 'cap5': '5 min', 'cap6': '5 min',
+    'cap7': '5 min', 'cap8': '5 min', 'cap9': '5 min',
+    'cap10': '5 min', 'cap11': '5 min', 'cap12': '6 min',
+    'resumen': '6 min'
+  };
+
+  var PAGINAS = ['portada','contenido','intro','cap1','cap2','cap3','cap4','cap5','cap6','cap7','cap8','cap9','cap10','cap11','cap12','resumen'];
+  var paginaActual = 'portada';
+
+  function toggleDark() {
+    var dark = document.body.classList.toggle('dark');
+    document.getElementById('btn-dark').textContent = dark ? '☀' : '☽';
+  }
+
+  function toggleLectura() {
+    document.body.classList.toggle('modo-lectura');
+  }
+
+  function abrirMenu() {
+    document.getElementById('menu-panel').classList.add('abierto');
+    document.getElementById('menu-overlay').classList.add('activo');
+  }
+
+  function cerrarMenu() {
+    document.getElementById('menu-panel').classList.remove('abierto');
+    document.getElementById('menu-overlay').classList.remove('activo');
+  }
+
+  function irA(id) {
+    document.querySelectorAll('.pagina').forEach(function(p) {
+      p.classList.remove('visible');
+      p.classList.add('oculta');
+    });
+    var destino = document.getElementById(id);
+    destino.classList.remove('oculta');
+    destino.classList.add('visible');
+    destino.scrollTop = 0;
+    paginaActual = id;
+
+    var esPortada = id === 'portada';
+
+    // Hamburguesa
+    document.getElementById('menu-btn').style.display = esPortada ? 'none' : 'flex';
+    // Botón lectura
+    document.getElementById('btn-lectura').style.display = esPortada ? 'none' : 'flex';
+    // Barra progreso
+    var barra = document.getElementById('barra-progreso');
+    barra.style.display = esPortada ? 'none' : 'block';
+    barra.style.width = '0%';
+
+    // Tiempo de lectura en header
+    if (TIEMPOS[id]) {
+      var meta = destino.querySelector('.lectura-meta span');
+      if (meta) meta.textContent = TIEMPOS[id];
+    }
+
+    // Marcar activo en menú
+    document.querySelectorAll('.menu-item').forEach(function(d) {
+      d.classList.toggle('activo', d.dataset.page === id);
+    });
+
+    cerrarMenu();
+
+    // Listener de progreso para esta página
+    destino.onscroll = function() {
+      var el = destino;
+      var scrollable = el.scrollHeight - el.clientHeight;
+      if (scrollable <= 0) { barra.style.width = '100%'; return; }
+      var pct = Math.min(100, Math.round((el.scrollTop / scrollable) * 100));
+      barra.style.width = pct + '%';
+    };
+  }
+
+  function mostrarContenido() { irA('contenido'); }
+  function mostrarPortada() { irA('portada'); }
+
+  // ── SWIPE ──
+  var swipeStartX = 0, swipeStartY = 0, swipeMoving = false;
+
+  document.addEventListener('touchstart', function(e) {
+    swipeStartX = e.touches[0].clientX;
+    swipeStartY = e.touches[0].clientY;
+    swipeMoving = false;
+  }, { passive: true });
+
+  document.addEventListener('touchmove', function() {
+    swipeMoving = true;
+  }, { passive: true });
+
+  document.addEventListener('touchend', function(e) {
+    if (!swipeMoving) return;
+    var dx = e.changedTouches[0].clientX - swipeStartX;
+    var dy = e.changedTouches[0].clientY - swipeStartY;
+    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    if (document.getElementById('menu-panel').classList.contains('abierto')) return;
+    var idx = PAGINAS.indexOf(paginaActual);
+    if (dx < 0 && idx < PAGINAS.length - 1) irA(PAGINAS[idx + 1]);
+    else if (dx > 0 && idx > 0) irA(PAGINAS[idx - 1]);
+  }, { passive: true });
+
+  // ── ANCLAS INTERNAS ──
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var hash = a.getAttribute('href');
+    if (hash === '#') return;
+    var target = document.querySelector(hash);
+    if (target) {
+      e.preventDefault();
+      var paginaVis = document.querySelector('.pagina.visible');
+      if (!paginaVis) return;
+      var offset = target.getBoundingClientRect().top - paginaVis.getBoundingClientRect().top + paginaVis.scrollTop - 16;
+      paginaVis.scrollTo({ top: offset, behavior: 'smooth' });
+    }
+  });
+</script>
+
+</body>
+</html>
