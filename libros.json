@@ -29,6 +29,20 @@
       "capitulos": 3,
       "archivo": "libros/sit-walk-stand.html",
       "descripcion": "La vida cristiana no comienza con el esfuerzo sino con el descanso: solo quien primero se sienta puede después caminar con poder y mantenerse en pie ante el enemigo."
+    },
+    {
+      "titulo": "La Divina Conspiración",
+      "autor": "Dallas Willard",
+      "anio": 1998,
+      "expedicion": "mentalidad",
+      "sub_expedicion": "reino",
+      "color_acento": "#1E3A8A",
+      "color_portada_inicio": "#030712",
+      "color_portada_fin": "#D4AF37",
+      "tiempo_lectura_min": 125,
+      "capitulos": 10,
+      "archivo": "libros/la-divina-conspiracion.html",
+      "descripcion": "Una visión del Reino de Dios como realidad presente y disponible ahora, donde el discipulado consiste en aprender a vivir la vida que Jesús viviría si estuviera en nuestro lugar."
     }
   ]
 }
