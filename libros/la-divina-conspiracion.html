@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Divina Conspiración — Dallas Willard</title>
+
+<script type="application/json" id="libro-meta">
+{
+  "titulo": "La Divina Conspiración",
+  "subtitulo": "Nuestra vida escondida en Dios",
+  "autor": "Dallas Willard",
+  "anio": 1998,
+  "anio_autor": "1935–2013",
+  "paginas_virtuales": 15,
+  "capitulos": 10,
+  "expedicion": "mentalidad",
+  "sub_expedicion": "reino",
+  "color_acento": "#1E3A8A",
+  "color_portada_inicio": "#030712",
+  "color_portada_fin": "#D4AF37",
+  "tiempo_lectura_total_min": 125,
+  "archivo": "libros/la-divina-conspiracion.html"
+}
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --c-acento:        #1E3A8A;
+  --c-acento-medio:  #2563EB;
+  --c-acento-suave:  #D4AF37;
+  --c-acento-claro:  #F4D675;
+  --c-acento-palido: #EEF3FF;
+  --c-acento-bg:     #C7D2FE;
+
+  --portada-grad: linear-gradient(155deg, #030712 0%, #0B1020 34%, #1E3A8A 70%, #D4AF37 100%);
+  --header-grad:  linear-gradient(135deg, #0B1020 0%, #1E3A8A 100%);
+
+  --font-serif:  'Cormorant Garamond', Georgia, serif;
+  --font-body:   'Source Serif 4', Georgia, serif;
+
+  --c-accion:     #1E9E75;
+  --c-accion-bg:  #062E26;
+  --c-accion-txt: #D9F3EB;
+  --c-bg:         #F7F3EE;
+  --c-surface:    #FDFAF5;
+  --c-border:     #E5DDD0;
+  --c-texto:      #1C1710;
+  --c-texto-2:    #5A4E3A;
+  --c-texto-3:    #9E8E6E;
+  --radio:        6px;
+  --radio-lg:     10px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+body { font-family: var(--font-body); color: var(--c-texto); background: var(--c-bg); }
+
+.pagina { position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow-y: auto; transition: opacity 0.4s ease, transform 0.4s ease; }
+.pagina.oculta  { opacity: 0; pointer-events: none; transform: translateY(20px); }
+.pagina.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+#barra-progreso { position: fixed; top: 0; left: 0; z-index: 10000; height: 3px; width: 0%; background: linear-gradient(90deg, var(--c-acento-suave), var(--c-accion)); display: none; border-radius: 0 2px 2px 0; }
+
+#portada .c1 { position: absolute; top: -100px; right: -100px; width: 480px; height: 480px; border-radius: 50%; background: rgba(255,255,255,0.025); pointer-events: none; animation: flotar 9s ease-in-out infinite; }
+#portada .c2 { position: absolute; bottom: -120px; left: -80px; width: 520px; height: 520px; border-radius: 50%; background: rgba(255,255,255,0.018); pointer-events: none; animation: flotar 11s ease-in-out infinite reverse; }
+#portada .c3 { position: absolute; top: 50%; right: -180px; transform: translateY(-50%); width: 350px; height: 350px; border-radius: 50%; border: 1px solid rgba(212,175,55,0.12); pointer-events: none; animation: rotar 35s linear infinite; }
+
+@keyframes flotar { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-20px) scale(1.015); } }
+@keyframes rotar { from { transform: translateY(-50%) rotate(0deg); } to { transform: translateY(-50%) rotate(360deg); } }
+@keyframes entrar { to { opacity: 1; transform: translateY(0); } }
+
+.portada-inner { position: relative; z-index: 1; max-width: 640px; display: flex; flex-direction: column; align-items: center; opacity: 0; transform: translateY(28px); animation: entrar 1s cubic-bezier(0.22,1,0.36,1) 0.2s forwards; }
+.p-eyebrow { font-family: var(--font-body); font-size: 10px; letter-spacing: 0.38em; text-transform: uppercase; color: #F4D675; margin-bottom: 2.75rem; opacity: 0; animation: entrar 0.8s ease 0.5s forwards; }
+.p-ornament { font-size: 1.2rem; color: rgba(244,214,117,0.35); letter-spacing: 0.8em; margin-bottom: 1.5rem; opacity: 0; animation: entrar 0.8s ease 0.65s forwards; }
+.p-titulo { font-family: var(--font-serif); font-size: clamp(2.5rem, 6vw, 4.2rem); font-weight: 300; color: #F8FAFC; line-height: 1.08; text-align: center; letter-spacing: 0.02em; opacity: 0; animation: entrar 0.9s ease 0.75s forwards; }
+.p-titulo strong { font-weight: 600; color: #F4D675; display: block; }
+.p-rule { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--c-acento-suave), transparent); margin: 2rem 0; opacity: 0; animation: entrar 0.8s ease 0.9s forwards; }
+.p-autor { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 300; color: #D4AF37; letter-spacing: 0.18em; margin-bottom: 0.35rem; opacity: 0; animation: entrar 0.8s ease 1s forwards; }
+.p-fechas { font-size: 0.82rem; color: #93C5FD; letter-spacing: 0.08em; margin-bottom: 3rem; font-family: var(--font-body); opacity: 0; animation: entrar 0.8s ease 1.05s forwards; }
+.p-badge { border: 1px solid rgba(212,175,55,0.35); color: #F4D675; font-size: 9.5px; letter-spacing: 0.24em; padding: 6px 18px; border-radius: 40px; text-transform: uppercase; margin-bottom: 3.5rem; font-family: var(--font-body); opacity: 0; animation: entrar 0.8s ease 1.15s forwards; }
+.btn-leer { display: inline-flex; align-items: center; gap: 10px; background: var(--c-acento-suave); color: #0B1020; font-family: var(--font-serif); font-size: 1.05rem; font-weight: 600; padding: 1rem 2.75rem; border-radius: 4px; letter-spacing: 0.06em; box-shadow: 0 4px 24px rgba(0,0,0,0.35); transition: all 0.2s; border: none; cursor: pointer; opacity: 0; animation: entrar 0.9s cubic-bezier(0.22,1,0.36,1) 1.3s forwards; }
+.btn-leer:hover { background: #F4D675; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+.p-footer { position: absolute; bottom: 1.75rem; left: 0; right: 0; text-align: center; font-size: 9.5px; letter-spacing: 0.2em; color: #93C5FD; text-transform: uppercase; font-family: var(--font-body); opacity: 0; animation: entrar 0.8s ease 1.5s forwards; }
+
+.page { max-width: 720px; margin: 0 auto; background: var(--c-surface); border-radius: var(--radio); box-shadow: 0 4px 32px rgba(0,0,0,0.08); overflow: hidden; }
+.libro-header { background: var(--header-grad); padding: 1.75rem 3rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.libro-header-titulo { font-family: var(--font-serif); font-style: italic; font-size: 1rem; color: #F4D675; font-weight: 300; }
+.libro-header-paso { font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #F4D675; background: rgba(255,255,255,0.08); padding: 4px 12px; border-radius: 20px; white-space: nowrap; font-family: var(--font-body); }
+.lectura-meta { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1.5rem; background: rgba(0,0,0,0.04); border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 10.5px; letter-spacing: 0.12em; color: var(--c-texto-3); text-transform: uppercase; font-family: var(--font-body); }
+.lectura-meta span { color: var(--c-acento-medio); font-weight: 600; }
+.body { padding: 2.75rem 3.5rem 3.5rem; --escala: 1; font-size: calc(16px * var(--escala)); }
+.body.fuente-s  { --escala: 0.875; }
+.body.fuente-m  { --escala: 1; }
+.body.fuente-l  { --escala: 1.125; }
+.body.fuente-xl { --escala: 1.25; }
+
+.toc { background: var(--c-acento-palido); border-radius: var(--radio-lg); padding: 1.5rem 1.75rem; margin-bottom: 3rem; }
+.toc-titulo { font-family: var(--font-body); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-acento-medio); margin-bottom: 1rem; }
+.toc-grid { display: flex; flex-direction: column; gap: 7px; }
+.toc-btn { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid var(--c-acento-bg); border-radius: var(--radio); padding: 9px 12px; text-decoration: none; color: var(--c-texto); font-size: 15px; font-family: var(--font-body); transition: all 0.15s; cursor: pointer; }
+.toc-btn:hover { background: var(--c-acento-palido); border-color: var(--c-acento-suave); transform: translateX(4px); }
+.toc-num { width: 26px; height: 26px; border-radius: 50%; background: var(--c-acento-palido); border: 1px solid var(--c-acento-bg); color: var(--c-acento); font-size: 11px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: var(--font-body); }
+.toc-arrow { margin-left: auto; color: var(--c-acento-suave); font-size: 12px; }
+
+hr.rule { border: none; text-align: center; margin: 2.5rem 0; }
+hr.rule::before { content: '— ✦ —'; font-size: 11px; color: var(--c-acento-bg); letter-spacing: 0.3em; }
+.eyebrow { font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--c-acento-medio); margin-bottom: 0.6rem; display: block; padding-top: 0.4rem; font-family: var(--font-body); }
+.filtro-header { border-left: 3px solid var(--c-acento-suave); padding: 0.85rem 1.35rem; background: var(--c-acento-palido); border-radius: 0 var(--radio) var(--radio) 0; margin-bottom: 2.25rem; }
+.filtro-label { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-acento-medio); margin-bottom: 4px; font-family: var(--font-body); }
+.filtro-title { font-family: var(--font-serif); font-size: 1.1rem; font-style: italic; font-weight: 300; color: var(--c-texto); line-height: 1.55; }
+.problema { background: #FAF7F2; border: 1px solid var(--c-border); border-radius: var(--radio); padding: 1.1rem 1.4rem; font-size: inherit; line-height: 1.8; }
+.tesis-block { background: var(--c-acento-palido); border-radius: var(--radio-lg); padding: 2rem 2.25rem; margin: 1.25rem 0; position: relative; overflow: hidden; }
+.tesis-label { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-acento-medio); margin-bottom: 0.75rem; position: relative; z-index: 1; font-family: var(--font-body); }
+.tesis-text { font-family: var(--font-serif); font-size: 1.12rem; font-style: italic; font-weight: 300; color: #172554; line-height: 1.78; position: relative; z-index: 1; }
+.idea { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start; }
+.idea-num { width: 30px; height: 30px; border-radius: 50%; background: var(--c-acento-palido); border: 1px solid var(--c-acento-bg); color: var(--c-acento); font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 3px; }
+.idea-body { flex: 1; }
+.idea-text { font-size: inherit; line-height: 1.8; }
+.alerta-card { background: #FFF8F0; border: 1px solid #F0D8A8; border-left: 3px solid var(--c-acento-suave); border-radius: var(--radio); padding: 1.25rem 1.5rem; margin: 1.25rem 0; }
+.alerta-label { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-acento-medio); margin-bottom: 0.6rem; font-family: var(--font-body); }
+.alerta-text { font-size: inherit; line-height: 1.75; font-style: italic; }
+.veredicto-card { background: linear-gradient(135deg, #0B1020 0%, #1E3A8A 100%); border-radius: var(--radio-lg); padding: 2rem 2.25rem; margin: 1.25rem 0; color:#DBEAFE; }
+.veredicto-label { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-acento-claro); margin-bottom: 0.6rem; font-family: var(--font-body); }
+.veredicto-badge { display: inline-block; background: var(--c-acento-suave); color: #0B1020; font-family: var(--font-serif); font-style: italic; font-size: 1rem; border-radius: 3px; padding: 4px 14px; margin-bottom: 1rem; }
+.veredicto-text { font-size: inherit; line-height: 1.85; }
+
+.nav-final { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; padding: 2rem 3rem 2.5rem; border-top: 1px solid var(--c-border); }
+.btn-nav { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-serif); font-style: italic; font-weight: 300; font-size: 1rem; padding: 0.8rem 1.75rem; border-radius: 4px; border: none; cursor: pointer; transition: all 0.15s; }
+.btn-regresar { background: var(--c-acento-palido); color: var(--c-acento); border: 1px solid var(--c-acento-bg); }
+.btn-siguiente { background: var(--c-acento); color: #fff; box-shadow: 0 3px 12px rgba(30,58,138,0.3); }
+.book-footer { background: #0B1020; padding: 1rem 3rem; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+.footer-title { font-family: var(--font-serif); font-style: italic; font-weight: 300; font-size: 0.88rem; color: var(--c-acento-claro); }
+.footer-tag { font-size: 10px; letter-spacing: 0.15em; color: #93C5FD; text-transform: uppercase; font-family: var(--font-body); }
+.footer-firma { font-size: 11px; color: #64748B; font-family: var(--font-body); letter-spacing: 0.04em; margin-top: 0.15rem; }
+
+#btn-config { position: fixed; top: 1rem; right: 1rem; z-index: 9999; width: 44px; height: 44px; border-radius: 4px; background: rgba(11,16,32,0.92); border: 1px solid rgba(212,175,55,0.32); backdrop-filter: blur(8px); color: #F4D675; font-size: 1.05rem; display: none; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+#config-overlay { position: fixed; inset: 0; z-index: 9998; background: rgba(0,0,0,0.2); opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+#config-overlay.activo { opacity: 1; pointer-events: auto; }
+#config-panel { position: fixed; top: 4rem; right: 1rem; z-index: 9999; width: 210px; background: #0B1020; border: 1px solid rgba(212,175,55,0.25); border-radius: 8px; box-shadow: 0 8px 32px rgba(0,0,0,0.45); display: none; flex-direction: column; overflow: hidden; transform: translateY(-6px); opacity: 0; transition: transform 0.2s ease, opacity 0.2s ease; }
+#config-panel.visible { display: flex; }
+#config-panel.abierto { transform: translateY(0); opacity: 1; }
+.config-seccion-label { font-size: 8.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #93C5FD; padding: 0.75rem 1rem 0.3rem; font-family: var(--font-body); }
+.config-row { display: flex; align-items: center; justify-content: space-between; padding: 0.5rem 1rem 0.75rem; gap: 0.5rem; }
+.config-row-label { font-size: 13px; color: #DBEAFE; font-family: var(--font-body); }
+.toggle-wrap { position: relative; width: 40px; height: 22px; flex-shrink: 0; }
+.toggle-wrap input { opacity: 0; width: 0; height: 0; position: absolute; }
+.toggle-track { position: absolute; inset: 0; background: #1E3A8A; border-radius: 22px; cursor: pointer; transition: background 0.2s; border: 1px solid rgba(212,175,55,0.15); }
+.toggle-wrap input:checked + .toggle-track { background: var(--c-acento-suave); }
+.toggle-track::after { content: ''; position: absolute; width: 16px; height: 16px; background: #DBEAFE; border-radius: 50%; top: 2px; left: 2px; transition: transform 0.2s; }
+.toggle-wrap input:checked + .toggle-track::after { transform: translateX(18px); background: #fff; }
+.fuente-ctrl { display: flex; align-items: center; gap: 0; border: 1px solid rgba(212,175,55,0.25); border-radius: 4px; overflow: hidden; }
+.fuente-btn { width: 32px; height: 28px; background: none; border: none; color: #F4D675; cursor: pointer; font-family: var(--font-body); font-size: 0.82rem; font-weight: 600; }
+.fuente-val { min-width: 28px; text-align: center; font-size: 11px; color: #DBEAFE; font-family: var(--font-body); border-left: 1px solid rgba(212,175,55,0.15); border-right: 1px solid rgba(212,175,55,0.15); padding: 0 4px; }
+.config-sep { height: 1px; background: rgba(212,175,55,0.12); margin: 0 0.75rem; }
+
+#menu-btn { position: fixed; top: 1rem; left: 1rem; z-index: 9999; width: 44px; height: 44px; border-radius: 4px; background: rgba(11,16,32,0.92); border: 1px solid rgba(212,175,55,0.35); backdrop-filter: blur(8px); color: #F4D675; font-size: 1rem; display: none; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+#menu-overlay { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.4); opacity: 0; pointer-events: none; transition: opacity 0.28s ease; }
+#menu-overlay.activo { opacity: 1; pointer-events: auto; }
+#menu-panel { position: fixed; top: 0; left: 0; bottom: 0; width: 290px; z-index: 10000; background: #0B1020; box-shadow: 4px 0 32px rgba(0,0,0,0.4); transform: translateX(-100%); transition: transform 0.28s cubic-bezier(0.4,0,0.2,1); display: flex; flex-direction: column; overflow-y: auto; }
+#menu-panel.abierto { transform: translateX(0); }
+.menu-header { padding: 1.5rem 1.5rem 1rem; border-bottom: 1px solid rgba(212,175,55,0.14); display: flex; align-items: center; justify-content: space-between; }
+.menu-titulo { font-family: var(--font-serif); font-style: italic; font-weight: 300; font-size: 0.95rem; color: var(--c-acento-claro); }
+.menu-close { background: none; border: none; cursor: pointer; color: var(--c-acento-suave); font-size: 1.1rem; padding: 4px; line-height: 1; }
+.menu-seccion { padding: 0.5rem 0; border-bottom: 1px solid rgba(212,175,55,0.08); }
+.menu-seccion-label { font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: #93C5FD; padding: 0.5rem 1.5rem 0.25rem; font-family: var(--font-body); }
+.menu-item { display: flex; align-items: center; gap: 0.85rem; width: 100%; padding: 0.7rem 1.5rem; background: none; border: none; cursor: pointer; text-align: left; transition: background 0.15s; font-family: var(--font-body); }
+.menu-item:hover, .menu-item.activo { background: rgba(212,175,55,0.12); }
+.menu-item-num { width: 26px; height: 26px; border-radius: 3px; flex-shrink: 0; background: rgba(212,175,55,0.12); border: 1px solid rgba(212,175,55,0.25); color: var(--c-acento-claro); font-size: 11px; display: flex; align-items: center; justify-content: center; }
+.menu-item-titulo { font-size: 14px; color: #DBEAFE; line-height: 1.3; }
+.menu-item-sub { font-size: 11px; color: #93C5FD; margin-top: 1px; font-style: italic; }
+
+body.dark { background: #050816; color: #DBEAFE; }
+body.dark .page, body.dark .body { background: #0B1020; }
+body.dark .filtro-header, body.dark .tesis-block, body.dark .problema, body.dark .toc, body.dark .alerta-card { background: #111827; border-color: #1E3A8A; color: #DBEAFE; }
+body.dark .filtro-title, body.dark .tesis-text, body.dark .idea-text, body.dark .problema, body.dark .footer-title { color: #DBEAFE; }
+body.dark .toc-btn { background: #0B1020; border-color: #1E3A8A; color: #DBEAFE; }
+body.modo-lectura .libro-header, body.modo-lectura .lectura-meta, body.modo-lectura .book-footer, body.modo-lectura .nav-final { display: none; }
+
+@media (max-width: 780px) { .page { border-radius: 0; } .body { padding: 2rem 2rem 3rem; } .libro-header { padding: 1.4rem 2rem; } .nav-final { padding: 1.75rem 2rem; } .book-footer { padding: 1rem 2rem; } }
+@media (max-width: 600px) { .p-titulo { font-size: clamp(1.9rem, 7vw, 2.4rem); } .page { border-radius: 0; box-shadow: none; } .libro-header { padding: 1rem 1.25rem; flex-direction: column; align-items: flex-start; gap: 0.5rem; } .body { padding: 1.4rem 1.1rem 2rem; } .nav-final { padding: 1.4rem 1.1rem; gap: 0.75rem; } .btn-nav { font-size: 0.9rem; padding: 0.7rem 1.3rem; flex: 1; justify-content: center; } .book-footer { padding: 1rem 1.25rem; flex-direction: column; text-align: center; gap: 0.4rem; } #config-panel { right: 0.5rem; width: 195px; } }
+
+</style>
+</head>
+<body>
+
+<div id="menu-overlay" onclick="cerrarMenu()"></div>
+
+<div id="menu-panel">
+  <div class="menu-header">
+    <span class="menu-titulo">La Divina Conspiración</span>
+    <button class="menu-close" onclick="cerrarMenu()">✕</button>
+  </div>
+  
+<div class="menu-seccion">
+  <div class="menu-seccion-label">Resumen</div>
+  <button class="menu-item" onclick="irA('filtro')" data-page="filtro"><span class="menu-item-num">F</span><span><div class="menu-item-titulo">Filtro de Lectura</div><div class="menu-item-sub">Resumen ejecutivo</div></span></button>
+  <button class="menu-item" onclick="irA('intro')" data-page="intro"><span class="menu-item-num">·</span><span><div class="menu-item-titulo">Introducción</div><div class="menu-item-sub">El Reino presente</div></span></button>
+</div>
+<div class="menu-seccion">
+  <div class="menu-seccion-label">Capítulos</div>
+<button class="menu-item" onclick="irA('cap1')" data-page="cap1"><span class="menu-item-num">1</span><span><div class="menu-item-titulo">La Vida En Oscuridad, La Invitación Al Reino</div><div class="menu-item-sub">No volamos patas arriba por accidente: ace</div></span></button>
+<button class="menu-item" onclick="irA('cap2')" data-page="cap2"><span class="menu-item-num">2</span><span><div class="menu-item-titulo">Los Evangelios Para Lidiar Con El Pecado</div><div class="menu-item-sub">Cuando el mensaje que se predica produce e</div></span></button>
+<button class="menu-item" onclick="irA('cap3')" data-page="cap3"><span class="menu-item-num">3</span><span><div class="menu-item-titulo">Lo Que Sabía Jesús: Nuestro Mundo Bañado En Dios</div><div class="menu-item-sub">La realidad que Jesús veía cuando miraba l</div></span></button>
+<button class="menu-item" onclick="irA('cap4')" data-page="cap4"><span class="menu-item-num">4</span><span><div class="menu-item-titulo">¿Y A Quién Le Va Realmente Bien? Las Bienaventuranzas Como Proclamación</div><div class="menu-item-sub">Las bienaventuranzas no son una lista de r</div></span></button>
+<button class="menu-item" onclick="irA('cap5')" data-page="cap5"><span class="menu-item-num">5</span><span><div class="menu-item-titulo">La Rectitud Del Corazón Del Reino: Más Allá De La Bondad De Los Escribas</div><div class="menu-item-sub">La ley controla las acciones. Solo el cora</div></span></button>
+<button class="menu-item" onclick="irA('cap6')" data-page="cap6"><span class="menu-item-num">6</span><span><div class="menu-item-titulo">Invertir En Los Cielos: Escapemos A Los Engaños De La Reputación Y La Riqueza</div><div class="menu-item-sub">Los dos anzuelos que sacan a las personas </div></span></button>
+<button class="menu-item" onclick="irA('cap7')" data-page="cap7"><span class="menu-item-num">7</span><span><div class="menu-item-titulo">La Comunidad Del Amor En Oración Y Adoración</div><div class="menu-item-sub">La oración no es técnica: es la vida de un</div></span></button>
+<button class="menu-item" onclick="irA('cap8')" data-page="cap8"><span class="menu-item-num">8</span><span><div class="menu-item-titulo">Ser Discípulo De Jesús Hoy: La Gran Omisión</div><div class="menu-item-sub">La Iglesia ha cumplido la Gran Comisión ha</div></span></button>
+<button class="menu-item" onclick="irA('cap9')" data-page="cap9"><span class="menu-item-num">9</span><span><div class="menu-item-titulo">Currículo Del Que Busca Parecerse A Cristo</div><div class="menu-item-sub">No basta querer ser como Jesús: hay que en</div></span></button>
+<button class="menu-item" onclick="irA('cap10')" data-page="cap10"><span class="menu-item-num">10</span><span><div class="menu-item-titulo">La Restauración De Todas Las Cosas: El Futuro Que Da Sentido Al Presente</div><div class="menu-item-sub">El cielo no es un estado de ánimo eterno: </div></span></button>
+
+</div>
+<div class="menu-seccion">
+  <div class="menu-seccion-label">Evaluación</div>
+  <button class="menu-item" onclick="irA('evaluacion')" data-page="evaluacion"><span class="menu-item-num">E</span><span><div class="menu-item-titulo">Curaduría de la Información</div><div class="menu-item-sub">Fiabilidad y aplicabilidad</div></span></button>
+  <button class="menu-item" onclick="irA('comunicador')" data-page="comunicador"><span class="menu-item-num">C</span><span><div class="menu-item-titulo">Willard como Comunicador</div><div class="menu-item-sub">Evaluación del autor</div></span></button>
+</div>
+<div class="menu-seccion">
+  <div class="menu-seccion-label">Consolidación</div>
+  <button class="menu-item" onclick="irA('resumen')" data-page="resumen"><span class="menu-item-num">★</span><span><div class="menu-item-titulo">Resumen Final</div><div class="menu-item-sub">Consolidación del libro</div></span></button>
+</div>
+
+</div>
+
+<button id="menu-btn" onclick="abrirMenu()">☰</button>
+<button id="btn-config" onclick="toggleConfig()">⚙︎</button>
+
+<div id="config-overlay" onclick="cerrarConfig()"></div>
+<div id="config-panel">
+  <div class="config-seccion-label">Apariencia</div>
+  <div class="config-row">
+    <span class="config-row-label">Modo oscuro</span>
+    <label class="toggle-wrap">
+      <input type="checkbox" id="toggle-dark" onchange="toggleDark()">
+      <span class="toggle-track"></span>
+    </label>
+  </div>
+  <div class="config-sep"></div>
+  <div class="config-row">
+    <span class="config-row-label">Lectura limpia</span>
+    <label class="toggle-wrap">
+      <input type="checkbox" id="toggle-lectura" onchange="toggleLectura()">
+      <span class="toggle-track"></span>
+    </label>
+  </div>
+  <div class="config-sep"></div>
+  <div class="config-seccion-label">Tamaño de letra</div>
+  <div class="config-row">
+    <span class="config-row-label">Texto</span>
+    <div class="fuente-ctrl">
+      <button class="fuente-btn" onclick="cambiarFuente(-1)">A−</button>
+      <span class="fuente-val" id="fuente-nivel">M</span>
+      <button class="fuente-btn" onclick="cambiarFuente(1)">A+</button>
+    </div>
+  </div>
+</div>
+
+<div id="barra-progreso"></div>
+
+<div id="portada" class="pagina visible">
+<section style="min-height:100vh;background:var(--portada-grad);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem 2rem;position:relative;overflow:hidden;">
+  <div class="c1"></div><div class="c2"></div><div class="c3"></div>
+  <div class="portada-inner">
+    <div class="p-eyebrow">Resumen Editorial · Mentor de Conocimiento</div>
+    <div class="p-ornament">— ✦ —</div>
+    <div class="p-titulo"><strong>La Divina</strong>Conspiración</div>
+    <div class="p-rule"></div>
+    <div class="p-autor">Dallas Willard</div>
+    <div class="p-fechas">1935 – 2013</div>
+    <div class="p-badge">Mentalidad · Reino · Discipulado</div>
+    <button class="btn-leer" onclick="irA('filtro')">Leer resumen &nbsp;→</button>
+  </div>
+  <div class="p-footer">La Divina Conspiración · Dallas Willard · 1998</div>
+</section>
+</div>
+
+
+<div id="filtro" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">La Divina Conspiración · Dallas Willard</div>
+      <div class="libro-header-paso">Filtro de Lectura</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>9 min</span></div>
+    <div class="body fuente-m">
+      <div class="toc"><div class="toc-titulo">Contenido</div><div class="toc-grid"><button class="toc-btn" onclick="irA('intro')"><span class="toc-num">·</span>Introducción<span class="toc-arrow">↓</span></button><button class="toc-btn" onclick="irA('cap1')"><span class="toc-num">1</span>La Vida En Oscuridad, La Invitación Al Reino<span class="toc-arrow">↓</span></button><button class="toc-btn" onclick="irA('cap2')"><span class="toc-num">2</span>Los Evangelios Para Lidiar Con El Pecado<span class="toc-arrow">↓</span></button><button class="toc-btn" onclick="irA('cap3')"><span class="toc-num">3</span>Lo Que Sabía Jesús: Nuestro Mundo Bañado En Dios<span class="toc-arrow">↓</span></button><button class="toc-btn" onclick="irA('cap4')"><span class="toc-num">4</span>¿Y A Quién Le Va Realmente Bien? Las Bienaventuranzas Como Proclamación<span class="toc-arrow">↓</span></button><button class="toc-btn" onclick="irA('cap5')"><span class="toc-num">5</span>La Rectitud Del Corazón Del Reino: Más Allá De La Bondad De Los Escribas<span class="toc-arrow">↓</span></button><button class="toc-btn" onclick="irA('cap6')"><span class="toc-num">6</span>Invertir En Los Cielos: Escapemos A Los Engaños De La Reputación Y La Riqueza<span class="toc-arrow">↓</span></button><button class="toc-btn" onclick="irA('cap7')"><span class="toc-num">7</span>La Comunidad Del Amor En Oración Y Adoración<span class="toc-arrow">↓</span></button><button class="toc-btn" onclick="irA('cap8')"><span class="toc-num">8</span>Ser Discípulo De Jesús Hoy: La Gran Omisión<span class="toc-arrow">↓</span></button><button class="toc-btn" onclick="irA('cap9')"><span class="toc-num">9</span>Currículo Del Que Busca Parecerse A Cristo<span class="toc-arrow">↓</span></button><button class="toc-btn" onclick="irA('cap10')"><span class="toc-num">10</span>La Restauración De Todas Las Cosas: El Futuro Que Da Sentido Al Presente<span class="toc-arrow">↓</span></button><button class="toc-btn" onclick="irA('evaluacion')"><span class="toc-num">E</span>Curaduría de la Información<span class="toc-arrow">↓</span></button><button class="toc-btn" onclick="irA('comunicador')"><span class="toc-num">C</span>Evaluación del Autor<span class="toc-arrow">↓</span></button><button class="toc-btn" onclick="irA('resumen')"><span class="toc-num">★</span>Resumen Final<span class="toc-arrow">↓</span></button></div></div>
+<div class="filtro-header"><div class="filtro-label">Filtro de Lectura</div><div class="filtro-title">Para discernir si La Divina Conspiración merece tu tiempo, tu atención y tu vida</div></div>
+<div class="problema" style="margin-bottom:1rem;">Para discernir si La divina conspiración merece tu tiempo, tu atención y tu vida</div>
+<div class="problema" style="margin-bottom:1rem;">Título</div>
+<div class="problema" style="margin-bottom:1rem;"><strong>La divina conspiración:</strong> Nuestra vida escondida en Dios</div>
+<div class="problema" style="margin-bottom:1rem;">Autor</div>
+<div class="problema" style="margin-bottom:1rem;">Dallas Willard</div>
+<div class="problema" style="margin-bottom:1rem;">Breve biografía del autor</div>
+<div class="problema" style="margin-bottom:1rem;">Dallas Willard (1935–2013) fue filósofo y profesor de la Universidad del Sur de California durante más de cuatro décadas, especializado en fenomenología y filosofía de la mente. Pero su obra más influyente no fue académica: fue teológica y espiritual. Fue pastor bautista, director espiritual y uno de los pensadores más serios del siglo XX en el tema de la formación espiritual cristiana. Su combinación poco común de rigor filosófico y profundidad devocional lo convirtió en una voz singular en el mundo cristiano. Richard Foster, autor de Celebración de la disciplina, lo describió como uno de los libros para el próximo milenio, comparable a Bonhoeffer, Calvino y san Agustín.</div>
+<div class="problema" style="margin-bottom:1rem;">El problema central que aborda</div>
+<div class="problema" style="margin-bottom:1rem;">La fe cristiana se ha reducido a una "teología de manejo del pecado" —cómo conseguir el cielo al morir o cómo protestar contra los males sociales— vaciando a Jesús de toda relevancia para la vida real, cotidiana y presente.</div>
+<span class="eyebrow">1. Tesis Central</span>
+<div class="problema" style="margin-bottom:1rem;"><strong>La idea más importante del libro:</strong></div>
+<div class="problema" style="margin-bottom:1rem;">El Reino de Dios no es un destino después de la muerte sino una realidad presente y disponible ahora mismo, a la que se accede a través del discipulado real con Jesús como Maestro vivo, no solo como Redentor de pecados.</div>
+<span class="eyebrow">2. Ideas Clave</span>
+<div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El evangelio se ha vaciado de vida. Tanto la derecha teológica ("eres salvo porque tus pecados fueron perdonados") como la izquierda ("eres cristiano si luchas por la justicia social") ofrecen el mismo vacío: una fe que no transforma el carácter interior ni tiene nada que decirle a la existencia cotidiana real.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Jesús es el hombre más inteligente que haya vivido. Willard lo reintroduce no como figura mágica, puntual o dogmática, sino como maestro de la realidad: alguien que entendió el cosmos, la naturaleza humana y la vida de Dios mejor que nadie. Sus enseñanzas son inteligentes, vitales e intensamente prácticas —no poesía mística, no leyes imposibles.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Las Bienaventuranzas no son mandatos, son radiografías. El Sermón del Monte no es una nueva ley que aplasta el alma ni un ideal inalcanzable reservado para otra época. Es la descripción de quién vive bien, de qué lado de la realidad están los que experimentan el Reino ahora. El pobre en espíritu no es un modelo a imitar; es alguien que ya está siendo bendecido por Dios allí donde está.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El mundo está bañado en Dios. Vivimos rodeados de la presencia y el poder de Dios en cada momento, en cada lugar común. La vida eterna no es lo que comienza cuando morimos; es el tipo de vida que empieza cuando confiamos en Jesús ahora. El "Reino de los cielos" no es un lugar geográfico futuro: es la voluntad de Dios en acción, tan accesible como la electricidad en un cable.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Ser discípulo es la única forma real de ser cristiano. El concepto de "cristiano no discípulo" es una contradicción. Todos somos aprendices de alguien: la televisión, el mercado, los miedos de la infancia. La pregunta no es si aprendes de alguien, sino de quién. Y Willard propone que Jesús es el único maestro que da poder para hacer lo que enseña.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El currículo de la transformación existe. No se trata de esfuerzo moral ni de voluntarismo. Las disciplinas espirituales (ayuno, silencio, servicio, oración contemplativa) son el "entrenamiento" que produce personas capaces de hacer naturalmente lo que sin entrenamiento es imposible: amar al enemigo, no juzgar, bendecir al que escupe.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">La restauración de todas las cosas es el horizonte real. El libro termina con una visión del futuro que no es "flotar en el cielo con arpa" sino gobernar y crear con Dios en un cosmos ampliado, continuando la obra iniciada aquí. El carácter que formes hoy te acompañará para siempre.</div></div>
+</div>
+</div>
+<span class="eyebrow">3. Dato, Giro O Hallazgo Más Impactante</span>
+<div class="problema" style="margin-bottom:1rem;">El 74% de los estadounidenses declara un compromiso de vida con Jesucristo, pero sus estadísticas de conducta ética, fracaso familiar, adicciones y crimen son prácticamente idénticas a las del resto de la población — y Willard argumenta que esto no ocurre a pesar de lo que se enseña en las iglesias, sino precisamente por ello.</div>
+<span class="eyebrow">4. Acción Inmediata</span>
+<div class="problema" style="margin-bottom:1rem;"><strong>Haz esto hoy:</strong></div>
+<div class="problema" style="margin-bottom:1rem;">Hoy, en la primera conversación difícil que tengas, practica no juzgar ni condenar a la otra persona: obsérvalos como Dios los observa, con curiosidad en lugar de veredicto. Luego nota qué cambió en ti.</div>
+<span class="eyebrow">5. Veredicto De Lectura</span>
+<div class="problema" style="margin-bottom:1rem;">Léelo por completo, ya que una IA jamás podría resumir ni igualar la experiencia de lo que quiso transmitir el autor.</div>
+<div class="problema" style="margin-bottom:1rem;">Este libro no es solo información; es una travesía filosófica, teológica y espiritual que reorienta la percepción completa de la realidad. La densidad de Willard, su uso de ejemplos concretos, su análisis del Sermón del Monte capítulo a capítulo, y la acumulación progresiva de su argumento producen en el lector una experiencia que no puede comprimirse sin pérdida significativa. Es, como dijo Foster, un libro para el próximo milenio. Especialmente si lideras, enseñas, pastorales o comunicas fe: no existe sustituto.</div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('portada')" class="btn-nav btn-regresar">← Portada</button>
+      <button onclick="irA('intro')" class="btn-nav btn-siguiente">Introducción →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">La Divina Conspiración · Dallas Willard</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Filtro de Lectura</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div id="intro" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">La Divina Conspiración · Dallas Willard</div>
+      <div class="libro-header-paso">Introducción</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>7 min</span></div>
+    <div class="body fuente-m">
+      
+<div class="filtro-header"><div class="filtro-label">Introducción</div><div class="filtro-title">El Reino de Dios como realidad presente y disponible</div></div>
+<span class="eyebrow">Introducción</span>
+<div class="problema" style="margin-bottom:1rem;"><strong>Hay una ilusión que nos persigue sin que lo notemos:</strong> creemos conocer a Jesús porque hemos oído su nombre toda la vida. Pero Willard abre su libro con una provocación directa: esa familiaridad es precisamente lo que nos ha privado de Él. Cuando algo se da por sabido, se deja de escuchar. Y cuando se deja de escuchar a Jesús, no solo se pierde una creencia: se pierde el único acceso a la vida que verdaderamente funciona.</div>
+<div class="problema" style="margin-bottom:1rem;">El mundo en que vivimos ha perdido el mapa. Las élites intelectuales llevan siglos intentando construir una ética y un sentido de la existencia sin Dios, y el resultado visible es una sociedad que vuela cabeza abajo sin saberlo: personas brillantes con pésimo carácter, instituciones académicas que producen razonadores morales que no pueden ser buenos, cultura saturada de eslóganes que nada dicen. Tolstói lo vio hace más de un siglo. Nietzsche también. Pero ninguno encontró la salida que sí encontró Jesús.</div>
+<div class="problema" style="margin-bottom:1rem;">Willard no escribe como predicador. Escribe como filósofo que ha pasado décadas estudiando la naturaleza humana y que ha llegado a una convicción verificable: Jesús es el hombre más inteligente que haya vivido, y sus enseñanzas no son poesía mística ni leyes imposibles sino guías precisas y prácticas para la única vida que realmente vale la pena vivir. El libro es la defensa de esa convicción, desplegada capítulo a capítulo sobre la realidad del Reino de Dios, el Sermón del Monte, el discipulado y la transformación del carácter.</div>
+<div class="problema" style="margin-bottom:1rem;">Lo que hace único a este libro es que no se detiene en la teología. Sigue caminando hasta llegar a ti: a tus relaciones, a tu trabajo, a tu ira cotidiana, a tu lujuria, a tus miedos sobre el dinero y la reputación. El Reino de Dios, argumenta Willard, o entra en esas cosas o no ha entrado en ninguna parte.</div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('filtro')" class="btn-nav btn-regresar">← Filtro de Lectura</button>
+      <button onclick="irA('cap1')" class="btn-nav btn-siguiente">Capítulo 1 · La Vida En Oscuridad, La Invitación Al Reino →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">La Divina Conspiración · Dallas Willard</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Introducción</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div id="cap1" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">La Divina Conspiración · Dallas Willard</div>
+      <div class="libro-header-paso">Capítulo 1 · La Vida En Oscuridad, La Invitación Al Reino</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>10 min</span></div>
+    <div class="body fuente-m">
+      
+<div class="filtro-header"><div class="filtro-label">Capítulo 1 · La Vida En Oscuridad, La Invitación Al Reino</div><div class="filtro-title">No volamos patas arriba por accidente: aceptamos ideas que nos invirtieron</div></div>
+<span class="eyebrow">La Vida En Oscuridad, La Invitación Al Reino</span>
+<div class="problema" style="margin-bottom:1rem;"><strong>No volamos patas arriba por accidente:</strong> aceptamos ideas que nos invirtieron</div>
+<span class="eyebrow">IDEA CENTRAL</span>
+<div class="problema" style="margin-bottom:1rem;">La crisis más profunda de nuestro tiempo no es económica ni política sino intelectual: hemos aceptado la idea de que no existe conocimiento moral posible, y esa idea —invisible pero todopoderosa— está destruyendo la existencia humana desde adentro.</div>
+<span class="eyebrow">PROSA EN VOZ DEL AUTOR</span>
+<div class="problema" style="margin-bottom:1rem;">Vivimos en una época que ha decidido, sin haberlo debatido abiertamente, que lo bueno y lo malo no son cuestiones de conocimiento. Puedes saber que Colón llegó en 1492 o que siete por cinco son treinta y cinco, y si dices otra cosa, te corrigen. Pero si dices que la discriminación está bien o que la crueldad es aceptable, ningún profesor universitario puede bajarte la nota. Ha admitido que eso sería "imponer su opinión". ¿Lo ves? El conocimiento científico manda. El conocimiento moral no existe.</div>
+<div class="problema" style="margin-bottom:1rem;">Esta no es una conspiración de personas malvadas. Es el resultado de décadas de ideas producidas por personas brillantes y bien intencionadas que gradualmente separaron el pensamiento de la vida. Lo que Derek Bok —rector de Harvard— describió como el problema de conectar el intelecto con el carácter no es un fallo pedagógico: es el fruto natural de asumir que lo bueno no puede conocerse. Si no puede conocerse, no puede enseñarse. Si no puede enseñarse, el carácter queda librado a sí mismo. Y el carácter librado a sí mismo, en un mundo lleno de tentaciones y presiones, se deforma.</div>
+<div class="problema" style="margin-bottom:1rem;">La joven que limpió habitaciones en Harvard para pagarse los estudios y que vio cómo sus compañeros —los mismos que sacaban A en cursos de ética— la trataban con desdén y le hacían proposiciones indecentes lo describió mejor que ningún filósofo: "¿De qué sirve saber lo que es el bien si uno no intenta ser buena persona?" No fue una observación ingenua. Fue el diagnóstico más preciso del fracaso de la modernidad.</div>
+<div class="problema" style="margin-bottom:1rem;">En este mundo que vuela cabeza abajo y no lo sabe, irrumpe Jesús. No como figura religiosa que produce consuelo. No como agente de cambio social. Irrumpe como quien abre la puerta a la única realidad que puede sostener una vida humana: el Reino de Dios. Un Reino que no está lejos, que no requiere morir para acceder, que no es metáfora ni promesa vaga. Es la voluntad eficaz de Dios en acción, presente en este momento, tan accesible como la electricidad en un cable. Lo único que falta es aprender a enchufarse.</div>
+<div class="problema" style="margin-bottom:1rem;">Cuando Jesús comenzó su ministerio en los pueblos más periféricos de Galilea y anunció que "el reino de los cielos se ha acercado", no estaba prometiendo algo futuro. Estaba señalando algo presente. La palabra griega usada —eggiken— es un verbo en tiempo pasado completo. No "está por llegar". Literalmente: "ha llegado". La realidad del gobierno de Dios estaba disponible allí, con Él, a través de Él. Y sigue estándolo hoy.</div>
+<div class="problema" style="margin-bottom:1rem;"><strong>Todos tenemos un reino:</strong> el ámbito donde nuestras decisiones determinan lo que sucede. Fuimos creados para gobernar dentro de ese dominio, pero no solos. La intención de Dios fue siempre ser nuestro compañero en esa tarea. Cuando nos separamos de Él —cuando decidimos que podemos con el mundo solos— no perdemos solo la guía divina. Perdemos la fuente misma de nuestra capacidad de gobernar bien. El resultado es lo que vemos: reinos en conflicto, personas que se destruyen mutuamente tratando de dominar lo que no les pertenece, una historia que parece escrita por el caos.</div>
+<div class="problema" style="margin-bottom:1rem;">Pero la puerta sigue abierta. Siempre ha estado abierta. Jesús la encontró abierta para una prostituta en casa de un fariseo. La encontró abierta para un meteorólogo en los suburbios de Los Ángeles que despertó una noche rodeado de una presencia que no podía nombrar. La encontró abierta para un joven budista coreano muriendo de tuberculosis que clamó al "Dios de los otros" sin saber que ese Dios ya lo estaba buscando a él.</div>
+<div class="problema" style="margin-bottom:1rem;">El problema no es que el Reino esté lejos. El problema es que nadie nos enseña que está aquí.</div>
+<span class="eyebrow">BULLETS DE IMPACTO</span>
+<div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">En el experimento de Frank Laubach —volver la mente a Cristo un segundo por minuto— cuatro semanas bastaron para transformar radicalmente la calidad de su trabajo y sus relaciones. Sin cambiar de oficio ni de lugar.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El rector de Harvard en 1986 admitió que la universidad ya no podía enseñar valores morales porque no existe consenso sobre qué son. Consecuencia directa: los más brillantes de la nación pueden razonar sobre ética y tratar a las personas con crueldad sin contradicción interna.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">"Si yo viniera hoy, podría trabajar como técnico de computadoras, contador o mecánico. Podría vivir en tu departamento, tener tu trabajo, tus mismas perspectivas. Nada de eso sería obstáculo para la vida eterna." — La aplicación más revolucionaria que Willard hace de la encarnación.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Los campos de exterminio de Camboya fueron producto directo de debates filosóficos en París. Las ideas matan. Y las ideas que salvan también tienen ese alcance.</div></div>
+</div>
+</div>
+<span class="eyebrow">DATO CLAVE:</span>
+<div class="problema" style="margin-bottom:1rem;"><strong>El término "eggiken" en Marcos 1:</strong>15 —"el reino de los cielos se ha acercado"— es gramaticalmente un verbo en tiempo perfecto: significa que la acción ya ocurrió y su efecto sigue presente. No es una promesa futura: es una declaración de disponibilidad actual.</div>
+<span class="eyebrow">REFLEXIÓN:</span>
+<div class="problema" style="margin-bottom:1rem;">Si el Reino de Dios está realmente disponible aquí y ahora, ¿en qué área de tu vida cotidiana sigues actuando como si no lo estuviera, tomando decisiones como si Dios no fuera un compañero activo sino un espectador?</div>
+<span class="eyebrow">PRÁCTICA:</span>
+<div class="problema" style="margin-bottom:1rem;">Hoy, en una sola conversación difícil, antes de responder con tu primer impulso, detente dos segundos y formula internamente esta pregunta: "¿Qué haría alguien que vive en el Reino ahora mismo?" No tienes que saber la respuesta perfecta. Solo hacer la pausa es entrar.</div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('intro')" class="btn-nav btn-regresar">← Introducción</button>
+      <button onclick="irA('cap2')" class="btn-nav btn-siguiente">Capítulo 2 · Los Evangelios Para Lidiar Con El Pecado →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">La Divina Conspiración · Dallas Willard</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 1 · La Vida En Oscuridad, La Invitación Al Reino</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div id="cap2" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">La Divina Conspiración · Dallas Willard</div>
+      <div class="libro-header-paso">Capítulo 2 · Los Evangelios Para Lidiar Con El Pecado</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>10 min</span></div>
+    <div class="body fuente-m">
+      
+<div class="filtro-header"><div class="filtro-label">Capítulo 2 · Los Evangelios Para Lidiar Con El Pecado</div><div class="filtro-title">Cuando el mensaje que se predica produce exactamente los resultados que vemos</div></div>
+<span class="eyebrow">Los Evangelios Para Lidiar Con El Pecado</span>
+<div class="problema" style="margin-bottom:1rem;">Cuando el mensaje que se predica produce exactamente los resultados que vemos</div>
+<span class="eyebrow">IDEA CENTRAL</span>
+<div class="problema" style="margin-bottom:1rem;">El evangelio que predomina hoy —tanto en la derecha como en la izquierda teológica— no transforma el carácter ni tiene relevancia para la vida cotidiana, y eso no ocurre a pesar de lo que se predica sino precisamente como consecuencia de ello.</div>
+<span class="eyebrow">PROSA EN VOZ DEL AUTOR</span>
+<div class="problema" style="margin-bottom:1rem;">Hay una pegatina que resume con inquietante precisión el estado de la fe cristiana en nuestro tiempo: "Los cristianos no son perfectos. Solo han sido perdonados." Parece humilde. Es devastadora. Porque lo que dice implícitamente es esto: ser cristiano no tiene nada que ver con el tipo de persona que eres.</div>
+<div class="problema" style="margin-bottom:1rem;">Piénsalo un momento. Si el único resultado seguro de la fe es el perdón de los pecados —la limpieza del registro para poder entrar al cielo cuando se muera— entonces toda la vida que transcurre entre la conversión y la muerte queda por fuera del proyecto. Dios se ocupa de tu destino eterno. Del resto te ocupas tú, como puedas. La fe es un seguro de vida, no una relación transformadora.</div>
+<div class="problema" style="margin-bottom:1rem;">Esta es la "teología de código de barras". El lector escanea tu credencial de fe —asentiste al credo correcto, pronunciaste la oración correcta, perteneces a la iglesia correcta— y automáticamente fluye el perdón. No importa quién eres, cómo tratas a las personas, qué tiene tu corazón adentro. La máquina solo lee el código. Y si la máquina solo lee el código, el resto de tu vida es irrelevante.</div>
+<div class="problema" style="margin-bottom:1rem;">La evidencia de que esto está produciendo resultados precisamente predecibles está a la vista. Según encuestas de Gallup, el 74% de los estadounidenses declara compromiso con Jesucristo. Pero sus estadísticas de conducta sin ética, fracaso familiar, adicción y crimen son prácticamente idénticas a las del resto de la población. ¿Podría esto ser "la vida en abundancia" que Jesús dijo que venía a traer? La única respuesta honesta es que el mensaje que se está predicando no tiene poder alguno sobre la vida real de las personas. No porque el evangelio sea débil. Sino porque lo que se está predicando no es el evangelio de Jesús.</div>
+<div class="problema" style="margin-bottom:1rem;">¿Cuál es ese evangelio? En la derecha teológica, el debate gira alrededor de si la "fe salvadora" requiere también la intención de obedecer a Jesús como Señor —lo que John MacArthur defiende— o si basta con creer que Cristo murió por los pecados, como sostiene Charles Ryrie. Pero lo revelador es lo que comparten: ambas partes concuerdan en que el tema de la salvación es exclusivamente el cielo después de la muerte. La pregunta que nadie formula es: ¿y la vida de ahora?</div>
+<div class="problema" style="margin-bottom:1rem;">En la izquierda, el evangelio se ha convertido en compromiso con la liberación social: Jesús murió por los oprimidos, y ser cristiano es identificarse con esa lucha. Es un impulso más noble, pero tiene el mismo problema fundamental: no transforma el carácter interior, no proporciona guía para la vida cotidiana —el trabajo, las relaciones, el dinero, la sexualidad— y termina siendo una versión religiosa del sueño americano de igualdad y libertad.</div>
+<div class="problema" style="margin-bottom:1rem;">Lo que comparten la derecha y la izquierda es la ausencia de Jesús como maestro. Como alguien de quien se aprende a vivir. Como la persona más competente en el tema de la existencia humana que haya pisado este planeta. En cambio, para todo lo demás —el amor, el dinero, la sexualidad, la carrera— acudimos a los expertos de turno. Para las finanzas, Wall Street. Para el amor, las revistas. Para el carácter, los seminarios de liderazgo. Para el cosmos, Carl Sagan. Jesús puede encargarse del cielo. La vida real la manejamos nosotros.</div>
+<div class="problema" style="margin-bottom:1rem;"><strong>El resultado es el elefante en la habitación de la Iglesia:</strong> no estamos produciendo discípulos. Estamos produciendo personas que creen cosas sobre Jesús pero que no aprenden de Él. Y un sistema diseñado para producir un resultado produce exactamente ese resultado. El experto en administración tiene razón: tu sistema está perfectamente diseñado para rendir lo que está rindiendo.</div>
+<div class="problema" style="margin-bottom:1rem;"><strong>La pregunta que todo predicador debería hacerse cada semana es esta:</strong> ¿el evangelio que predico tiene la tendencia natural de convertir a quienes lo creen en aprendices de Jesús? ¿O los confirma en la idea de que ya tienen todo lo que necesitan, y que el resto es opcional?</div>
+<span class="eyebrow">BULLETS DE IMPACTO</span>
+<div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Abraham fue declarado justo por Dios porque creyó que Dios interactuaría con su vida presente —un hijo, una tierra, un futuro concreto— no porque creyera en una teoría de la propiciación. La fe bíblica siempre fue confianza en Dios para la vida de ahora.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Una reconocida revista cristiana estadounidense admitió que los casos de fracaso moral de líderes evangélicos son tan frecuentes que han tenido que establecer criterios para decidir cuáles merecen cobertura y cuáles no.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">"La vida eterna" en la única definición que Jesús dio es: "Que te conozcan a ti, el único Dios verdadero, y a Jesucristo." Conocer, en el idioma bíblico, no significa saber sobre: significa relación íntima e interactiva. La vida eterna no comienza al morir. Es el tipo de relación que puede comenzar hoy.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El obispo Stephen Neill lo dijo sin ambigüedad: "Ser cristiano significa ser como Jesucristo." Bajo ese estándar, las estadísticas de fracaso moral entre creyentes profesos no son una anomalía. Son la consecuencia natural de predicar un evangelio que no exige ni produce ninguna semejanza con Cristo.</div></div>
+</div>
+</div>
+<span class="eyebrow">DATO CLAVE:</span>
+<div class="problema" style="margin-bottom:1rem;">El Sermón del Monte —las enseñanzas más influyentes de Jesús sobre cómo vivir— casi nunca se predica como unidad coherente ni como guía práctica para la vida. Peter Wagner, uno de los líderes más conocidos del movimiento de crecimiento de iglesias, admitió que en treinta años como cristiano no podía recordar un solo sermón sobre el Reino de Dios.</div>
+<span class="eyebrow">REFLEXIÓN:</span>
+<div class="problema" style="margin-bottom:1rem;">El mensaje que describes cuando alguien te pregunta qué es el evangelio cristiano, ¿tiene la tendencia natural de hacer que quien lo cree quiera aprender a vivir como vivió Jesús? ¿O les confirma que ya tienen lo que necesitan y que el resto es opcional?</div>
+<span class="eyebrow">PRÁCTICA:</span>
+<div class="problema" style="margin-bottom:1rem;">Esta semana, en una conversación con alguien que te pregunte sobre la fe, describe el evangelio sin usar las palabras "perdón", "cielo" ni "muerte". Habla solo del Reino de Dios como realidad presente y de Jesús como Maestro de vida. Nota la incomodidad —y lo que ella revela sobre tu propio entendimiento.</div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap1')" class="btn-nav btn-regresar">← Capítulo 1 · La Vida En Oscuridad, La Invitación Al Reino</button>
+      <button onclick="irA('cap3')" class="btn-nav btn-siguiente">Capítulo 3 · Lo Que Sabía Jesús: Nuestro Mundo Bañado En Dios →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">La Divina Conspiración · Dallas Willard</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 2 · Los Evangelios Para Lidiar Con El Pecado</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div id="cap3" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">La Divina Conspiración · Dallas Willard</div>
+      <div class="libro-header-paso">Capítulo 3 · Lo Que Sabía Jesús: Nuestro Mundo Bañado En Dios</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>10 min</span></div>
+    <div class="body fuente-m">
+      
+<div class="filtro-header"><div class="filtro-label">Capítulo 3 · Lo Que Sabía Jesús: Nuestro Mundo Bañado En Dios</div><div class="filtro-title">La realidad que Jesús veía cuando miraba lo que tú y yo miramos sin ver</div></div>
+<span class="eyebrow">Lo Que Sabía Jesús: Nuestro Mundo Bañado En Dios</span>
+<div class="problema" style="margin-bottom:1rem;">La realidad que Jesús veía cuando miraba lo que tú y yo miramos sin ver</div>
+<span class="eyebrow">IDEA CENTRAL</span>
+<div class="problema" style="margin-bottom:1rem;">El mundo en que vivimos no es un sistema cerrado de materia y energía; es un cosmos radicalmente permeable a Dios, bañado en su presencia, cargado de su gloria, y Jesús lo sabía con una nitidez que sus enseñanzas reflejan en cada página.</div>
+<span class="eyebrow">PROSA EN VOZ DEL AUTOR</span>
+<div class="problema" style="margin-bottom:1rem;">Antes de poder entender nada de lo que enseñó Jesús, necesito entender cómo veía Él el mundo en que vivía. Porque sus palabras no venían de un sistema teológico abstracto. Venían de una percepción directa de la realidad. Y esa realidad, para Él, era fundamentalmente distinta a la que perciben la mayoría de los seres humanos de nuestro tiempo.</div>
+<div class="problema" style="margin-bottom:1rem;">Para Jesús, este mundo está bañado en Dios. No salpicado ocasionalmente, no visitado de vez en cuando por intervenciones sobrenaturales. Bañado. Permeado. Lleno. "Llena está toda la tierra de su gloria", decía el profeta, y Jesús lo sabía no como doctrina sino como experiencia cotidiana. Cada árbol, cada pez, cada tormenta, cada persona que se cruzaba en su camino existía dentro del movimiento continuo de la voluntad de Dios.</div>
+<div class="problema" style="margin-bottom:1rem;">Pensar en Dios adecuadamente es el punto de partida de todo. Y la mayoría de nosotros tenemos imágenes de Dios que lo hacen pequeño, lejano, aburrido o amenazante. El Dios de muchos cristianos profesos es una especie de juez eterno que tolera al mundo hasta que pueda eliminar los daños. No es de extrañar que nadie quiera pasar la eternidad con Él.</div>
+<div class="problema" style="margin-bottom:1rem;">El Dios que Jesús conocía y reveló es radicalmente diferente. Es el ser más gozoso del universo. Su existencia es una experiencia ininterrumpida de todo lo que es bueno, verdadero y bello. Las playas que nos dejan sin palabras, las nebulosas fotografiadas por el telescopio Hubble, los pimpollos abriéndose al amanecer, la risa de un niño: todo eso que a nosotros nos produce un instante de deleite que se acaba demasiado pronto, Dios lo experimenta en plenitud infinita, permanentemente, desde todos los ángulos posibles al mismo tiempo. Cuando Jesús dijo que su gozo estaba en sus discípulos y quería que ese gozo fuera completo en ellos, no era hipérbole devocional. Era una descripción del tipo de vida que quería transmitirles.</div>
+<div class="problema" style="margin-bottom:1rem;">Este Dios gozoso y creativo está presente en el mundo de una manera que las ciencias materiales no pueden captar pero que la experiencia humana percibe constantemente, aunque no sepa nombrarla. Vladimir Nabokov —no exactamente un teólogo— describió un momento en que su personaje descubrió de repente "la ternura del mundo", el "bendito vínculo entre toda la creación" y entendió que el mundo no es una secuencia predadora de sucesos al azar sino "la dicha que brilla serena, la benéfica trepidación, un regalo que se nos ha dado y no llegamos a apreciar". Eso es lo que Jesús veía todo el tiempo.</div>
+<div class="problema" style="margin-bottom:1rem;"><strong>Ahora bien:</strong> si eso es lo que Jesús veía, y si Él era la "fotografía exacta" de la naturaleza de Dios, como lo describe el autor de Hebreos, entonces sus enseñanzas no son leyes impuestas desde afuera sobre un mundo hostil. Son descripciones de cómo funciona la realidad desde adentro. El Sermón del Monte no es un código de conducta para los dispuestos a sacrificarse. Es un manual de la realidad para los que quieren ver el mundo como realmente es.</div>
+<div class="problema" style="margin-bottom:1rem;">El problema con nuestra época es que ha elegido deliberadamente no ver. El "dogma tácito" de las élites intelectuales occidentales — que el cosmos es solo partículas y progreso, que la única realidad es la material, que el sentido no existe — ha sido transmitido sin debate ni justificación a través de generaciones, por las universidades, los medios, la cultura pop. No es que hayamos examinado la cosmovisión cristiana y la hayamos encontrado insuficiente. Es que la hemos dado por superada sin jamás haberla mirado de frente.</div>
+<div class="problema" style="margin-bottom:1rem;">Jesús quería recuperar esa mirada. Devolvernos los ojos. Por eso, antes de enseñarnos cómo vivir, nos invitó a ver dónde vivimos: en la casa del Padre, en un universo que no es un sistema cerrado sino una comunidad de amor infinito y totalmente competente, permeado en cada átomo por la presencia de Alguien que nos conoce, nos valora y tiene poder para actuar con nosotros si se lo permitimos.</div>
+<span class="eyebrow">BULLETS DE IMPACTO</span>
+<div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Jesús era completamente competente en su entorno histórico. Nazaret, en su época, era parte de una Palestina cosmopolita que interactuaba con todo el mundo romano. El muchachito que a los doce años dejó sin habla a los maestros del templo no vivía en una aldea primitiva. Vivía en una sociedad tan rica culturalmente como hoy podría ser Israel en la escena internacional.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">La frase "el que me ha visto a mí ha visto al Padre" no es una afirmación teológica abstracta. Es una invitación directa: observa cómo era Jesús —su carácter, su gozo, su amor, su inteligencia— y sabrás cómo es Dios. El Dios que Jesús mostró no era distante, aburrido ni amenazante. Era generoso, inteligente, desbordante de vida.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Pensar en Dios como un ser moroso, miserable, frustrado o al acecho es incompatible con haber visto a Jesús. Una de las características más notorias de su personalidad fue precisamente la abundancia de gozo. Las personas no huían de Él. Lo buscaban en multitudes.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El cosmos no es un sistema cerrado. Huston Smith lo dijo: "Así como la ciencia encontró que la potencia del sol está encerrada en el átomo, la religión proclama que la gloria de lo eterno se refleja en los elementos más simples del tiempo." Cada momento ordinario es potencialmente transparente a lo divino.</div></div>
+</div>
+</div>
+<span class="eyebrow">DATO CLAVE:</span>
+<div class="problema" style="margin-bottom:1rem;">La palabra "conocer" en la Biblia nunca significa conocimiento intelectual. Significa relación íntima, interactiva y personal. "La vida eterna es que te conozcan a ti, el único Dios verdadero" no es una descripción de un estado teológico. Es la descripción de una relación que puede comenzar hoy y que se profundiza para siempre.</div>
+<span class="eyebrow">REFLEXIÓN:</span>
+<div class="problema" style="margin-bottom:1rem;">Si creyeras con la misma certeza con que crees en la ley de gravedad que Dios está presente y activo en este momento en tu vida — en tu trabajo, en tu casa, en tus conversaciones de hoy — ¿qué cambiaría en cómo actúas las próximas dos horas?</div>
+<span class="eyebrow">PRÁCTICA:</span>
+<div class="problema" style="margin-bottom:1rem;">Esta semana, elige un lugar ordinario que visites habitualmente — el bus, la cocina de tu casa, la entrada de tu trabajo — y al llegar allí, practica la percepción consciente de la presencia de Dios en ese espacio. No con palabras ni con oración elaborada. Solo con la pregunta interna: "¿Qué está haciendo Dios aquí ahora mismo?" Mantén esa pregunta mientras estás allí.</div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap2')" class="btn-nav btn-regresar">← Capítulo 2 · Los Evangelios Para Lidiar Con El Pecado</button>
+      <button onclick="irA('cap4')" class="btn-nav btn-siguiente">Capítulo 4 · ¿Y A Quién Le Va Realmente Bien? Las Bienaventuranzas Como Proclamación →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">La Divina Conspiración · Dallas Willard</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 3 · Lo Que Sabía Jesús: Nuestro Mundo Bañado En Dios</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div id="cap4" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">La Divina Conspiración · Dallas Willard</div>
+      <div class="libro-header-paso">Capítulo 4 · ¿Y A Quién Le Va Realmente Bien? Las Bienaventuranzas Como Proclamación</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>10 min</span></div>
+    <div class="body fuente-m">
+      
+<div class="filtro-header"><div class="filtro-label">Capítulo 4 · ¿Y A Quién Le Va Realmente Bien? Las Bienaventuranzas Como Proclamación</div><div class="filtro-title">Las bienaventuranzas no son una lista de requisitos: son un anuncio de que nadie está más allá del alcance del Reino</div></div>
+<span class="eyebrow">¿Y A Quién Le Va Realmente Bien? Las Bienaventuranzas Como Proclamación</span>
+<div class="problema" style="margin-bottom:1rem;"><strong>Las bienaventuranzas no son una lista de requisitos:</strong> son un anuncio de que nadie está más allá del alcance del Reino</div>
+<span class="eyebrow">IDEA CENTRAL</span>
+<div class="problema" style="margin-bottom:1rem;">Las bienaventuranzas no son condiciones que hay que cumplir para merecer la bendición de Dios, sino proclamaciones de que el Reino está disponible incluso para los que el mundo considera causas perdidas — y eso cambia todo.</div>
+<span class="eyebrow">PROSA EN VOZ DEL AUTOR</span>
+<div class="problema" style="margin-bottom:1rem;">Hay pocas enseñanzas que hayan causado más daño bien intencionado que las bienaventuranzas mal interpretadas. Un hombre que dejó la Iglesia me lo dijo con franqueza: "Me dicen que el cristiano ideal es el pobre, el triste, el débil, el manso. Yo no soy así. Jamás podré serlo." Y se fue. No fue un rebelde. Fue alguien que recibió el mensaje con toda honestidad y sacó la conclusión lógica.</div>
+<div class="problema" style="margin-bottom:1rem;">Esa conclusión era incorrecta, pero el error no era suyo. Era de quienes habían convertido las bienaventuranzas en una nueva ley moral: una lista de condiciones que hay que cumplir —o al menos admirar y aspirar— para estar en el lado correcto de Dios. Bajo esa lectura, ser "pobre de espíritu" es una virtud que uno debe cultivar. Estar de luto es la postura apropiada del creyente. La mansedumbre es el modelo del cristiano. Y si no encajas en esa descripción, estás fuera.</div>
+<div class="problema" style="margin-bottom:1rem;">Pero eso no es lo que Jesús estaba haciendo. Para entenderlo, hay que volver a la escena: Jesús acaba de sanar multitudes. La gente llega rota, desesperada, sin credenciales religiosas, sin poder social, sin nada que los "califique" para el favor de Dios. Y Él los toca. Los sana. Los acepta. Y luego se sienta frente a esa misma muchedumbre y dice: "Bienaventurados los pobres de espíritu, porque de ellos es el reino de los cielos."</div>
+<div class="problema" style="margin-bottom:1rem;">No está diciendo "qué bueno es ser espiritualmente pobre". No está diseñando un modelo de santidad mística. Está señalando a la gente que tiene delante y declarando que el gobierno de Dios desde los cielos ha descendido sobre ellos en su estado actual, sin que tuvieran que cambiar ni calificarse. La bienaventuranza no es el resultado de la pobreza espiritual. Es el resultado del contacto con Jesús, que ocurre en medio de la pobreza espiritual.</div>
+<div class="problema" style="margin-bottom:1rem;"><strong>Es el mismo giro que produce el buen samaritano:</strong> rompe la suposición general de quién tiene la vida eterna. El sacerdote y el levita pasaron de largo. El despreciado samaritano se detuvo. No porque la Ley lo mandara — de hecho, la Ley religiosa podría haberle dado argumentos para seguir caminando — sino porque su corazón lo movió. Y Jesús cierra la historia con una pregunta que invierte todo: no "¿quién es mi prójimo?" sino "¿de quién soy prójimo yo?" La definición de prójimo no está en la categoría del otro sino en la condición del corazón propio.</div>
+<div class="problema" style="margin-bottom:1rem;">Las bienaventuranzas funcionan igual. No son radiografías de los que merecen el Reino. Son proclamaciones de que el Reino llega a los que menos lo esperan. Los pobres de espíritu, los que lloran, los mansos, los perseguidos, los que arden de justicia — ninguno de ellos está en esa lista por ser modelos de virtud. Están porque el toque de Dios los encontró allí, en su quebranto, en su necesidad, en su desesperanza.</div>
+<div class="problema" style="margin-bottom:1rem;">Y eso abre el Reino a todos. Absolutamente a todos. Al chico de la calle y al CEO. Al adicto y al moralista agotado. Al que fracasó como padre y al que triunfó en los negocios pero se siente vacío. La única condición no es ninguna condición humana: es el toque de Jesús. Y ese toque busca activamente a los que el sistema religioso había descartado.</div>
+<div class="problema" style="margin-bottom:1rem;">"Los que son escupidos, los oprimidos, los vapuleados", cantó Paul Simon. Y Jesús habría dicho: exactamente. También para ellos. Especialmente para ellos.</div>
+<span class="eyebrow">BULLETS DE IMPACTO</span>
+<div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">La pobreza espiritual no es en sí misma algo bueno. Jesús no la celebra por su mérito. La menciona porque el Reino llega también allí, a pesar de ella — lo que es infinitamente más poderoso que cualquier sistema de méritos.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">La palabra griega "makarios" —traducida como "bienaventurado"— era el término que los griegos usaban para describir el tipo de existencia dichosa de los dioses. Jesús la aplica a los más rotos de entre los humanos. Es la inversión más radical de la historia del pensamiento.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El "buen samaritano" era un oxímoron para sus oyentes: tan imposible como decir hoy "el buen terrorista" o "el buen narcotraficante." Jesús lo eligió deliberadamente para mostrar que el favor de Dios no sigue las líneas que trazamos nosotros.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El método de enseñanza de Jesús no buscaba llenar mentes de información. Buscaba cambiar vidas. Por eso usaba el método de "mostrar y contar": señalaba a personas concretas que tenía delante y declaraba sobre ellas lo que Dios estaba haciendo. Aprendizaje sin apuntes, porque lo que marca la vida se recuerda sin esfuerzo.</div></div>
+</div>
+</div>
+<span class="eyebrow">DATO CLAVE:</span>
+<div class="problema" style="margin-bottom:1rem;">Las bienaventuranzas no son una lista completa ni exclusiva de quiénes entran al Reino. Son ilustraciones de la disponibilidad universal del Reino — casos extremos que demuestran que si el gobierno de Dios llega incluso allí, no hay lugar donde no pueda llegar.</div>
+<span class="eyebrow">REFLEXIÓN:</span>
+<div class="problema" style="margin-bottom:1rem;">Si las bienaventuranzas son proclamaciones de la disponibilidad del Reino para los que el mundo ha descartado, ¿quién en tu entorno próximo estás tú descartando como "más allá del alcance" de Dios? ¿Y qué dice eso sobre tu visión del Reino?</div>
+<span class="eyebrow">PRÁCTICA:</span>
+<div class="problema" style="margin-bottom:1rem;">Esta semana, identifica a una persona en tu entorno que el mundo —o tu propia evaluación interior— tiende a ver como "causa perdida" o fuera del radar de Dios. Acércate a ella con una sola pregunta genuina: ¿cómo estás? Sin agenda. Solo presencia. Eso es practicar el Evangelio de las bienaventuranzas.</div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap3')" class="btn-nav btn-regresar">← Capítulo 3 · Lo Que Sabía Jesús: Nuestro Mundo Bañado En Dios</button>
+      <button onclick="irA('cap5')" class="btn-nav btn-siguiente">Capítulo 5 · La Rectitud Del Corazón Del Reino: Más Allá De La Bondad De Los Escribas →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">La Divina Conspiración · Dallas Willard</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 4 · ¿Y A Quién Le Va Realmente Bien? Las Bienaventuranzas Como Proclamación</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div id="cap5" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">La Divina Conspiración · Dallas Willard</div>
+      <div class="libro-header-paso">Capítulo 5 · La Rectitud Del Corazón Del Reino: Más Allá De La Bondad De Los Escribas</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>10 min</span></div>
+    <div class="body fuente-m">
+      
+<div class="filtro-header"><div class="filtro-label">Capítulo 5 · La Rectitud Del Corazón Del Reino: Más Allá De La Bondad De Los Escribas</div><div class="filtro-title">La ley controla las acciones. Solo el corazón transformado produce la vida que la ley intenta describir</div></div>
+<span class="eyebrow">La Rectitud Del Corazón Del Reino: Más Allá De La Bondad De Los Escribas</span>
+<div class="problema" style="margin-bottom:1rem;">La ley controla las acciones. Solo el corazón transformado produce la vida que la ley intenta describir</div>
+<span class="eyebrow">IDEA CENTRAL</span>
+<div class="problema" style="margin-bottom:1rem;">La justicia del Reino no es un conjunto de conductas correctas sino un tipo de ser interior — el corazón transformado por el amor de Dios — del cual fluyen naturalmente las acciones correctas, sin esfuerzo y sin posibilidad de manipulación.</div>
+<span class="eyebrow">PROSA EN VOZ DEL AUTOR</span>
+<div class="problema" style="margin-bottom:1rem;">Hay un error que los seres humanos cometemos una y otra vez al intentar ser buenos: confundimos el fruto con el árbol. Tomamos la lista de conductas que un árbol sano produce y la clavamos en las ramas de un árbol enfermo esperando que eso lo sane. El manzano no da manzanas porque les atamos manzanas a las ramas. Da manzanas porque es un manzano. Y la persona buena no hace buenas acciones porque sigue una lista de reglas. Las hace porque es buena.</div>
+<div class="problema" style="margin-bottom:1rem;">Jesús lo sabía mejor que nadie. Por eso, cuando trata el tema de la moralidad humana en el Sermón del Monte, no comienza con una lista de conductas prohibidas. Se sumerge directamente en las entrañas de la existencia humana: la ira, el desprecio, la lujuria, el divorcio, la manipulación verbal, la venganza. Las mismas cosas que aparecen en las telenovelas y en las noticias. Y las trata desde adentro hacia afuera, desde el corazón hacia la acción.</div>
+<div class="problema" style="margin-bottom:1rem;">La ira no es solo una mala conducta. Es una condición del ser. Y cuando la albergas y la alimentas, no necesita expresarse para hacer daño. Es venenosa por su mera existencia. Con solo estar presente en ti, marchita las relaciones, contamina las conversaciones, cierra las puertas del Reino. El asesino de veinte y tantos años que dispara en su lugar de trabajo no actuó así por un impulso del momento. Llevaba meses o años alimentando una ira que esperaba su ocasión.</div>
+<div class="problema" style="margin-bottom:1rem;">El desprecio es peor todavía. La ira quiere lastimar. El desprecio ni siquiera se toma la molestia: el otro simplemente no vale la pena. Y el desprecio es el lubricante de todos los grandes crímenes humanos: los genocidios, la esclavitud, el abuso, el bullying en el patio de la escuela. No empieza con el crimen. Empieza con el gesto, con la mirada, con la palabra que excluye.</div>
+<div class="problema" style="margin-bottom:1rem;">Cuando Jesús dice "yo os digo que cualquiera que se enoje con su hermano será culpable ante el tribunal", no está endureciendo la ley. Está desnudando su raíz. La ley dice "no matarás." Él dice: el asesinato comienza mucho antes de la acción. Comienza en el momento en que decides alimentar la ira en lugar de soltarla. La conducta externa es el síntoma final de una enfermedad que lleva mucho tiempo instalada.</div>
+<div class="problema" style="margin-bottom:1rem;">Lo mismo con la lujuria. El problema no es la atracción sexual, que es natural y buena. El problema es el cultivo deliberado del deseo: mirar a alguien con el propósito de desearlo, usar la imaginación para repetir y amplificar una fantasía, construir un mundo interior de posesión del otro que no respeta su dignidad ni su persona. Eso no le sucede a la persona. Lo elige. Y cuando se vuelve hábito, remodela el alma hasta que la intimidad real —la única experiencia sexual que produce gozo verdadero— se vuelve imposible.</div>
+<div class="problema" style="margin-bottom:1rem;">Por eso Jesús no nos da leyes más estrictas. Nos muestra seis contrastes entre la vieja justicia —que controla la conducta— y la justicia del Reino —que transforma el corazón—. La vieja justicia dice: no mates. La justicia del Reino dice: vive sin ira ni desprecio hacia nadie. La vieja justicia dice: no cometas adulterio. La justicia del Reino dice: no cultives la lujuria. La vieja justicia dice: da carta de divorcio. La justicia del Reino dice: construye un corazón que ame permanentemente. La vieja justicia dice: cumple tus juramentos. La justicia del Reino dice: que tu sí sea sí y tu no sea no, sin necesidad de fórmulas que manipulen.</div>
+<div class="problema" style="margin-bottom:1rem;">Y el propósito de todo esto no es darte una lista más difícil de cumplir. Es mostrarte que el árbol bueno da buen fruto de manera natural. Cuando alguien vive verdaderamente desde el amor de Dios, no tiene que decidir si va a enojarse o no. Sencillamente, no se enoja de esa manera destructiva. No tiene que decidir si va a cultivar la lujuria. Tiene otras cosas que llenan su imaginación. No tiene que decidir si va a manipular verbalmente. La verdad fluye de él con naturalidad.</div>
+<div class="problema" style="margin-bottom:1rem;">El fariseo intenta pegar duraznos en un manzano. Jesús ofrece convertirte en un durazno.</div>
+<span class="eyebrow">BULLETS DE IMPACTO</span>
+<div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El término griego "dikaiosune" —que aparece como "justicia" o "rectitud" en el Sermón del Monte— es exactamente el mismo que usó Platón en "La República" para describir la condición interior del alma que produce una vida verdaderamente buena. Jesús tomó el concepto más sofisticado de la ética griega y lo completó con la dinámica del amor de Dios.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">La ira alimentada siempre contiene un elemento de ego herido: la sensación de ser superior a quien nos ofendió, de tener razón, de merecer más. Por eso se puede cargar durante años. Ese elemento de superioridad es precisamente lo que la hace tan destructiva y tan difícil de soltar.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">En Estados Unidos hay unos 25.000 asesinatos por año, y casi ninguno ocurre sin un largo período previo de ira albergada y alimentada. El asesinato es el síntoma terminal de una enfermedad que comenzó con una decisión pequeña: alimentar el enojo en lugar de soltarlo.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Cortar la raíz de la ira equivale a marchitar el árbol de la maldad humana. Por eso Pablo no da una ley elaborada sobre la ira. Simplemente dice: "Desechad la ira." Es la instrucción más corta y más revolucionaria del Nuevo Testamento en materia de moralidad práctica.</div></div>
+</div>
+</div>
+<span class="eyebrow">DATO CLAVE:</span>
+<div class="problema" style="margin-bottom:1rem;">El Sermón del Monte no es una serie de dichos independientes ensamblados por editores desconocidos. Es un discurso unificado con una progresión lógica precisa: bienestar → bondad del corazón → advertencias sobre la reputación → advertencias sobre la riqueza → comunidad de amor. Cada parte presupone las anteriores. Tomarlo en pedazos es como intentar descifrar una sinfonía tocando solo la última nota.</div>
+<span class="eyebrow">REFLEXIÓN:</span>
+<div class="problema" style="margin-bottom:1rem;">Piensa en una persona con quien tengas irritación o distancia. ¿Hay en esa incomodidad algún elemento de desprecio — la sensación de que esa persona simplemente no está a tu altura o no vale tu atención completa? ¿Y cuánto de ese desprecio está alimentando en ti algo que no reconocerías como desprecio?</div>
+<span class="eyebrow">PRÁCTICA:</span>
+<div class="problema" style="margin-bottom:1rem;">Elige a alguien con quien tengas una tensión no resuelta. No hables con esa persona todavía. Primero, pasa cinco minutos escribiendo lo que valoras genuinamente de ella — sus luchas, sus logros, su humanidad. Luego nota si algo en ti se mueve. Ese movimiento es el comienzo de la dikaiosune del Reino.</div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap4')" class="btn-nav btn-regresar">← Capítulo 4 · ¿Y A Quién Le Va Realmente Bien? Las Bienaventuranzas Como Proclamación</button>
+      <button onclick="irA('cap6')" class="btn-nav btn-siguiente">Capítulo 6 · Invertir En Los Cielos: Escapemos A Los Engaños De La Reputación Y La Riqueza →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">La Divina Conspiración · Dallas Willard</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 5 · La Rectitud Del Corazón Del Reino: Más Allá De La Bondad De Los Escribas</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div id="cap6" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">La Divina Conspiración · Dallas Willard</div>
+      <div class="libro-header-paso">Capítulo 6 · Invertir En Los Cielos: Escapemos A Los Engaños De La Reputación Y La Riqueza</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>10 min</span></div>
+    <div class="body fuente-m">
+      
+<div class="filtro-header"><div class="filtro-label">Capítulo 6 · Invertir En Los Cielos: Escapemos A Los Engaños De La Reputación Y La Riqueza</div><div class="filtro-title">Los dos anzuelos que sacan a las personas del pulso del Reino sin que lo noten</div></div>
+<span class="eyebrow">Invertir En Los Cielos: Escapemos A Los Engaños De La Reputación Y La Riqueza</span>
+<div class="problema" style="margin-bottom:1rem;">Los dos anzuelos que sacan a las personas del pulso del Reino sin que lo noten</div>
+<span class="eyebrow">IDEA CENTRAL</span>
+<div class="problema" style="margin-bottom:1rem;">El deseo de ser vistos como devotos y el deseo de seguridad material son las dos fuerzas que más sistemáticamente desconectan a las personas del fluir real del Reino de Dios, convirtiendo su vida espiritual en teatro y su confianza en una ilusión.</div>
+<span class="eyebrow">PROSA EN VOZ DEL AUTOR</span>
+<div class="problema" style="margin-bottom:1rem;">Hay dos tentaciones que Jesús identifica como las más peligrosas para los que intentan vivir en el Reino — y son peligrosas precisamente porque parecen formas de avanzar en lugar de formas de retroceder. La primera es el deseo de ser reconocidos como personas devotas. La segunda es la dependencia de la riqueza material para sentirse seguros. Ambas te sacan del pulso del Reino sin que lo notes, porque ambas parecen perfectamente razonables.</div>
+<div class="problema" style="margin-bottom:1rem;">El que da limosna con fanfarria no se siente hipócrita. Se siente generoso. El que hace ostentación de su oración no se percibe como actor. Se percibe como devoto. El que acumula riqueza no se experimenta como desconfiado de Dios. Se experimenta como responsable. Y eso es exactamente lo que los hace tan letales para el alma.</div>
+<div class="problema" style="margin-bottom:1rem;">Cuando hacemos cualquier cosa buena — dar, orar, ayunar, servir — con el ojo puesto en lo que otros pensarán, nos salimos del plano en que Dios actúa. Porque Dios actúa en el nivel del corazón, en lo que Jesús llama "lo secreto." Y cuando la motivación es la mirada ajena, el corazón ya no está en ese nivel. Está en el teatro. Y en el teatro, Dios cortésmente se hace a un lado. No por orgullo divino herido, sino porque el teatro es precisamente el ámbito de la competencia humana, y ahí no es donde Él opera.</div>
+<div class="problema" style="margin-bottom:1rem;"><strong>El principio es devastadoramente simple:</strong> ya tienen su recompensa. Si oré para impresionar a los que me rodeaban, los impresioné. Eso es todo lo que hay. La cuenta está pagada y cerrada. No hay nada más que esperar del Padre que ve en lo secreto, porque nunca fue el Padre a quien me dirigí.</div>
+<div class="problema" style="margin-bottom:1rem;">Los puritanos norteamericanos lo entendieron y vivían de una manera que Os Guinness describió con una sola frase: "Ante una audiencia de uno solo." Su único público era Dios. Y la libertad que eso produce es extraordinaria. Cuando ya no necesitas la aprobación humana, puedes servir a los seres humanos con un amor que antes era imposible. Porque ya no los necesitas. Y cuando no los necesitas, puedes darles lo que de verdad necesitan en lugar de lo que a ti te haría quedar bien.</div>
+<div class="problema" style="margin-bottom:1rem;">La trampa del dinero funciona de manera igualmente silenciosa. Jesús no dice que el dinero sea malo. Dice que no se puede servir a dos señores a la vez. El corazón tiene una sola dirección suprema, y esa dirección determina cómo se ve todo lo demás. Si tu tesoro está en la tierra, tu corazón está en la tierra. Y cuando el corazón está en la tierra, el ojo del alma se distorsiona: todo lo que existe es visto en relación con su capacidad de producir o proteger lo que atesoras. La vida se vuelve un sistema de extracción permanente.</div>
+<div class="problema" style="margin-bottom:1rem;">Pero cuando tu tesoro está en el Reino — cuando lo que más valoras es tu relación con Dios, el bien de las personas a tu alrededor, la participación en lo que Dios está haciendo en el mundo — entonces el ojo está sano. Lo que ves es lo que realmente es. Y desde ese lugar, puedes usar el dinero, la reputación y cualquier recurso material sin ser usado por ellos.</div>
+<div class="problema" style="margin-bottom:1rem;">Los pájaros no acumulan tesoros en la tierra. No ahorran para el invierno. Reciben cada día lo que necesitan para ese día. Y son la ilustración más cotidiana del Padre que provee. Jesús lo dice con una ironía suave: "¿No valen ustedes más que los pájaros?" Y la respuesta implícita es: entonces tienen el mismo Padre proveyendo para ellos, pero con una abundancia mayor. La ansiedad sobre el mañana no es humildad. Es desconfianza enmascarada de responsabilidad.</div>
+<span class="eyebrow">BULLETS DE IMPACTO</span>
+<div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">"Tu Padre que ve en lo secreto te recompensará." Dios no responde a nuestras actuaciones públicas. Responde a nuestras intenciones reales. La persona que da sin saber que está dando algo especial, que ora sin preocuparse por cómo suena, que ayuna sin que nadie lo sepa — esa es la persona que experimenta el poder del Reino multiplicado en su vida.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Clyde Reid, observador de la vida de la iglesia, formuló su "ley de la evasión religiosa": las iglesias tienden a estructurarse de modo que sus miembros puedan escudarse de Dios y protegerse de la experiencia religiosa genuina. La respetabilidad religiosa puede ser la forma más sofisticada de huir de Dios mientras parecemos buscarle.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El anuncio de un edificio lleva el nombre del donante. El mantenimiento del mismo edificio no lo lleva. Por eso es incomparablemente más fácil conseguir fondos para lo primero. El principio de la trompeta sigue operando en formas que solo requieren una lectura cuidadosa para descubrirse.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">"En el mundo tendrán tribulación." Jesús no promete que vivir en el Reino te protegerá del sufrimiento del mundo. Promete algo mejor: que el sufrimiento no tendrá la última palabra, porque Él ya venció al mundo. El discipulado no es un seguro contra el dolor. Es una ancla dentro de él.</div></div>
+</div>
+</div>
+<span class="eyebrow">DATO CLAVE:</span>
+<div class="problema" style="margin-bottom:1rem;">"Atesora" lo que proteges, conservas y pones en el centro de tus decisiones. Para descubrir cuál es tu tesoro real, no preguntes qué valoras — pregunta por qué cosas te angustias cuando están en riesgo. Esa angustia te revela lo que realmente atesoras.</div>
+<span class="eyebrow">REFLEXIÓN:</span>
+<div class="problema" style="margin-bottom:1rem;">¿Hay alguna práctica espiritual en tu vida — dar, orar, servir, asistir, publicar en redes sobre tu fe — que en parte realizas porque te hace sentir bien ante los demás o ante ti mismo? No para producir culpa, sino para ver con claridad: ¿qué porcentaje de tu vida espiritual está dirigido a una audiencia de uno?</div>
+<span class="eyebrow">PRÁCTICA:</span>
+<div class="problema" style="margin-bottom:1rem;">Esta semana, haz una buena acción que absolutamente nadie sepa que hiciste. No lo cuentes después. No lo registres. No lo recuerdes como logro. Solo hazla. Y nota lo que ocurre en tu interior cuando el único testigo es Dios.</div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap5')" class="btn-nav btn-regresar">← Capítulo 5 · La Rectitud Del Corazón Del Reino: Más Allá De La Bondad De Los Escribas</button>
+      <button onclick="irA('cap7')" class="btn-nav btn-siguiente">Capítulo 7 · La Comunidad Del Amor En Oración Y Adoración →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">La Divina Conspiración · Dallas Willard</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 6 · Invertir En Los Cielos: Escapemos A Los Engaños De La Reputación Y La Riqueza</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div id="cap7" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">La Divina Conspiración · Dallas Willard</div>
+      <div class="libro-header-paso">Capítulo 7 · La Comunidad Del Amor En Oración Y Adoración</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>10 min</span></div>
+    <div class="body fuente-m">
+      
+<div class="filtro-header"><div class="filtro-label">Capítulo 7 · La Comunidad Del Amor En Oración Y Adoración</div><div class="filtro-title">La oración no es técnica: es la vida de una relación con Alguien que realmente actúa en el mundo</div></div>
+<span class="eyebrow">La Comunidad Del Amor En Oración Y Adoración</span>
+<div class="problema" style="margin-bottom:1rem;"><strong>La oración no es técnica:</strong> es la vida de una relación con Alguien que realmente actúa en el mundo</div>
+<span class="eyebrow">IDEA CENTRAL</span>
+<div class="problema" style="margin-bottom:1rem;">La oración no es una práctica religiosa ni una disciplina de autoayuda espiritual — es la expresión natural de una relación con el Dios más real del universo, y cuando fluye desde el amor genuino en comunidad, mueve realidades que nada más puede mover.</div>
+<span class="eyebrow">PROSA EN VOZ DEL AUTOR</span>
+<div class="problema" style="margin-bottom:1rem;"><strong>Hay una pregunta que la mayoría de las personas nunca se hace en serio:</strong> ¿realmente creo que Dios actúa cuando oro? No si "la oración me hace sentir mejor" o si "me conecta con algo superior". Sino esto: ¿Hay alguien allí que escucha, que se mueve, que responde con poder real en el mundo real? Porque si la respuesta es sí, entonces la oración es lo más práctico que existe. Y si la respuesta es no, entonces toda la piedad es teatro.</div>
+<div class="problema" style="margin-bottom:1rem;">El mundo en que vivimos trata la oración con condescendencia amable. La ciencia la tolera como ritual psicológico. La cultura secular la respeta como práctica personal que no debería afectar nada importante. Y una parte de la Iglesia ha cedido a esa presión, reduciendo la oración a ejercicio de introspección o gestión emocional. Pero Jesús oró como quien habla con alguien real. Oró antes de decisiones importantes. Oró cuando su alma estaba al límite en Getsemaní, sudando sangre. Oró en público y en privado. Y enseñó a sus discípulos a orar con la misma certeza con que les enseñó a comer.</div>
+<div class="problema" style="margin-bottom:1rem;">El Padrenuestro no es un poema litúrgico. Es un mapa de cómo funciona la relación con Dios en términos reales. Comienza con la identidad del que ora: "Padre nuestro que estás en los cielos." No "Fuerza cósmica" ni "Universo". Padre. Una persona. Y una persona que está en los cielos — en el centro del poder y la realidad, no en los márgenes del cosmos. Esa sola afirmación reorganiza el universo entero.</div>
+<div class="problema" style="margin-bottom:1rem;"><strong>Luego viene la orientación:</strong> "Santificado sea tu nombre, venga tu reino, hágase tu voluntad." Antes de pedir nada para mí, me alineo con lo que Él quiere. No estoy usando a Dios como dispensador de favores personales. Estoy entrando en un proyecto que es suyo, que comenzó antes que yo y seguirá después de mí. Mi lugar en ese proyecto es lo que da sentido a todo lo demás, incluyendo lo que pido después.</div>
+<div class="problema" style="margin-bottom:1rem;">La comunidad que ora unida no es un club de apoyo mutuo con vocabulario religioso. Es un ejército espiritual con acceso real al Comandante. Las primeras comunidades de discípulos lo entendían así. En Hechos 4, cuando Pedro y Juan son amenazados por las autoridades, el grupo no se reúne para planear estrategias. Se reúne para orar. Y la respuesta es física: el lugar donde estaban reunidos se sacude. No es metáfora. Es la descripción de alguien que estuvo allí y tomó nota.</div>
+<div class="problema" style="margin-bottom:1rem;">La adoración completa la oración porque añade lo que la petición sola no puede dar: el sentido de proporción. Cuando adoro a Dios, recuerdo quién es Él y quién soy yo. Y en esa perspectiva, los problemas que me parecían insolubles encuentran su lugar real. No desaparecen, pero se vuelven manejables. Porque ahora sé quién está a cargo. Y sé que no soy yo.</div>
+<div class="problema" style="margin-bottom:1rem;"><strong>Frank Laubach lo practicó con rigor científico:</strong> dedicar un segundo por minuto a volver el pensamiento a Dios. El resultado en cuatro semanas fue una transformación de la calidad de su trabajo y sus relaciones que él mismo describió como "glorioso e incomprensible." No necesitó cambiar de trabajo ni de ciudad. Necesitó cambiar el centro de gravedad de su atención.</div>
+<div class="problema" style="margin-bottom:1rem;">El amor es la condición que hace que la oración funcione con mayor potencia. No el amor como sentimiento, sino como orientación estable del ser hacia el bien del otro. Cuando oro desde el amor, no estoy usando a Dios. Estoy respondiendo a quien ya me amó primero, y esa respuesta tiene el peso de una relación real.</div>
+<span class="eyebrow">BULLETS DE IMPACTO</span>
+<div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Los estudios del doctor Randolph Byrd en el Hospital General de San Francisco demostraron que los pacientes cardíacos por quienes se oró tenían significativamente menos complicaciones que el grupo de control. El estudio cumplió todos los estándares de una investigación médica doble ciego y fue publicado en el Southern Medical Journal. La oración tiene efectos documentables en el mundo físico.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">C. S. Lewis observó que la objeción de que "Dios ya sabe lo que necesitas antes de que lo pidas, entonces para qué orar" equivale a preguntar "¿para qué hablarle a tu padre si él ya sabe cómo estás?" La respuesta es: porque eso es lo que hace una relación.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Martín Lutero oraba entre dos y tres horas diarias. Cuando alguien le preguntó cómo podía darse ese lujo con todo su trabajo, respondió: "Tengo tanto trabajo hoy que necesito tres horas de oración en lugar de dos."</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">La adoración no es un estado de ánimo. Es el acto de atribuirle a Dios el valor que le corresponde. Y ese acto reorganiza toda la jerarquía de valores en la persona que lo practica.</div></div>
+</div>
+</div>
+<span class="eyebrow">DATO CLAVE:</span>
+<div class="problema" style="margin-bottom:1rem;">El Padrenuestro no es una oración para repetir como fórmula mágica. Es un modelo de las dimensiones que debe cubrir toda oración real: relación, orientación hacia el Reino, provisión cotidiana, perdón recíproco, protección espiritual, y afirmación del señorío de Dios. Usarlo como plantilla transforma la calidad de toda comunicación con Dios.</div>
+<span class="eyebrow">REFLEXIÓN:</span>
+<div class="problema" style="margin-bottom:1rem;">Si tuvieras la certeza absoluta de que Dios escucha y actúa en respuesta a tus oraciones, ¿qué pedirías que no estás pidiendo ahora? Y si no lo estás pidiendo, ¿qué te dice eso sobre el nivel real de tu confianza en Él?</div>
+<span class="eyebrow">PRÁCTICA:</span>
+<div class="problema" style="margin-bottom:1rem;">Esta semana, elige una situación concreta en tu vida — una relación tensa, una decisión pendiente, una necesidad real — y ora por ella cada día con esta estructura: primero, adora a Dios por algo específico de su carácter; segundo, alinéate con su voluntad aunque no la entiendas; tercero, pide con precisión. Nota qué cambia en ti hacia el final de la semana.</div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap6')" class="btn-nav btn-regresar">← Capítulo 6 · Invertir En Los Cielos: Escapemos A Los Engaños De La Reputación Y La Riqueza</button>
+      <button onclick="irA('cap8')" class="btn-nav btn-siguiente">Capítulo 8 · Ser Discípulo De Jesús Hoy: La Gran Omisión →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">La Divina Conspiración · Dallas Willard</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 7 · La Comunidad Del Amor En Oración Y Adoración</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div id="cap8" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">La Divina Conspiración · Dallas Willard</div>
+      <div class="libro-header-paso">Capítulo 8 · Ser Discípulo De Jesús Hoy: La Gran Omisión</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>10 min</span></div>
+    <div class="body fuente-m">
+      
+<div class="filtro-header"><div class="filtro-label">Capítulo 8 · Ser Discípulo De Jesús Hoy: La Gran Omisión</div><div class="filtro-title">La Iglesia ha cumplido la Gran Comisión haciendo convertidos. Ha fallado en hacer discípulos.</div></div>
+<span class="eyebrow">Ser Discípulo De Jesús Hoy: La Gran Omisión</span>
+<div class="problema" style="margin-bottom:1rem;">La Iglesia ha cumplido la Gran Comisión haciendo convertidos. Ha fallado en hacer discípulos.</div>
+<span class="eyebrow">IDEA CENTRAL</span>
+<div class="problema" style="margin-bottom:1rem;">El discipulado no es un nivel avanzado del cristianismo reservado para los más comprometidos — es la única forma de ser cristiano que Jesús definió, y su ausencia masiva en las iglesias de hoy es el elefante en la habitación que nadie nombra.</div>
+<span class="eyebrow">PROSA EN VOZ DEL AUTOR</span>
+<div class="problema" style="margin-bottom:1rem;">Existe un elefante en la habitación de la Iglesia contemporánea que todos ven y nadie menciona: la ausencia de discípulos. Tenemos iglesias llenas de personas que creen en Jesús — o creen que creen — pero que no están aprendiendo de Él cómo vivir. Profesan su fe en los servicios del domingo, quizás den dinero, quizás sirvan en comités. Pero de lunes a sábado, sus decisiones, sus relaciones, su manejo del dinero, su sexualidad, su trato a los enemigos son prácticamente indistinguibles de los de sus vecinos que no pisan una iglesia.</div>
+<div class="problema" style="margin-bottom:1rem;">Y nadie parece considerar esto como un problema fundamental. Se acepta como la normalidad. "Los cristianos no son perfectos" nos recuerdan los stickers. "Solo perdonados." Como si la transformación del carácter fuera una opción adicional para los especialmente devotos, no la promesa central del Evangelio.</div>
+<div class="problema" style="margin-bottom:1rem;">¿Qué es un discípulo? La palabra griega mathetes significa "aprendiz." Alguien que aprende de un maestro no solo información sino una manera de vivir. Los discípulos de Jesús no eran personas que habían asentido a un credo. Eran personas que habían decidido estar con Él para aprender a ser como Él. Que habían organizado su vida alrededor de esa decisión.</div>
+<div class="problema" style="margin-bottom:1rem;">Hoy, esa decisión es separada artificialmente de la "salvación." Se dice: puedes confiar en Jesús como Salvador sin seguirlo como Señor. Puedes tener el perdón sin el discipulado. Puedes ser cristiano sin ser aprendiz. Pero esto es una contradicción que el Nuevo Testamento nunca contempla. La Gran Comisión no dice "vayan y hagan creyentes." Dice: "Vayan y hagan discípulos." El objetivo siempre fue la transformación, no solo la conversión.</div>
+<div class="problema" style="margin-bottom:1rem;">El modelo de la vida de Pablo es revelador. Cuando escribe a las iglesias, no solo corrige doctrina. Describe un estilo de vida. Le dice a los corintios "Sed imitadores de mí, como también yo lo soy de Cristo." A los filipenses: "Lo que habéis aprendido y recibido y oído y visto en mí, esto practicad." Hay una cadena de transmisión: Jesús → Pablo → los que aprendieron de Pablo. Y se supone que esa cadena continúa hasta hoy.</div>
+<div class="problema" style="margin-bottom:1rem;">Pero la cadena se rompió. No de golpe. Fue un proceso histórico gradual en el que Jesús el Maestro fue reemplazado por Jesús el Salvador — una figura que se necesita para el cielo pero que no es relevante para la vida presente. Y cuando el Maestro desaparece, el discipulado desaparece con Él. Y cuando el discipulado desaparece, queda solo la religiosidad externa: las asistencias, los credos, los rituales, los comités.</div>
+<div class="problema" style="margin-bottom:1rem;">La solución no es otro programa. No es un nuevo curso de cinco semanas con cuadernillo de trabajo. La solución es la intención radical de hacer exactamente lo que Jesús mandó: enseñar a las personas a hacer todo lo que Él enseñó. No a saber todo lo que Él enseñó. A hacer todo lo que Él enseñó. Hay una diferencia abismal entre ambas cosas.</div>
+<div class="problema" style="margin-bottom:1rem;">El hermano Lorenzo, un monje del siglo XVII que pelaba papas en una cocina monástica, vivió este discipulado de manera tan completa que sus cartas y conversaciones siguen siendo leídas tres siglos después. Entendió que pelar papas para la gloria de Dios y predicar ante miles son el mismo acto si ambos fluyen del mismo corazón. No hay actividades sagradas y actividades seculares. Hay personas que llevan a Dios consigo y personas que no.</div>
+<span class="eyebrow">BULLETS DE IMPACTO</span>
+<div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El término "cristiano" aparece tres veces en el Nuevo Testamento. El término "discípulo" aparece más de 260 veces. La proporción dice todo sobre cuál fue el énfasis real de Jesús.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">William Law, el gran maestro espiritual del siglo XVIII, lo articuló con precisión lapidaria: la persona que no considera que su trabajo diario es parte de su vida religiosa aún no ha comenzado a entender la religión. El trabajo no está separado de la devoción. Es el lugar donde la devoción se prueba.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Os Guinness describe el principio del "auditorio de uno": el cristiano que ha entendido el discipulado actúa ante la mirada de Dios solamente, y esa libertad de la aprobación humana lo hace capaz de un servicio que ninguna motivación externa puede producir.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El hecho de que la palabra "discípulo" desaparezca después del libro de los Hechos en el Nuevo Testamento no significa que el concepto desaparece. Significa que ya estaba tan integrado que no necesitaba nombrarse. Toda la ética epistolar de Pablo es formación de discípulos, aunque no use la palabra.</div></div>
+</div>
+</div>
+<span class="eyebrow">DATO CLAVE — LA GRAN OMISIÓN:</span>
+<div class="problema" style="margin-bottom:1rem;"><strong>"enseñándoles a guardar todo lo que os he mandado" (Mateo 28:</strong>20). No solo a creer. No solo a bautizarse. A guardar todo. El estándar es explícito y total, y es exactamente lo que la Iglesia contemporánea ha dejado de intentar producir.</div>
+<span class="eyebrow">REFLEXIÓN:</span>
+<div class="problema" style="margin-bottom:1rem;">Si alguien que te conoce bien — en el trabajo, en casa, en las situaciones de presión — tuviera que describir cómo vives, ¿encontraría evidencia de que estás aprendiendo de Jesús cómo existir? No si eres "buen cristiano" en términos religiosos, sino si tu manera cotidiana de tratar a las personas, manejar el dinero, responder al conflicto y vivir el trabajo refleja a alguien que tiene a Jesús como Maestro activo.</div>
+<span class="eyebrow">PRÁCTICA:</span>
+<div class="problema" style="margin-bottom:1rem;">Esta semana, identifica un área específica de tu vida donde operas completamente con tus propios recursos — sin preguntar qué haría Jesús, sin llevarlo contigo de ninguna manera real. Puede ser el trabajo, las finanzas, las redes sociales, las conversaciones difíciles. Elige esa área e intenta conscientemente llevar a Jesús a ella durante siete días. No como regla nueva, sino como compañero activo.</div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap7')" class="btn-nav btn-regresar">← Capítulo 7 · La Comunidad Del Amor En Oración Y Adoración</button>
+      <button onclick="irA('cap9')" class="btn-nav btn-siguiente">Capítulo 9 · Currículo Del Que Busca Parecerse A Cristo →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">La Divina Conspiración · Dallas Willard</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 8 · Ser Discípulo De Jesús Hoy: La Gran Omisión</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div id="cap9" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">La Divina Conspiración · Dallas Willard</div>
+      <div class="libro-header-paso">Capítulo 9 · Currículo Del Que Busca Parecerse A Cristo</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>10 min</span></div>
+    <div class="body fuente-m">
+      
+<div class="filtro-header"><div class="filtro-label">Capítulo 9 · Currículo Del Que Busca Parecerse A Cristo</div><div class="filtro-title">No basta querer ser como Jesús: hay que entrenarse para serlo, igual que cualquier maestro entrena a sus aprendices</div></div>
+<span class="eyebrow">Currículo Del Que Busca Parecerse A Cristo</span>
+<div class="problema" style="margin-bottom:1rem;"><strong>No basta querer ser como Jesús:</strong> hay que entrenarse para serlo, igual que cualquier maestro entrena a sus aprendices</div>
+<span class="eyebrow">IDEA CENTRAL</span>
+<div class="problema" style="margin-bottom:1rem;">La transformación del carácter a semejanza de Cristo no ocurre por esfuerzo moral ni por acumulación de información teológica — ocurre a través de un entrenamiento intencional del cuerpo y la mente que convierte los hábitos del alma, con la cooperación del Espíritu Santo y la práctica de disciplinas espirituales específicas.</div>
+<span class="eyebrow">PROSA EN VOZ DEL AUTOR</span>
+<div class="problema" style="margin-bottom:1rem;"><strong>Imagina un cartel en la puerta de una iglesia que dijera:</strong> "Aquí enseñamos a todos los que se comprometen seriamente con Jesús a hacer todo lo que Él mandó." Si hubieras leído los evangelios esa mañana, pensarías: "Claro, eso es exactamente lo que dijo el fundador de la Iglesia." Pero lo segundo que pensarías es que esa iglesia es muy extraña. ¿Cuándo fue la última vez que un grupo de creyentes se reunió para planear cómo enseñarles a sus miembros a bendecir a los que los escupen? ¿A vivir sin lujuria ni codicia? ¿A liberarse de la ira de manera real y no solo momentánea?</div>
+<div class="problema" style="margin-bottom:1rem;">La respuesta es casi nunca. Y no es por maldad ni por hipocresía consciente. Es porque hemos perdido la conexión entre la fe y el entrenamiento. Hemos aceptado que la información basta. Que saber es suficiente. Pero no lo es.</div>
+<div class="problema" style="margin-bottom:1rem;">El gran error de la educación cristiana moderna es confundir conocimiento con creencia, y creencia con transformación. Un estudiante universitario puede escribir un excelente ensayo sobre la ética kantiana y al mismo tiempo tratar a sus compañeros con crueldad sistemática. Saber las respuestas correctas y vivir según ellas son cosas radicalmente distintas. Y la Iglesia ha caído en la trampa académica: produce personas que conocen las respuestas correctas sobre Jesús pero que no han integrado esas respuestas a su ser real.</div>
+<div class="problema" style="margin-bottom:1rem;">Lo que se necesita es entrenamiento — en el sentido técnico de la palabra. Cuando enseñas a nadar a alguien, no le explicas la teoría del agua. Lo metes al agua. Lo acompañas. Lo dejas que el cuerpo aprenda lo que la mente no puede aprender sola. Lo mismo aplica al discipulado. No puedes aprender a bendecir a quien te escupe leyendo un libro sobre bendecir a quien te escupe. Lo aprendes cuando alguien te escupe y tienes los recursos interiores para responder de una manera diferente.</div>
+<div class="problema" style="margin-bottom:1rem;">Esos recursos interiores se forman a través de lo que la tradición cristiana llama disciplinas espirituales. No son prácticas mágicas ni rituales religiosos. Son actividades que, realizadas con intención y constancia, transforman los hábitos del cuerpo y la mente de manera que lo que antes era imposible se vuelve natural. El atleta que entrena no piensa en los movimientos durante el partido — los ejecuta. El músico que practica no cuenta los dedos durante el concierto — toca. El discípulo que se disciplina no decide en el momento de la presión si va a actuar como Jesús — actúa.</div>
+<div class="problema" style="margin-bottom:1rem;"><strong>El "triángulo de oro" del crecimiento espiritual tiene tres vértices:</strong> la acción del Espíritu Santo, la respuesta a las pruebas cotidianas, y la práctica de disciplinas espirituales intencionales. Ninguno de los tres puede funcionar sin los otros dos. Solo el Espíritu no transforma el carácter sin la cooperación del discípulo. Solo el esfuerzo humano sin el Espíritu produce fariseos. Y las disciplinas sin las pruebas cotidianas quedan como gimnasia espiritual desconectada de la vida real.</div>
+<div class="problema" style="margin-bottom:1rem;"><strong>Las cuatro disciplinas fundamentales que Willard propone como base son:</strong> soledad y silencio — para romper los hábitos automáticos de respuesta que gobiernan la mayor parte de nuestras acciones; estudio — para integrar el orden del Reino en la estructura de la mente y los sentimientos; y adoración — para imprimir en el ser completo la magnificencia de Dios como punto de referencia supremo.</div>
+<div class="problema" style="margin-bottom:1rem;">La soledad y el silencio merecen atención especial porque van en contra de todo lo que la cultura contemporánea valora. Pascal lo dijo hace siglos con escalofriante precisión: "toda la infelicidad del ser humano surge de una sola cosa: la incapacidad de permanecer callado en su propia habitación." No porque el silencio sea virtuoso en sí mismo. Sino porque es el único espacio donde los hábitos epidérmicos — esas respuestas automáticas de ira, desprecio, lujuria, ansiedad — pueden ser vistos con claridad suficiente para ser reemplazados. En el ruido constante de la vida moderna, esas respuestas nunca tienen que rendir cuentas. En el silencio, se muestran tal como son.</div>
+<div class="problema" style="margin-bottom:1rem;">Los dos objetivos del curso de imitación de Cristo son simples y totales: llevar al discípulo a amar a Dios con todo su ser, y liberar al discípulo del poder de sus respuestas automáticas contra el Reino. Todo lo demás —la conducta correcta, la doctrina sana, la experiencia espiritual genuina— viene como consecuencia natural de esos dos objetivos, no como camino hacia ellos.</div>
+<span class="eyebrow">BULLETS DE IMPACTO</span>
+<div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Los hábitos de ira, lujuria y desprecio no son fuerzas cósmicas invencibles. Son rutinas corporales — respuestas automáticas que se desarrollan con el tiempo y se pueden cambiar con el tiempo. Pablo los llama "pecado que habita en mí", no "necesidad metafísica." La diferencia es crucial: lo que se puede nombrar como hábito, se puede cambiar como hábito.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El programa de los Doce Pasos de Alcohólicos Anónimos no fue inventado por AA. Es una aplicación del principio universal de la transformación humana: la mente directa no tiene poder sobre los hábitos profundos; solo el entrenamiento sostenido que trabaja a través del cuerpo puede cambiar lo que está enraizado en el cuerpo.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">"Separados de mí nada podéis hacer." Pero si no hacemos nada, eso también lo hacemos sin Él. La gracia y el esfuerzo no son opuestos. Son socios. Dios no llevará pesas para fortalecer mis músculos. Pero es Él quien hace que el entrenamiento produzca fruto.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Juan Calvino resumió la vida cristiana en una sola frase en el capítulo VII del Libro III de sus Instituciones: "Autonegación." No negación de la autoestima. Negación del yo como centro supremo del universo. Es la misma idea que Willard, expresada con el rigor de la Reforma.</div></div>
+</div>
+</div>
+<span class="eyebrow">DATO CLAVE:</span>
+<div class="problema" style="margin-bottom:1rem;">El Salmo 16 describe la mecánica de la vida espiritual transformada en una sola imagen: "Al Señor he puesto continuamente delante de mí." No ocasionalmente. No en momentos de crisis. Continuamente. Esa orientación continua de la mente es el corazón de las disciplinas espirituales — y el resultado es que el corazón se alegra y el alma se regocija, no como sentimiento buscado sino como consecuencia natural de vivir con el foco correcto.</div>
+<span class="eyebrow">REFLEXIÓN:</span>
+<div class="problema" style="margin-bottom:1rem;">Si te preguntaran qué plan tienes para aprender a hacer lo que Jesús enseñó — no para saber lo que enseñó sino para hacerlo de manera natural y constante — ¿qué responderías? ¿Tienes un plan? ¿O estás esperando que la transformación ocurra sola, por acumulación de exposición religiosa?</div>
+<span class="eyebrow">PRÁCTICA:</span>
+<div class="problema" style="margin-bottom:1rem;">Diseña esta semana tu primer "triángulo de oro" personal. Escribe tres cosas: (1) una disciplina de abstinencia que practicarás esta semana (silencio de 20 minutos diarios, ayuno de una comida, desconexión de redes sociales por las mañanas); (2) una disciplina de compromiso (lectura meditativa de un pasaje específico cada día); (3) la prueba cotidiana en la que decides recibir el Reino en lugar de resistirlo. Ese es tu currículo por siete días.</div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap8')" class="btn-nav btn-regresar">← Capítulo 8 · Ser Discípulo De Jesús Hoy: La Gran Omisión</button>
+      <button onclick="irA('cap10')" class="btn-nav btn-siguiente">Capítulo 10 · La Restauración De Todas Las Cosas: El Futuro Que Da Sentido Al Presente →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">La Divina Conspiración · Dallas Willard</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 9 · Currículo Del Que Busca Parecerse A Cristo</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div id="cap10" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">La Divina Conspiración · Dallas Willard</div>
+      <div class="libro-header-paso">Capítulo 10 · La Restauración De Todas Las Cosas: El Futuro Que Da Sentido Al Presente</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>10 min</span></div>
+    <div class="body fuente-m">
+      
+<div class="filtro-header"><div class="filtro-label">Capítulo 10 · La Restauración De Todas Las Cosas: El Futuro Que Da Sentido Al Presente</div><div class="filtro-title">El cielo no es un estado de ánimo eterno: es el comienzo de una vida creativa y activa en un cosmos ampliado bajo el gobierno de Dios</div></div>
+<span class="eyebrow">La Restauración De Todas Las Cosas: El Futuro Que Da Sentido Al Presente</span>
+<div class="problema" style="margin-bottom:1rem;"><strong>El cielo no es un estado de ánimo eterno:</strong> es el comienzo de una vida creativa y activa en un cosmos ampliado bajo el gobierno de Dios</div>
+<span class="eyebrow">IDEA CENTRAL</span>
+<div class="problema" style="margin-bottom:1rem;">El futuro que Dios prepara para los seres humanos no es el descanso pasivo de almas flotantes sino la expansión de la vida activa, creativa y gobernante que comenzamos a ejercer aquí — y esa visión del futuro es lo que da urgencia y seriedad a la formación del carácter en el presente.</div>
+<span class="eyebrow">PROSA EN VOZ DEL AUTOR</span>
+<div class="problema" style="margin-bottom:1rem;">Uno de los daños más profundos que ha sufrido el Evangelio cristiano es la imagen del cielo. No porque sea mentira, sino porque es tan pobre, tan pasiva, tan aburrida que nadie que piense seriamente puede desearla con toda el alma. "Flotar en nubes, tocar el arpa por la eternidad." O en versiones más sofisticadas: "Una contemplación perpetua de la gloria divina." Es decir: nada que hacer, para siempre.</div>
+<div class="problema" style="margin-bottom:1rem;">Si esa fuera la realidad del destino humano, sería comprensible que personas inteligentes prefirieran la nada a eso.</div>
+<div class="problema" style="margin-bottom:1rem;">Pero no es lo que enseñó Jesús. Ni lo que describe el resto de las Escrituras. El horizonte del Evangelio del Reino es radicalmente diferente — y radicalmente más desafiante.</div>
+<div class="problema" style="margin-bottom:1rem;"><strong>"Bien hecho, siervo bueno y fiel:</strong> has sido fiel en lo poco, te pondré sobre lo mucho." Esas palabras no describen una jubilación celestial. Describen una promoción. Una expansión de responsabilidad. Una confianza mayor otorgada en proporción al carácter formado aquí. El siervo que fue fiel con una ciudad gobernará diez ciudades. El que fue fiel con diez talentos recibirá más. La imagen es consistente: el futuro es más vida, más creatividad, más gobierno, más responsabilidad, más participación en la obra de Dios — no menos.</div>
+<div class="problema" style="margin-bottom:1rem;">La creación misma, con sus diez mil millones de galaxias y sus cien mil millones de millardos de planetas, no es el escenario accidental de una historia pequeña. Es la casa del Padre con muchas moradas — el marco de una existencia que apenas comienza aquí y que se despliega para siempre en una creatividad y una capacidad que hoy apenas podemos imaginar. George MacDonald lo vio con ojos de poeta: "¿Y si Dios nos da la capacidad de hacer como Él, de iluminar con lunas, de vestir con verde, de colgar dorados atardeceres sobre un mar rosado y púrpura?"</div>
+<div class="problema" style="margin-bottom:1rem;">Esta visión del futuro tiene consecuencias inmediatas para el presente. Si el carácter que formo hoy es el que llevaré a ese futuro eterno, entonces cada decisión moral importa infinitamente más de lo que parece. No porque Dios sea un contable de méritos, sino porque el ser que me estoy convirtiendo es el ser que entrará en ese futuro. La persona que cultiva el desprecio se está convirtiendo en alguien incapaz de gobernar con amor. La persona que practica la gratitud y la generosidad se está convirtiendo en alguien apto para la confianza que Dios quiere depositar.</div>
+<div class="problema" style="margin-bottom:1rem;">Pasar por la muerte, en la perspectiva de Jesús, no es perder el mundo sino verlo por primera vez tal como realmente es. Pablo lo dice con precisión: "Ahora vemos por espejo, oscuramente; entonces veremos cara a cara. Ahora conozco en parte; pero entonces conoceré como fui conocido." La muerte no es el fin de la conciencia — es la liberación de sus distorsiones presentes. Los que aman a Dios no experimentarán la muerte como los demás la experimentan. Para ellos, en la imagen de Jesús, es como Lázaro que es llevado por los ángeles al seno de Abraham. No se arrojan al vacío. Son recibidos.</div>
+<div class="problema" style="margin-bottom:1rem;">Y el destino final no es el descanso de los santos en la beatífica contemplación estática, hermosa como suena esa imagen. Es el shalom en su sentido más pleno: plenitud, completitud, creatividad reposada pero activa, en una búsqueda cooperativa de todo el cosmos que se aproxima continuamente pero nunca alcanza la ilimitada bondad y grandeza de Dios. Es decir: una aventura sin fin, con la mejor compañía posible, con los mejores recursos posibles, hacia los mejores horizontes posibles.</div>
+<div class="problema" style="margin-bottom:1rem;">San Agustín, llegando al final de La ciudad de Dios, lo expresó con palabras que merecen ser memorizadas: "Allá descansaremos y veremos, veremos y amaremos, amaremos y alabaremos. Es lo que seremos en el final sin final. Porque ¿qué otro final nos proponemos, más que el de entrar en el reino que no tiene fin?"</div>
+<span class="eyebrow">BULLETS DE IMPACTO</span>
+<div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">La existencia humana continuará después de la muerte no principalmente porque nosotros lo merezcamos sino porque Dios ha hecho una inversión enorme en cada persona humana y no tiene ninguna intención de desperdiciarla. "Debido a la angustia de su alma, Él lo verá y quedará satisfecho" (Isaías 53:11). Nuestra supervivencia es, en el sentido más profundo, para beneficio de Dios.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El envejecimiento, visto desde el Reino, no es declinación sino preparación. A medida que el cuerpo físico se apaga, el cuerpo espiritual —el "cuerpo de gloria" del que habla Pablo— se profundiza. George MacDonald lo describe como "el arbusto chamuscado, por el fuego incorruptible, interior de la vida."</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Pregunta práctica para evaluar la preparación para el futuro eterno: Si te dieran hoy poder para gobernar una ciudad, ¿cómo resultarían las cosas? La respuesta honesta a esa pregunta revela el nivel real de tu formación en el carácter del Reino.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">"Nada hay oculto que no sea revelado." Toda la transparencia total del mundo de Dios —donde todos sabrán todo de todos— no es amenaza sino liberación para quien vive desde la verdad. Y es exactamente lo contrario para quien vive desde el engaño.</div></div>
+</div>
+</div>
+<span class="eyebrow">DATO CLAVE:</span>
+<div class="problema" style="margin-bottom:1rem;">El universo físico no es el fin del escenario. Es el comienzo. Con diez mil millones de galaxias y una cantidad de planetas que supera la capacidad humana de comprensión, el cosmos es el marco de una obra que comenzará a desplegarse cuando la presente fase de entrenamiento y formación haya producido personas dignas de confiarse con responsabilidades mayores.</div>
+<span class="eyebrow">REFLEXIÓN:</span>
+<div class="problema" style="margin-bottom:1rem;">Si tu existencia continúa para siempre y el carácter que formas hoy es el carácter con el que entrarás a ese futuro, ¿en qué tipo de persona te estás convirtiendo? No en términos de logros religiosos externos, sino en la calidad interior de tu amor, tu generosidad, tu capacidad de confiar en Dios en la oscuridad: ¿hay crecimiento real?</div>
+<span class="eyebrow">PRÁCTICA:</span>
+<div class="problema" style="margin-bottom:1rem;">Hoy, toma una decisión pequeña y completamente invisible para todos — una acción de generosidad, paciencia o amor que nadie notará ni sabrá. Hazla sabiendo que ese acto pequeño es parte de la formación del ser que llevarás a la eternidad. No hay acto pequeño en el Reino. Solo hay actos que el mundo ve y actos que solo Dios ve — y los segundos son los que más importan.</div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap9')" class="btn-nav btn-regresar">← Capítulo 9 · Currículo Del Que Busca Parecerse A Cristo</button>
+      <button onclick="irA('evaluacion')" class="btn-nav btn-siguiente">Curaduría de la Información →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">La Divina Conspiración · Dallas Willard</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 10 · La Restauración De Todas Las Cosas: El Futuro Que Da Sentido Al Presente</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div id="evaluacion" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">La Divina Conspiración · Dallas Willard</div>
+      <div class="libro-header-paso">Curaduría de la Información</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>8 min</span></div>
+    <div class="body fuente-m">
+      
+<div class="filtro-header"><div class="filtro-label">Curaduría de la Información</div><div class="filtro-title">Evaluación rigurosa de los fundamentos del libro</div></div>
+<div class="problema" style="margin-bottom:1rem;">Evaluación rigurosa de los fundamentos teológicos, filosóficos, científicos y experienciales del libro en su totalidad</div>
+<span class="eyebrow">CONCEPTO 1: El Reino de Dios como realidad presente y accesible</span>
+<div class="problema" style="margin-bottom:1rem;"><strong>Fiabilidad:</strong> 9/10  |  Aplicabilidad: 10/10</div>
+<div class="problema" style="margin-bottom:1rem;">El argumento de Willard de que el Reino de Dios es una realidad presente y no solo futura tiene respaldo sólido en el texto griego de los evangelios. El análisis del término eggiken en Marcos 1:15 como tiempo perfecto — acción completada con efecto continuo — es filológicamente correcto y está respaldado por académicos del Nuevo Testamento de primer nivel como C. H. Dodd y George Eldon Ladd, aunque con matices distintos. La tensión "ya pero todavía no" del Reino es un consenso bien establecido en la teología bíblica contemporánea. Donde Willard es especialmente fuerte es en su énfasis en la dimensión presente, que ha sido históricamente subvalorada en el evangelicalismo conservador. El único punto de debate legítimo es hasta qué punto la experiencia cotidiana del Reino puede sistematizarse como propone Willard, dado que el propio Jesús mantuvo cierta tensión irreducible entre presente y futuro escatológico.</div>
+<span class="eyebrow">CONCEPTO 2: Las bienaventuranzas como proclamación, no como condición moral</span>
+<div class="problema" style="margin-bottom:1rem;"><strong>Fiabilidad:</strong> 8/10  |  Aplicabilidad: 9/10</div>
+<div class="problema" style="margin-bottom:1rem;">La reinterpretación de Willard de las bienaventuranzas como declaraciones de disponibilidad del Reino — no como requisitos de entrada ni como ideales morales a imitar — es exegéticamente defendible y ha ganado terreno en la academia bíblica. El contexto narrativo de Mateo 5 (Jesús sanando primero, luego sentándose a enseñar a la misma multitud que acaba de sanar) sostiene la lectura de Willard. Su análisis del término griego makarios como descripción de un estado real de bienestar presente, más que una promesa futura condicionada, está bien fundamentado. La objeción legítima es que la lectura tradicional también tiene defensores serios: Robert Guelich y otros académicos argumentan que el elemento escatológico es más prominente de lo que Willard concede. Sin embargo, ambas lecturas son compatibles: la disponibilidad presente del Reino y su plenitud futura no se excluyen. La aplicabilidad es altísima precisamente porque rompe el legalismo más dañino en la práctica pastoral.</div>
+<span class="eyebrow">CONCEPTO 3: Los hábitos corporales como sede del pecado y la virtud</span>
+<div class="problema" style="margin-bottom:1rem;"><strong>Fiabilidad:</strong> 9/10  |  Aplicabilidad: 9/10</div>
+<div class="problema" style="margin-bottom:1rem;">La comprensión de Willard del pecado no como fuerza cósmica irresistible sino como hábitos encarnados — respuestas automáticas del cuerpo y su entorno social, formadas por años de práctica — tiene respaldo convergente desde fuentes muy distintas. En la tradición filosófica, es la misma intuición de Aristóteles sobre el hábito (ethos) como base del carácter en la Ética Nicomaquea. En la psicología contemporánea, coincide con la investigación sobre neuroplasticidad y formación de hábitos. En la neurociencia, con el trabajo sobre memoria procedimental y comportamiento automático. En la tradición espiritual cristiana, es la misma doctrina que sostiene Ignacio de Loyola, Benito de Nursia y los Padres del Desierto. Willard no inventa nada aquí: recupera un consenso que la Iglesia tenía y perdió. La aplicabilidad práctica es directa y verificable: el programa de los Doce Pasos, que Willard cita, es exactamente este principio aplicado a la adicción, con décadas de evidencia de efectividad.</div>
+<span class="eyebrow">CONCEPTO 4: La oración como acción eficaz en el mundo real</span>
+<div class="problema" style="margin-bottom:1rem;"><strong>Fiabilidad:</strong> 7/10  |  Aplicabilidad: 9/10</div>
+<div class="problema" style="margin-bottom:1rem;">Willard no da este tema el desarrollo técnico que merece, pero lo que afirma es sólido dentro de sus límites. La referencia al estudio del doctor Randolph Byrd sobre oración intercesora y recuperación cardíaca es real — fue publicado en el Southern Medical Journal en 1988 y cumplió estándares metodológicos serios, aunque estudios posteriores han dado resultados mixtos. El argumento filosófico sobre la oración — que si Dios es personal y actúa en la historia, la oración tiene sentido exactamente de la misma manera que la comunicación tiene sentido entre personas — es lógicamente consistente. La fiabilidad baja a 7 no por debilidad del argumento sino por la complejidad del tema: la eficacia de la oración cruza el campo de la metafísica, la epistemología y la teología de manera que Willard trata con más confianza de la que el estado del conocimiento permite. Su punto más fuerte es el argumento experiencial: el testimonio histórico de personas que oraron y vieron resultados concretos es demasiado amplio y consistente para ser ignorado sin costo epistémico real.</div>
+<span class="eyebrow">CONCEPTO 5: El futuro eterno como vida activa y creativa, no contemplación pasiva</span>
+<div class="problema" style="margin-bottom:1rem;"><strong>Fiabilidad:</strong> 8/10  |  Aplicabilidad: 8/10</div>
+<div class="problema" style="margin-bottom:1rem;">La reinterpretación de Willard de la escatología cristiana — el cielo no como estado contemplativo estático sino como expansión de actividad, creatividad y gobierno bajo Dios — tiene respaldo tanto bíblico como teológico. Las parábolas de los talentos y las minas en los evangelios son explícitamente sobre responsabilidad expandida como recompensa. La imagen de "reinar con Él" aparece en Apocalipsis, Romanos y las cartas pastorales. La crítica legítima es que Willard extrapola con mayor confianza de la que el texto bíblico autoriza en ciertos detalles — la idea de gobernar planetas específicos, por ejemplo, es especulación imaginativa más que exégesis sólida. Pero el argumento central — que el futuro de Dios para los seres humanos es más vida y más responsabilidad, no menos — está bien fundado y es más coherente con el conjunto del testimonio bíblico que la imagen popular del descanso eterno pasivo. La aplicabilidad es alta porque esta visión transforma radicalmente la actitud ante la formación del carácter presente.</div>
+<span class="eyebrow">FIABILIDAD GLOBAL: 8.2/10  |  APLICABILIDAD GLOBAL: 9/10</span>
+<span class="eyebrow">CONCEPTO FINAL INTEGRADOR: La divina conspiración es un libro de alta fiabilidad en su núcleo exegético y filosófico, con algunos pasajes donde la confianza del autor supera lo que el estado del conocimiento autoriza estrictamente. Su mayor fortaleza no es la precisión técnica sino la coherencia sistémica: cada capítulo sostiene a los demás, y el argumento global — que Jesús es el maestro más relevante para la vida real, que su Reino está disponible ahora, y que la transformación del carácter es posible mediante entrenamiento intencional — es sólido, integrado y verificable en la experiencia. Su aplicabilidad es excepcionalmente alta precisamente porque no se queda en la teoría: cada idea apunta a una práctica concreta, a una manera diferente de vivir que puede ser probada en la vida cotidiana.</span>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap10')" class="btn-nav btn-regresar">← Capítulo 10 · La Restauración De Todas Las Cosas: El Futuro Que Da Sentido Al Presente</button>
+      <button onclick="irA('comunicador')" class="btn-nav btn-siguiente">Evaluación del Autor como Comunicador →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">La Divina Conspiración · Dallas Willard</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Curaduría de la Información</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div id="comunicador" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">La Divina Conspiración · Dallas Willard</div>
+      <div class="libro-header-paso">Evaluación del Autor como Comunicador</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>7 min</span></div>
+    <div class="body fuente-m">
+      
+<div class="filtro-header"><div class="filtro-label">Evaluación del Autor como Comunicador</div><div class="filtro-title">Dallas Willard como comunicador, filósofo y formador</div></div>
+<div class="problema" style="margin-bottom:1rem;">Análisis técnico con rúbrica de 10 dimensiones</div>
+<div class="problema" style="margin-bottom:1rem;">Dimensión	Puntaje	Observación formativa</div>
+<span class="eyebrow">Tesis central	9	La tesis es clara, original y sostenida con coherencia a lo largo de las 400 páginas. Willard nunca pierde el hilo. Cada capítulo regresa al argumento central desde un ángulo diferente sin repetirse.</span>
+<div class="problema" style="margin-bottom:1rem;"><strong>Estructura narrativa	7	El libro progresa con lógica sólida:</strong> desde el diagnóstico (capítulos 1-2) hasta la cosmovisión (3), la enseñanza de Jesús (4-6), la comunidad (7), el discipulado (8-9) y el horizonte eterno (10). Sin embargo, la densidad filosófica de los capítulos medios puede perder lectores no entrenados.</div>
+<div class="problema" style="margin-bottom:1rem;">Densidad de contenido	10	Es uno de los libros más densos en ideas por página de la literatura cristiana contemporánea. Cada párrafo carga peso conceptual real. No hay relleno, no hay anécdotas decorativas sin función. La densidad es consistente de principio a fin.</div>
+<div class="problema" style="margin-bottom:1rem;">Recursos retóricos	8	Willard usa con maestría el contraste, la pregunta socrática, el ejemplo cotidiano sorpresivo y la paradoja. Su uso de la ironía es sutil pero efectivo. Lo que le falta es variedad de ritmo: el registro es casi uniformemente alto, lo que fatiga al lector en tramos largos.</div>
+<div class="problema" style="margin-bottom:1rem;">Conexión emocional	7	El libro conecta intelectualmente con gran poder, pero emocionalmente su tono es más el de un filósofo sereno que el de un pastor ardiente. Hay momentos de calor genuino — la descripción de Dios como el ser más gozoso del universo, la visión del futuro eterno — pero son oasis en un paisaje predominantemente conceptual.</div>
+<div class="problema" style="margin-bottom:1rem;">Rigor de fuentes	9	Las notas al pie son extensas, precisas y honestas. Willard cita fuentes con las que no está de acuerdo con la misma seriedad que las que apoyan su argumento. Usa filósofos, poetas, científicos, teólogos y personas ordinarias con igual naturalidad.</div>
+<div class="problema" style="margin-bottom:1rem;">Aplicabilidad	9	Cada capítulo cierra con implicaciones prácticas, aunque no siempre tan explícitas como podrían ser. El capítulo 9 sobre el currículo es el más directamente práctico del libro. En general, las ideas son suficientemente concretas para ser llevadas a la vida.</div>
+<div class="problema" style="margin-bottom:1rem;">Autenticidad	10	Willard escribe desde la experiencia vivida, no desde la academia abstracta. Sus ejemplos personales — la tarde leyendo a Juan en la lavandería, los salones del tercer piso donde aprendió a orar — tienen el peso inequívoco de lo verdadero. No hay postura ni performance en este libro.</div>
+<div class="problema" style="margin-bottom:1rem;">Manejo del lenguaje	8	El español de la traducción es cuidado y fluido. En el original inglés, Willard escribe con precisión filosófica que nunca se vuelve jerga. Sus frases son largas y articuladas, a veces demasiado — podrían haberse beneficiado de mayor variedad en la longitud sintáctica.</div>
+<div class="problema" style="margin-bottom:1rem;">Impacto formativo	10	Pocos libros del siglo XX tienen el potencial de este para reorientar completamente la comprensión de la fe cristiana. No produce información nueva: produce una reorganización profunda de lo que ya se sabe. Lectores de todas las tradiciones reportan que cambió su manera de ver la vida entera.</div>
+<span class="eyebrow">FORTALEZA DOMINANTE:</span>
+<div class="problema" style="margin-bottom:1rem;">La coherencia sistémica del argumento. Willard no tiene ideas sueltas. Cada concepto está conectado con todos los demás en una arquitectura de pensamiento que se sostiene desde el primer capítulo hasta el último. Leer el libro completo produce un efecto acumulativo que ningún capítulo aislado puede producir.</div>
+<span class="eyebrow">ÁREA DE DESARROLLO:</span>
+<div class="problema" style="margin-bottom:1rem;">La accesibilidad emocional. El libro habla al intelecto con maestría pero subestima que muchos lectores necesitan ser movidos antes de poder ser convencidos. Algunos capítulos habrían ganado enormemente con una historia humana central — un personaje real cuya vida ilustrara el argumento — en lugar de ir directo al análisis conceptual.</div>
+<span class="eyebrow">PUNTAJE TOTAL: 87 / 100</span>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('evaluacion')" class="btn-nav btn-regresar">← Curaduría de la Información</button>
+      <button onclick="irA('resumen')" class="btn-nav btn-siguiente">Resumen Final →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">La Divina Conspiración · Dallas Willard</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Evaluación del Autor como Comunicador</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div id="resumen" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">La Divina Conspiración · Dallas Willard</div>
+      <div class="libro-header-paso">Resumen Final</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>7 min</span></div>
+    <div class="body fuente-m">
+      
+<div class="filtro-header"><div class="filtro-label">Resumen Final</div><div class="filtro-title">Consolidación del libro completo</div></div>
+<span class="eyebrow">Resumen Final De Consolidación</span>
+<div class="problema" style="margin-bottom:1rem;">Lo que debe quedar vivo después de leer este libro</div>
+<span class="eyebrow">1. Idea Madre Del Libro</span>
+<div class="problema" style="margin-bottom:1rem;"><strong>Una sola oración:</strong></div>
+<div class="problema" style="margin-bottom:1rem;">Jesús no es solo el Salvador que te lleva al cielo cuando mueras — es el Maestro más inteligente que haya vivido, cuyas enseñanzas son la guía más precisa y práctica para la única vida que realmente vale la pena vivir, aquí y ahora, en el Reino de Dios disponible en este momento.</div>
+<span class="eyebrow">2. Mapa De Las Grandes Ideas</span>
+<div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El Reino de Dios es una realidad presente. No es un lugar al que irás después de morir ni una utopía social futura. Es el gobierno activo de Dios disponible ahora mismo, tan accesible como la electricidad en un cable — y tan inútil si no aprendes a conectarte.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El Evangelio que se predica no está funcionando. Tanto la derecha teológica (fe como seguro de vida para el cielo) como la izquierda (fe como compromiso con la justicia social) producen el mismo resultado: personas que creen cosas sobre Jesús pero no aprenden de Él cómo vivir. El 74% de los estadounidenses profesa fe en Cristo y sus estadísticas de conducta son idénticas a las del resto de la población. Esto no es un accidente — es el resultado predecible de lo que se predica.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Jesús es el hombre más inteligente que haya vivido. Sus enseñanzas no son poesía mística ni leyes imposibles. Son descripciones precisas de cómo funciona la realidad desde adentro — el Sermón del Monte no es un ideal inalcanzable sino un mapa de la vida que realmente funciona.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El corazón, no la conducta, es el punto de intervención. Las bienaventuranzas no son una lista de actitudes que hay que cultivar. La justicia del Reino no es obediencia a reglas externas. La transformación real ocurre desde adentro hacia afuera — del árbol al fruto, no al revés. No pegues manzanas en un manzano: conviértete en manzano.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El discipulado es la única forma real de ser cristiano. No es una opción avanzada para los especialmente comprometidos. Es la definición que Jesús usó. Y su ausencia masiva en la Iglesia contemporánea es el elefante en la habitación que nadie nombra.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">La transformación requiere entrenamiento, no solo información. Las disciplinas espirituales — soledad, silencio, estudio, adoración — no son rituales religiosos. Son el gimnasio donde el carácter se forma. Igual que el atleta entrena los movimientos que ejecuta sin pensar en el partido, el discípulo entrena las respuestas que producirá sin esfuerzo en la presión cotidiana.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El futuro lo cambia todo. El destino de los seres humanos no es la contemplación pasiva eterna. Es la expansión de vida, creatividad y gobierno bajo Dios en un cosmos ampliado. El carácter que formas hoy es el que llevarás a ese futuro — lo que convierte cada decisión moral presente en algo de peso infinito.</div></div>
+</div>
+</div>
+<span class="eyebrow">3. Lo Que Este Libro Cambia</span>
+<div class="problema" style="margin-bottom:1rem;">Este libro cambia el punto de entrada a la fe. En lugar de comenzar con el pecado y la necesidad de perdón, comienza con la realidad del Reino de Dios y la invitación a vivir en él ahora. En lugar de ver a Jesús como el agente de la salvación post mortem, lo restaura como el Maestro activo de la vida presente. Y en lugar de reducir el crecimiento espiritual a acumulación de información religiosa o correcta conducta externa, lo define como la transformación real y verificable del carácter interior — un proceso que tiene herramientas, que requiere intención, y que produce resultados que el mundo puede ver aunque no pueda explicar.</div>
+<span class="eyebrow">4. Tres Frases Que Deben Quedar Vivas</span>
+<div class="problema" style="margin-bottom:1rem;">"El sistema está perfectamente diseñado para producir los resultados que está produciendo."</div>
+<div class="problema" style="margin-bottom:1rem;">"No se puede construir el árbol colgándole frutos. Hay que convertirse en el árbol."</div>
+<div class="problema" style="margin-bottom:1rem;">"Ante una audiencia de uno solo."</div>
+<span class="eyebrow">5. Si Solo Recordara Una Cosa</span>
+<div class="problema" style="margin-bottom:1rem;"><strong>La línea más importante del libro:</strong></div>
+<div class="problema" style="margin-bottom:1rem;">El Reino de Dios no comienza cuando mueras — comienza cuando confías en Jesús como tu Maestro de vida, y cada momento de hoy es una oportunidad de vivirlo.</div>
+<span class="eyebrow">6. Aplicación Maestra</span>
+<div class="problema" style="margin-bottom:1rem;"><strong>Haz esto esta semana:</strong></div>
+<div class="problema" style="margin-bottom:1rem;">Elige hoy un área de tu vida donde operas sin Jesús — donde tus decisiones, reacciones y valores son indistinguibles de los de alguien que no lo conoce — e inicia esta semana el entrenamiento consciente de llevar el Reino a ese espacio específico, con una disciplina espiritual concreta, con la expectativa real de que algo cambiará.</div>
+<span class="eyebrow">Documento Maestro Del Curso</span>
+<span class="eyebrow">Vivir En El Reino</span>
+<div class="problema" style="margin-bottom:1rem;">Formación para la vida que realmente funciona</div>
+<div class="problema" style="margin-bottom:1rem;">Basado en La Divina Conspiración</div>
+<div class="problema" style="margin-bottom:1rem;">de Dallas Willard</div>
+<div class="problema" style="margin-bottom:1rem;">Curso de 4 semanas  |  Formato presencial o virtual</div>
+<span class="eyebrow">1. Identidad Del Curso</span>
+<div class="problema" style="margin-bottom:1rem;">Nombre del curso</div>
+<div class="problema" style="margin-bottom:1rem;"><strong>VIVIR EN EL REINO:</strong> Formación para la vida que realmente funciona</div>
+<span class="eyebrow">Tesis central</span>
+<div class="problema" style="margin-bottom:1rem;"><strong>La gran afirmación:</strong></div>
+<div class="problema" style="margin-bottom:1rem;">El Reino de Dios no es un destino futuro sino una realidad presente a la que se accede a través del discipulado real con Jesús como Maestro vivo — y esa realidad transforma el carácter, las relaciones y la vida entera de quien decide entrar en ella con intención y entrenamiento.</div>
+<div class="problema" style="margin-bottom:1rem;">Propósito formativo</div>
+<div class="problema" style="margin-bottom:1rem;">Producir en cada participante una reorientación completa de su comprensión de la fe cristiana: de una religión de gestión del pecado y garantía del cielo, a una vida de discipulado activo con Jesús como Maestro de la existencia cotidiana — con herramientas concretas, hábitos formados y experiencia verificable del Reino en la vida real.</div>
+<div class="problema" style="margin-bottom:1rem;">Dimensión formativa principal</div>
+<div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Mentalidad (primaria): Cambio de percepción sobre Jesús, el Reino, la fe y la vida cotidiana. Sin este cambio, todo lo demás es conducta forzada.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Carácter (secundaria): Identificación y reemplazo de hábitos del alma que operan contra el Reino, a través de disciplinas concretas.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Habilidad (terciaria): Capacidades prácticas específicas: orar con poder, manejar la ira, vivir sin ansiedad, bendecir a quienes lastiman.</div></div>
+</div>
+</div>
+<div class="problema" style="margin-bottom:1rem;">Modelo pedagógico</div>
+<div class="problema" style="margin-bottom:1rem;">Entender → Interiorizar → Aplicar</div>
+<div class="problema" style="margin-bottom:1rem;"><strong>Cada semana y cada sesión opera en tres movimientos:</strong> ver la realidad de una manera nueva (Entender), mover esa verdad del nivel intelectual al nivel del ser a través de disciplinas (Interiorizar), y llevar lo interiorizado a una situación concreta e inmediata de la vida real (Aplicar).</div>
+<span class="eyebrow">2. Perfil Del Alumno</span>
+<div class="problema" style="margin-bottom:1rem;">El curso está diseñado para tres tipos de personas que frecuentemente convergen en el mismo espacio:</div>
+<div class="problema" style="margin-bottom:1rem;">El creyente vaciado</div>
+<div class="problema" style="margin-bottom:1rem;">Lleva años en la fe pero siente que algo no funciona. Conoce las respuestas correctas, asiste a los servicios, incluso sirve — pero su vida interior y exterior son difícilmente distinguibles de las de alguien sin fe. No busca más información. Busca que algo cambie de verdad.</div>
+<div class="problema" style="margin-bottom:1rem;">El líder o formador frustrado</div>
+<div class="problema" style="margin-bottom:1rem;">Pastor, maestro, líder de grupos pequeños, director de ministerio. Ha intentado producir transformación real y siente que el sistema no da resultados. Sabe que algo falla estructuralmente pero no tiene el diagnóstico ni el camino alternativo.</div>
+<div class="problema" style="margin-bottom:1rem;">El buscador intelectualmente honesto</div>
+<div class="problema" style="margin-bottom:1rem;">Alguien que no puede seguir creyendo en el Jesús decorativo que le han presentado pero tampoco puede descartarlo. Necesita encontrar a Jesús como pensador serio y maestro competente antes de poder confiarle algo.</div>
+<span class="eyebrow">3. Arquitectura Maestra — Las 4 Semanas</span>
+<div class="problema" style="margin-bottom:1rem;"><strong>El curso sigue una progresión deliberada de cuatro movimientos:</strong> Ver diferente → Ser confrontado → Entrenarse → Orientarse al futuro.</div>
+<span class="eyebrow">Semana 1</span>
+<div class="problema" style="margin-bottom:1rem;">El diagnóstico y la visión</div>
+<div class="problema" style="margin-bottom:1rem;">Tesis de la semana</div>
+<div class="problema" style="margin-bottom:1rem;">El evangelio que predomina hoy no transforma el carácter ni tiene relevancia para la vida cotidiana. La solución no es más compromiso con el mismo sistema sino un cambio radical de visión sobre quién es Jesús y qué es su Reino.</div>
+<div class="problema" style="margin-bottom:1rem;">Propósito</div>
+<div class="problema" style="margin-bottom:1rem;">Producir en el alumno el deseo genuino de un evangelio diferente, al mostrarle con honestidad el fracaso del actual y la realidad del Reino como alternativa concreta.</div>
+<div class="problema" style="margin-bottom:1rem;">Cobertura del libro</div>
+<div class="problema" style="margin-bottom:1rem;">Capítulos 1, 2 y 3 de La Divina Conspiración.</div>
+<div class="problema" style="margin-bottom:1rem;">Qué entender</div>
+<div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El diagnóstico: el 74% profesa fe y las estadísticas de conducta son idénticas al resto de la población.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Los dos evangelios que no funcionan: el de la derecha (seguro de vida para el cielo) y el de la izquierda (compromiso social).</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El Reino de Dios como realidad presente, no futura: el significado de eggiken en Marcos 1:15.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El Dios que Jesús conocía: el ser más gozoso del universo, presente en cada átomo de la creación.</div></div>
+</div>
+</div>
+<div class="problema" style="margin-bottom:1rem;">Qué interiorizar</div>
+<div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">La pregunta honesta: el mensaje que predico/creo, ¿tiende naturalmente a hacer que quien lo cree quiera aprender a vivir como Jesús?</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">La práctica de percepción: elegir un objeto ordinario y pasar 5 minutos con la pregunta activa: ¿qué está haciendo Dios aquí ahora mismo?</div></div>
+</div>
+</div>
+<div class="problema" style="margin-bottom:1rem;">Qué cambiar</div>
+<div class="problema" style="margin-bottom:1rem;"><strong>La imagen de Jesús:</strong> de figura religiosa que garantiza el cielo a Maestro activo y relevante para la vida cotidiana presente.</div>
+<div class="problema" style="margin-bottom:1rem;">Aplicación de la semana</div>
+<span class="eyebrow">Práctica maestra — Semana 1:</span>
+<div class="problema" style="margin-bottom:1rem;">En la primera conversación difícil de cada día, detenerse dos segundos antes de responder con el primer impulso y formular internamente: ¿Qué haría alguien que vive en el Reino ahora mismo? No buscar respuesta perfecta. Solo hacer la pausa es entrar.</div>
+<span class="eyebrow">Semana 2</span>
+<div class="problema" style="margin-bottom:1rem;">El Sermón del Monte — Radiografía de la realidad</div>
+<div class="problema" style="margin-bottom:1rem;">Tesis de la semana</div>
+<div class="problema" style="margin-bottom:1rem;">El Sermón del Monte no es una ley más difícil ni un ideal inalcanzable — es la descripción de cómo funciona la realidad desde adentro, y las personas que viven según él no se están sacrificando sino descubriendo la única vida que realmente funciona.</div>
+<div class="problema" style="margin-bottom:1rem;">Propósito</div>
+<div class="problema" style="margin-bottom:1rem;">Que el alumno experimente el Sermón del Monte no como texto religioso familiar sino como diagnóstico vivo de su propio corazón y como invitación a una calidad de vida radicalmente diferente.</div>
+<div class="problema" style="margin-bottom:1rem;">Cobertura del libro</div>
+<div class="problema" style="margin-bottom:1rem;">Capítulos 4, 5 y 6 de La Divina Conspiración.</div>
+<div class="problema" style="margin-bottom:1rem;">Qué entender</div>
+<div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Las bienaventuranzas como proclamación de disponibilidad, no como condiciones a cumplir.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Los seis contrastes del Sermón: la diferencia entre controlar conducta y transformar el corazón.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">La ira y el desprecio como enfermedades del alma, no como emociones inevitables.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Los dos anzuelos: la reputación religiosa y la dependencia material como desconectores del Reino.</div></div>
+</div>
+</div>
+<div class="problema" style="margin-bottom:1rem;">Qué interiorizar</div>
+<div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El espejo del desprecio: ¿hay alguien en mi vida a quien considero, en algún nivel, simplemente no a mi altura?</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">La audiencia de uno: una práctica espiritual completamente invisible que solo Dios conoce.</div></div>
+</div>
+</div>
+<div class="problema" style="margin-bottom:1rem;">Qué cambiar</div>
+<div class="problema" style="margin-bottom:1rem;"><strong>El punto de intervención:</strong> dejar de trabajar sobre la conducta externa y comenzar a trabajar sobre el corazón. No pegar manzanas en un manzano: convertirse en manzano.</div>
+<div class="problema" style="margin-bottom:1rem;">Aplicación de la semana</div>
+<span class="eyebrow">Práctica maestra — Semana 2:</span>
+<div class="problema" style="margin-bottom:1rem;"><strong>Hacer una buena acción completamente invisible:</strong> nadie sabe, nadie sabrá. El único testigo es Dios. Notar qué ocurre en el interior cuando el único público es una audiencia de uno. Esta práctica entrena directamente contra el anzuelo de la reputación.</div>
+<span class="eyebrow">Semana 3</span>
+<div class="problema" style="margin-bottom:1rem;">El discipulado — Entrar en la transformación real</div>
+<div class="problema" style="margin-bottom:1rem;">Tesis de la semana</div>
+<div class="problema" style="margin-bottom:1rem;">La transformación del carácter a semejanza de Cristo no ocurre por esfuerzo moral sino por entrenamiento intencional que trabaja a través del cuerpo, los hábitos y la relación real con Dios — y ese entrenamiento tiene herramientas concretas, verificables y accesibles.</div>
+<div class="problema" style="margin-bottom:1rem;">Propósito</div>
+<div class="problema" style="margin-bottom:1rem;">Que el alumno comprenda la diferencia entre intentar comportarse como Jesús y entrenarse para ser como Jesús, e inicie su primer ciclo real de disciplinas espirituales con expectativa genuina de resultados.</div>
+<div class="problema" style="margin-bottom:1rem;">Cobertura del libro</div>
+<div class="problema" style="margin-bottom:1rem;">Capítulos 7, 8 y 9 de La Divina Conspiración.</div>
+<div class="problema" style="margin-bottom:1rem;">Qué entender</div>
+<div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">La oración como relación real con alguien que actúa — no como práctica de autoayuda espiritual.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">La Gran Omisión: 'enseñándoles a guardar todo lo que os he mandado' (Mateo 28:20).</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Los hábitos corporales como sede del pecado y la virtud: no fuerzas cósmicas, sino rutinas cambiables.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El triángulo de oro: Espíritu Santo + pruebas cotidianas + disciplinas espirituales.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Las cuatro disciplinas fundamentales: soledad, silencio, estudio, adoración.</div></div>
+</div>
+</div>
+<div class="problema" style="margin-bottom:1rem;">Qué interiorizar</div>
+<div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">La pregunta más honesta del curso: ¿soy un discípulo? ¿Puedo nombrar algo concreto que hice diferente esta semana porque Jesús es mi Maestro?</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Diseño del triángulo de oro personal: una disciplina de abstinencia, una de compromiso, la actitud ante las pruebas.</div></div>
+</div>
+</div>
+<div class="problema" style="margin-bottom:1rem;">Qué cambiar</div>
+<div class="problema" style="margin-bottom:1rem;"><strong>La estrategia de transformación:</strong> de intentar más fuerte a entrenarse de manera diferente. El atleta no decide los movimientos en el partido — los ejecuta porque los entrenó.</div>
+<div class="problema" style="margin-bottom:1rem;">Aplicación de la semana</div>
+<span class="eyebrow">Práctica maestra — Semana 3:</span>
+<div class="problema" style="margin-bottom:1rem;">Diseñar y firmar el triángulo de oro personal para las próximas cuatro semanas: (1) una disciplina de abstinencia específica, (2) una disciplina de compromiso específica, (3) la disposición a recibir las pruebas cotidianas como el lugar donde el Reino llega. Establecer un compañero de rendición de cuentas.</div>
+<span class="eyebrow">Semana 4</span>
+<div class="problema" style="margin-bottom:1rem;">El horizonte eterno y la vida que comienza</div>
+<div class="problema" style="margin-bottom:1rem;">Tesis de la semana</div>
+<div class="problema" style="margin-bottom:1rem;">El futuro de Dios para los seres humanos es más vida y más responsabilidad creativa, no menos — y esa visión del futuro transforma radicalmente la urgencia y el sentido de la formación del carácter en el presente.</div>
+<div class="problema" style="margin-bottom:1rem;">Propósito</div>
+<div class="problema" style="margin-bottom:1rem;">Que el alumno salga con una visión del destino humano tan amplia y concreta que le dé urgencia real a la formación del carácter, y con un plan de discipulado sostenible que continúe más allá del curso.</div>
+<div class="problema" style="margin-bottom:1rem;">Cobertura del libro</div>
+<div class="problema" style="margin-bottom:1rem;">Capítulo 10 y síntesis global de La Divina Conspiración.</div>
+<div class="problema" style="margin-bottom:1rem;">Qué entender</div>
+<div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El cielo no es descanso pasivo eterno: es expansión de vida, creatividad y gobierno bajo Dios.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El carácter que formas hoy es el que llevarás a la eternidad — cada decisión moral presente tiene peso infinito.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Pasar por la muerte no es perder el mundo sino verlo por primera vez tal como realmente es.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Las cinco dimensiones del progreso espiritual: confianza, discipulado, obediencia, transformación, poder.</div></div>
+</div>
+</div>
+<div class="problema" style="margin-bottom:1rem;">Qué interiorizar</div>
+<div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">La pregunta de preparación: si te dieran hoy poder para gobernar tu ciudad, ¿cómo resultarían las cosas?</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Evaluación honesta en qué dimensión del progreso espiritual se encuentra cada participante.</div></div>
+</div>
+</div>
+<div class="problema" style="margin-bottom:1rem;">Qué cambiar</div>
+<div class="problema" style="margin-bottom:1rem;"><strong>La perspectiva del tiempo:</strong> el presente deja de ser el todo y se convierte en el entrenamiento para un futuro infinitamente mayor. Lo que parece pequeño e invisible cobra peso eterno.</div>
+<div class="problema" style="margin-bottom:1rem;">Aplicación de la semana</div>
+<span class="eyebrow">Práctica maestra — Semana 4:</span>
+<div class="problema" style="margin-bottom:1rem;">Tomar una decisión pequeña y completamente invisible — una acción de generosidad, paciencia o amor que nadie notará ni sabrá. Hacerla sabiendo que ese acto es parte de la formación del ser que se llevará a la eternidad. No hay acto pequeño en el Reino.</div>
+<span class="eyebrow">4. Estructura Diaria De Cada Sesión</span>
+<div class="problema" style="margin-bottom:1rem;">Cada sesión del curso, independientemente de la semana, sigue cinco movimientos en secuencia fija:</div>
+<div class="problema" style="margin-bottom:1rem;">Dimensión	Puntaje	Observación formativa</div>
+<div class="problema" style="margin-bottom:1rem;">Apertura	5 min	Silencio y presencia. Una frase del libro en voz alta, 60 segundos de silencio. Dios está en la sala antes de comenzar.</div>
+<div class="problema" style="margin-bottom:1rem;">Recordatorio de la práctica anterior	10 min	Reporte honesto — no testimonio de éxito. ¿Qué fue difícil? ¿Qué sorprendió? El fracaso honesto es más formativo que el éxito silenciado.</div>
+<div class="problema" style="margin-bottom:1rem;">Enseñanza central	20-25 min	Exploración dialogada del concepto del día. El facilitador plantea la idea central, invita preguntas, trabaja las tensiones sin cerrarlas prematuramente.</div>
+<span class="eyebrow">Práctica del día	10-15 min	Aplicación inmediata dentro de la sesión. No tarea para después — experiencia ahora. Silencio, escritura, conversación en parejas o ejercicio de percepción.</span>
+<div class="problema" style="margin-bottom:1rem;">Cierre y comisión	5 min	El facilitador enuncia con precisión la práctica que cada participante llevará al día. Concreta, específica, verificable en las próximas 24 horas.</div>
+<span class="eyebrow">5. Resultado Final Esperado</span>
+<div class="problema" style="margin-bottom:1rem;">Al completar el curso, el participante habrá experimentado cuatro cambios verificables:</div>
+<div class="problema" style="margin-bottom:1rem;">Cambio de imagen de Jesús</div>
+<div class="problema" style="margin-bottom:1rem;">Ya no lo ve como figura religiosa que garantiza el cielo sino como Maestro activo y relevante para la vida cotidiana — el más inteligente y competente en el tema de la existencia humana.</div>
+<div class="problema" style="margin-bottom:1rem;">Cambio de comprensión de la fe</div>
+<div class="problema" style="margin-bottom:1rem;">Ya no entiende la fe como asentimiento a doctrinas ni como membresía en una comunidad religiosa sino como confianza activa en Jesús para la vida presente, expresada en aprendizaje continuo.</div>
+<div class="problema" style="margin-bottom:1rem;">Inicio de un currículo de transformación</div>
+<div class="problema" style="margin-bottom:1rem;">Tiene al menos una disciplina espiritual en práctica, al menos un hábito identificado que trabaja contra el Reino, y al menos un compañero de rendición de cuentas.</div>
+<div class="problema" style="margin-bottom:1rem;">Visión del futuro que cambia el presente</div>
+<div class="problema" style="margin-bottom:1rem;">Comprende que el carácter que forma hoy es el que llevará a la eternidad, lo que convierte cada decisión moral presente en algo de peso real e infinito.</div>
+<span class="eyebrow">6. Progresión Del Recorrido</span>
+<div class="problema" style="margin-bottom:1rem;">Dimensión	Puntaje	Observación formativa</div>
+<div class="problema" style="margin-bottom:1rem;">Ver diferente — Semana 1	Perceptual	El participante sale con una comprensión nueva de quién es Jesús, qué es el Reino y por qué el evangelio que conocía era insuficiente.</div>
+<div class="problema" style="margin-bottom:1rem;">Ser confrontado — Semana 2	Emocional	El participante se encuentra cara a cara con el estado real de su corazón en ira, desprecio, hipocresía religiosa y ansiedad económica.</div>
+<div class="problema" style="margin-bottom:1rem;">Entrenarse — Semana 3	Práctico	El participante recibe las herramientas del discipulado e inicia su primer ciclo real de práctica con expectativa modesta pero firme.</div>
+<div class="problema" style="margin-bottom:1rem;">Orientarse al futuro — Semana 4	Estratégico	El participante sale con una visión del destino humano y un plan de discipulado sostenible que no depende de la continuación del curso.</div>
+<span class="eyebrow">7. Criterios De Fidelidad Al Libro</span>
+<div class="problema" style="margin-bottom:1rem;">El curso se considera fiel a La Divina Conspiración en la medida en que cumpla los siguientes criterios sin excepción:</div>
+<div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El Evangelio que se presenta es el Evangelio del Reino, no el evangelio de gestión del pecado.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Jesús es presentado como Maestro de vida, no solo como Redentor de pecados.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El discipulado es presentado como la forma normal y única de ser cristiano, no como nivel avanzado opcional.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">La transformación del carácter es presentada como el objetivo central de la fe, alcanzable a través de entrenamiento intencional.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Las disciplinas espirituales son presentadas como herramientas de entrenamiento, no como actos de mérito religioso.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El futuro eterno es presentado como expansión de vida y responsabilidad creativa, no como descanso pasivo.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Ninguna sesión termina sin una práctica concreta, específica y ejecutable en las próximas 24 horas.</div></div>
+</div>
+</div>
+<span class="eyebrow">8. Instrucciones De Uso Futuro</span>
+<div class="problema" style="margin-bottom:1rem;">Contextos de aplicación</div>
+<div class="problema" style="margin-bottom:1rem;">Grupo pequeño de iglesia</div>
+<div class="problema" style="margin-bottom:1rem;">4 semanas, 3 sesiones por semana de 60 minutos. Requiere un facilitador que haya leído el libro completo. No requiere que los participantes lean el libro, aunque se recomienda.</div>
+<div class="problema" style="margin-bottom:1rem;">Retiro intensivo</div>
+<div class="problema" style="margin-bottom:1rem;">Las 4 semanas son comprimibles en un retiro de 4 días con sesiones matutinas y vespertinas. El mayor beneficio del retiro es que las prácticas del día pueden ser evaluadas en la sesión siguiente del mismo día.</div>
+<div class="problema" style="margin-bottom:1rem;">Formación de líderes</div>
+<div class="problema" style="margin-bottom:1rem;">Uso como base de formación para pastores, líderes de grupos pequeños y directores de ministerio. Se añade una dimensión de diseño: cómo transferir estas ideas a los contextos que cada líder dirige.</div>
+<div class="problema" style="margin-bottom:1rem;">Uso personal con acompañamiento</div>
+<div class="problema" style="margin-bottom:1rem;">Un individuo puede seguir el curso solo con un acompañante espiritual o director, con sesiones semanales de revisión en lugar de sesiones diarias de grupo.</div>
+<div class="problema" style="margin-bottom:1rem;">Plataforma digital</div>
+<div class="problema" style="margin-bottom:1rem;">El curso es completamente adaptable a formato de video con prácticas en comunidad virtual, siempre que se mantenga el componente de rendición de cuentas en parejas o tríos pequeños.</div>
+<div class="problema" style="margin-bottom:1rem;">Advertencias para el facilitador</div>
+<div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Este curso no produce resultados si se facilita sin haber pasado personalmente por el proceso. El facilitador debe ser un discípulo en formación, no un instructor de contenido.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">Las prácticas no son opcionales ni decorativas. Son el corazón del curso. Un curso sin prácticas ejecutadas es solo un seminario de información.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">La rendición de cuentas en parejas o tríos es el mecanismo de sostenibilidad más importante del curso. Sin ella, el 90% de los participantes abandona las disciplinas en la primera semana posterior al curso.</div></div>
+</div>
+
+<div class="idea">
+  <div class="idea-num">·</div>
+  <div class="idea-body"><div class="idea-text">El fracaso honesto en las prácticas es más valioso que el éxito silenciado. El facilitador debe modelar esto desde la primera sesión.</div></div>
+</div>
+</div>
+<span class="eyebrow">9. Resumen Final De Consolidación</span>
+<div class="problema" style="margin-bottom:1rem;">Idea madre del libro</div>
+<div class="problema" style="margin-bottom:1rem;"><strong>Una sola oración:</strong></div>
+<div class="problema" style="margin-bottom:1rem;">Jesús no es solo el Salvador que te lleva al cielo cuando mueras — es el Maestro más inteligente que haya vivido, cuyas enseñanzas son la guía más precisa y práctica para la única vida que realmente vale la pena vivir, aquí y ahora, en el Reino de Dios disponible en este momento.</div>
+<div class="problema" style="margin-bottom:1rem;">Tres frases que deben quedar vivas</div>
+<div class="problema" style="margin-bottom:1rem;">"El sistema está perfectamente diseñado para producir los resultados que está produciendo."</div>
+<div class="problema" style="margin-bottom:1rem;">"No se puede construir el árbol colgándole frutos. Hay que convertirse en el árbol."</div>
+<div class="problema" style="margin-bottom:1rem;">"Ante una audiencia de uno solo."</div>
+<div class="problema" style="margin-bottom:1rem;">Si solo recordara una cosa</div>
+<div class="problema" style="margin-bottom:1rem;"><strong>La línea más importante del libro:</strong></div>
+<div class="problema" style="margin-bottom:1rem;">El Reino de Dios no comienza cuando mueras — comienza cuando confías en Jesús como tu Maestro de vida, y cada momento de hoy es una oportunidad de vivirlo.</div>
+<div class="problema" style="margin-bottom:1rem;">Aplicación maestra</div>
+<div class="problema" style="margin-bottom:1rem;">Elige hoy un área de tu vida donde operas sin Jesús — donde tus decisiones, reacciones y valores son indistinguibles de los de alguien que no lo conoce — e inicia esta semana el entrenamiento consciente de llevar el Reino a ese espacio específico, con una disciplina espiritual concreta, con la expectativa real de que algo cambiará.</div>
+<span class="eyebrow">Proceso Total Completado Con Éxito</span>
+<div class="problema" style="margin-bottom:1rem;">Documento Maestro — VIVIR EN EL REINO</div>
+<div class="problema" style="margin-bottom:1rem;">Basado en La Divina Conspiración de Dallas Willard</div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('comunicador')" class="btn-nav btn-regresar">← Evaluación del Autor como Comunicador</button>
+      <button onclick="irA('portada')" class="btn-nav btn-siguiente">Volver al inicio →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">La Divina Conspiración · Dallas Willard</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Resumen Final</div>
+    </div>
+  </div>
+</section>
+</div>
+
+
+
+<script>
+const paginas = ["portada", "filtro", "intro", "cap1", "cap2", "cap3", "cap4", "cap5", "cap6", "cap7", "cap8", "cap9", "cap10", "evaluacion", "comunicador", "resumen"];
+const nivelesFuente = ['fuente-s','fuente-m','fuente-l','fuente-xl'];
+const nombresFuente = ['S','M','L','XL'];
+let paginaActual = 'portada';
+let fuenteIndex = Number(localStorage.getItem('divina-fuente') || 1);
+
+function irA(id) {
+  if (!paginas.includes(id)) return;
+  paginas.forEach(p => {
+    const el = document.getElementById(p);
+    if (el) {
+      el.classList.remove('visible');
+      el.classList.add('oculta');
+    }
+  });
+  const destino = document.getElementById(id);
+  if (destino) {
+    destino.classList.remove('oculta');
+    destino.classList.add('visible');
+    destino.scrollTop = 0;
+  }
+  paginaActual = id;
+  const esPortada = id === 'portada';
+  document.getElementById('menu-btn').style.display = esPortada ? 'none' : 'flex';
+  document.getElementById('btn-config').style.display = esPortada ? 'none' : 'flex';
+  document.getElementById('barra-progreso').style.display = esPortada ? 'none' : 'block';
+  document.querySelectorAll('.menu-item').forEach(b => b.classList.toggle('activo', b.dataset.page === id));
+  cerrarMenu();
+  cerrarConfig();
+  actualizarProgreso();
+}
+
+function actualizarProgreso() {
+  const pagina = document.getElementById(paginaActual);
+  const barra = document.getElementById('barra-progreso');
+  if (!pagina || paginaActual === 'portada') return;
+  const max = pagina.scrollHeight - pagina.clientHeight;
+  const pct = max > 0 ? (pagina.scrollTop / max) * 100 : 0;
+  barra.style.width = pct + '%';
+}
+
+paginas.forEach(p => {
+  const el = document.getElementById(p);
+  if (el) el.addEventListener('scroll', actualizarProgreso);
+});
+
+function abrirMenu() {
+  document.getElementById('menu-panel').classList.add('abierto');
+  document.getElementById('menu-overlay').classList.add('activo');
+}
+
+function cerrarMenu() {
+  document.getElementById('menu-panel').classList.remove('abierto');
+  document.getElementById('menu-overlay').classList.remove('activo');
+}
+
+function toggleConfig() {
+  const panel = document.getElementById('config-panel');
+  const overlay = document.getElementById('config-overlay');
+  if (panel.classList.contains('abierto')) {
+    cerrarConfig();
+  } else {
+    panel.classList.add('visible');
+    setTimeout(() => panel.classList.add('abierto'), 10);
+    overlay.classList.add('activo');
+  }
+}
+
+function cerrarConfig() {
+  const panel = document.getElementById('config-panel');
+  const overlay = document.getElementById('config-overlay');
+  panel.classList.remove('abierto');
+  overlay.classList.remove('activo');
+  setTimeout(() => panel.classList.remove('visible'), 200);
+}
+
+function toggleDark() {
+  document.body.classList.toggle('dark');
+  localStorage.setItem('divina-dark', document.body.classList.contains('dark') ? '1' : '0');
+}
+
+function toggleLectura() {
+  document.body.classList.toggle('modo-lectura');
+  localStorage.setItem('divina-lectura', document.body.classList.contains('modo-lectura') ? '1' : '0');
+}
+
+function aplicarFuente() {
+  document.querySelectorAll('.body').forEach(b => {
+    b.classList.remove(...nivelesFuente);
+    b.classList.add(nivelesFuente[fuenteIndex]);
+  });
+  const nivel = document.getElementById('fuente-nivel');
+  if (nivel) nivel.textContent = nombresFuente[fuenteIndex];
+  localStorage.setItem('divina-fuente', fuenteIndex);
+}
+
+function cambiarFuente(delta) {
+  fuenteIndex = Math.max(0, Math.min(nivelesFuente.length - 1, fuenteIndex + delta));
+  aplicarFuente();
+}
+
+if (localStorage.getItem('divina-dark') === '1') {
+  document.body.classList.add('dark');
+  document.getElementById('toggle-dark').checked = true;
+}
+if (localStorage.getItem('divina-lectura') === '1') {
+  document.body.classList.add('modo-lectura');
+  document.getElementById('toggle-lectura').checked = true;
+}
+aplicarFuente();
+</script>
+
+</body>
+</html>
