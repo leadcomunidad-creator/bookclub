@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jesús Es _____ — Judah Smith</title>
+<script type="application/json" id="libro-meta">
+{
+  "titulo": "Jesús Es _____",
+  "subtitulo": "",
+  "autor": "Judah Smith",
+  "anio": 2013,
+  "anio_autor": "1973–",
+  "paginas_virtuales": 22,
+  "capitulos": 16,
+  "expedicion": "mentalidad",
+  "sub_expedicion": "identidad",
+  "color_acento": "#8B1A1A",
+  "color_portada_inicio": "#080305",
+  "color_portada_fin": "#C0392B",
+  "tiempo_lectura_total_min": 130,
+  "archivo": "libros/jesus-es.html"
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --c-acento:        #8B1A1A;
+    --c-acento-medio:  #A52020;
+    --c-acento-suave:  #C0392B;
+    --c-acento-claro:  #E8A0A0;
+    --c-acento-palido: #FDF0EE;
+    --c-acento-bg:     #F0C8C4;
+    --portada-grad: linear-gradient(155deg, #080305 0%, #1A0808 30%, #3D1010 60%, #8B1A1A 85%, #C0392B 100%);
+    --header-grad:  linear-gradient(135deg, #1A0808 0%, #5A1515 100%);
+    --font-serif:  'DM Serif Display', Georgia, serif;
+    --font-body:   'Lora', Georgia, serif;
+    --c-accion:     #1E9E75;
+    --c-accion-bg:  #062E26;
+    --c-accion-txt: #D9F3EB;
+    --c-bg:         #FAF7F5;
+    --c-surface:    #FFFFFF;
+    --c-border:     #E8DDD8;
+    --c-texto:      #1C1410;
+    --c-texto-2:    #4A3C38;
+    --c-texto-3:    #9A8880;
+    --radio:        12px;
+    --radio-lg:     16px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;overflow:hidden;}
+  body{font-family:var(--font-body);color:var(--c-texto);background:var(--c-bg);}
+
+  .pagina{position:fixed;top:0;left:0;width:100%;height:100%;overflow-y:auto;transition:opacity 0.4s ease,transform 0.4s ease;}
+  .pagina.oculta{opacity:0;pointer-events:none;transform:translateY(16px);}
+  .pagina.visible{opacity:1;pointer-events:auto;transform:translateY(0);}
+  #barra-progreso{position:fixed;top:0;left:0;z-index:10000;height:3px;width:0%;background:linear-gradient(90deg,var(--c-acento-suave),#E8A000);display:none;border-radius:0 2px 2px 0;}
+
+  @keyframes entrar{to{opacity:1;transform:translateY(0);}}
+  @keyframes flotar{0%,100%{transform:translateY(0);}50%{transform:translateY(-16px);}}
+  @keyframes pulsar{0%,100%{opacity:0.06;}50%{opacity:0.12;}}
+
+  /* PORTADA */
+  #portada .c1{position:absolute;top:-100px;right:-80px;width:420px;height:420px;border-radius:50%;background:rgba(255,255,255,0.04);pointer-events:none;animation:flotar 9s ease-in-out infinite;}
+  #portada .c2{position:absolute;bottom:-80px;left:-60px;width:460px;height:460px;border-radius:50%;background:rgba(255,255,255,0.025);pointer-events:none;animation:flotar 12s ease-in-out infinite reverse;}
+  #portada .c3{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;border-radius:50%;border:1px solid rgba(192,57,43,0.12);pointer-events:none;animation:pulsar 4s ease-in-out infinite;}
+
+  .portada-inner{position:relative;z-index:1;max-width:580px;display:flex;flex-direction:column;align-items:center;text-align:center;opacity:0;transform:translateY(24px);animation:entrar 1s cubic-bezier(0.22,1,0.36,1) 0.2s forwards;}
+  .p-eyebrow{font-family:var(--font-body);font-size:9.5px;letter-spacing:0.42em;text-transform:uppercase;color:#8C6060;margin-bottom:2.5rem;opacity:0;animation:entrar 0.8s ease 0.5s forwards;}
+  .p-ornament{font-size:1rem;color:rgba(192,57,43,0.3);letter-spacing:0.8em;margin-bottom:1.25rem;opacity:0;animation:entrar 0.8s ease 0.65s forwards;}
+  .p-titulo{font-family:var(--font-serif);font-size:clamp(2.4rem,6vw,4.2rem);font-weight:400;color:#F8EAE8;line-height:1.05;letter-spacing:0.01em;opacity:0;animation:entrar 0.9s ease 0.75s forwards;}
+  .p-titulo em{font-style:italic;color:#E8A0A0;}
+  .p-blank{font-family:var(--font-serif);font-size:clamp(1.2rem,3vw,2rem);font-weight:400;font-style:italic;color:rgba(232,160,160,0.5);letter-spacing:0.15em;margin-top:0.4rem;opacity:0;animation:entrar 0.8s ease 0.88s forwards;}
+  .p-rule-rojo{width:60px;height:2px;background:linear-gradient(90deg,transparent,var(--c-acento-suave),transparent);margin:2rem 0;opacity:0;animation:entrar 0.8s ease 0.95s forwards;}
+  .p-autor{font-family:var(--font-serif);font-size:1rem;font-weight:400;color:#C09090;letter-spacing:0.16em;margin-bottom:0.3rem;opacity:0;animation:entrar 0.8s ease 1.05s forwards;}
+  .p-fechas{font-size:0.78rem;color:#5A3030;letter-spacing:0.08em;margin-bottom:2.5rem;font-family:var(--font-body);opacity:0;animation:entrar 0.8s ease 1.1s forwards;}
+  .p-badge{border:1px solid rgba(192,57,43,0.2);color:#8B4040;font-size:9px;letter-spacing:0.26em;padding:5px 16px;border-radius:40px;text-transform:uppercase;margin-bottom:3.5rem;font-family:var(--font-body);opacity:0;animation:entrar 0.8s ease 1.2s forwards;}
+  .btn-leer{display:inline-flex;align-items:center;gap:10px;background:#C0392B;color:#fff;font-family:var(--font-serif);font-size:1rem;font-weight:400;padding:1rem 2.75rem;border-radius:50px;letter-spacing:0.06em;box-shadow:0 4px 28px rgba(192,57,43,0.5);transition:all 0.2s;border:none;cursor:pointer;opacity:0;animation:entrar 0.9s cubic-bezier(0.22,1,0.36,1) 1.35s forwards;}
+  .btn-leer:hover{background:#8B1A1A;transform:translateY(-2px);box-shadow:0 8px 36px rgba(139,26,26,0.55);}
+  .p-footer{position:absolute;bottom:1.5rem;left:0;right:0;text-align:center;font-size:9px;letter-spacing:0.2em;color:#2A1010;text-transform:uppercase;font-family:var(--font-body);opacity:0;animation:entrar 0.8s ease 1.55s forwards;}
+
+  /* LAYOUT */
+  .page{max-width:720px;margin:0 auto;background:var(--c-surface);border-radius:0;box-shadow:0 2px 24px rgba(0,0,0,0.06);overflow:hidden;}
+  .libro-header{background:var(--header-grad);padding:1.5rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+  .libro-header-titulo{font-family:var(--font-serif);font-style:italic;font-size:0.92rem;color:var(--c-acento-claro);font-weight:400;}
+  .libro-header-paso{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:#C09060;background:rgba(255,255,255,0.06);padding:4px 12px;border-radius:20px;white-space:nowrap;font-family:var(--font-body);}
+  .lectura-meta{display:flex;align-items:center;gap:0.5rem;padding:0.45rem 1.5rem;background:rgba(0,0,0,0.025);border-bottom:1px solid var(--c-border);font-size:10px;letter-spacing:0.14em;color:var(--c-texto-3);text-transform:uppercase;font-family:var(--font-body);}
+  .lectura-meta span{color:var(--c-acento-medio);font-weight:600;}
+  .body{padding:2.5rem 3rem 3.5rem;--escala:1;font-size:calc(16px * var(--escala));}
+  .body.fuente-s{--escala:0.875;} .body.fuente-m{--escala:1;} .body.fuente-l{--escala:1.125;} .body.fuente-xl{--escala:1.25;}
+  .body .problema,.body .idea-text,.body .accion-text,.body .author-bio,.body .eval-text,.body .veredicto-text,.body .dato-text{font-size:inherit;}
+  .body .tesis-text{font-size:1.04em;} .body .filtro-title{font-size:1.04em;} .body .accion-question{font-size:0.98em;}
+
+  /* TOC */
+  .toc{background:var(--c-acento-palido);padding:1.5rem 1.75rem;margin-bottom:2.5rem;border-radius:var(--radio);border:1px solid var(--c-acento-bg);}
+  .toc-titulo{font-family:var(--font-body);font-size:0.7rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:var(--c-acento-medio);margin-bottom:1rem;}
+  .toc-grid{display:flex;flex-direction:column;gap:6px;}
+  .toc-btn{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--c-acento-bg);border-radius:var(--radio);padding:10px 14px;text-decoration:none;color:var(--c-texto);font-size:14.5px;font-family:var(--font-body);transition:all 0.15s;cursor:pointer;text-align:left;}
+  .toc-btn:hover{background:var(--c-acento-palido);border-color:var(--c-acento-suave);transform:translateX(4px);}
+  .toc-num{width:26px;height:26px;border-radius:50%;background:var(--c-acento-palido);border:1px solid var(--c-acento-bg);color:var(--c-acento);font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .toc-arrow{margin-left:auto;color:var(--c-acento-claro);font-size:13px;}
+
+  hr.rule{border:none;text-align:center;margin:2.5rem 0;}
+  hr.rule::before{content:'· · ·';font-size:14px;color:var(--c-acento-bg);letter-spacing:0.6em;}
+  .eyebrow{font-size:9.5px;letter-spacing:0.28em;text-transform:uppercase;color:var(--c-acento-medio);margin-bottom:0.6rem;display:block;padding-top:0.4rem;font-family:var(--font-body);}
+  .filtro-header{border-left:3px solid var(--c-acento-suave);padding:0.9rem 1.35rem;background:var(--c-acento-palido);border-radius:0 var(--radio) var(--radio) 0;margin-bottom:2.25rem;}
+  .filtro-label{font-size:9.5px;letter-spacing:0.22em;text-transform:uppercase;color:var(--c-acento-medio);margin-bottom:4px;font-family:var(--font-body);}
+  .filtro-title{font-family:var(--font-serif);font-size:1.05rem;font-style:italic;font-weight:400;color:var(--c-texto);line-height:1.55;}
+
+  .author-card{display:flex;gap:1.25rem;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radio);padding:1.2rem 1.4rem;margin-bottom:1.5rem;align-items:flex-start;}
+  .author-monogram{width:48px;height:48px;border-radius:50%;background:var(--c-acento-palido);border:2px solid var(--c-acento-bg);display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-size:1.2rem;font-style:italic;color:var(--c-acento);flex-shrink:0;}
+  .author-name{font-family:var(--font-serif);font-size:0.95rem;font-weight:400;color:var(--c-texto);margin-bottom:5px;}
+  .author-bio{font-size:15px;color:var(--c-texto-2);line-height:1.75;}
+
+  .problema{background:#FDF8F7;border:1px solid var(--c-border);border-radius:var(--radio);padding:1.2rem 1.4rem;font-size:16px;color:var(--c-texto-2);line-height:1.85;}
+
+  .tesis-block{background:var(--c-acento-palido);border-radius:var(--radio-lg);padding:1.85rem 2rem;margin:1.25rem 0;position:relative;overflow:hidden;border:1px solid var(--c-acento-bg);}
+  .tesis-block::before{content:'\201C';font-family:var(--font-serif);font-size:6rem;color:var(--c-acento-suave);opacity:0.12;position:absolute;top:-8px;left:10px;line-height:1;pointer-events:none;}
+  .tesis-label{font-size:9.5px;letter-spacing:0.22em;text-transform:uppercase;color:var(--c-acento-medio);margin-bottom:0.7rem;position:relative;z-index:1;font-family:var(--font-body);}
+  .tesis-text{font-family:var(--font-serif);font-size:1.05rem;font-style:italic;font-weight:400;color:#2A0808;line-height:1.78;position:relative;z-index:1;}
+
+  .idea{display:flex;gap:1rem;margin-bottom:1.5rem;align-items:flex-start;}
+  .idea-num{width:28px;height:28px;border-radius:50%;background:var(--c-acento-palido);border:1.5px solid var(--c-acento-bg);color:var(--c-acento);font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+  .idea-body{flex:1;}
+  .idea-text{font-size:15.5px;color:var(--c-texto-2);line-height:1.82;}
+
+  .dato-card{background:var(--c-accion-bg);border-radius:var(--radio-lg);padding:1.6rem 2rem;margin:1.25rem 0;}
+  .dato-label{font-size:9.5px;letter-spacing:0.22em;text-transform:uppercase;color:#5DCAA5;margin-bottom:0.7rem;font-family:var(--font-body);}
+  .dato-text{font-family:var(--font-serif);font-size:1.04rem;font-style:italic;font-weight:400;color:var(--c-accion-txt);line-height:1.8;}
+
+  .accion-card{background:var(--c-surface);border:1px solid #C8E6D8;border-top:3px solid var(--c-accion);border-radius:var(--radio);padding:1.4rem 1.65rem;margin:1.25rem 0;}
+  .accion-label{font-size:9.5px;letter-spacing:0.22em;text-transform:uppercase;color:#0F6E56;margin-bottom:0.7rem;font-family:var(--font-body);}
+  .accion-text{font-size:16px;color:var(--c-texto);line-height:1.8;}
+  .accion-question{font-family:var(--font-serif);font-style:italic;font-size:1.02rem;color:#0F6E56;line-height:1.7;border-left:3px solid var(--c-accion);padding-left:1rem;margin:0.85rem 0;}
+
+  .veredicto-card{background:linear-gradient(135deg,#1A0808 0%,#5A1515 100%);border-radius:var(--radio-lg);padding:2rem 2.25rem;margin:1.25rem 0;}
+  .veredicto-label{font-size:9.5px;letter-spacing:0.22em;text-transform:uppercase;color:var(--c-acento-claro);margin-bottom:0.6rem;font-family:var(--font-body);}
+  .veredicto-badge{display:inline-block;background:#C0392B;color:#fff;font-family:var(--font-serif);font-style:italic;font-size:0.92rem;font-weight:400;padding:4px 16px;border-radius:20px;margin-bottom:1rem;}
+  .veredicto-text{font-size:15.5px;color:#F0C8C4;line-height:1.85;}
+
+  /* PARTE HEADER */
+  .parte-header{background:linear-gradient(135deg,#FDF0EE 0%,#F8E0DC 100%);border:1px solid var(--c-acento-bg);border-radius:var(--radio-lg);padding:1.25rem 1.75rem;margin-bottom:2rem;text-align:center;}
+  .parte-label{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--c-acento-medio);margin-bottom:0.3rem;font-family:var(--font-body);}
+  .parte-titulo{font-family:var(--font-serif);font-size:1.1rem;font-style:italic;color:var(--c-acento);}
+
+  /* EVAL */
+  .eval-grid{display:flex;flex-direction:column;gap:1rem;margin:1.25rem 0;}
+  .eval-item{background:#FDF8F7;border:1px solid var(--c-border);border-radius:var(--radio);border-left:3px solid var(--c-acento-suave);padding:1rem 1.25rem;}
+  .eval-header{display:flex;align-items:flex-start;justify-content:space-between;gap:0.75rem;margin-bottom:0.55rem;flex-wrap:wrap;}
+  .eval-titulo{font-family:var(--font-serif);font-size:0.93rem;font-weight:400;color:var(--c-texto);line-height:1.35;}
+  .eval-scores{display:flex;gap:0.4rem;flex-shrink:0;}
+  .eval-score{font-size:0.7rem;padding:2px 8px;border-radius:20px;font-weight:600;font-family:var(--font-body);}
+  .eval-score.fid{background:var(--c-acento-palido);color:var(--c-acento);}
+  .eval-score.apl{background:#E8F5EE;color:#0F6E56;}
+  .eval-text{font-size:15px;color:var(--c-texto-2);line-height:1.75;}
+
+  .com-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.65rem;margin:1.25rem 0;}
+  .com-item{background:#FDF8F7;border:1px solid var(--c-border);border-radius:var(--radio);padding:0.85rem 1rem;}
+  .com-dim{font-size:0.72rem;font-weight:600;color:var(--c-texto-3);margin-bottom:0.25rem;font-family:var(--font-body);text-transform:uppercase;letter-spacing:0.06em;}
+  .com-score{font-family:var(--font-serif);font-size:1.4rem;font-weight:400;color:var(--c-acento);margin-bottom:0.25rem;}
+  .com-obs{font-size:12px;color:var(--c-texto-2);line-height:1.55;}
+
+  /* NAV */
+  .nav-final{display:flex;gap:0.85rem;justify-content:center;flex-wrap:wrap;padding:2rem 2.5rem 2.5rem;border-top:1px solid var(--c-border);}
+  .btn-nav{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-serif);font-style:italic;font-size:0.95rem;padding:0.75rem 1.65rem;border-radius:50px;border:none;cursor:pointer;transition:all 0.15s;font-weight:400;}
+  .btn-regresar{background:var(--c-acento-palido);color:var(--c-acento);border:1px solid var(--c-acento-bg);}
+  .btn-regresar:hover{background:var(--c-acento-bg);transform:translateY(-1px);}
+  .btn-siguiente{background:var(--c-acento);color:#fff;box-shadow:0 3px 12px rgba(139,26,26,0.28);}
+  .btn-siguiente:hover{background:#5A1515;transform:translateY(-1px);}
+
+  .book-footer{background:#1A0808;padding:0.9rem 2.5rem;display:flex;flex-direction:column;align-items:center;gap:0.25rem;border-top:1px solid rgba(192,57,43,0.25);}
+  .footer-title{font-family:var(--font-serif);font-style:italic;font-weight:400;font-size:0.85rem;color:#E8A0A0;}
+  .footer-firma{font-size:10.5px;color:#9A6060;font-family:var(--font-body);letter-spacing:0.04em;}
+  .footer-tag{font-size:9.5px;letter-spacing:0.18em;color:#7A4040;text-transform:uppercase;font-family:var(--font-body);}
+
+  /* MENÚ */
+  #menu-btn{position:fixed;top:1rem;left:1rem;z-index:9999;width:44px;height:44px;border-radius:50%;background:#1A0808;border:1.5px solid rgba(192,57,43,0.35);color:#E8A0A0;font-size:1rem;display:none;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.3);}
+  #menu-btn:hover{background:#5A1515;}
+  body.dark #menu-btn{background:#FAF7F5;border-color:var(--c-acento-bg);color:var(--c-acento);}
+  #menu-overlay{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.4);opacity:0;pointer-events:none;transition:opacity 0.28s;}
+  #menu-overlay.activo{opacity:1;pointer-events:auto;}
+  #menu-panel{position:fixed;top:0;left:0;bottom:0;width:290px;z-index:10000;background:#1A0808;box-shadow:4px 0 32px rgba(0,0,0,0.5);transform:translateX(-100%);transition:transform 0.28s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;overflow-y:auto;}
+  #menu-panel.abierto{transform:translateX(0);}
+  .menu-header{padding:1.5rem 1.5rem 1rem;border-bottom:1px solid rgba(192,57,43,0.15);display:flex;align-items:center;justify-content:space-between;}
+  .menu-titulo{font-family:var(--font-serif);font-style:italic;font-weight:400;font-size:0.9rem;color:#E8A0A0;}
+  .menu-close{background:none;border:none;cursor:pointer;color:#C09090;font-size:1.1rem;padding:4px;line-height:1;}
+  .menu-seccion{padding:0.5rem 0;border-bottom:1px solid rgba(192,57,43,0.08);}
+  .menu-seccion-label{font-size:8px;letter-spacing:0.26em;text-transform:uppercase;color:#5A2020;padding:0.5rem 1.5rem 0.25rem;font-family:var(--font-body);}
+  .menu-item{display:flex;align-items:center;gap:0.85rem;width:100%;padding:0.65rem 1.5rem;background:none;border:none;cursor:pointer;text-align:left;transition:background 0.15s;font-family:var(--font-body);}
+  .menu-item:hover{background:rgba(192,57,43,0.08);}
+  .menu-item.activo{background:rgba(192,57,43,0.12);}
+  .menu-item-num{width:24px;height:24px;border-radius:50%;flex-shrink:0;background:rgba(192,57,43,0.1);border:1px solid rgba(192,57,43,0.2);color:#E8A0A0;font-size:10px;display:flex;align-items:center;justify-content:center;}
+  .menu-item.activo .menu-item-num{background:var(--c-acento);border-color:var(--c-acento);color:#fff;}
+  .menu-item-titulo{font-size:13.5px;color:#C0A0A0;line-height:1.3;}
+  .menu-item-sub{font-size:10.5px;color:#5A2020;margin-top:1px;font-style:italic;}
+
+  /* CONFIG */
+  #btn-config{position:fixed;top:1rem;right:1rem;z-index:9999;width:44px;height:44px;border-radius:50%;background:#1A0808;border:1.5px solid rgba(192,57,43,0.35);color:#E8A0A0;font-size:1rem;display:none;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.3);}
+  #btn-config:hover{background:#5A1515;}
+  body.dark #btn-config{background:#FAF7F5;border-color:var(--c-acento-bg);color:var(--c-acento);}
+  #config-overlay{position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,0.2);opacity:0;pointer-events:none;transition:opacity 0.2s;}
+  #config-overlay.activo{opacity:1;pointer-events:auto;}
+  #config-panel{position:fixed;top:4rem;right:1rem;z-index:9999;width:210px;background:#FAF7F5;border:1px solid var(--c-border);border-radius:var(--radio);box-shadow:0 8px 32px rgba(0,0,0,0.12);display:none;flex-direction:column;overflow:hidden;transform:translateY(-6px);opacity:0;transition:transform 0.2s ease,opacity 0.2s ease;}
+  #config-panel.visible{display:flex;}
+  #config-panel.abierto{transform:translateY(0);opacity:1;}
+  body.dark #config-panel{background:#1A0808;border-color:rgba(192,57,43,0.2);}
+  .config-seccion-label{font-size:8px;letter-spacing:0.22em;text-transform:uppercase;color:var(--c-acento-medio);padding:0.75rem 1rem 0.3rem;font-family:var(--font-body);}
+  body.dark .config-seccion-label{color:#5A2020;}
+  .config-row{display:flex;align-items:center;justify-content:space-between;padding:0.5rem 1rem 0.75rem;gap:0.5rem;}
+  .config-row-label{font-size:13px;color:var(--c-texto);font-family:var(--font-body);}
+  body.dark .config-row-label{color:#E8A0A0;}
+  .toggle-wrap{position:relative;width:40px;height:22px;flex-shrink:0;}
+  .toggle-wrap input{opacity:0;width:0;height:0;position:absolute;}
+  .toggle-track{position:absolute;inset:0;background:var(--c-border);border-radius:22px;cursor:pointer;transition:background 0.2s;border:1px solid var(--c-acento-bg);}
+  .toggle-wrap input:checked + .toggle-track{background:var(--c-acento);}
+  .toggle-track::after{content:'';position:absolute;width:16px;height:16px;background:var(--c-acento-claro);border-radius:50%;top:2px;left:2px;transition:transform 0.2s;}
+  .toggle-wrap input:checked + .toggle-track::after{transform:translateX(18px);background:#fff;}
+  body.dark .toggle-track{background:#3A1010;border-color:#5A2020;}
+  body.dark .toggle-track::after{background:#C09090;}
+  body.dark .toggle-wrap input:checked + .toggle-track{background:var(--c-acento);}
+  body.dark .toggle-wrap input:checked + .toggle-track::after{background:#fff;}
+  .fuente-ctrl{display:flex;align-items:center;border:1px solid var(--c-border);border-radius:var(--radio);overflow:hidden;}
+  .fuente-btn{width:32px;height:28px;background:none;border:none;color:var(--c-acento);cursor:pointer;font-family:var(--font-body);font-size:0.8rem;font-weight:700;transition:background 0.15s;display:flex;align-items:center;justify-content:center;}
+  .fuente-btn:hover{background:var(--c-acento-palido);}
+  .fuente-val{min-width:28px;text-align:center;font-size:11px;color:var(--c-texto-3);font-family:var(--font-body);border-left:1px solid var(--c-border);border-right:1px solid var(--c-border);padding:0 4px;}
+  body.dark .fuente-btn{color:var(--c-acento-claro);}
+  body.dark .fuente-val{color:#5A2020;border-color:rgba(192,57,43,0.2);}
+  body.dark .fuente-ctrl{border-color:rgba(192,57,43,0.2);}
+  .config-sep{height:1px;background:var(--c-border);margin:0 0.75rem;}
+  body.dark .config-sep{background:rgba(192,57,43,0.12);}
+
+  /* DARK */
+  body.dark{background:#100808;color:#E8D0C8;}
+  body.dark .page{background:#180C0C;box-shadow:0 2px 24px rgba(0,0,0,0.5);}
+  body.dark .libro-header{background:linear-gradient(135deg,#080404 0%,#1A0808 100%);}
+  body.dark .body{background:#180C0C;}
+  body.dark .toc{background:#200E0E;border-color:#3A1A1A;}
+  body.dark .toc-btn{background:#180C0C;border-color:#3A1A1A;color:#E8D0C8;}
+  body.dark .toc-btn:hover{background:#2A1010;}
+  body.dark .toc-num{background:#2A1010;border-color:#5A2020;color:var(--c-acento-claro);}
+  body.dark .filtro-header{background:#200E0E;border-left-color:var(--c-acento-suave);}
+  body.dark .filtro-title{color:#E8D0C8;}
+  body.dark .tesis-block{background:#200E0E;border-color:#3A1A1A;}
+  body.dark .tesis-text{color:#E8D0C8;}
+  body.dark .problema{background:#200E0E;border-color:#3A1A1A;color:#C8B0A8;}
+  body.dark .idea-text{color:#C8B0A8;}
+  body.dark .idea-num{background:#2A1010;border-color:#5A2020;color:var(--c-acento-claro);}
+  body.dark .accion-card{background:#081410;border-color:#1A3A28;}
+  body.dark .accion-text{color:#E8D0C8;}
+  body.dark .accion-question{color:#5DCAA5;}
+  body.dark .author-card{background:#180C0C;border-color:#3A1A1A;}
+  body.dark .author-name{color:#E8D0C8;}
+  body.dark .author-bio{color:#C8B0A8;}
+  body.dark .parte-header{background:linear-gradient(135deg,#200E0E 0%,#2A1010 100%);border-color:#3A1A1A;}
+  body.dark .parte-titulo{color:var(--c-acento-claro);}
+  body.dark .nav-final{border-top-color:#3A1A1A;background:#180C0C;}
+  body.dark .btn-regresar{background:#2A1010;color:var(--c-acento-claro);border-color:#5A2020;}
+  body.dark .eval-item{background:#200E0E;border-color:#3A1A1A;border-left-color:var(--c-acento-suave);}
+  body.dark .eval-titulo{color:#E8D0C8;}
+  body.dark .eval-text{color:#C8B0A8;}
+  body.dark .com-item{background:#200E0E;border-color:#3A1A1A;}
+  body.dark .com-dim{color:#8A5050;}
+  body.dark .com-score{color:var(--c-acento-claro);}
+  body.dark .com-obs{color:#C8B0A8;}
+  body.dark hr.rule::before{color:#3A1A1A;}
+  body.dark .dato-text{color:var(--c-accion-txt);}
+  body.dark .veredicto-text{color:#F0C8C4;}
+  body.dark .footer-firma{color:#6A3535;}
+  body.dark .footer-tag{color:#4A2525;}
+  body.modo-lectura .libro-header,.body.modo-lectura .lectura-meta,.body.modo-lectura .book-footer,.body.modo-lectura .nav-final{display:none;}
+  body.modo-lectura .libro-header{display:none;}
+  body.modo-lectura .lectura-meta{display:none;}
+  body.modo-lectura .book-footer{display:none;}
+  body.modo-lectura .nav-final{display:none;}
+
+  @media(max-width:780px){.body{padding:2rem 2rem 3rem;}.libro-header{padding:1.25rem 2rem;}.nav-final{padding:1.75rem 2rem;}.book-footer{padding:0.85rem 2rem;}.toc{padding:1.25rem 1.5rem;}}
+  @media(max-width:600px){.p-titulo{font-size:clamp(1.9rem,7vw,2.6rem);}.page{box-shadow:none;}.libro-header{padding:1rem 1.25rem;flex-direction:column;align-items:flex-start;gap:0.4rem;}.libro-header-titulo{font-size:0.85rem;}.body{padding:1.35rem 1.1rem 2rem;}.filtro-title{font-size:0.98rem;}.tesis-text{font-size:0.98rem;}.idea-text{font-size:14px;}.accion-text{font-size:14.5px;}.accion-question{font-size:0.97rem;}.dato-text{font-size:0.98rem;}.problema{font-size:14.5px;padding:1rem 1.1rem;}.toc{padding:1.1rem 1rem;}.toc-btn{font-size:14px;padding:9px 11px;}.tesis-block{padding:1.4rem 1.25rem;}.dato-card{padding:1.25rem 1.4rem;}.accion-card{padding:1.1rem 1.25rem;}.filtro-header{padding:0.75rem 1rem;margin-bottom:1.75rem;}.author-card{gap:0.85rem;padding:1rem 1.1rem;}.author-monogram{width:42px;height:42px;font-size:1.1rem;}.idea{gap:0.65rem;margin-bottom:1.25rem;}.idea-num{width:22px;height:22px;font-size:10px;}.com-grid{grid-template-columns:1fr;}.eval-header{flex-direction:column;gap:0.35rem;}.nav-final{padding:1.35rem 1.1rem;gap:0.6rem;}.btn-nav{font-size:0.88rem;padding:0.65rem 1.25rem;flex:1;justify-content:center;}.book-footer{padding:0.85rem 1.25rem;}.eval-text{font-size:14px;}#config-panel{right:0.5rem;width:195px;}}
+  @media(max-width:380px){.p-titulo{font-size:1.8rem;}.body{padding:1.1rem 0.9rem 1.75rem;}.btn-nav{font-size:0.82rem;padding:0.6rem 0.9rem;}}
+</style>
+</head>
+<body>
+<div id="menu-overlay" onclick="cerrarMenu()"></div>
+<div id="menu-panel">
+  <div class="menu-header">
+    <span class="menu-titulo">Jesús Es _____</span>
+    <button class="menu-close" onclick="cerrarMenu()">✕</button>
+  </div>
+  <div class="menu-seccion">
+    <div class="menu-seccion-label">Resumen</div>
+    <button class="menu-item" onclick="irA('filtro')" data-page="filtro"><span class="menu-item-num">F</span><span class="menu-item-texto"><div class="menu-item-titulo">Filtro de Lectura</div><div class="menu-item-sub">Índice y tesis</div></span></button>
+    <button class="menu-item" onclick="irA('intro')" data-page="intro"><span class="menu-item-num">·</span><span class="menu-item-texto"><div class="menu-item-titulo">Introducción</div><div class="menu-item-sub">El espacio en blanco</div></span></button>
+  </div>
+  <div class="menu-seccion">
+    <div class="menu-seccion-label">Parte 1 · Jesús es Amigo</div>
+    <button class="menu-item" onclick="irA('cap1')" data-page="cap1"><span class="menu-item-num">1</span><span class="menu-item-texto"><div class="menu-item-titulo">El amigo de los pecadores</div><div class="menu-item-sub">Sin condición previa</div></span></button>
+    <button class="menu-item" onclick="irA('cap2')" data-page="cap2"><span class="menu-item-num">2</span><span class="menu-item-texto"><div class="menu-item-titulo">El árbol de Zaqueo</div><div class="menu-item-sub">Visto antes de bajarse</div></span></button>
+    <button class="menu-item" onclick="irA('cap3')" data-page="cap3"><span class="menu-item-num">3</span><span class="menu-item-texto"><div class="menu-item-titulo">La escala de maldad</div><div class="menu-item-sub">Por qué nadie se siente bienvenido</div></span></button>
+  </div>
+  <div class="menu-seccion">
+    <div class="menu-seccion-label">Parte 2 · Jesús es Gracia</div>
+    <button class="menu-item" onclick="irA('cap4')" data-page="cap4"><span class="menu-item-num">4</span><span class="menu-item-texto"><div class="menu-item-titulo">Acepta la gracia</div><div class="menu-item-sub">La puerta que no entramos</div></span></button>
+    <button class="menu-item" onclick="irA('cap5')" data-page="cap5"><span class="menu-item-num">5</span><span class="menu-item-texto"><div class="menu-item-titulo">La gracia es una persona</div><div class="menu-item-sub">No un sistema</div></span></button>
+    <button class="menu-item" onclick="irA('cap6')" data-page="cap6"><span class="menu-item-num">6</span><span class="menu-item-texto"><div class="menu-item-titulo">Abandonar Meritolandia</div><div class="menu-item-sub">El parque más agotador</div></span></button>
+  </div>
+  <div class="menu-seccion">
+    <div class="menu-seccion-label">Parte 3 · Jesús es el Camino</div>
+    <button class="menu-item" onclick="irA('cap7')" data-page="cap7"><span class="menu-item-num">7</span><span class="menu-item-texto"><div class="menu-item-titulo">¿Para qué estoy aquí?</div><div class="menu-item-sub">La pregunta equivocada</div></span></button>
+    <button class="menu-item" onclick="irA('cap8')" data-page="cap8"><span class="menu-item-num">8</span><span class="menu-item-texto"><div class="menu-item-titulo">El punto</div><div class="menu-item-sub">Juan 17:3</div></span></button>
+    <button class="menu-item" onclick="irA('cap9')" data-page="cap9"><span class="menu-item-num">9</span><span class="menu-item-texto"><div class="menu-item-titulo">Dejar atrás el plan B</div><div class="menu-item-sub">Todo lo que creíste necesitar</div></span></button>
+  </div>
+  <div class="menu-seccion">
+    <div class="menu-seccion-label">Parte 4 · Jesús es Feliz</div>
+    <button class="menu-item" onclick="irA('cap10b')" data-page="cap10b"><span class="menu-item-num">10</span><span class="menu-item-texto"><div class="menu-item-titulo">El Jesús que nadie predica</div><div class="menu-item-sub">Ungido con alegría</div></span></button>
+    <button class="menu-item" onclick="irA('cap11b')" data-page="cap11b"><span class="menu-item-num">11</span><span class="menu-item-texto"><div class="menu-item-titulo">Con nosotros y por nosotros</div><div class="menu-item-sub">Jesús lloró</div></span></button>
+  </div>
+  <div class="menu-seccion">
+    <div class="menu-seccion-label">Parte 5 · Jesús está Aquí</div>
+    <button class="menu-item" onclick="irA('cap12b')" data-page="cap12b"><span class="menu-item-num">12</span><span class="menu-item-texto"><div class="menu-item-titulo">Aquel al que amas</div><div class="menu-item-sub">Presencia personal</div></span></button>
+    <button class="menu-item" onclick="irA('cap13b')" data-page="cap13b"><span class="menu-item-num">13</span><span class="menu-item-texto"><div class="menu-item-titulo">Está bien</div><div class="menu-item-sub">Cuando los resultados no llegan</div></span></button>
+  </div>
+  <div class="menu-seccion">
+    <div class="menu-seccion-label">Parte 6 · Jesús está Vivo</div>
+    <button class="menu-item" onclick="irA('cap14b')" data-page="cap14b"><span class="menu-item-num">14</span><span class="menu-item-texto"><div class="menu-item-titulo">La vida real</div><div class="menu-item-sub">La resurrección que habitas</div></span></button>
+    <button class="menu-item" onclick="irA('cap15b')" data-page="cap15b"><span class="menu-item-num">15</span><span class="menu-item-texto"><div class="menu-item-titulo">Jesús el zombi</div><div class="menu-item-sub">Lo que la resurrección no es</div></span></button>
+    <button class="menu-item" onclick="irA('cap16b')" data-page="cap16b"><span class="menu-item-num">16</span><span class="menu-item-texto"><div class="menu-item-titulo">Un nuevo camino</div><div class="menu-item-sub">Plenamente humano</div></span></button>
+  </div>
+  <div class="menu-seccion">
+    <div class="menu-seccion-label">Evaluación</div>
+    <button class="menu-item" onclick="irA('evaluacion')" data-page="evaluacion"><span class="menu-item-num">E</span><span class="menu-item-texto"><div class="menu-item-titulo">Curaduría de Ideas</div><div class="menu-item-sub">Solidez y aplicabilidad</div></span></button>
+    <button class="menu-item" onclick="irA('comunicador')" data-page="comunicador"><span class="menu-item-num">C</span><span class="menu-item-texto"><div class="menu-item-titulo">Judah como Comunicador</div><div class="menu-item-sub">Evaluación del autor</div></span></button>
+  </div>
+  <div class="menu-seccion">
+    <div class="menu-seccion-label">Consolidación</div>
+    <button class="menu-item" onclick="irA('resumen')" data-page="resumen"><span class="menu-item-num">★</span><span class="menu-item-texto"><div class="menu-item-titulo">Resumen Final</div><div class="menu-item-sub">Consolidación del libro</div></span></button>
+  </div>
+</div>
+<button id="menu-btn" onclick="abrirMenu()">☰</button>
+<button id="btn-config" onclick="toggleConfig()">⚙︎</button>
+<div id="config-overlay" onclick="cerrarConfig()"></div>
+<div id="config-panel">
+  <div class="config-seccion-label">Apariencia</div>
+  <div class="config-row">
+    <span class="config-row-label">Modo oscuro</span>
+    <label class="toggle-wrap"><input type="checkbox" id="toggle-dark" onchange="toggleDark()"><span class="toggle-track"></span></label>
+  </div>
+  <div class="config-sep"></div>
+  <div class="config-row">
+    <span class="config-row-label">Lectura limpia</span>
+    <label class="toggle-wrap"><input type="checkbox" id="toggle-lectura" onchange="toggleLectura()"><span class="toggle-track"></span></label>
+  </div>
+  <div class="config-sep"></div>
+  <div class="config-seccion-label">Tamaño de letra</div>
+  <div class="config-row">
+    <span class="config-row-label">Texto</span>
+    <div class="fuente-ctrl">
+      <button class="fuente-btn" onclick="cambiarFuente(-1)">A−</button>
+      <span class="fuente-val" id="fuente-nivel">M</span>
+      <button class="fuente-btn" onclick="cambiarFuente(1)">A+</button>
+    </div>
+  </div>
+</div>
+<div id="barra-progreso"></div>
+<div id="portada" class="pagina visible">
+<section style="min-height:100vh;background:var(--portada-grad);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem 2rem;position:relative;overflow:hidden;">
+  <div class="c1"></div><div class="c2"></div><div class="c3"></div>
+  <div class="portada-inner">
+    <div class="p-eyebrow">Resumen Editorial · Mentor de Conocimiento</div>
+    <div class="p-ornament">— ✦ —</div>
+    <div class="p-titulo">Jesús Es</div>
+    <div class="p-blank">___________</div>
+    <div class="p-rule-rojo"></div>
+    <div class="p-autor">Judah Smith</div>
+    <div class="p-fechas">1973 –</div>
+    <div class="p-badge">Mentalidad · Identidad</div>
+    <button class="btn-leer" onclick="irA('filtro')">Leer resumen &nbsp;→</button>
+  </div>
+  <div class="p-footer">Jesús Es _____ · Judah Smith · 2013</div>
+</section>
+</div>
+<!-- ══ FILTRO ══ -->
+<div id="filtro" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Jesús Es _____ · Judah Smith</div>
+      <div class="libro-header-paso">Filtro de Lectura</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>9 min</span></div>
+    <div class="body">
+      <div class="toc">
+        <div class="toc-titulo">Contenido</div>
+        <div class="toc-grid">
+          <button class="toc-btn" onclick="document.querySelector('.pagina.visible').scrollTo({top:document.getElementById('s1').getBoundingClientRect().top+document.querySelector('.pagina.visible').scrollTop-16,behavior:'smooth'})"><span class="toc-num">1</span>Sobre el autor y el problema central<span class="toc-arrow">↓</span></button>
+          <button class="toc-btn" onclick="document.querySelector('.pagina.visible').scrollTo({top:document.getElementById('s2').getBoundingClientRect().top+document.querySelector('.pagina.visible').scrollTop-16,behavior:'smooth'})"><span class="toc-num">2</span>Tesis central<span class="toc-arrow">↓</span></button>
+          <button class="toc-btn" onclick="document.querySelector('.pagina.visible').scrollTo({top:document.getElementById('s3').getBoundingClientRect().top+document.querySelector('.pagina.visible').scrollTop-16,behavior:'smooth'})"><span class="toc-num">3</span>Ideas clave<span class="toc-arrow">↓</span></button>
+          <button class="toc-btn" onclick="document.querySelector('.pagina.visible').scrollTo({top:document.getElementById('s4').getBoundingClientRect().top+document.querySelector('.pagina.visible').scrollTop-16,behavior:'smooth'})"><span class="toc-num">4</span>Dato más impactante<span class="toc-arrow">↓</span></button>
+          <button class="toc-btn" onclick="document.querySelector('.pagina.visible').scrollTo({top:document.getElementById('s5').getBoundingClientRect().top+document.querySelector('.pagina.visible').scrollTop-16,behavior:'smooth'})"><span class="toc-num">5</span>Acción inmediata<span class="toc-arrow">↓</span></button>
+          <button class="toc-btn" onclick="document.querySelector('.pagina.visible').scrollTo({top:document.getElementById('s6').getBoundingClientRect().top+document.querySelector('.pagina.visible').scrollTop-16,behavior:'smooth'})"><span class="toc-num">6</span>Veredicto de lectura<span class="toc-arrow">↓</span></button>
+        </div>
+      </div>
+
+      <div class="filtro-header">
+        <div class="filtro-label">Filtro de Lectura</div>
+        <div class="filtro-title">Para discernir si este libro tiene peso real, claridad espiritual y valor transformador</div>
+      </div>
+
+      <span class="eyebrow" id="s1">§ 1 · Sobre el Autor</span>
+      <div class="author-card">
+        <div class="author-monogram">J</div>
+        <div>
+          <div class="author-name">Judah Smith (1973 –)</div>
+          <div class="author-bio">Pastor principal de Churchome, una comunidad con sede en Seattle con presencia global. Conocido por su estilo directo, conversacional y culturalmente conectado. Su libro anterior, <em>Jesus Is _____</em> (2013), se convirtió en bestseller del New York Times. Escribe y predica desde la convicción de que la imagen distorsionada de Jesús es el mayor obstáculo entre las personas y una fe real. No es teólogo académico — es comunicador pastoral de alta efectividad con acceso a audiencias que los académicos raramente alcanzan.</div>
+        </div>
+      </div>
+
+      <span class="eyebrow" id="s1b">§ 2 · El Problema Central</span>
+      <div class="problema">
+        La mayoría de las personas — dentro y fuera de la iglesia — tiene una imagen de Jesús que no se parece al Jesús de los Evangelios. Esa imagen distorsionada produce una relación distorsionada: con un Jesús severo no puedes tener intimidad; con un Jesús lejano no puedes tener confianza; con un Jesús aburrido no puedes tener deleite.
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow" id="s2">§ 3 · Tesis Central</span>
+      <div class="tesis-block">
+        <div class="tesis-label">La Idea más Importante</div>
+        <div class="tesis-text">La vida con Jesús no comienza cuando te arreglas, no se sostiene con esfuerzo religioso y no termina en una doctrina — comienza, se sostiene y culmina en un encuentro real con una persona que es amigo, gracia, propósito, alegría, presencia y vida simultáneamente.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow" id="s3">§ 4 · Ideas Clave — las que estructuran el libro</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text"><strong>Jesús es amigo de pecadores sin condición previa.</strong> No busca a los que ya están bien. Busca a los que saben que no lo están. La iniciativa siempre es de Dios, nunca del mérito humano.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text"><strong>La gracia no es un sistema de perdón — es la naturaleza de una persona.</strong> Jesús no trae gracia: él es gracia. Mientras vivamos en "Meritolandia" estaremos exhaustos y espiritualmente solos, aunque conozcamos toda la teología correcta.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text"><strong>Jesús es la respuesta a la pregunta más profunda, no uno de los temas importantes.</strong> El propósito de la vida no es una misión que descubres — es una persona que conoces.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text"><strong>El Jesús real es feliz — y esa felicidad no es indiferencia al dolor.</strong> El Jesús de los Evangelios va a bodas, hace chistes visuales, atrae niños. También llora en funerales. Su alegría es profunda precisamente porque no depende de circunstancias.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text"><strong>Jesús está aquí, ahora.</strong> El mayor error práctico de la fe es tratar a Jesús como legado histórico. María lo buscó como cuerpo muerto y lo encontró vivo a su lado pronunciando su nombre.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text"><strong>La resurrección no es solo un dogma — es una realidad que habitar.</strong> El mismo poder que sacó a Jesús de la tumba opera en la vida cotidiana. Las heridas no desaparecen — se glorifican.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text"><strong>Jesús es el modelo más completo de humanidad plena.</strong> Seguirlo no es volverte menos humano por ser más espiritual — es volverte más humano en el sentido más original del término.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow" id="s4">§ 5 · Dato más Impactante</span>
+      <div class="dato-card">
+        <div class="dato-label">El Giro Central</div>
+        <div class="dato-text">Hebreos 1:9 describe a Jesús como "ungido con óleo de alegría más que tus compañeros" — Jesús no es el ser más sombrío del universo sino el más gozoso. Y ese gozo, según Judah, está disponible para quienes lo conocen, no como actitud forzada sino como identidad heredada.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow" id="s5">§ 6 · Acción Inmediata</span>
+      <div class="accion-card">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-question">Completa esta frase sin filtro teológico, con la primera respuesta honesta: "Para mí, hoy, Jesús es ____." Guarda esa respuesta. Vuelve a completarla en 30 días. La distancia entre ambas respuestas es el mapa de tu transformación real.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow" id="s6">§ 7 · Veredicto de Lectura</span>
+      <div class="veredicto-card">
+        <div class="veredicto-label">Veredicto</div>
+        <div class="veredicto-badge">Lectura Recomendada</div>
+        <div class="veredicto-text">No es teología profunda — es limpieza de lentes. Su función principal es eliminar capas de religiosidad, estereotipos culturales y distorsiones acumuladas sobre Jesús. En esa función específica es extraordinariamente eficaz. Es una puerta, no un destino. Léelo antes de un libro más denso sobre la persona de Cristo.</div>
+      </div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('portada')" class="btn-nav btn-regresar">← Portada</button>
+      <button onclick="irA('intro')" class="btn-nav btn-siguiente">Introducción →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Jesús Es _____ · Judah Smith</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Filtro de Lectura</div>
+    </div>
+  </div>
+</section>
+</div>
+<!-- ══ INTRO ══ -->
+<div id="intro" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Jesús Es _____ · Judah Smith</div>
+      <div class="libro-header-paso">Introducción</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>5 min</span></div>
+    <div class="body">
+      <div class="filtro-header">
+        <div class="filtro-label">Introducción</div>
+        <div class="filtro-title">El espacio en blanco — Por qué completar la frase cambia todo</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">El Punto de Partida</div>
+        <div class="tesis-text">El título del libro no es un error de edición. El espacio en blanco es deliberado — porque lo que cada persona pone ahí revela la imagen real de Jesús que opera en su vida, no la imagen que declara tener.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="problema">
+        Judah Smith abre el libro con una historia que lo define todo: la muerte de su padre, el pastor que lo formó. En el funeral, rodeado de miles de personas que su padre había impactado, Judah describe la paradoja de ese momento: el dolor más grande de su vida ocurriendo en el mismo espacio que la evidencia más clara del poder de una vida bien vivida.
+        <br><br>
+        Esa paradoja le plantea la pregunta que estructura todo el libro: ¿Quién es Jesús en los momentos en que más te importa que sea alguien real? No en los sermones. No en las declaraciones teológicas. En el funeral de tu padre. En la crisis de tu matrimonio. En la confusión sobre tu identidad. En la culpa que no te suelta.
+        <br><br>
+        El libro no pretende dar una definición exhaustiva de Jesús — eso ni siquiera es posible. Pretende algo más específico y más urgente: limpiar el lente a través del cual lo ves, para que lo que veas se parezca más al Jesús que aparece en los Evangelios. Porque si tu imagen de Jesús está distorsionada, tu relación con él estará igualmente distorsionada — y ninguna cantidad de disciplina religiosa puede compensar eso.
+        <br><br>
+        Hay seis afirmaciones que Judah desarrolla a lo largo del libro. Cada una es una corrección a una distorsión común: Jesús es amigo (no juez), es gracia (no sistema de méritos), es el camino (no uno de los temas importantes), es feliz (no sombrío), está aquí (no en el pasado), está vivo (no es solo un personaje histórico). Juntas forman el retrato más completo y accesible que el libro puede ofrecer de quién es realmente.
+      </div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('filtro')" class="btn-nav btn-regresar">← Filtro</button>
+      <button onclick="irA('cap1')" class="btn-nav btn-siguiente">Capítulo 1 →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Jesús Es _____ · Judah Smith</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Introducción</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ══ CAP1 ══ -->
+<div id="cap1" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Jesús Es _____ · Judah Smith</div>
+      <div class="libro-header-paso">Capítulo 1</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>8 min</span></div>
+    <div class="body">
+      <div class="parte-header">
+        <div class="parte-label">Parte 1 · Jesús es Amigo</div>
+        <div class="parte-titulo">El amigo de los pecadores — La amistad que no requiere que cambies primero</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">Jesús no busca a los que ya están bien — busca específicamente a los que saben que no lo están. Y no los busca para reprocharlos sino para cenar con ellos.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa del Capítulo</span>
+      <div class="problema">Existe una imagen de Jesús que muchos llevan tatuada en la mente sin haberla elegido conscientemente: la del inspector espiritual. Un ser de mirada evaluadora que se acerca a las personas para verificar si cumplen los requisitos mínimos de decencia antes de decidir si merece su tiempo. En esa imagen, acercarte a Jesús requiere haber resuelto primero tus problemas más obvios — porque si no, el acercamiento mismo sería una presunción.<br><br>El problema es que ese Jesús no existe en los Evangelios. El que existe tiene fama de comer con gente que el mundo religioso de su época prefería ignorar. Los escribas y fariseos lo describen como "amigo de publicanos y pecadores" (Mateo 11:19) — y lo dicen como crítica. Pero sin quererlo, estaban describiendo exactamente lo que era.<br><br>El término griego para amigo en ese contexto es <em>philos</em> — no conocido, no simpatizante, no mentor. Amigo. La persona con quien compartes tu mesa. Con quien pasas tu tiempo no por obligación sino por elección. Y Jesús eligió sistemáticamente pasar su tiempo con exactamente las personas que el sistema religioso de su época consideraba casos perdidos.<br><br>Judah no romantiza esto. No dice que Jesús aprueba todo lo que hacen esas personas. Lo que sí dice — con el texto en la mano — es que Jesús no pone la aprobación de la conducta como condición previa a la relación. La relación viene primero. El cambio viene después, desde adentro, como consecuencia de haber sido amado sin condición — no como requisito para ser amado.</div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">El término <em>philos</em> en el griego implica amistad genuina — compartir mesa, tiempo, vida — no mera simpatía o aprobación distante.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La crítica "amigo de publicanos y pecadores" que le hacen a Jesús sus adversarios es la descripción más precisa de su ministerio — y ellos no lo intentaban como elogio.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Los publicanos eran colaboradores del sistema de opresión romana — la categoría más despreciada socialmente en Israel. Jesús no solo los toleraba. Los buscaba.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">El cambio en Zaqueo (Lucas 19) no llegó como condición para la visita de Jesús. Llegó como consecuencia de ella. El orden importa: primero la aceptación, luego la transformación.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">Judah plantea que la pregunta no es si Jesús puede aceptar a alguien en su condición actual — la pregunta es si nosotros podemos aceptar que él ya lo hizo, sin necesitar que esa persona cambie primero.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿Quiénes son las personas con quienes Jesús estaría cenando en tu ciudad esta noche — y tú qué tan cómodo estarías sentado a esa misma mesa?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Esta semana, invita a cenar o a un café a alguien que sientas que está "fuera de tu círculo espiritual". No con agenda de evangelismo — solo con la intención de escucharlos genuinamente.</div>
+      </div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('intro')" class="btn-nav btn-regresar">← Introducción</button>
+      <button onclick="irA('cap2')" class="btn-nav btn-siguiente">Cap 2 →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Jesús Es _____ · Judah Smith</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 1</div>
+    </div>
+  </div>
+</section>
+</div>
+<!-- ══ CAP2 ══ -->
+<div id="cap2" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Jesús Es _____ · Judah Smith</div>
+      <div class="libro-header-paso">Capítulo 2</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>8 min</span></div>
+    <div class="body">
+      <div class="parte-header">
+        <div class="parte-label">Parte 1 · Jesús es Amigo</div>
+        <div class="parte-titulo">El árbol de Zaqueo — Visto antes de bajarse</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">Jesús llamó a Zaqueo antes de que Zaqueo prometiera nada, hiciera nada ni cambiara nada. Esa secuencia — primero el llamado, luego la transformación — es el patrón consistente de cómo Jesús opera.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa del Capítulo</span>
+      <div class="problema">Zaqueo es uno de los personajes más ricos de los Evangelios precisamente porque concentra en una sola escena todo lo que hace difícil creer que Jesús te busca: era recaudador de impuestos — colaborador del sistema de opresión romana —, era jefe de los recaudadores — el nivel máximo de impopularidad posible —, y era rico con dinero que había extraído de sus vecinos. En la escala social y moral de su época, era el último en la lista de personas que un rabino respetable querría visitar.<br><br>Y sin embargo, cuando Jesús llega a Jericó, levanta la vista, lo ve en el árbol y dice: "Zaqueo, date prisa y desciende, porque hoy es necesario que pose yo en tu casa." No lo llama "hombre de negocios locales". No lo llama "pecador arrepentido". Lo llama por su nombre. Y luego le dice que va a su casa — sin esperar invitación, sin establecer condiciones, sin verificar primero si hay suficiente cambio de conducta en el horizonte.<br><br>Judah subraya el detalle que más fácilmente pasa desapercibido: Zaqueo no hizo ninguna promesa antes de que Jesús anunciara que iba a su casa. Solo estaba en el árbol, mirando de lejos. La iniciativa fue completamente de Jesús. Y la transformación — la promesa de restituir cuatro veces lo robado — vino después del encuentro, no como condición para él.<br><br>Ese es el patrón que Judah identifica como la firma de Jesús: la iniciativa soberana primero, la transformación como consecuencia. No como recompensa del mérito sino como fruto del amor recibido.</div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Jesús pronuncia el nombre de Zaqueo antes de que Zaqueo haga o diga nada — eso es gracia pura, iniciativa unilateral, amor sin condición de entrada.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La multitud murmura: "Ha ido a hospedarse con un hombre pecador." El sistema religioso siempre tiene una objeción cuando Jesús elige a alguien que no parece merecer su atención.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La restitución que promete Zaqueo en Lucas 19:8 va más allá de lo que la ley requería — eso es el fruto natural de haber sido amado sin condición, no el precio de entrada a ese amor.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">"Hoy ha venido la salvación a esta casa" — Jesús no lo dice después de que Zaqueo promete cambiar. Lo dice como declaración del poder que la presencia de Jesús produce.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">Judah señala que Jesús no dijo "Zaqueo, si bajas y prometes cambiar, tal vez consideremos cenar juntos". Dijo "hoy es necesario" — como si la visita fuera inevitable, planificada desde antes, urgente. Eso es lo que el amor incondicional parece desde adentro.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿Hay algo en tu vida que sientes que tienes que "resolver" antes de que Jesús esté genuinamente interesado en ti? ¿De dónde viene esa creencia?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Escribe una lista de las condiciones que sientes (no que piensas — que sientes) que necesitas cumplir antes de acercarte a Dios con confianza. Luego lee cada ítem con esta pregunta: ¿Quién puso esta condición — Jesús o yo?</div>
+      </div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap1')" class="btn-nav btn-regresar">← Cap 1</button>
+      <button onclick="irA('cap3')" class="btn-nav btn-siguiente">Cap 3 →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Jesús Es _____ · Judah Smith</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 2</div>
+    </div>
+  </div>
+</section>
+</div>
+<!-- ══ CAP3 ══ -->
+<div id="cap3" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Jesús Es _____ · Judah Smith</div>
+      <div class="libro-header-paso">Capítulo 3</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>8 min</span></div>
+    <div class="body">
+      <div class="parte-header">
+        <div class="parte-label">Parte 1 · Jesús es Amigo</div>
+        <div class="parte-titulo">La escala de maldad — Por qué todos se sienten demasiado malos para ser amigos de Jesús</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">Existe una jerarquía cultural invisible de quién merece acercarse a Dios — y todos, sin excepción, se sienten demasiado abajo en esa escala como para acercarse con confianza.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa del Capítulo</span>
+      <div class="problema">Judah introduce una idea que resulta inmediatamente reconocible para cualquiera que haya crecido en un contexto religioso: la "escala de maldad". Una jerarquía implícita donde ciertos pecados son peores que otros, ciertos tipos de personas están más cerca o más lejos de Dios, y donde tu posición en esa escala determina tu nivel de acceso a la gracia divina.<br><br>Lo perturbador de la escala no es que sea falsa — es que todos, sin excepción, se ubican a sí mismos en algún punto donde la distancia con Dios se siente demasiado grande. El adicto cree que está más abajo que el creyente moral. El creyente moral cree que está más abajo que el pastor. El pastor, en sus momentos honestos, cree que está más abajo que la imagen de santidad que proyecta. La escala siempre tiene a alguien más arriba, y tú siempre estás a una distancia insalvable de ellos.<br><br>El Jesús de los Evangelios desmonta la escala con cada interacción que tiene. Cena con prostitutas y con fariseos con igual comodidad. Toca al leproso sin dudar. Habla con la mujer samaritana — cinco infracciones simultáneas de protocolo social en una sola conversación. No porque la conducta no importe, sino porque la conducta no es la puerta de entrada a su presencia.<br><br>Judah lo dice con claridad: Jesús no vino a relocar a las personas en la escala de maldad. Vino a demoler la escala. El acceso a él no es proporcional al nivel de virtud que hayas acumulado — es incondicional, immediato y disponible ahora mismo desde donde estás.</div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La escala de maldad no es una enseñanza bíblica — es una construcción cultural que el sistema religioso mantiene porque da poder a quienes se ubican más arriba en ella.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Jesús habló con la mujer samaritana violando cinco convenciones sociales simultáneamente: hablar con una mujer en público, hablar con una samaritana, hablar con alguien divorciada cinco veces, pedir agua (implicando reciprocidad), hacerlo a solas.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">El mayor obstáculo para acercarse a Jesús no es la conducta pasada — es la creencia de que esa conducta pasada determina el nivel de acceso al que tienes derecho.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">El sistema de la escala convierte la gracia en transacción: no te acerques hasta que hayas subido suficientemente. Eso es exactamente lo opuesto de lo que Jesús propone.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">La mujer samaritana dejó su cántaro cuando encontró a Jesús (Juan 4:28). Judah interpreta ese detalle como símbolo: cuando encuentras lo real, sueltas lo que usabas para llenar el vacío. No como mandamiento — como consecuencia natural.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿En qué posición de la escala de maldad te ubicas a ti mismo? ¿Y qué efecto tiene esa posición en tu capacidad de acercarte a Jesús con confianza?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Identifica a alguien que mentalmente ubicas "más abajo" que tú en la escala de maldad. Esta semana, interactúa con esa persona exactamente como lo harías con alguien que ubicas "más arriba" que tú.</div>
+      </div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap2')" class="btn-nav btn-regresar">← Cap 2</button>
+      <button onclick="irA('cap4')" class="btn-nav btn-siguiente">Cap 4 →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Jesús Es _____ · Judah Smith</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 3</div>
+    </div>
+  </div>
+</section>
+</div>
+<!-- ══ CAP4 ══ -->
+<div id="cap4" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Jesús Es _____ · Judah Smith</div>
+      <div class="libro-header-paso">Capítulo 4</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>8 min</span></div>
+    <div class="body">
+      <div class="parte-header">
+        <div class="parte-label">Parte 2 · Jesús es Gracia</div>
+        <div class="parte-titulo">Acepta la gracia — La puerta que pagaron pero no entramos</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">El mayor problema con la gracia no es que la gente no la conozca — es que, en el fondo, no la cree aplicable a su caso específico.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa del Capítulo</span>
+      <div class="problema">Hay una diferencia enorme entre saber que la gracia existe y creer que es para ti. La mayoría de las personas que llevan años en la iglesia pueden definir la gracia con precisión teológica — y al mismo tiempo vivir como si tuvieran que ganarse el acceso a Dios con cada acción correcta que hagan. Saben la doctrina. No han internalizado la experiencia.<br><br>Judah parte de una imagen que resulta perturbadora en su simplicidad: la de un parque de diversiones donde la entrada ya fue pagada. El dueño del parque invita a todos a entrar, el boleto está cubierto, las atracciones están disponibles. Pero hay personas que se quedan afuera, convencidas de que tienen que ganarse el derecho a entrar primero. Caminan de un lado al otro frente a la puerta, acumulando méritos imaginarios, esperando sentirse suficientemente dignos para pasar. Y mientras tanto, el dueño los mira desde adentro, con la puerta abierta, sin entender qué están esperando.<br><br>Eso es lo que hacemos con la gracia. No es que Dios la esté reteniendo. Somos nosotros los que no entramos.<br><br>¿Por qué? Porque aceptar gracia pura —sin mérito, sin esfuerzo previo, sin proceso de purificación personal— es en realidad un acto de humildad muy difícil. Implica reconocer que no puedes hacer nada para merecerla. Y eso golpea directamente al ego. Preferimos creer que algo de lo que hacemos contribuye. Que nuestro esfuerzo cuenta. Que Dios nos ama también porque nos portamos bien.<br><br>La gracia dice que no. Que el amor es anterior al comportamiento. Que la bienvenida no depende de la conducta. Y eso, para muchas personas, no se siente como liberación — se siente como trampa. Como si hubiera un precio escondido que aparecerá después.</div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Entender la gracia intelectualmente y recibirla existencialmente son dos cosas completamente distintas — y la mayoría vive atrapada entre las dos.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">El esfuerzo de ganarse el amor de Dios no es humildad. Es una forma sofisticada de no confiar en él.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La gracia no baja el estándar moral — lo hace innecesario como condición de entrada. El estándar sigue existiendo, pero ya no es la puerta.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Recibir gracia sin merecerla es el acto más contraintuitivo que un ser humano puede hacer — y el más transformador.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">Judah plantea que vivir bajo gracia no produce personas que pecan más libremente — produce personas que quieren pecar menos, porque experimentaron ser amadas sin condición y eso cambia la motivación desde adentro.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿Hay algo que estás esperando resolver, mejorar o superar antes de acercarte a Dios con confianza plena? ¿Qué dice eso sobre lo que crees realmente de la gracia?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Escribe una lista de las cosas que sientes que tienes que "arreglar" antes de estar bien con Dios. Luego léela como si fuera una lista de cosas que Jesús ya cubrió. No como ejercicio teórico — como declaración personal.</div>
+      </div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap3')" class="btn-nav btn-regresar">← Cap 3</button>
+      <button onclick="irA('cap5')" class="btn-nav btn-siguiente">Cap 5 →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Jesús Es _____ · Judah Smith</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 4</div>
+    </div>
+  </div>
+</section>
+</div>
+<!-- ══ CAP5 ══ -->
+<div id="cap5" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Jesús Es _____ · Judah Smith</div>
+      <div class="libro-header-paso">Capítulo 5</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>8 min</span></div>
+    <div class="body">
+      <div class="parte-header">
+        <div class="parte-label">Parte 2 · Jesús es Gracia</div>
+        <div class="parte-titulo">La gracia es una persona — No un sistema que se administra</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">La gracia no es el sistema por el cual Dios perdona — es el nombre de lo que Jesús es, y eso lo cambia todo.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa del Capítulo</span>
+      <div class="problema">Hay una tendencia natural a convertir la gracia en un concepto manejable. Un mecanismo divino. Un protocolo de perdón que se activa cuando cumples ciertos requisitos — arrepentimiento, confesión, propósito de enmienda — y que produce como resultado una cuenta limpia ante Dios. Es un sistema ordenado. Comprensible. Casi burocrático.<br><br>El problema es que eso no es lo que dice la Biblia. Juan 1:14 dice que Jesús estaba "lleno de gracia y de verdad". No dice que Jesús trajo gracia. Dice que Jesús era gracia. La distinción parece pequeña pero es enorme: si la gracia es un sistema, puedes estudiarlo, optimizarlo y eventualmente dominarlo. Pero si la gracia es una persona, la única relación posible con ella es personal.<br><br>Esto transforma completamente la pregunta. Ya no es "¿cómo obtengo más gracia?" sino "¿cómo conozco más profundamente a Jesús?" Ya no es un recurso espiritual que se administra — es una presencia que se habita.<br><br>Judah narra aquí la historia de la mujer sorprendida en adulterio. Jesús no anula la ley — pero los acusadores se van uno a uno. Luego le pregunta a la mujer: "¿Nadie te condenó?" Ella responde: "Nadie, Señor." Y él dice: "Ni yo te condeno. Ve, y no peques más."<br><br>Observa el orden: primero viene la no-condena. Luego viene el "no peques más". No al revés. La gracia precede la transformación — no la recompensa.</div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Juan 1:14 no dice que Jesús trajo gracia — dice que estaba lleno de gracia. La gracia es su naturaleza, no su política.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La no-condena de Jesús a la mujer adúltera llegó antes de que ella prometiera cambiar. Ese orden lo cambia todo.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Convertir la gracia en un sistema es una forma de mantener el control — y el control es exactamente lo opuesto de la fe.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">No puedes "usar" la gracia como recurso. Solo puedes relacionarte con ella como persona.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">El texto griego de Juan usa la palabra <em>charis</em> para gracia — que en la cultura griega significaba no solo un favor, sino un favor dado con alegría, sin esperar nada a cambio. La gracia de Dios no es resignada ni condescendiente. Es entusiasta.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿Has estado relacionándote con la gracia como un sistema de perdón administrable, o como una presencia personal con quien puedes tener encuentros reales?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Hoy, en lugar de empezar tu tiempo de oración pidiendo perdón o listando necesidades, comienza simplemente diciendo: "Jesús, quiero conocerte." Quédate en silencio por tres minutos y observa qué ocurre internamente.</div>
+      </div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap4')" class="btn-nav btn-regresar">← Cap 4</button>
+      <button onclick="irA('cap6')" class="btn-nav btn-siguiente">Cap 6 →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Jesús Es _____ · Judah Smith</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 5</div>
+    </div>
+  </div>
+</section>
+</div>
+<!-- ══ CAP6 ══ -->
+<div id="cap6" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Jesús Es _____ · Judah Smith</div>
+      <div class="libro-header-paso">Capítulo 6</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>8 min</span></div>
+    <div class="body">
+      <div class="parte-header">
+        <div class="parte-label">Parte 2 · Jesús es Gracia</div>
+        <div class="parte-titulo">Abandonar Meritolandia — El parque de atracciones más agotador del universo</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">"Meritolandia" es el parque temático imaginario donde vivimos cuando creemos que el amor de Dios se gana — y es el lugar más agotador del universo.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa del Capítulo</span>
+      <div class="problema">Judah crea en este capítulo una de sus imágenes más memorables: Meritolandia. Un parque de atracciones donde cada atracción tiene un precio, cada experiencia requiere un ticket ganado a través de comportamiento correcto, y el dueño del parque tiene una expresión permanentemente insatisfecha. Nadie en Meritolandia se divierte del todo — porque siempre hay una atracción más que no has podido costear, un ticket que todavía no tienes, una sección VIP a la que no llegas.<br><br>Lo más perturbador de Meritolandia es que sus habitantes son voluntarios. Nadie los obliga a estar ahí. El parque de la gracia está literalmente al lado, con la entrada abierta, y sin embargo la mayoría prefiere quedarse en Meritolandia porque al menos ahí saben las reglas. La gracia, con su lógica invertida, resulta más aterradora que el esfuerzo infinito.<br><br>Pablo lo dice con una claridad que incomoda en Gálatas 5:1: "Estad, pues, firmes en la libertad con que Cristo nos hizo libres, y no estéis otra vez sujetos al yugo de esclavitud." La esclavitud a la que se refiere no es el pecado — es la ley. El sistema de merecer. Y el punto de Pablo es que volver al sistema de merecer después de haber conocido la gracia es una regresión, no una virtud.<br><br>El capítulo profundiza en la parábola de los trabajadores de la viña. Unos trabajaron todo el día, otros llegaron a última hora, y todos recibieron el mismo pago. Los que trabajaron desde el amanecer se indignaron. "No es justo", dijeron. Y el dueño respondió algo que sacude la lógica transaccional hasta el fondo: "¿O tienes tú envidia porque yo soy bueno?" La generosidad del dueño no dependía de las horas trabajadas — dependía de su propia naturaleza.</div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Meritolandia no es impuesta por Dios — es construida por nosotros mismos como forma de mantener el control sobre nuestra relación con él.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La parábola de los trabajadores de la viña no enseña que el esfuerzo no importa — enseña que el amor del dueño no está condicionado por él.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Gálatas 5:1 llama "esclavitud" al sistema de merecer — no "disciplina", no "santidad", sino esclavitud.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La gracia no produce pereza espiritual en las personas que la han recibido de verdad — produce gratitud que se convierte en el motor más poderoso de la acción.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">Judah observa que los que más se indignan con la generosidad de Dios hacia otros son exactamente los que más tiempo llevan "trabajando" para merecerla — porque su identidad está construida sobre el esfuerzo, no sobre el amor recibido.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿En qué áreas de tu vida sigues viviendo en Meritolandia — donde tu paz interior depende de qué tan bien te has portado esa semana?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Identifica una cosa concreta que haces regularmente con la motivación de "ganar puntos" con Dios. Esta semana, hazla exactamente igual — pero con la declaración interna: "Lo hago desde el amor recibido, no para obtener amor." Observa si algo cambia en cómo se siente.</div>
+      </div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap5')" class="btn-nav btn-regresar">← Cap 5</button>
+      <button onclick="irA('cap7')" class="btn-nav btn-siguiente">Cap 7 →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Jesús Es _____ · Judah Smith</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 6</div>
+    </div>
+  </div>
+</section>
+</div>
+<!-- ══ CAP7 ══ -->
+<div id="cap7" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Jesús Es _____ · Judah Smith</div>
+      <div class="libro-header-paso">Capítulo 7</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>8 min</span></div>
+    <div class="body">
+      <div class="parte-header">
+        <div class="parte-label">Parte 3 · Jesús es el Camino</div>
+        <div class="parte-titulo">¿Para qué estoy aquí? — La pregunta más importante mal formulada</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">La crisis de propósito que afecta a millones de personas no viene de no tener misión — viene de haber puesto la misión en el lugar que le corresponde a una persona.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa del Capítulo</span>
+      <div class="problema">Existe una industria completa construida alrededor de ayudar a las personas a "descubrir su propósito". Libros, seminarios, tests de personalidad, coaches espirituales — todos orientados a responder la misma pregunta: ¿Para qué estoy aquí? ¿Cuál es mi misión? ¿Cuál es el plan específico de Dios para mi vida?<br><br>Judah no descarta la pregunta. La reposiciona. Su argumento es que cuando la pregunta de propósito ocupa el centro de la vida espiritual, termina siendo respondida de una manera que produce exactamente lo opuesto de lo que promete: más ansiedad, más comparación, más sensación de que te estás perdiendo algo que otros ya encontraron.<br><br>La respuesta a esa pregunta no es una misión. Es una persona. Juan 17:3 lo dice con una precisión que sorprende: "Y esta es la vida eterna: que te conozcan a ti, el único Dios verdadero, y a Jesucristo, a quien has enviado." La vida eterna no se define como un destino geográfico ni como una duración temporal — se define como conocimiento relacional. Y si ese es el horizonte final, ese es también el centro del presente.<br><br>Cuando Jesús es el centro — no la misión, no el propósito, no el plan — las preguntas de identidad y dirección se responden desde adentro hacia afuera. No porque dejen de importar, sino porque el suelo firme desde el que se responden cambia completamente.</div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La pregunta "¿cuál es mi propósito?" orientada hacia una misión produce ansiedad. La misma pregunta orientada hacia una persona produce paz.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Juan 17:3 define la vida eterna como conocimiento relacional — no como destino ni como duración. Eso redefine completamente qué significa "vivir para siempre".</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">El peligro de hacer de la misión el centro es que convierte a Dios en un medio para tu propósito, en lugar de convertir tu propósito en un medio para conocer a Dios.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Cuando Jesús es el centro, las misiones, vocaciones y llamados emergen naturalmente — no como descubrimientos ansiosos sino como consecuencias de la relación.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">Judah cita a Thomas à Kempis: "¿De qué te sirve hablar profundamente de la Trinidad, si careces de humildad y eres, por tanto, desagradable a la Trinidad?" La profundidad espiritual no es acumulación de conocimiento sobre Dios — es profundización de la relación con él.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿Tu búsqueda de propósito te ha acercado o alejado de Jesús? ¿La pregunta "¿para qué estoy aquí?" te produce paz o ansiedad?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Durante esta semana, cada vez que surja la pregunta "¿cuál es mi propósito?", sustitúyela por esta: "¿Cómo conozco más profundamente a Jesús hoy?" Observa si la primera pregunta pierde urgencia cuando la segunda se responde bien.</div>
+      </div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap6')" class="btn-nav btn-regresar">← Cap 6</button>
+      <button onclick="irA('cap8')" class="btn-nav btn-siguiente">Cap 8 →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Jesús Es _____ · Judah Smith</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 7</div>
+    </div>
+  </div>
+</section>
+</div>
+<!-- ══ CAP8 ══ -->
+<div id="cap8" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Jesús Es _____ · Judah Smith</div>
+      <div class="libro-header-paso">Capítulo 8</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>8 min</span></div>
+    <div class="body">
+      <div class="parte-header">
+        <div class="parte-label">Parte 3 · Jesús es el Camino</div>
+        <div class="parte-titulo">El punto — Cuando la relación es más importante que la agenda</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">El punto no es lo que puedes lograr para Dios — el punto es conocerlo. Y conocerlo cambia todo lo demás de adentro hacia afuera.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa del Capítulo</span>
+      <div class="problema">Judah narra una conversación con un amigo que lleva años buscando el plan específico de Dios para su vida — y que cada vez que cree haberlo encontrado, la vida lo lleva en otra dirección. La frustración acumulada lo llevó a una pregunta: "¿Y si no hay un plan específico que debo descubrir? ¿Y si el punto no es el plan?"<br><br>La respuesta de Judah no niega que Dios tenga planes y propósitos. Los afirma — pero los reposiciona. El plan de Dios no es un mapa que debes descifrar. Es una persona con quien debes caminar. Y la dirección emerge del caminar, no del mapa.<br><br>La historia de María y Marta en Lucas 10 ilustra esto con una tensión que cualquiera puede reconocer. Marta está ocupada sirviendo, cumpliendo, administrando la visita. María está sentada a los pies de Jesús, escuchando. Marta se queja: "¿No te importa que mi hermana me haya dejado sola para servir?" Y Jesús responde con algo que sacude la ética del servicio religioso: "Marta, Marta, estás afanada y turbada con muchas cosas. Pero solo una cosa es necesaria, y María ha escogido la buena parte."<br><br>La buena parte no es la inactividad. Es la prioridad. Y la prioridad — la que Jesús declara necesaria sobre todas las demás — es la relación. Todo lo demás, incluyendo el servicio más devoto y sacrificado, fluye bien solo cuando fluye desde ahí.</div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">María eligió "la buena parte" — no porque el servicio no importara, sino porque la relación precede y sostiene al servicio. Sin eso, el servicio se convierte en Meritolandia religiosa.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La diferencia entre servir a Jesús y conocer a Jesús no es teológica — es experiencial. Uno produce agotamiento, el otro produce poder.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">El "afán y la turbación" de Marta no venían de su trabajo sino de haber perdido de vista por qué trabajaba y para quién.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Cuando la relación es el centro, las crisis de identidad y propósito no desaparecen — se vuelven navegables porque el ancla ya no está en los resultados.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">Judah señala que Jesús no reprendió a Marta por servir sino por perder el centro mientras servía. Esa distinción es todo: puedes hacer exactamente lo correcto desde el lugar equivocado, y el resultado será exactamente el cansancio que Marta experimentaba.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿En tu vida espiritual actual, eres más Marta o más María? ¿Y qué evidencia concreta tienes para tu respuesta?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Esta semana, antes de cada actividad religiosa o espiritual — oración, estudio, servicio, reunión — tómate 60 segundos para decir en silencio: "Lo hago desde la relación, no para construirla." Observa si algo cambia en la calidad de la experiencia.</div>
+      </div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap7')" class="btn-nav btn-regresar">← Cap 7</button>
+      <button onclick="irA('cap9')" class="btn-nav btn-siguiente">Cap 9 →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Jesús Es _____ · Judah Smith</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 8</div>
+    </div>
+  </div>
+</section>
+</div>
+<!-- ══ CAP9 ══ -->
+<div id="cap9" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Jesús Es _____ · Judah Smith</div>
+      <div class="libro-header-paso">Capítulo 9</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>8 min</span></div>
+    <div class="body">
+      <div class="parte-header">
+        <div class="parte-label">Parte 3 · Jesús es el Camino</div>
+        <div class="parte-titulo">Dejar atrás el plan B — Cuando descubres que ya tenías lo que buscabas</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">La búsqueda desesperada de propósito es, en muchos casos, la señal de que no has recibido todavía lo único que podía calmarla: la certeza de que ya eres conocido y amado por tu nombre.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa del Capítulo</span>
+      <div class="problema">Hay una razón por la que la pregunta del propósito es tan urgente para tantas personas: no es realmente una pregunta sobre la misión. Es una pregunta disfrazada sobre el valor. Si tengo un propósito importante, entonces valgo algo. Si mi vida tiene una misión, entonces importo. La búsqueda del propósito es, en muchos casos, una búsqueda de confirmación de que existes y que eso importa a alguien.<br><br>Y esa búsqueda nunca puede ser satisfecha por una misión — porque las misiones terminan, fracasan, cambian de forma. Lo que puede satisfacerla es exactamente lo que Jesús ofreció a cada persona que encontró: ser visto por su nombre, en su condición actual, y ser declarado valioso no por lo que hace sino por lo que es.<br><br>Judah llama a esto "dejar atrás el plan B" — esa versión de vida que asumes que estás viviendo cuando la versión real todavía no llega. El plan B es vivir con una sensación permanente de provisionalidad: esto es temporal, lo real está por venir, cuando tenga claridad sobre mi propósito entonces comenzaré realmente a vivir. Pero mientras tanto, la vida se consume esperando comenzar.<br><br>Lo que Jesús ofrece es diferente: no la claridad sobre un plan sino la certeza de una presencia. Y desde esa presencia, todo lo que haces — incluyendo las cosas pequeñas, rutinarias, aparentemente sin significado — adquiere el peso de lo eterno, porque ocurre en compañía del eterno.</div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">El plan B no es una etapa de vida — es una actitud hacia la vida que puede durar décadas mientras se espera que "lo real" comience.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La pregunta del propósito es frecuentemente la pregunta del valor disfrazada. Y el valor no puede ser respondido por una misión sino por una relación.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Jesús no le dio a Zaqueo una misión. Le dio su presencia. Y esa presencia produjo transformación que ninguna misión hubiera podido producir.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Cuando sabes que eres conocido y amado por tu nombre, la pregunta "¿para qué estoy aquí?" pierde su urgencia ansiosa y adquiere una cualidad de curiosidad gozosa.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">Judah cita la historia de un pastor que le preguntó a una anciana en su congregación cuál había sido su propósito en la vida. Ella respondió: "Conocer a Jesús y dejar que él me conociera." Llevaba ochenta años haciéndolo. Eso, dice Judah, es la respuesta más completa que jamás escuchó.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿Estás viviendo en modo "plan B" — esperando que algo llegue antes de comenzar realmente a vivir? ¿Qué crees que está esperando que llegue?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Identifica una cosa ordinaria de tu vida cotidiana que normalmente no consideras "espiritual" ni "significativa". Esta semana, hazla con la conciencia de que Jesús está ahí contigo mientras la haces. Observa si algo cambia en cómo la vives.</div>
+      </div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap8')" class="btn-nav btn-regresar">← Cap 8</button>
+      <button onclick="irA('cap10b')" class="btn-nav btn-siguiente">Cap 10 →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Jesús Es _____ · Judah Smith</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 9</div>
+    </div>
+  </div>
+</section>
+</div>
+<!-- ══ CAP10B ══ -->
+<div id="cap10b" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Jesús Es _____ · Judah Smith</div>
+      <div class="libro-header-paso">Capítulo 10</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>8 min</span></div>
+    <div class="body">
+      <div class="parte-header">
+        <div class="parte-label">Parte 4 · Jesús es Feliz</div>
+        <div class="parte-titulo">El Jesús que nadie predica — Ungido con alegría más que nadie</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">La imagen del Jesús perpetuamente serio, cargado y sin humor es una construcción cultural que no tiene sustento en los Evangelios — y esa imagen falsa hace que relacionarse con él sea un deber, no un deleite.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa del Capítulo</span>
+      <div class="problema">Existe una versión de Jesús que aparece en innumerables pinturas, sermones y actitudes religiosas: un hombre pálido, de expresión grave, con los ojos levantados al cielo en permanente estado de intercesión agónica. Este Jesús nunca ríe. Nunca hace un chiste. Nunca disfruta una buena comida por el simple placer de disfrutarla. Existe en modo de sufrimiento constante, cargando el peso del mundo con una expresión que oscila entre la tristeza profunda y la reprimenda suave.<br><br>El problema con este Jesús es que no se parece al de los Evangelios.<br><br>El Jesús de los Evangelios va a bodas y no solo asiste — convierte agua en vino de calidad superior cuando el anfitrión se queda sin. El Jesús de los Evangelios cuenta historias con personajes cómicos — un hombre con una viga en el ojo intentando sacarle una astilla al vecino es imagen humorística, no solo metáfora moral. El Jesús de los Evangelios era conocido por frecuentar cenas con pecadores — lo cual en su cultura era sinónimo de pasar un buen rato.<br><br>Judah no propone un Jesús superficialmente alegre ni un evangelio de bienestar vacío. Propone algo más interesante: que la alegría de Jesús era profunda precisamente porque provenía de quien era, no de sus circunstancias. Vivió en pobreza, fue rechazado, murió traicionado. Y sin embargo, la imagen que emerge de los Evangelios es la de alguien que irradiaba una alegría que atraía a los niños, a los marginados y a los celebradores de la vida.</div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">El primer milagro de Jesús no fue sanar un enfermo ni resucitar un muerto — fue salvar una fiesta de boda del fracaso social.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Los niños se acercaban a Jesús espontáneamente — los niños tienen un radar infalible para detectar quién genuinamente disfruta estar con ellos.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Una imagen de Jesús perpetuamente sombrío hace que seguirlo parezca un deber pesado — no una aventura deseable.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La alegría de Jesús no era circunstancial. Provenía de su identidad como Hijo amado — y esa misma identidad está disponible para ti.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">Hebreos 1:9 cita el Salmo 45 aplicado a Jesús: "Has amado la justicia y aborrecido la maldad, por lo cual te ungió Dios, el Dios tuyo, con óleo de alegría más que a tus compañeros." Jesús es descrito en las Escrituras como ungido con alegría más que cualquier otro.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿Cómo sería tu vida espiritual si creyeras genuinamente que Jesús disfruta estar contigo — no solo que te tolera, sino que activamente le alegra tu presencia?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Durante esta semana, cada vez que tengas un momento de genuino disfrute — una buena comida, una carcajada, un atardecer — di en voz alta o en silencio: "Gracias, Jesús. Esto también eres tú." Practica reconocerlo en el gozo, no solo en el esfuerzo.</div>
+      </div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap9')" class="btn-nav btn-regresar">← Cap 9</button>
+      <button onclick="irA('cap11b')" class="btn-nav btn-siguiente">Cap 11 →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Jesús Es _____ · Judah Smith</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 10</div>
+    </div>
+  </div>
+</section>
+</div>
+<!-- ══ CAP11B ══ -->
+<div id="cap11b" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Jesús Es _____ · Judah Smith</div>
+      <div class="libro-header-paso">Capítulo 11</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>8 min</span></div>
+    <div class="body">
+      <div class="parte-header">
+        <div class="parte-label">Parte 4 · Jesús es Feliz</div>
+        <div class="parte-titulo">Con nosotros y por nosotros — Jesús lloró</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">Que Jesús sea feliz no significa que sea ajeno a tu sufrimiento — significa que su gozo es lo suficientemente profundo como para entrar en tu dolor sin ser destruido por él.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa del Capítulo</span>
+      <div class="problema">Hay una objeción legítima que surge cuando se habla de un Jesús feliz: si Jesús es feliz, ¿qué hace con el sufrimiento humano? ¿Lo ignora? ¿Lo minimiza?<br><br>Judah responde con el texto más corto de toda la Biblia: Juan 11:35 — "Jesús lloró." El contexto es la muerte de Lázaro. Jesús sabía que lo resucitaría momentos después. Y aun así, ante el dolor de María y Marta, ante la tumba de su amigo, lloró. No como acto performativo. No para dar ejemplo. Lloró porque el dolor de los que amaba le dolía a él también.<br><br>Eso es lo que significa "con nosotros": no solo presencia geográfica sino presencia emocional. Un Dios que llora en el funeral de su amigo, sabiendo que lo va a resucitar, es un Dios que valora tanto la experiencia humana del dolor que no lo saltea aunque tenga el poder de eliminarlo instantáneamente.<br><br>Y luego está el "por nosotros". Romanos 8:31 pregunta: "Si Dios es por nosotros, ¿quién contra nosotros?" No dice que Dios está con nosotros de manera neutral — dice que está a favor nuestro. Hay una diferencia entre un árbitro imparcial y un entrenador que quiere que ganes. Jesús no es árbitro. Es el entrenador que además pagó la entrada, preparó el campo y venció al equipo contrario antes de que el partido comenzara.</div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Juan 11:35 — "Jesús lloró" — es la prueba más contundente de que la felicidad de Jesús no es distancia emocional sino profundidad emocional.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Llorar junto a alguien cuyo problema ya resolviste dice algo extraordinario: que la experiencia del dolor de otro te importa, no solo el resultado.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">"Por nosotros" en Romanos 8:31 no es neutralidad divina — es compromiso activo, parcialidad declarada a favor del ser humano.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La estabilidad interior de Jesús es lo que le permite entrar al dolor sin ser aplastado por él — y eso es exactamente lo que ofrece a quienes lo conocen.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">En el texto griego de Juan 11:33, antes de llorar, se dice que Jesús se "estremeció en el espíritu" — la palabra usada es <em>embrimaomai</em>, que describe una emoción intensa, casi una indignación visceral ante la presencia de la muerte y el dolor.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿Qué cambiaría en cómo enfrentas tus momentos más oscuros si creyeras que Jesús no solo los observa, sino que los recibe con la misma intensidad emocional con que tú los vives?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Trae a tu mente algo que te está doliendo actualmente. En lugar de pedir que se quite, cuéntaselo a Jesús con todos los detalles — como le contarías a un amigo cercano que sabes que genuinamente quiere escuchar. Luego quédate en silencio por cinco minutos.</div>
+      </div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap10b')" class="btn-nav btn-regresar">← Cap 10</button>
+      <button onclick="irA('cap12b')" class="btn-nav btn-siguiente">Cap 12 →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Jesús Es _____ · Judah Smith</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 11</div>
+    </div>
+  </div>
+</section>
+</div>
+<!-- ══ CAP12B ══ -->
+<div id="cap12b" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Jesús Es _____ · Judah Smith</div>
+      <div class="libro-header-paso">Capítulo 12</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>8 min</span></div>
+    <div class="body">
+      <div class="parte-header">
+        <div class="parte-label">Parte 5 · Jesús está Aquí</div>
+        <div class="parte-titulo">Aquel al que amas — Pronunciando tu nombre</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">El mayor error práctico de la fe cristiana es vivir como si Jesús estuviera en el pasado o en el futuro — cuando él declaró con claridad que está aquí, ahora, en este momento exacto.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa del Capítulo</span>
+      <div class="problema">Hay una forma muy común de relacionarse con Jesús que, sin que nadie lo declare explícitamente, lo convierte en un personaje histórico extraordinario. Estudiamos lo que dijo. Admiramos lo que hizo. Nos conmueven sus milagros narrados en los Evangelios. Y luego vivimos nuestra semana como si él hubiera dejado un legado poderoso que ahora nos toca administrar solos.<br><br>Judah parte aquí de la historia de María Magdalena en el jardín, la mañana de la resurrección. Llega llorando, convencida de que el cuerpo de Jesús ha sido robado. Hay un hombre en el jardín al que confunde con el jardinero y le pregunta dónde pusieron el cuerpo. El hombre dice una sola palabra: "María." Y en ese momento ella lo reconoce. No por su apariencia. Lo reconoció por su voz diciendo su nombre.<br><br>Ese es el modelo de la presencia de Jesús: personal, directa, por nombre. No un anuncio general para todos los que estén en el jardín. Una palabra para una persona específica en su dolor específico.<br><br>La pregunta que Judah deja suspendida es perturbadora en su sencillez: ¿Cuántas veces estamos buscando el cuerpo de un Jesús que ya no está — su legado, su historia, su doctrina — mientras él está de pie a nuestro lado diciendo nuestro nombre y no lo reconocemos porque no esperamos que esté aquí?</div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">María reconoció al Jesús resucitado no por verlo sino por escuchar su voz pronunciar su nombre — la presencia de Jesús siempre es personal, nunca genérica.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Buscar el legado de un Jesús del pasado mientras él está presente en el ahora es el equivalente espiritual de buscar el cuerpo en la tumba vacía.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Juan 14:17 no dice que el Espíritu vendrá de visita — dice que morará con nosotros. La presencia es permanente, no esporádica.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La oración no es comunicación con alguien lejano — es conversación con alguien en la misma habitación.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">La palabra griega <em>parakletos</em>, traducida como "Consolador" en Juan 14, literalmente significa "el que es llamado a estar al lado de". No es un título de función — es una descripción de posición.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿Vives tu fe como si Jesús estuviera en el pasado que estudias, en el futuro al que esperas llegar, o en el presente que habitas hoy?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Durante las próximas 24 horas, cada vez que cambies de actividad — de la casa al auto, del trabajo al almuerzo — di en voz baja: "Jesús, aquí también." No como ritual vacío, sino como reconocimiento genuino de una presencia real.</div>
+      </div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap11b')" class="btn-nav btn-regresar">← Cap 11</button>
+      <button onclick="irA('cap13b')" class="btn-nav btn-siguiente">Cap 13 →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Jesús Es _____ · Judah Smith</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 12</div>
+    </div>
+  </div>
+</section>
+</div>
+<!-- ══ CAP13B ══ -->
+<div id="cap13b" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Jesús Es _____ · Judah Smith</div>
+      <div class="libro-header-paso">Capítulo 13</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>8 min</span></div>
+    <div class="body">
+      <div class="parte-header">
+        <div class="parte-label">Parte 5 · Jesús está Aquí</div>
+        <div class="parte-titulo">Está bien — Cuando la presencia es suficiente aunque el resultado no llegue</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">"Está bien" no es una negación del dolor ni un optimismo vacío — es la declaración de alguien que ha descubierto que la presencia de Jesús es suficiente incluso cuando las circunstancias no cambian.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa del Capítulo</span>
+      <div class="problema">Hay una expectativa silenciosa que muchos creyentes cargan: que si Jesús está presente, las cosas deberían mejorar. Que su presencia se mide en resultados favorables. Si la enfermedad no cede, si el matrimonio no se restaura, si el trabajo no aparece — entonces quizás Jesús no estaba tan presente como se creía.<br><br>Judah desmonta esta lógica con la historia de Lázaro desde el ángulo de las hermanas. Cuando Lázaro enfermó, le enviaron mensaje a Jesús: "Aquel a quien amas está enfermo." Y sin embargo, el texto dice algo que incomoda: "Amaba Jesús a Marta, a su hermana y a Lázaro. Cuando oyó, pues, que estaba enfermo, se quedó dos días más en el lugar donde estaba."<br><br>Lo amaba. Y se quedó dos días más.<br><br>La demora no era abandono — era propósito. Jesús no llegó tarde porque estuviera distraído o porque el amor fallara. Llegó tarde porque lo que estaba preparando era más grande que lo que Marta y María habían pedido. Pedían sanidad. Él traía resurrección.<br><br>"Está bien" es lo que puedes decir en ese espacio oscuro no porque todo esté bien, sino porque Jesús está ahí. María cayó a sus pies llorando. Jesús lloró con ella. No la corrigió. No le explicó su plan. Lloró. Y luego actuó. Eso es lo que hace la presencia real: acompaña en el dolor antes de resolverlo.</div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">"Lo amaba... y se quedó dos días más" es la tensión más honesta del Nuevo Testamento entre el amor de Dios y sus tiempos.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La demora de Jesús no fue falla del amor — fue profundidad del plan. Pero eso solo se ve en retrospectiva, y la fe vive en el mientras tanto.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Jesús no llegó con explicaciones ni con disculpas — llegó con presencia y luego con poder. En ese orden.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">"Está bien" no es resignación ni negación — es la declaración de alguien que ha aprendido que la presencia de Jesús es suficiente cuando los resultados no llegan.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">Cuando Marta sale al encuentro de Jesús y le dice "si hubieses estado aquí, mi hermano no habría muerto", Jesús no la corrige ni la consuela con doctrina. Le hace una pregunta: "¿Crees esto?" — devolviendo el foco de las circunstancias a la relación.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿Hay alguna área de tu vida donde la demora de Dios ha erosionado tu confianza en su presencia? ¿Qué cambiaría si pudieras separar "Jesús está aquí" de "Jesús lo arregló ya"?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Escribe en un papel la cosa que más estás esperando que Dios resuelva. Debajo escribe: "Jesús está aquí, aunque esto todavía no cambia." No como resignación — como declaración de una presencia que no depende del resultado. Ponlo donde lo veas cada mañana esta semana.</div>
+      </div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap12b')" class="btn-nav btn-regresar">← Cap 12</button>
+      <button onclick="irA('cap14b')" class="btn-nav btn-siguiente">Cap 14 →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Jesús Es _____ · Judah Smith</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 13</div>
+    </div>
+  </div>
+</section>
+</div>
+<!-- ══ CAP14B ══ -->
+<div id="cap14b" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Jesús Es _____ · Judah Smith</div>
+      <div class="libro-header-paso">Capítulo 14</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>8 min</span></div>
+    <div class="body">
+      <div class="parte-header">
+        <div class="parte-label">Parte 6 · Jesús está Vivo</div>
+        <div class="parte-titulo">La vida real — La resurrección como realidad presente, no solo dogma</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">La resurrección de Jesús no es el final de la historia — es el comienzo de una forma completamente nueva de existir, disponible ahora, no solo después de morir.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa del Capítulo</span>
+      <div class="problema">La resurrección ha sido tratada principalmente como un argumento. El debate más importante del apologista cristiano: ¿ocurrió o no ocurrió? Y toda esa conversación es legítima e importante. Pero Judah propone que nos hemos quedado debatiendo el hecho sin habitar la realidad que el hecho inaugura.<br><br>La resurrección de Jesús no es solo la prueba de que él era quien decía ser. Es la inauguración de un orden nuevo de existencia. Pablo lo llama en 1 Corintios 15 "las primicias" — el primer fruto de una cosecha completa. Jesús no resucitó como excepción sobrenatural. Resucitó como adelanto de lo que está disponible para todo ser humano que entra en comunión con él.<br><br>Y esa vida nueva no comienza cuando mueres. Comienza ahora. Juan 11:25-26: "Yo soy la resurrección y la vida; el que cree en mí, aunque esté muerto, vivirá. Y todo aquel que vive y cree en mí, no morirá eternamente." El verbo está en presente, no en futuro.<br><br>Judah lo dice con una directness que no permite escape cómodo: si crees en la resurrección como evento histórico pero vives como si tus problemas fueran permanentes, tus heridas fueran irrecuperables y tu futuro estuviera determinado por tu pasado — entonces no has habitado aún lo que la resurrección significa.</div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Pablo llama a Jesús "las primicias" de la resurrección — no la excepción, sino el primero de una cosecha disponible para todos.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La vida eterna en el lenguaje de Jesús no comienza después de la muerte — comienza en el momento en que lo conoces.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">El mismo poder que resucitó a Jesús habita en el creyente según Romanos 8:11 — eso no es hipérbole devocional, es afirmación teológica con consecuencias prácticas radicales.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Creer en la resurrección como historia sin habitarla como realidad presente es la forma más común de neutralizar su poder.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">En 1 Corintios 15:17, Pablo dice: "Y si Cristo no resucitó, vuestra fe es vana; aún estáis en vuestros pecados." Pablo no dice "si Cristo no resucitó, la doctrina es falsa". Dice que la fe es vana — sin efecto, sin poder, sin sentido. La resurrección no es solo el fundamento intelectual del cristianismo. Es la fuente de su energía transformadora.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿En qué área de tu vida estás tratando a Jesús como si fuera un gran maestro histórico admirado, en lugar de un Dios vivo y activo que puede intervenir en tu realidad hoy?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Identifica una "zona muerta" en tu vida — un área donde has asumido que el cambio ya no es posible. Esta semana, ora específicamente sobre esa área no con resignación sino con expectativa: "El mismo poder que resucitó a Jesús opera aquí."</div>
+      </div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap13b')" class="btn-nav btn-regresar">← Cap 13</button>
+      <button onclick="irA('cap15b')" class="btn-nav btn-siguiente">Cap 15 →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Jesús Es _____ · Judah Smith</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 14</div>
+    </div>
+  </div>
+</section>
+</div>
+<!-- ══ CAP15B ══ -->
+<div id="cap15b" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Jesús Es _____ · Judah Smith</div>
+      <div class="libro-header-paso">Capítulo 15</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>8 min</span></div>
+    <div class="body">
+      <div class="parte-header">
+        <div class="parte-label">Parte 6 · Jesús está Vivo</div>
+        <div class="parte-titulo">Jesús el zombi — Lo que la resurrección NO es</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">La cultura popular ha distorsionado tan completamente la idea de "volver de entre los muertos" que es necesario desmantelar esa imagen antes de poder entender qué significa realmente que Jesús esté vivo.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa del Capítulo</span>
+      <div class="problema">Judah abre este capítulo con una disrupción deliberada y humorística: en la cultura popular, volver de entre los muertos es sinónimo de zombi — un ser sin alma, desconectado, con un solo impulso instintivo y destructivo. Y si alguien que no conoce el evangelio escucha que Jesús "volvió de entre los muertos", esa es exactamente la imagen que puede acudir a su mente.<br><br>Pero la resurrección de Jesús no es eso. Es lo opuesto. Un zombi es un cuerpo sin alma, sin conciencia, sin propósito, sin relación. Jesús resucitado come, conversa, es reconocido por su voz, cocina pescado en la playa para sus discípulos hambrientos, aparece en un cuarto cerrado, muestra sus heridas a Tomás con paciencia infinita. Es más humano después de la resurrección que antes, no menos.<br><br>Lo que resucitó no fue solo un cuerpo reanimado. Fue la humanidad de Jesús llevada a su plenitud. La resurrección no borró sus cicatrices — las glorificó. Las heridas permanecieron, pero transformadas. Ya no eran señales de muerte sino de victoria. Eso dice algo profundo sobre cómo Dios trabaja con el dolor humano: no lo elimina como si nunca hubiera ocurrido. Lo redime. Lo transforma en evidencia de algo más grande.<br><br>Y el Jesús que aparece a sus discípulos después de la resurrección hace algo que ningún zombi haría jamás: pregunta. Le pregunta a Pedro tres veces "¿me amas?" — una por cada negación. No para humillarlo sino para restaurarlo.</div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La resurrección de Jesús no produjo un ser desconectado — produjo a alguien más personal, más cercano y más relacional que antes.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Jesús mantuvo sus cicatrices después de resucitar — lo que indica que Dios no borra el dolor de la historia, sino que lo transforma en evidencia de su poder.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La pregunta "¿me amas?" repetida tres veces a Pedro no es tortura emocional — es restauración deliberada y precisa de una relación rota.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La humanidad glorificada de Jesús resucitado es el modelo de lo que está disponible para todo ser humano: no la eliminación de la historia, sino su redención.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">En Juan 21, el Jesús resucitado cocina pescado en la playa y desayuna con sus discípulos. Es el único registro de Dios cocinando en toda la Biblia. No hay nada teológicamente abstracto en esa imagen — es intimidad radical, servicio ordinario, presencia cotidiana.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿Hay heridas o fracasos en tu historia que crees que Dios preferiría que desaparecieran? ¿Qué cambiaría si creyeras que él quiere transformarlas en cicatrices glorificadas?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Escribe una experiencia dolorosa de tu historia que desearías poder borrar. Luego reescríbela con esta pregunta: ¿Cómo podría Dios estar usando exactamente eso — no a pesar de lo que dolió, sino por lo que dolió — para algo más grande?</div>
+      </div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap14b')" class="btn-nav btn-regresar">← Cap 14</button>
+      <button onclick="irA('cap16b')" class="btn-nav btn-siguiente">Cap 16 →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Jesús Es _____ · Judah Smith</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 15</div>
+    </div>
+  </div>
+</section>
+</div>
+<!-- ══ CAP16B ══ -->
+<div id="cap16b" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Jesús Es _____ · Judah Smith</div>
+      <div class="libro-header-paso">Capítulo 16</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>8 min</span></div>
+    <div class="body">
+      <div class="parte-header">
+        <div class="parte-label">Parte 6 · Jesús está Vivo</div>
+        <div class="parte-titulo">Un nuevo camino para ser genuinamente humano</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Central</div>
+        <div class="tesis-text">Jesús no vino a hacer mejores religiosos — vino a mostrar cómo se ve un ser humano funcionando como fue diseñado.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Prosa del Capítulo</span>
+      <div class="problema">Existe una tendencia en la teología popular a presentar a Jesús principalmente en su dimensión divina — como Dios que temporalmente habitó un cuerpo humano para pagar una deuda y luego volver a su naturaleza real. En ese marco, su humanidad es casi un disfraz, una condescendencia temporal. Y si eso es lo que fue, entonces Jesús como modelo de vida humana tiene sentido limitado.<br><br>Pero la Biblia afirma algo mucho más radical: que Jesús era completamente Dios y completamente humano — no en partes iguales mezcladas, sino en plenitud simultánea. Hebreos 4:15 dice que fue "tentado en todo según nuestra semejanza, pero sin pecado". No tentado en algunos puntos de humanidad. En todo. El hambre, el cansancio, la amistad, la traición, el miedo en Getsemaní, el abandono, la muerte.<br><br>Lo que Jesús vivió no fue una actuación de humanidad desde una posición privilegiada de divinidad. Fue humanidad real, plena, sin trampa. Y por eso es el modelo más útil posible: no porque sea tan diferente de nosotros, sino porque siendo lo que nosotros somos, vivió de un modo que nosotros aún no hemos logrado.<br><br>¿Qué se ve en esa humanidad? Alguien que sabe quién es sin necesidad de que nadie se lo confirme. Que sirve sin perder identidad. Que ama sin necesitar ser amado de vuelta para funcionar. Que enfrenta la injusticia sin amargura. Que descansa genuinamente. Que celebra y llora con igual autenticidad.</div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Puntos de Impacto</span>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;margin:1.25rem 0;">
+      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Jesús fue tentado en todo según nuestra semejanza — lo que significa que no hay experiencia humana de fragilidad que él no haya habitado.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La humanidad de Jesús no fue un disfraz temporal — fue tan real como su divinidad, y esa realidad lo hace el modelo más relevante posible.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Seguir a Jesús no es volverte menos humano por ser más espiritual — es volverte más humano, en el sentido más profundo y original del término.</div></div></div>      <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La imagen más completa de lo que significa ser humano no está en la filosofía ni en la psicología — está en los Evangelios.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Dato Clave</div>
+        <div class="dato-text">El título que Jesús usó más frecuentemente para referirse a sí mismo no fue "Hijo de Dios" sino "Hijo del Hombre" — enfatizando deliberadamente su identidad humana. No como negación de su divinidad sino como declaración de su solidaridad con la humanidad.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Reflexión</div>
+        <div class="accion-question">¿Tu imagen de santidad te hace más o menos humano? ¿Se parece eso a Jesús?</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Práctica</div>
+        <div class="accion-text">Esta semana, en lugar de preguntarte "¿qué haría un cristiano perfecto en esta situación?", pregúntate "¿qué haría Jesús — el Jesús que comió con pecadores, que lloró, que descansó, que celebró bodas — en este momento?" Observa si la respuesta cambia.</div>
+      </div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap15b')" class="btn-nav btn-regresar">← Cap 15</button>
+      <button onclick="irA('evaluacion')" class="btn-nav btn-siguiente">Evaluación →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Jesús Es _____ · Judah Smith</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Capítulo 16</div>
+    </div>
+  </div>
+</section>
+</div>
+<!-- ══ EVALUACION ══ -->
+<div id="evaluacion" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Jesús Es _____ · Judah Smith</div>
+      <div class="libro-header-paso">Curaduría de la Información</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>7 min</span></div>
+    <div class="body">
+      <div class="filtro-header">
+        <div class="filtro-label">Curaduría de la Información</div>
+        <div class="filtro-title">Evaluación rigurosa de los conceptos centrales desde fundamento teológico, psicológico y experiencial</div>
+      </div>
+
+      <div class="eval-grid">
+        <div class="eval-item">
+          <div class="eval-header">
+            <div class="eval-titulo">1. Jesús como amigo de pecadores — sin condición previa</div>
+            <div class="eval-scores"><span class="eval-score fid">Fid. 9/10</span><span class="eval-score apl">Apl. 10/10</span></div>
+          </div>
+          <div class="eval-text">El fundamento bíblico es sólido y directo: Lucas 19:1-10 (Zaqueo), Lucas 15 (el hijo pródigo), Mateo 11:19 donde los propios críticos de Jesús lo llaman "amigo de publicanos y pecadores". No es una interpretación forzada — es la descripción más literal posible de su comportamiento registrado. La psicología contemporánea también respalda el principio: las personas cambian más profundamente desde la aceptación incondicional que desde la presión condicional. Carl Rogers lo documentó extensamente en su teoría del cambio terapéutico.</div>
+        </div>
+        <div class="eval-item">
+          <div class="eval-header">
+            <div class="eval-titulo">2. La gracia como persona, no como sistema</div>
+            <div class="eval-scores"><span class="eval-score fid">Fid. 8/10</span><span class="eval-score apl">Apl. 9/10</span></div>
+          </div>
+          <div class="eval-text">El respaldo está en Juan 1:14, en la teología paulina de Gálatas y Romanos, y en la tradición teológica que va desde Agustín hasta Karl Barth, quien también insistió en que la gracia no es un atributo abstracto sino la acción personal de Dios en Jesucristo. El único punto de tensión es que Judah simplifica una discusión teológica rica. Para uso formativo básico, la idea es poderosa y correctamente fundamentada.</div>
+        </div>
+        <div class="eval-item">
+          <div class="eval-header">
+            <div class="eval-titulo">3. El propósito de la vida como conocer a Jesús</div>
+            <div class="eval-scores"><span class="eval-score fid">Fid. 9/10</span><span class="eval-score apl">Apl. 8/10</span></div>
+          </div>
+          <div class="eval-text">Juan 17:3 es el texto ancla y es usado con precisión exegética: la vida eterna definida como conocimiento relacional de Dios, no como destino geográfico. Concuerda con la tradición contemplativa cristiana — desde los Padres del Desierto hasta Thomas à Kempis. La aplicabilidad es alta pero requiere madurez: personas en crisis vocacional aguda pueden necesitar más andamiaje práctico antes de poder habitar esta idea con paz genuina.</div>
+        </div>
+        <div class="eval-item">
+          <div class="eval-header">
+            <div class="eval-titulo">4. Jesús es feliz — el Dios que disfruta</div>
+            <div class="eval-scores"><span class="eval-score fid">Fid. 8/10</span><span class="eval-score apl">Apl. 9/10</span></div>
+          </div>
+          <div class="eval-text">Hebreos 1:9, la asistencia de Jesús a bodas, su primer milagro en Caná, la atracción espontánea de los niños hacia él — todo señala una personalidad caracterizada por el gozo genuino. El riesgo menor es que en manos equivocadas esta idea puede derivar hacia un evangelio de bienestar superficial — algo que el propio Judah evita cuidadosamente con el capítulo sobre la presencia en el dolor.</div>
+        </div>
+        <div class="eval-item">
+          <div class="eval-header">
+            <div class="eval-titulo">5. La resurrección como realidad presente, no solo dogma</div>
+            <div class="eval-scores"><span class="eval-score fid">Fid. 9/10</span><span class="eval-score apl">Apl. 8/10</span></div>
+          </div>
+          <div class="eval-text">Pablo lo establece con claridad en Romanos 8:11 y en 1 Corintios 15 donde la resurrección de Cristo es "primicias" — primer fruto de una cosecha disponible para todos. La aplicabilidad es alta para personas en situaciones de aparente imposibilidad — pero requiere honestidad sobre los tiempos de Dios para no convertirse en un eslogan que minimice el dolor real del proceso.</div>
+        </div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Evaluación Global</div>
+        <div class="dato-text">Fiabilidad Global: 8.6/10 · Aplicabilidad Global: 8.8/10
+          <br><br>
+          Jesús Es _____ no es un libro de teología sistemática — y no pretende serlo. Es un libro de imagen: su función principal es limpiar el lente a través del cual una persona ve a Jesús. En esa función específica es extraordinariamente eficaz. Sus conceptos tienen raíces bíblicas sólidas, coherencia teológica suficiente y una aplicabilidad práctica inmediata que pocos libros de este género logran. No reemplaza la formación teológica profunda — la prepara. Es una puerta, no un destino.</div>
+      </div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('cap16b')" class="btn-nav btn-regresar">← Cap 16</button>
+      <button onclick="irA('comunicador')" class="btn-nav btn-siguiente">Judah Comunicador →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Jesús Es _____ · Judah Smith</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Curaduría de la Información</div>
+    </div>
+  </div>
+</section>
+</div>
+<!-- ══ COMUNICADOR ══ -->
+<div id="comunicador" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Jesús Es _____ · Judah Smith</div>
+      <div class="libro-header-paso">Judah como Comunicador</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>6 min</span></div>
+    <div class="body">
+      <div class="filtro-header">
+        <div class="filtro-label">Evaluación del Autor</div>
+        <div class="filtro-title">Judah Smith como Comunicador — 10 dimensiones evaluadas</div>
+      </div>
+
+      <div class="com-grid">
+        <div class="com-item"><div class="com-dim">1. Tesis Central</div><div class="com-score">9/10</div><div class="com-obs">Clara, sostenida y repetida desde ángulos distintos sin volverse redundante. Judah sabe exactamente lo que quiere dejar en el lector.</div></div>
+        <div class="com-item"><div class="com-dim">2. Estructura Narrativa</div><div class="com-score">7/10</div><div class="com-obs">Las seis afirmaciones organizan bien el libro, pero la progresión entre ellas no es siempre inevitable. Algunos capítulos podrían intercambiarse.</div></div>
+        <div class="com-item"><div class="com-dim">3. Densidad de Contenido</div><div class="com-score">7/10</div><div class="com-obs">Privilegia accesibilidad sobre profundidad. Cada idea podría desarrollarse con más textura teológica. Para lectores nuevos es la densidad correcta.</div></div>
+        <div class="com-item"><div class="com-dim">4. Recursos Retóricos</div><div class="com-score">9/10</div><div class="com-obs">Narrador excepcional. Su recontextualización de historias bíblicas en lenguaje contemporáneo es creativa, precisa y memorable. El humor es natural.</div></div>
+        <div class="com-item"><div class="com-dim">5. Conexión Emocional</div><div class="com-score">10/10</div><div class="com-obs">Su mayor don. La muerte de su padre, su honestidad sobre sus luchas — todo construye una atmósfera de confianza que hace que el lector baje la guardia.</div></div>
+        <div class="com-item"><div class="com-dim">6. Rigor de Fuentes</div><div class="com-score">6/10</div><div class="com-obs">Cita la Biblia extensamente y con precisión, pero casi no cita otras fuentes. La tradición teológica que respalda sus ideas está ausente.</div></div>
+        <div class="com-item"><div class="com-dim">7. Aplicabilidad</div><div class="com-score">9/10</div><div class="com-obs">Cada concepto aterriza en algo concreto y ejecutable. La capacidad de pasar de la teología a la práctica cotidiana en dos párrafos es notable.</div></div>
+        <div class="com-item"><div class="com-dim">8. Autenticidad</div><div class="com-score">10/10</div><div class="com-obs">No hay una sola página donde Judah suene a personaje. Escribe exactamente como habla — con humor, velocidad y un amor genuino por Jesús.</div></div>
+        <div class="com-item"><div class="com-dim">9. Manejo del Lenguaje</div><div class="com-score">8/10</div><div class="com-obs">Limpio, conversacional y culturalmente actual. Ocasionalmente sacrifica precisión por velocidad, pero la voz es consistente y auténtica.</div></div>
+        <div class="com-item"><div class="com-dim">10. Impacto Formativo</div><div class="com-score">9/10</div><div class="com-obs">El libro transforma la imagen que el lector tiene de Jesús, que es exactamente lo que se propone. Varios capítulos producen incomodidad productiva real.</div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="tesis-block">
+        <div class="tesis-label">Fortaleza Dominante</div>
+        <div class="tesis-text">La autenticidad emocional combinada con la capacidad narrativa. Judah no explica a Jesús — te lo pone enfrente a través de historias que sientes, no solo que entiendes. Eso es el recurso más poderoso y el más difícil de enseñar.</div>
+      </div>
+
+      <div class="accion-card" style="margin-top:1rem;">
+        <div class="accion-label">Área de Desarrollo</div>
+        <div class="accion-text">El rigor de fuentes y la profundidad teológica. El libro ganaría una dimensión adicional si Judah construyera puentes más explícitos entre su experiencia personal y la tradición teológica que lo respalda. No para volverse académico — sino para dar a sus ideas el peso histórico que merecen.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Puntaje Total</div>
+        <div class="dato-text">84 / 100</div>
+      </div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('evaluacion')" class="btn-nav btn-regresar">← Curaduría</button>
+      <button onclick="irA('resumen')" class="btn-nav btn-siguiente">Resumen Final →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Jesús Es _____ · Judah Smith</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Judah como Comunicador</div>
+    </div>
+  </div>
+</section>
+</div>
+<!-- ══ RESUMEN ══ -->
+<div id="resumen" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header">
+      <div class="libro-header-titulo">Jesús Es _____ · Judah Smith</div>
+      <div class="libro-header-paso">Resumen Final · Consolidación</div>
+    </div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>6 min</span></div>
+    <div class="body">
+      <div class="filtro-header">
+        <div class="filtro-label">Resumen Final</div>
+        <div class="filtro-title">Todo lo que este libro dice — en una sola lectura</div>
+      </div>
+
+      <div class="tesis-block">
+        <div class="tesis-label">Idea Madre</div>
+        <div class="tesis-text">La vida con Jesús no comienza cuando te arreglas, no se sostiene con esfuerzo religioso y no termina en una doctrina — comienza, se sostiene y culmina en un encuentro real con una persona que es amigo, gracia, propósito, alegría, presencia y vida simultáneamente.</div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Mapa de las Grandes Ideas</span>
+      <div style="display:flex;flex-direction:column;gap:1rem;margin:1.25rem 0;">
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text" style="font-weight:600;margin-bottom:0.3rem;color:var(--c-texto);">Jesús es amigo de pecadores — sin condición previa.</div><div class="idea-text">No busca a los que ya están bien. Busca a los que saben que no lo están. Zaqueo no fue llamado después de prometer cambiar. Fue llamado mientras estaba en el árbol, mirando de lejos, sin haber comprometido nada. La iniciativa siempre es de Dios, nunca del mérito humano.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text" style="font-weight:600;margin-bottom:0.3rem;color:var(--c-texto);">La gracia no es un sistema de perdón — es la naturaleza de una persona.</div><div class="idea-text">Jesús no trae gracia como recurso que administra: él es gracia. Mientras vivamos en Meritolandia — creyendo que el amor de Dios se gana con conducta correcta — estaremos exhaustos y espiritualmente solos, aunque conozcamos toda la teología correcta.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text" style="font-weight:600;margin-bottom:0.3rem;color:var(--c-texto);">Jesús es la respuesta a la pregunta más profunda, no uno de los temas importantes.</div><div class="idea-text">El propósito de la vida no es una misión que descubres — es una persona que conoces. Juan 17:3 define la vida eterna como conocer a Dios, no como alcanzar un destino.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text" style="font-weight:600;margin-bottom:0.3rem;color:var(--c-texto);">El Jesús real es feliz — y esa felicidad no es indiferencia al dolor.</div><div class="idea-text">El Jesús de cartón, sombrío y perpetuamente agónico, no existe en los Evangelios. Pero también llora en los funerales de sus amigos. Su alegría es profunda precisamente porque no depende de circunstancias — viene de su identidad como Hijo amado.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text" style="font-weight:600;margin-bottom:0.3rem;color:var(--c-texto);">Jesús no está en el pasado ni esperando en el futuro lejano — está aquí, ahora.</div><div class="idea-text">El mayor error práctico de la fe es tratar a Jesús como legado histórico. María lo buscó como cuerpo muerto y lo encontró vivo a su lado pronunciando su nombre. El Espíritu Santo no es una visita ocasional — es una presencia permanente, personal y activa.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text" style="font-weight:600;margin-bottom:0.3rem;color:var(--c-texto);">La resurrección no es solo un dogma que defender — es una realidad que habitar.</div><div class="idea-text">El mismo poder que sacó a Jesús de la tumba opera en la vida cotidiana del creyente. Las heridas no desaparecen — se glorifican, como las cicatrices de Jesús que permanecieron después de resucitar, transformadas en evidencia de victoria.</div></div></div>
+        <div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text" style="font-weight:600;margin-bottom:0.3rem;color:var(--c-texto);">Jesús es el modelo más completo de humanidad plena.</div><div class="idea-text">Seguirlo no es volverte menos humano por ser más espiritual — es volverte más humano en el sentido más original del término: alguien que sabe quién es, que sirve sin perder identidad, que ama sin necesitar aprobación para funcionar.</div></div></div>
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Lo que este libro cambia</span>
+      <div class="problema" style="margin-top:1rem;">
+        Este libro no cambia lo que sabes sobre Jesús — cambia la imagen que tienes de él. Y esa diferencia es todo. Una imagen pequeña, severa o distante produce una fe pequeña, severa y distante. Una imagen real — la del Jesús que llama a Zaqueo por su nombre, que llora con María, que cocina pescado en la playa — produce algo completamente diferente: una relación.
+      </div>
+
+      <hr class="rule">
+
+      <span class="eyebrow">Tres frases que deben quedar vivas</span>
+      <div style="display:flex;flex-direction:column;gap:0.75rem;margin:1.25rem 0;">
+        <div class="accion-card"><div class="accion-question">"Jesús no se detuvo bajo el árbol de Zaqueo porque Zaqueo fuera bueno. Se detuvo por su propia elección soberana. La iniciativa siempre es de Dios."</div></div>
+        <div class="accion-card"><div class="accion-question">"La gracia no baja el estándar moral — lo hace innecesario como condición de entrada."</div></div>
+        <div class="accion-card"><div class="accion-question">"Jesús no vino a hacer mejores religiosos. Vino a mostrar cómo se ve un ser humano funcionando como fue diseñado."</div></div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="dato-card">
+        <div class="dato-label">Si solo recordara una cosa</div>
+        <div class="dato-text">Jesús no está esperando que te arregles para acercarse — ya está de pie junto a ti, diciéndote tu nombre, y la única respuesta que necesita es que bajes del árbol.</div>
+      </div>
+
+      <hr class="rule">
+
+      <div class="accion-card">
+        <div class="accion-label">Aplicación Maestra</div>
+        <div class="accion-text">Completa esta frase sin filtro teológico, sin lenguaje de iglesia, con la primera respuesta honesta que llegue:</div>
+        <div class="accion-question">"Para mí, hoy, Jesús es ____."</div>
+        <div class="accion-text" style="margin-top:0.75rem;">Guarda esa respuesta. Vuelve a completarla en 30 días. La distancia entre ambas respuestas es el mapa de tu transformación real.</div>
+      </div>
+    </div>
+    <div class="nav-final">
+      <button onclick="irA('comunicador')" class="btn-nav btn-regresar">← Comunicador</button>
+      <button onclick="irA('portada')" class="btn-nav btn-siguiente">Volver al inicio →</button>
+    </div>
+    <div class="book-footer">
+      <div class="footer-title">Jesús Es _____ · Judah Smith</div>
+      <div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div>
+      <div class="footer-tag">Resumen Final · Consolidación</div>
+    </div>
+  </div>
+</section>
+</div>
+<script>
+  var FUENTES=['fuente-s','fuente-m','fuente-l','fuente-xl'],FUENTE_LABELS=['S','M','L','XL'],fuenteIdx=1;
+  var PAGINAS=['portada','filtro','intro','cap1','cap2','cap3','cap4','cap5','cap6','cap7','cap8','cap9','cap10b','cap11b','cap12b','cap13b','cap14b','cap15b','cap16b','evaluacion','comunicador','resumen'];
+  var paginaActual='portada';
+  var TIEMPOS={'filtro':'9 min','intro':'5 min','cap1':'8 min','cap2':'8 min','cap3':'8 min','cap4':'8 min','cap5':'8 min','cap6':'8 min','cap7':'8 min','cap8':'8 min','cap9':'8 min','cap10b':'8 min','cap11b':'8 min','cap12b':'8 min','cap13b':'8 min','cap14b':'8 min','cap15b':'8 min','cap16b':'8 min','evaluacion':'7 min','comunicador':'6 min','resumen':'6 min'};
+
+  function toggleConfig(){var p=document.getElementById('config-panel'),o=document.getElementById('config-overlay');if(p.classList.contains('abierto')){cerrarConfig();}else{p.classList.add('visible');o.classList.add('activo');requestAnimationFrame(function(){p.classList.add('abierto');});}}
+  function cerrarConfig(){var p=document.getElementById('config-panel');p.classList.remove('abierto');document.getElementById('config-overlay').classList.remove('activo');setTimeout(function(){p.classList.remove('visible');},200);}
+  function toggleDark(){var d=document.body.classList.toggle('dark');document.getElementById('toggle-dark').checked=d;}
+  function toggleLectura(){var l=document.body.classList.toggle('modo-lectura');document.getElementById('toggle-lectura').checked=l;}
+  function cambiarFuente(dir){var n=Math.max(0,Math.min(FUENTES.length-1,fuenteIdx+dir));if(n===fuenteIdx)return;fuenteIdx=n;document.querySelectorAll('.body').forEach(function(b){FUENTES.forEach(function(c){b.classList.remove(c);});b.classList.add(FUENTES[fuenteIdx]);});document.getElementById('fuente-nivel').textContent=FUENTE_LABELS[fuenteIdx];}
+  function abrirMenu(){document.getElementById('menu-panel').classList.add('abierto');document.getElementById('menu-overlay').classList.add('activo');cerrarConfig();}
+  function cerrarMenu(){document.getElementById('menu-panel').classList.remove('abierto');document.getElementById('menu-overlay').classList.remove('activo');}
+  function irA(id){
+    document.querySelectorAll('.pagina').forEach(function(p){p.classList.remove('visible');p.classList.add('oculta');});
+    var d=document.getElementById(id);d.classList.remove('oculta');d.classList.add('visible');d.scrollTop=0;
+    paginaActual=id;var ep=id==='portada';
+    document.getElementById('menu-btn').style.display=ep?'none':'flex';
+    document.getElementById('btn-config').style.display=ep?'none':'flex';
+    var b=document.getElementById('barra-progreso');b.style.display=ep?'none':'block';b.style.width='0%';
+    if(TIEMPOS[id]){var m=d.querySelector('.lectura-meta span');if(m)m.textContent=TIEMPOS[id];}
+    document.querySelectorAll('.menu-item').forEach(function(i){i.classList.toggle('activo',i.dataset.page===id);});
+    cerrarMenu();cerrarConfig();
+    d.onscroll=function(){var s=d.scrollHeight-d.clientHeight;if(s<=0){b.style.width='100%';return;}b.style.width=Math.min(100,Math.round((d.scrollTop/s)*100))+'%';};
+  }
+  var sx=0,sy=0,sm=false;
+  document.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY;sm=false;},{passive:true});
+  document.addEventListener('touchmove',function(){sm=true;},{passive:true});
+  document.addEventListener('touchend',function(e){
+    if(!sm)return;var dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;
+    if(Math.abs(dx)<50||Math.abs(dx)<Math.abs(dy)*1.5)return;
+    if(document.getElementById('menu-panel').classList.contains('abierto'))return;
+    if(document.getElementById('config-panel').classList.contains('abierto'))return;
+    var idx=PAGINAS.indexOf(paginaActual);
+    if(dx<0&&idx<PAGINAS.length-1)irA(PAGINAS[idx+1]);else if(dx>0&&idx>0)irA(PAGINAS[idx-1]);
+  },{passive:true});
+  document.addEventListener('click',function(e){var a=e.target.closest('a[href^="#"]');if(!a)return;var h=a.getAttribute('href');if(h==='#')return;var t=document.querySelector(h);if(t){e.preventDefault();var pv=document.querySelector('.pagina.visible');if(!pv)return;pv.scrollTo({top:t.getBoundingClientRect().top-pv.getBoundingClientRect().top+pv.scrollTop-16,behavior:'smooth'});}});
+</script>
+</body>
+</html>

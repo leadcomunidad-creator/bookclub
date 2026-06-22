@@ -43,6 +43,20 @@
       "capitulos": 10,
       "archivo": "libros/la-divina-conspiracion.html",
       "descripcion": "Una visión del Reino de Dios como realidad presente y disponible ahora, donde el discipulado consiste en aprender a vivir la vida que Jesús viviría si estuviera en nuestro lugar."
+    },
+    {
+      "titulo": "Jesús Es _____",
+      "autor": "Judah Smith",
+      "anio": 2013,
+      "expedicion": "mentalidad",
+      "sub_expedicion": "identidad",
+      "color_acento": "#8B1A1A",
+      "color_portada_inicio": "#080305",
+      "color_portada_fin": "#C0392B",
+      "tiempo_lectura_min": 130,
+      "capitulos": 16,
+      "archivo": "libros/jesus-es.html",
+      "descripcion": "Una invitación a limpiar la imagen que cargamos de Jesús y redescubrirlo como amigo, gracia, camino, alegría, presencia y vida."
     }
   ]
 }
