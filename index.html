@@ -594,7 +594,7 @@
     var subLabel = etiquetaSub(libro.expedicion, libro.sub_expedicion);
     var expLabel = etiquetaExp(libro.expedicion);
 
-    return '<a class="tarjeta" href="' + libro.archivo + '">' +
+    return '<a class="tarjeta" href="' + libro.archivo + '" target="_blank" rel="noopener noreferrer">' +
       '<div class="tarjeta-banda" style="background:' + libro.color_acento + '"></div>' +
       '<div class="tarjeta-portada" style="background:' + grad + '">' +
         '<div class="tarjeta-portada-overlay"></div>' +

@@ -57,6 +57,20 @@
       "capitulos": 16,
       "archivo": "libros/jesus-es.html",
       "descripcion": "Una invitación a limpiar la imagen que cargamos de Jesús y redescubrirlo como amigo, gracia, camino, alegría, presencia y vida."
+    },
+    {
+      "titulo": "Gana la guerra en tu mente",
+      "autor": "Craig Groeschel",
+      "anio": 2021,
+      "expedicion": "mentalidad",
+      "sub_expedicion": "renovacion",
+      "color_acento": "#2E2A7A",
+      "color_portada_inicio": "#07061F",
+      "color_portada_fin": "#1C6F78",
+      "tiempo_lectura_min": 75,
+      "capitulos": 12,
+      "archivo": "libros/gana-la-guerra-en-tu-mente.html",
+      "descripcion": "Una guía práctica para identificar las mentiras que gobiernan la mente, reemplazarlas por verdad y entrenar nuevas respuestas mediante reemplazo, recableado, replanteamiento y regocijo."
     }
   ]
 }

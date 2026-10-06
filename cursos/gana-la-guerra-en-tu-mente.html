@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#100E38">
+<title>Gana la guerra en tu mente — Craig Groeschel</title>
+<script type="application/json" id="libro-meta">
+{
+  "titulo": "Gana la guerra en tu mente",
+  "subtitulo": "De pensamientos automáticos a una vida dirigida por la verdad",
+  "autor": "Craig Groeschel",
+  "paginas_virtuales": 14,
+  "capitulos": 4,
+  "expedicion": "mentalidad",
+  "sub_expedicion": "renovacion",
+  "color_acento": "#2E2A7A",
+  "color_portada_inicio": "#07061F",
+  "color_portada_fin": "#1C6F78",
+  "tiempo_lectura_total_min": 30,
+  "archivo": "libros/gana-la-guerra-en-tu-mente.html"
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --c-acento:        #2E2A7A;
+    --c-acento-medio:  #4B45A6;
+    --c-acento-suave:  #3FC1B0;
+    --c-acento-claro:  #8FE3D6;
+    --c-acento-palido: #F1EBDC;
+    --c-acento-bg:     #D4D0E8;
+
+    --portada-grad: linear-gradient(155deg,#07061F 0%,#100E38 35%,#221E66 70%,#1C6F78 100%);
+    --header-grad:  linear-gradient(135deg, #100E38 0%, #221E66 100%);
+
+    --font-serif:  'Cormorant Garamond', Georgia, serif;
+    --font-body:   'Source Serif 4', Georgia, serif;
+
+    --c-accion:     #138A86;
+    --c-accion-bg:  #072B35;
+    --c-accion-txt: #D6F2EF;
+    --c-bg:         #F7F2E8;
+    --c-surface:    #FDFAF2;
+    --c-border:     #E3DDCF;
+    --c-texto:      #15132E;
+    --c-texto-2:    #4A4666;
+    --c-texto-3:    #7C7899;
+    --radio:        6px;
+    --radio-lg:     10px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; }
+  body { font-family: var(--font-body); color: var(--c-texto); background: var(--c-bg); }
+
+  /* ── PÁGINAS ── */
+  .pagina { position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow-y: auto; transition: opacity 0.4s ease, transform 0.4s ease; }
+  .pagina.oculta  { opacity: 0; pointer-events: none; transform: translateY(20px); }
+  .pagina.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+  /* ── BARRA PROGRESO ── */
+  #barra-progreso { position: fixed; top: 0; left: 0; z-index: 10000; height: 3px; width: 0%; background: linear-gradient(90deg, var(--c-acento-suave), var(--c-accion)); display: none; border-radius: 0 2px 2px 0; }
+
+  /* ── PORTADA ── */
+  #portada .c1 { position: absolute; top: -100px; right: -100px; width: 480px; height: 480px; border-radius: 50%; background: rgba(255,255,255,0.02); pointer-events: none; animation: flotar 9s ease-in-out infinite; }
+  #portada .c2 { position: absolute; bottom: -120px; left: -80px; width: 520px; height: 520px; border-radius: 50%; background: rgba(255,255,255,0.015); pointer-events: none; animation: flotar 11s ease-in-out infinite reverse; }
+  #portada .c3 { position: absolute; top: 50%; right: -180px; transform: translateY(-50%); width: 350px; height: 350px; border-radius: 50%; border: 1px solid rgba(63,193,176,0.08); pointer-events: none; animation: rotar 35s linear infinite; }
+
+  @keyframes flotar { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-20px) scale(1.015); } }
+  @keyframes rotar { from { transform: translateY(-50%) rotate(0deg); } to { transform: translateY(-50%) rotate(360deg); } }
+
+  .portada-inner { position: relative; z-index: 1; max-width: 580px; display: flex; flex-direction: column; align-items: center; opacity: 0; transform: translateY(28px); animation: entrar 1s cubic-bezier(0.22,1,0.36,1) 0.2s forwards; }
+  @keyframes entrar { to { opacity: 1; transform: translateY(0); } }
+
+  .p-eyebrow { font-family: var(--font-body); font-size: 10px; letter-spacing: 0.38em; text-transform: uppercase; color: #8E8BC9; margin-bottom: 2.75rem; opacity: 0; animation: entrar 0.8s ease 0.5s forwards; }
+  .p-ornament { font-size: 1.2rem; color: rgba(63,193,176,0.3); letter-spacing: 0.8em; margin-bottom: 1.5rem; opacity: 0; animation: entrar 0.8s ease 0.65s forwards; }
+  .p-titulo { font-family: var(--font-serif); font-size: clamp(2.4rem, 6vw, 3.8rem); font-weight: 300; color: #F3EBDD; line-height: 1.18; text-align: center; letter-spacing: 0.02em; opacity: 0; animation: entrar 0.9s ease 0.75s forwards; }
+  .p-titulo strong { font-weight: 600; color: #8FE3D6; display: block; }
+  .p-rule { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--c-acento-suave), transparent); margin: 2rem 0; opacity: 0; animation: entrar 0.8s ease 0.9s forwards; }
+  .p-autor { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 300; color: #A9A7E0; letter-spacing: 0.18em; margin-bottom: 0.35rem; opacity: 0; animation: entrar 0.8s ease 1s forwards; }
+  .p-fechas { font-size: 0.82rem; color: #7471AE; letter-spacing: 0.08em; margin-bottom: 3rem; font-family: var(--font-body); opacity: 0; animation: entrar 0.8s ease 1.05s forwards; }
+  .p-badge { border: 1px solid rgba(63,193,176,0.22); color: #8E8BC9; font-size: 9.5px; letter-spacing: 0.24em; padding: 6px 18px; border-radius: 40px; text-transform: uppercase; margin-bottom: 3.5rem; font-family: var(--font-body); opacity: 0; animation: entrar 0.8s ease 1.15s forwards; }
+  .btn-leer { display: inline-flex; align-items: center; gap: 10px; background: var(--c-acento-suave); color: #100E38; font-family: var(--font-serif); font-size: 1.05rem; font-weight: 600; padding: 1rem 2.75rem; border-radius: 4px; letter-spacing: 0.06em; box-shadow: 0 4px 24px rgba(0,0,0,0.35); transition: all 0.2s; border: none; cursor: pointer; opacity: 0; animation: entrar 0.9s cubic-bezier(0.22,1,0.36,1) 1.3s forwards; }
+  .btn-leer:hover { background: #8FE3D6; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+  .p-footer { position: absolute; bottom: 1.75rem; left: 0; right: 0; text-align: center; font-size: 9.5px; letter-spacing: 0.2em; color: #4B4A88; text-transform: uppercase; font-family: var(--font-body); opacity: 0; animation: entrar 0.8s ease 1.5s forwards; }
+
+  /* ── LAYOUT CONTENIDO ── */
+  .page { max-width: 720px; margin: 0 auto; background: var(--c-surface); border-radius: var(--radio); box-shadow: 0 4px 32px rgba(0,0,0,0.08); overflow: hidden; }
+  .libro-header { background: var(--header-grad); padding: 1.75rem 3rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .libro-header-titulo { font-family: var(--font-serif); font-style: italic; font-size: 1rem; color: #3FC1B0; font-weight: 300; }
+  .libro-header-paso { font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #2E2A7A; background: rgba(255,255,255,0.06); padding: 4px 12px; border-radius: 20px; white-space: nowrap; font-family: var(--font-body); }
+  .lectura-meta { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1.5rem; background: rgba(0,0,0,0.04); border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 10.5px; letter-spacing: 0.12em; color: var(--c-texto-3); text-transform: uppercase; font-family: var(--font-body); }
+  .lectura-meta span { color: var(--c-acento-medio); font-weight: 600; }
+  .body { padding: 2.75rem 3.5rem 3.5rem; }
+
+  /* ── TOC ── */
+  .toc { background: var(--c-acento-palido); border-radius: var(--radio-lg); padding: 1.5rem 1.75rem; margin-bottom: 3rem; }
+  .toc-titulo { font-family: var(--font-body); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-acento-medio); margin-bottom: 1rem; }
+  .toc-grid { display: flex; flex-direction: column; gap: 7px; }
+  .toc-btn { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid var(--c-acento-bg); border-radius: var(--radio); padding: 9px 12px; text-decoration: none; color: var(--c-texto); font-size: 15px; font-family: var(--font-body); transition: all 0.15s; cursor: pointer; }
+  .toc-btn:hover { background: var(--c-acento-palido); border-color: var(--c-acento-suave); transform: translateX(4px); }
+  .toc-num { width: 26px; height: 26px; border-radius: 50%; background: var(--c-acento-palido); border: 1px solid var(--c-acento-bg); color: var(--c-acento); font-size: 11px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: var(--font-body); }
+  .toc-arrow { margin-left: auto; color: var(--c-acento-claro); font-size: 12px; }
+
+  hr.rule { border: none; text-align: center; margin: 2.5rem 0; }
+  hr.rule::before { content: '— ✦ —'; font-size: 11px; color: var(--c-acento-bg); letter-spacing: 0.3em; }
+
+  .eyebrow { font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--c-acento-medio); margin-bottom: 0.6rem; display: block; padding-top: 0.4rem; font-family: var(--font-body); }
+
+  .filtro-header { border-left: 3px solid var(--c-acento-suave); padding: 0.85rem 1.35rem; background: var(--c-acento-palido); border-radius: 0 var(--radio) var(--radio) 0; margin-bottom: 2.25rem; }
+  .filtro-label { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-acento-medio); margin-bottom: 4px; font-family: var(--font-body); }
+  .filtro-title { font-family: var(--font-serif); font-size: 1.1rem; font-style: italic; font-weight: 300; color: var(--c-texto); line-height: 1.55; }
+
+  .author-card { display: flex; gap: 1.25rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radio); padding: 1.2rem 1.4rem; margin-bottom: 1.5rem; align-items: flex-start; }
+  .author-monogram { width: 52px; height: 52px; border-radius: 50%; background: var(--c-acento-palido); border: 1.5px solid var(--c-acento-bg); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 1.3rem; font-style: italic; color: var(--c-acento); flex-shrink: 0; }
+  .author-name { font-family: var(--font-serif); font-size: 1rem; font-weight: 600; color: var(--c-texto); margin-bottom: 5px; }
+  .author-bio { font-size: inherit; line-height: 1.75; }
+
+  .problema { background: #FAF6EC; border: 1px solid var(--c-border); border-radius: var(--radio); padding: 1.1rem 1.4rem; font-size: inherit; line-height: 1.8; }
+
+  .tesis-block { background: var(--c-acento-palido); border-radius: var(--radio-lg); padding: 2rem 2.25rem; margin: 1.25rem 0; position: relative; overflow: hidden; }
+  .tesis-block::before { content: '\201C'; font-family: var(--font-serif); font-size: 7rem; color: var(--c-acento-suave); opacity: 0.2; position: absolute; top: -10px; left: 12px; line-height: 1; pointer-events: none; }
+  .tesis-label { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-acento-medio); margin-bottom: 0.75rem; position: relative; z-index: 1; font-family: var(--font-body); }
+  .tesis-text { font-family: var(--font-serif); font-size: 1.12rem; font-style: italic; font-weight: 300; color: #1F1B45; line-height: 1.78; position: relative; z-index: 1; }
+
+  .idea { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start; }
+  .idea-num { width: 30px; height: 30px; border-radius: 50%; background: var(--c-acento-palido); border: 1px solid var(--c-acento-bg); color: var(--c-acento); font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 3px; }
+  .idea-body { flex: 1; }
+  .idea-text { font-size: inherit; line-height: 1.8; }
+
+  .dato-card { background: var(--c-accion-bg); border-radius: var(--radio-lg); padding: 1.75rem 2rem; margin: 1.25rem 0; }
+  .dato-label { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #5CD0C8; margin-bottom: 0.75rem; font-family: var(--font-body); }
+  .dato-text { font-family: var(--font-serif); font-size: 1.06rem; font-style: italic; font-weight: 300; color: var(--c-accion-txt); line-height: 1.8; }
+
+  .accion-card { background: var(--c-surface); border: 1px solid #BFE0DD; border-top: 3px solid var(--c-accion); border-radius: var(--radio); padding: 1.5rem 1.75rem; margin: 1.25rem 0; }
+  .accion-label { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #0B6A68; margin-bottom: 0.75rem; font-family: var(--font-body); }
+  .accion-text { font-size: inherit; line-height: 1.8; }
+  .accion-question { font-family: var(--font-serif); font-style: italic; font-weight: 300; font-size: 1.05rem; color: #0B6A68; line-height: 1.7; border-left: 2.5px solid var(--c-accion); padding-left: 1rem; margin: 0.9rem 0; }
+
+  .alerta-card { background: #F3F6F2; border: 1px solid #CFE6E3; border-left: 3px solid var(--c-acento-suave); border-radius: var(--radio); padding: 1.25rem 1.5rem; margin: 1.25rem 0; }
+  .alerta-label { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-acento-medio); margin-bottom: 0.6rem; font-family: var(--font-body); }
+  .alerta-text { font-size: inherit; line-height: 1.75; font-style: italic; }
+
+  .veredicto-card { background: linear-gradient(135deg, #100E38 0%, #201C58 100%); border-radius: var(--radio-lg); padding: 2rem 2.25rem; margin: 1.25rem 0; }
+  .veredicto-label { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-acento-claro); margin-bottom: 0.6rem; font-family: var(--font-body); }
+  .veredicto-badge { display: inline-block; background: var(--c-acento); color: #fff; font-family: var(--font-serif); font-style: italic; font-size: 1rem; border-radius: 3px; padding: 4px 14px; margin-bottom: 1rem; }
+  .veredicto-text { font-size: inherit; line-height: 1.85; }
+
+  .eval-grid { display: flex; flex-direction: column; gap: 1rem; margin: 1.25rem 0; }
+  .eval-item { background: #FAF6EC; border: 1px solid var(--c-border); border-radius: var(--radio); padding: 1rem 1.25rem; }
+  .eval-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
+  .eval-titulo { font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; color: var(--c-texto); }
+  .eval-scores { display: flex; gap: 0.5rem; }
+  .eval-score { font-size: 0.78rem; padding: 2px 8px; border-radius: 20px; font-family: var(--font-body); font-weight: 600; }
+  .eval-score.fid { background: var(--c-acento-palido); color: var(--c-acento); }
+  .eval-score.apl { background: #DDF1EF; color: #0B6A68; }
+  .eval-text { font-size: inherit; line-height: 1.7; }
+
+  .com-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1.25rem 0; }
+  .com-item { background: #FAF6EC; border: 1px solid var(--c-border); border-radius: var(--radio); padding: 0.9rem 1rem; }
+  .com-dim { font-size: 0.75rem; font-weight: 600; color: var(--c-texto-3); margin-bottom: 0.3rem; font-family: var(--font-body); }
+  .com-score { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 600; color: var(--c-acento); margin-bottom: 0.3rem; }
+  .com-obs { font-size: 0.82em; line-height: 1.55; }
+
+  .nav-final { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; padding: 2rem 3rem 2.5rem; border-top: 1px solid var(--c-border); }
+  .btn-nav { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-serif); font-style: italic; font-weight: 300; font-size: 1rem; padding: 0.8rem 1.75rem; border-radius: 4px; border: none; cursor: pointer; transition: all 0.15s; }
+  .btn-regresar { background: var(--c-acento-palido); color: var(--c-acento); border: 1px solid var(--c-acento-bg); }
+  .btn-regresar:hover { background: var(--c-acento-bg); transform: translateY(-1px); }
+  .btn-siguiente { background: var(--c-acento); color: #fff; box-shadow: 0 3px 12px rgba(46,42,122,0.3); }
+  .btn-siguiente:hover { background: #1F1B52; transform: translateY(-1px); }
+
+  .book-footer { background: #100E38; padding: 1rem 3rem; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+  .footer-title { font-family: var(--font-serif); font-style: italic; font-weight: 300; font-size: 0.88rem; color: var(--c-acento-suave); }
+  .footer-tag { font-size: 10px; letter-spacing: 0.15em; color: #4B4A88; text-transform: uppercase; font-family: var(--font-body); }
+  .footer-firma { font-size: 11px; color: #4B4A88; font-family: var(--font-body); letter-spacing: 0.04em; margin-top: 0.15rem; }
+
+  /* ── CONTROL TAMAÑO DE LETRA ── */
+  #ctrl-fuente {
+    position: fixed; bottom: 8.5rem; right: 1.5rem; z-index: 9999;
+    display: none; flex-direction: column; align-items: center;
+    background: #100E38; border: 1.5px solid rgba(63,193,176,0.3);
+    border-radius: 6px; overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .ctrl-fuente-btn {
+    width: 44px; height: 36px; background: none; border: none;
+    color: #3FC1B0; cursor: pointer; font-family: var(--font-body);
+    font-size: 0.85rem; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s; line-height: 1;
+  }
+  .ctrl-fuente-btn:hover { background: rgba(63,193,176,0.1); }
+  .ctrl-fuente-sep { width: 28px; height: 1px; background: rgba(63,193,176,0.15); }
+  .ctrl-fuente-nivel {
+    font-size: 9px; color: #7471AE; font-family: var(--font-body);
+    letter-spacing: 0.1em; padding: 3px 0 4px;
+  }
+  body.dark #ctrl-fuente { background: #FAF6EC; border-color: var(--c-acento-bg); }
+  body.dark .ctrl-fuente-btn { color: var(--c-acento); }
+  body.dark .ctrl-fuente-btn:hover { background: var(--c-acento-palido); }
+  body.dark .ctrl-fuente-nivel { color: var(--c-texto-3); }
+  body.dark .ctrl-fuente-sep { background: var(--c-border); }
+
+  /* Tamaños aplicables solo al cuerpo de lectura */
+  /* Tamaño de letra — escala todo el body de lectura */
+  .body { --escala: 1; font-size: calc(16px * var(--escala)); }
+  .body.fuente-s  { --escala: 0.875; }
+  .body.fuente-m  { --escala: 1; }
+  .body.fuente-l  { --escala: 1.125; }
+  .body.fuente-xl { --escala: 1.25; }
+
+  /* Todos los textos del body heredan la escala */
+  .body .problema      { font-size: inherit; }
+  .body .idea-text     { font-size: inherit; }
+  .body .tesis-text    { font-size: 1.05em; }
+  .body .filtro-title  { font-size: 1.05em; }
+  .body .dato-text     { font-size: inherit; }
+  .body .accion-text   { font-size: inherit; }
+  .body .accion-question { font-size: 1em; }
+  .body .alerta-text   { font-size: inherit; }
+  .body .veredicto-text { font-size: inherit; }
+  .body .eval-text     { font-size: inherit; }
+  .body .author-bio    { font-size: inherit; }
+  .body .author-name   { font-size: 1em; }
+  .body .eval-titulo   { font-size: 0.9em; }
+  .body .com-obs       { font-size: 0.82em; }
+
+  /* ── BOTÓN CONFIGURACIÓN ── */
+  #btn-config {
+    position: fixed; top: 1rem; right: 1rem; z-index: 9999;
+    width: 44px; height: 44px; border-radius: 4px;
+    background: rgba(16,14,56,0.88); border: 1px solid rgba(63,193,176,0.28);
+    backdrop-filter: blur(8px); color: #3FC1B0; font-size: 1.05rem;
+    display: none; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  #btn-config:hover { background: rgba(34,30,102,0.95); }
+  body.dark #btn-config { background: rgba(250,246,236,0.92); color: var(--c-acento); border-color: var(--c-acento-bg); }
+
+  /* ── PANEL CONFIGURACIÓN ── */
+  #config-overlay { position: fixed; inset: 0; z-index: 9998; background: rgba(0,0,0,0.2); opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+  #config-overlay.activo { opacity: 1; pointer-events: auto; }
+
+  #config-panel {
+    position: fixed; top: 4rem; right: 1rem; z-index: 9999;
+    width: 210px; background: #100E38;
+    border: 1px solid rgba(63,193,176,0.22);
+    border-radius: 8px; box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+    display: none; flex-direction: column; overflow: hidden;
+    transform: translateY(-6px); opacity: 0;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  #config-panel.visible { display: flex; }
+  #config-panel.abierto { transform: translateY(0); opacity: 1; }
+  body.dark #config-panel { background: #FAF6EC; border-color: var(--c-acento-bg); }
+
+  .config-seccion-label {
+    font-size: 8.5px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #7471AE; padding: 0.75rem 1rem 0.3rem; font-family: var(--font-body);
+  }
+  body.dark .config-seccion-label { color: var(--c-texto-3); }
+
+  .config-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.5rem 1rem 0.75rem; gap: 0.5rem;
+  }
+  .config-row-label {
+    font-size: 13px; color: #D9D5EE; font-family: var(--font-body);
+  }
+  body.dark .config-row-label { color: var(--c-texto-2); }
+
+  /* Toggle switch */
+  .toggle-wrap { position: relative; width: 40px; height: 22px; flex-shrink: 0; }
+  .toggle-wrap input { opacity: 0; width: 0; height: 0; position: absolute; }
+  .toggle-track {
+    position: absolute; inset: 0; background: #2F2B6B;
+    border-radius: 22px; cursor: pointer; transition: background 0.2s;
+    border: 1px solid rgba(63,193,176,0.15);
+  }
+  .toggle-wrap input:checked + .toggle-track { background: var(--c-acento); }
+  .toggle-track::after {
+    content: ''; position: absolute; width: 16px; height: 16px;
+    background: #D9D5EE; border-radius: 50%; top: 2px; left: 2px;
+    transition: transform 0.2s;
+  }
+  .toggle-wrap input:checked + .toggle-track::after { transform: translateX(18px); background: #fff; }
+  body.dark .toggle-track { background: var(--c-border); border-color: var(--c-border); }
+  body.dark .toggle-track::after { background: var(--c-texto-3); }
+  body.dark .toggle-wrap input:checked + .toggle-track { background: var(--c-acento); }
+  body.dark .toggle-wrap input:checked + .toggle-track::after { background: #fff; }
+
+  /* Fuente control */
+  .fuente-ctrl { display: flex; align-items: center; gap: 0; border: 1px solid rgba(63,193,176,0.2); border-radius: 4px; overflow: hidden; }
+  .fuente-btn {
+    width: 32px; height: 28px; background: none; border: none;
+    color: #3FC1B0; cursor: pointer; font-family: var(--font-body);
+    font-size: 0.82rem; font-weight: 600; transition: background 0.15s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .fuente-btn:hover { background: rgba(63,193,176,0.12); }
+  .fuente-val {
+    min-width: 28px; text-align: center; font-size: 11px;
+    color: #8E8BC9; font-family: var(--font-body); border-left: 1px solid rgba(63,193,176,0.15); border-right: 1px solid rgba(63,193,176,0.15); padding: 0 4px;
+  }
+  body.dark .fuente-btn { color: var(--c-acento); }
+  body.dark .fuente-val { color: var(--c-texto-3); border-color: var(--c-border); }
+  body.dark .fuente-ctrl { border-color: var(--c-border); }
+
+  .config-sep { height: 1px; background: rgba(63,193,176,0.1); margin: 0 0.75rem; }
+  body.dark .config-sep { background: var(--c-border); }
+
+  /* ── MENÚ ── */
+  #menu-btn { position: fixed; top: 1rem; left: 1rem; z-index: 9999; width: 44px; height: 44px; border-radius: 4px; background: rgba(16,14,56,0.85); border: 1px solid rgba(63,193,176,0.25); backdrop-filter: blur(8px); color: #3FC1B0; font-size: 1rem; display: none; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+  #menu-btn:hover { background: rgba(34,30,102,0.9); }
+
+  #menu-overlay { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.4); opacity: 0; pointer-events: none; transition: opacity 0.28s ease; }
+  #menu-overlay.activo { opacity: 1; pointer-events: auto; }
+
+  #menu-panel { position: fixed; top: 0; left: 0; bottom: 0; width: 290px; z-index: 10000; background: #100E38; box-shadow: 4px 0 32px rgba(0,0,0,0.4); transform: translateX(-100%); transition: transform 0.28s cubic-bezier(0.4,0,0.2,1); display: flex; flex-direction: column; overflow-y: auto; }
+  #menu-panel.abierto { transform: translateX(0); }
+
+  .menu-header { padding: 1.5rem 1.5rem 1rem; border-bottom: 1px solid rgba(63,193,176,0.12); display: flex; align-items: center; justify-content: space-between; }
+  .menu-titulo { font-family: var(--font-serif); font-style: italic; font-weight: 300; font-size: 0.95rem; color: var(--c-acento-suave); }
+  .menu-close { background: none; border: none; cursor: pointer; color: var(--c-acento-medio); font-size: 1.1rem; padding: 4px; line-height: 1; }
+  .menu-seccion { padding: 0.5rem 0; border-bottom: 1px solid rgba(63,193,176,0.08); }
+  .menu-seccion-label { font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: #7471AE; padding: 0.5rem 1.5rem 0.25rem; font-family: var(--font-body); }
+  .menu-item { display: flex; align-items: center; gap: 0.85rem; width: 100%; padding: 0.7rem 1.5rem; background: none; border: none; cursor: pointer; text-align: left; transition: background 0.15s; font-family: var(--font-body); }
+  .menu-item:hover { background: rgba(63,193,176,0.06); }
+  .menu-item.activo { background: rgba(63,193,176,0.1); }
+  .menu-item-num { width: 26px; height: 26px; border-radius: 3px; flex-shrink: 0; background: rgba(63,193,176,0.1); border: 1px solid rgba(63,193,176,0.2); color: var(--c-acento-suave); font-size: 11px; display: flex; align-items: center; justify-content: center; }
+  .menu-item.activo .menu-item-num { background: var(--c-acento); border-color: var(--c-acento); color: #fff; }
+  .menu-item-titulo { font-size: 14px; color: #D9D5EE; line-height: 1.3; }
+  .menu-item-sub { font-size: 11px; color: #7471AE; margin-top: 1px; font-style: italic; }
+
+  /* ── MENÚ ── */
+  body.dark { background: #07061F; color: #D9D5EE; }
+  body.dark .page { background: #100E38; box-shadow: 0 4px 32px rgba(0,0,0,0.5); }
+  body.dark .libro-header { background: linear-gradient(135deg, #07061F 0%, #100E38 100%); }
+  body.dark .body { background: #100E38; }
+  body.dark .filtro-header { background: #1A1746; border-left-color: var(--c-acento-suave); }
+  body.dark .filtro-title { color: #D9D5EE; }
+  body.dark .tesis-block { background: #1A1746; }
+  body.dark .tesis-text { color: #D9D5EE; }
+  body.dark .problema { background: #1A1746; border-color: #2F2B6B; color: #B6B3D6; }
+  body.dark .idea-num { background: #201C58; border-color: #3C3786; color: var(--c-acento-suave); }
+  body.dark .idea-text { color: #B6B3D6; }
+  body.dark .toc { background: #1A1746; }
+  body.dark .toc-btn { background: #100E38; border-color: #2F2B6B; color: #D9D5EE; }
+  body.dark .toc-btn:hover { background: #201C58; }
+  body.dark .toc-num { background: #201C58; border-color: #3C3786; color: var(--c-acento-suave); }
+  body.dark .accion-card { background: #0A1F2C; border-color: #17394A; }
+  body.dark .alerta-card { background: #1A1746; border-color: #2F2B6B; }
+  body.dark .alerta-text { color: #B6B3D6; }
+  body.dark .eval-item { background: #1A1746; border-color: #2F2B6B; }
+  body.dark .eval-text { color: #B6B3D6; }
+  body.dark .com-item { background: #1A1746; border-color: #2F2B6B; }
+  body.dark .com-obs { color: #B6B3D6; }
+  body.dark .nav-final { border-top-color: #2F2B6B; background: #100E38; }
+  body.dark .btn-regresar { background: #201C58; color: var(--c-acento-suave); border-color: #3C3786; }
+  body.dark #btn-config { background: rgba(250,246,236,0.92); color: var(--c-acento); border-color: var(--c-acento-bg); }
+  body.dark hr.rule::before { color: #2F2B6B; }
+  body.dark .author-card { background: #100E38; border-color: #2F2B6B; }
+  body.dark .author-name { color: #D9D5EE; }
+  body.dark .author-bio { color: #B6B3D6; }
+
+  body.modo-lectura .libro-header { display: none; }
+  body.modo-lectura .lectura-meta { display: none; }
+  body.modo-lectura .book-footer { display: none; }
+  body.modo-lectura .nav-final { display: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 780px) { .page { border-radius: 0; } .body { padding: 2rem 2rem 3rem; } .libro-header { padding: 1.4rem 2rem; } .nav-final { padding: 1.75rem 2rem; } .book-footer { padding: 1rem 2rem; } .com-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 600px) { .p-titulo { font-size: clamp(1.9rem, 7vw, 2.4rem); } .page { border-radius: 0; box-shadow: none; } .libro-header { padding: 1rem 1.25rem; flex-direction: column; align-items: flex-start; gap: 0.5rem; } .body { padding: 1.4rem 1.1rem 2rem; } .filtro-title { font-size: 1rem; } .tesis-text { font-size: 1rem; } .problema { font-size: 14.5px; } .idea-text { font-size: 14px; } .nav-final { padding: 1.4rem 1.1rem; gap: 0.75rem; } .btn-nav { font-size: 0.9rem; padding: 0.7rem 1.3rem; flex: 1; justify-content: center; } .book-footer { padding: 1rem 1.25rem; flex-direction: column; text-align: center; gap: 0.4rem; } #config-panel { right: 0.5rem; width: 195px; } }
+
+.libro-header-paso{color:#8FE3D6}.p-ornament svg{max-width:100%;height:auto}.p-footer{color:#7471AE}
+.p-sub{font-family:var(--font-serif);font-style:italic;font-size:1.1rem;color:#A9A7E0;margin-bottom:2.5rem;max-width:30ch;line-height:1.5;opacity:0;animation:entrar .8s ease 1.05s forwards}
+.body p{margin:0 0 1rem;line-height:1.85}.body p:last-child{margin-bottom:0}
+.lista{margin:0 0 1rem 1.2rem;line-height:1.8}.lista li{margin-bottom:.35rem}
+.blank{display:inline-block;min-width:5.5em;border-bottom:1.5px solid var(--c-acento-suave);margin:0 .15em}
+.campos{display:flex;flex-direction:column;gap:.7rem;margin:.9rem 0}
+.campo{display:flex;align-items:baseline;gap:.75rem;flex-wrap:wrap}
+.campo-l{font-size:.74em;letter-spacing:.12em;text-transform:uppercase;color:#0B6A68;font-weight:600;font-family:var(--font-body)}
+.campo .blank{flex:1;min-width:8em}
+.destacado{font-family:var(--font-serif);font-size:1.12em;font-style:italic;border-left:2.5px solid var(--c-accion);padding:.15rem 0 .15rem 1rem;margin:.9rem 0;line-height:1.65;color:#0B6A68}
+.destacado strong{font-weight:500}
+.clave{list-style:none;margin:1rem 0;padding:0;display:flex;flex-direction:column;gap:.5rem}
+.clave li{background:var(--c-acento-palido);border-left:3px solid var(--c-acento-suave);padding:.55rem .9rem;border-radius:0 6px 6px 0;line-height:1.55}
+.flecha{text-align:center;color:var(--c-accion);font-size:1.4rem;margin:.2rem 0 .8rem}
+.sec-titulo{font-family:var(--font-serif);font-size:1.7em;font-weight:600;color:var(--c-acento);line-height:1.25;margin:0 0 1rem}
+.hdr-sec{margin-top:2.2rem}
+.sub{font-family:var(--font-serif);font-size:1.25em;font-weight:600;color:var(--c-accion);margin:1.6rem 0 .6rem}
+.subtitulo{font-family:var(--font-serif);font-style:italic;font-size:1.2em;color:var(--c-acento-medio);margin:0 0 1.5rem;line-height:1.5}
+.big{font-family:var(--font-serif);font-size:1.7em;font-weight:600;letter-spacing:.04em;color:var(--c-acento);margin:1.2rem 0 .6rem}
+.dia-card{background:var(--c-surface);border:1px solid var(--c-border);border-left:3px solid var(--c-accion);border-radius:6px;padding:1.1rem 1.4rem;margin:1.1rem 0}
+.dia-t{font-family:var(--font-serif);font-weight:600;font-size:1.15em;color:var(--c-acento);margin-bottom:.6rem}
+.basado{font-family:var(--font-serif);font-style:italic;color:var(--c-acento-medio);margin-bottom:2rem}
+.tesis-text p,.dato-text p,.alerta-text p,.veredicto-text p{margin-bottom:.8rem}.tesis-text{font-style:normal}
+.tesis-text .destacado{color:#2A1F4E;border-left:0;padding:0;font-size:1em;margin:0 0 .8rem}.veredicto-text{color:#E6E2F5}
+.veredicto-text .destacado,.dato-text .destacado{color:#8FE3D6;border-color:#3FC1B0}
+.eyebrow{margin-top:1.4rem}.tesis-block,.dato-card,.veredicto-card{margin-top:1.4rem}
+body.dark .dia-card,body.dark .clave li{background:#1A1746;border-color:#2F2B6B}
+body.dark .destacado,body.dark .campo-l{color:#5CD0C8}body.dark .tesis-text .destacado{color:#8FE3D6}
+body.dark .sec-titulo,body.dark .dia-t,body.dark .big{color:#B9B6F0}body.dark .sub{color:#5CD0C8}
+body.dark .subtitulo,body.dark .basado{color:#A9A7E0}
+@media(max-width:600px){.sec-titulo,.big{font-size:1.45em}.dia-card{padding:1rem}.campo-l{font-size:.7em}}
+</style>
+</head>
+<body>
+<div id="menu-overlay" onclick="cerrarMenu()"></div>
+<div id="menu-panel"><div class="menu-header"><span class="menu-titulo">Gana la guerra en tu mente</span><button class="menu-close" onclick="cerrarMenu()" aria-label="Cerrar">✕</button></div><div class="menu-seccion"><div class="menu-seccion-label">Primera parte · Panorama</div><button class="menu-item" onclick="irA('p1')" data-page="p1"><span class="menu-item-num">1</span><span class="menu-item-texto"><div class="menu-item-titulo">Tesis, propósito y perfil</div><div class="menu-item-sub">Tesis · Propósito · Perfil · Mentalidad</div></span></button><button class="menu-item" onclick="irA('p2')" data-page="p2"><span class="menu-item-num">2</span><span class="menu-item-texto"><div class="menu-item-titulo">Modelo e introducción</div><div class="menu-item-sub">Entender · Interiorizar · Aplicar</div></span></button></div><div class="menu-seccion"><div class="menu-seccion-label">Ruta de cuatro semanas</div><button class="menu-item" onclick="irA('s1')" data-page="s1"><span class="menu-item-num">3</span><span class="menu-item-texto"><div class="menu-item-titulo">Semana 1 — Reemplazo</div><div class="menu-item-sub">Reemplazo</div></span></button><button class="menu-item" onclick="irA('s2')" data-page="s2"><span class="menu-item-num">4</span><span class="menu-item-texto"><div class="menu-item-titulo">Semana 2 — Recableado</div><div class="menu-item-sub">Recableado</div></span></button><button class="menu-item" onclick="irA('s3')" data-page="s3"><span class="menu-item-num">5</span><span class="menu-item-texto"><div class="menu-item-titulo">Semana 3 — Replanteamiento</div><div class="menu-item-sub">Replanteamiento</div></span></button><button class="menu-item" onclick="irA('s4')" data-page="s4"><span class="menu-item-num">6</span><span class="menu-item-texto"><div class="menu-item-titulo">Semana 4 — Regocijo</div><div class="menu-item-sub">Regocijo</div></span></button><button class="menu-item" onclick="irA('p3')" data-page="p3"><span class="menu-item-num">7</span><span class="menu-item-texto"><div class="menu-item-titulo">Progresión, resultado y fidelidad</div><div class="menu-item-sub">Cierre de la ruta</div></span></button></div><div class="menu-seccion"><div class="menu-seccion-label">Segunda parte · Versión final</div><button class="menu-item" onclick="irA('m0')" data-page="m0"><span class="menu-item-num">8</span><span class="menu-item-texto"><div class="menu-item-titulo">Fundamentos de la versión final</div><div class="menu-item-sub">Tesis · Propósito · Perfil · Modelo</div></span></button><button class="menu-item" onclick="irA('b1')" data-page="b1"><span class="menu-item-num">9</span><span class="menu-item-texto"><div class="menu-item-titulo">Bloque 1 · Reemplazo</div><div class="menu-item-sub">Reemplazo</div></span></button><button class="menu-item" onclick="irA('b2')" data-page="b2"><span class="menu-item-num">10</span><span class="menu-item-texto"><div class="menu-item-titulo">Bloque 2 · Recableado</div><div class="menu-item-sub">Recableado</div></span></button><button class="menu-item" onclick="irA('b3')" data-page="b3"><span class="menu-item-num">11</span><span class="menu-item-texto"><div class="menu-item-titulo">Bloque 3 · Replanteamiento</div><div class="menu-item-sub">Replanteamiento</div></span></button><button class="menu-item" onclick="irA('b4')" data-page="b4"><span class="menu-item-num">12</span><span class="menu-item-texto"><div class="menu-item-titulo">Bloque 4 · Regocijo</div><div class="menu-item-sub">Regocijo</div></span></button><button class="menu-item" onclick="irA('f1')" data-page="f1"><span class="menu-item-num">13</span><span class="menu-item-texto"><div class="menu-item-titulo">Progresión, resultado y fidelidad · versión final</div><div class="menu-item-sub">Progresión · Resultado · Fidelidad</div></span></button></div><div class="menu-seccion"><div class="menu-seccion-label">Cierre</div><button class="menu-item" onclick="irA('cierre')" data-page="cierre"><span class="menu-item-num">14</span><span class="menu-item-texto"><div class="menu-item-titulo">Cierre</div><div class="menu-item-sub">El corazón formativo</div></span></button></div></div>
+<button id="menu-btn" onclick="abrirMenu()" aria-label="Índice">☰</button>
+<button id="btn-config" onclick="toggleConfig()" aria-label="Ajustes de lectura">⚙︎</button>
+<div id="config-overlay" onclick="cerrarConfig()"></div>
+<div id="config-panel">
+  <div class="config-seccion-label">Apariencia</div>
+  <div class="config-row"><span class="config-row-label">Modo oscuro</span><label class="toggle-wrap"><input type="checkbox" id="toggle-dark" onchange="toggleDark()"><span class="toggle-track"></span></label></div>
+  <div class="config-sep"></div>
+  <div class="config-row"><span class="config-row-label">Lectura limpia</span><label class="toggle-wrap"><input type="checkbox" id="toggle-lectura" onchange="toggleLectura()"><span class="toggle-track"></span></label></div>
+  <div class="config-sep"></div>
+  <div class="config-seccion-label">Tamaño de letra</div>
+  <div class="config-row"><span class="config-row-label">Texto</span><div class="fuente-ctrl"><button class="fuente-btn" onclick="cambiarFuente(-1)">A−</button><span class="fuente-val" id="fuente-nivel">M</span><button class="fuente-btn" onclick="cambiarFuente(1)">A+</button></div></div>
+</div>
+<div id="barra-progreso"></div>
+<div id="portada" class="pagina visible">
+<section style="min-height:100vh;background:var(--portada-grad);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem 2rem;position:relative;overflow:hidden;">
+  <div class="c1"></div><div class="c2"></div><div class="c3"></div>
+  <div class="portada-inner">
+    <div class="p-eyebrow">Resumen Editorial · Mentor de Conocimiento</div>
+    <div class="p-ornament"><svg viewBox="0 0 260 56" width="260" height="56" aria-hidden="true"><path d="M4 30C20 4 34 54 50 28S76 6 88 30s16 22 24-2" fill="none" stroke="#8E8BC9" stroke-width="1.6" stroke-linecap="round" opacity=".75"/><path d="M126 28h32M152 22l8 6-8 6" fill="none" stroke="#8FE3D6" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M172 28h80" stroke="#8FE3D6" stroke-width="2" stroke-linecap="round"/><circle cx="252" cy="28" r="3.5" fill="#8FE3D6"/></svg></div>
+    <div class="p-titulo"><strong>Gana la guerra</strong>en tu mente</div>
+    <div class="p-rule"></div>
+    <div class="p-autor">Craig Groeschel</div>
+    <div class="p-sub">De pensamientos automáticos a una vida dirigida por la verdad</div>
+    <div class="p-badge">Mentalidad → Renovación</div>
+    <button class="btn-leer" onclick="irA('p1')">Leer resumen &nbsp;→</button>
+  </div>
+  <div class="p-footer">Gana la guerra en tu mente · Craig Groeschel</div>
+</section>
+</div>
+
+<div id="p1" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Panorama</div></div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>2 min</span></div>
+    <div class="body"><div class="toc"><div class="toc-titulo">Contenido</div><div class="toc-grid"><button class="toc-btn" onclick="irA('p1')"><span class="toc-num">1</span>Tesis, propósito y perfil<span class="toc-arrow">→</span></button><button class="toc-btn" onclick="irA('p2')"><span class="toc-num">2</span>Modelo e introducción<span class="toc-arrow">→</span></button><button class="toc-btn" onclick="irA('s1')"><span class="toc-num">3</span>Semana 1 — Reemplazo<span class="toc-arrow">→</span></button><button class="toc-btn" onclick="irA('s2')"><span class="toc-num">4</span>Semana 2 — Recableado<span class="toc-arrow">→</span></button><button class="toc-btn" onclick="irA('s3')"><span class="toc-num">5</span>Semana 3 — Replanteamiento<span class="toc-arrow">→</span></button><button class="toc-btn" onclick="irA('s4')"><span class="toc-num">6</span>Semana 4 — Regocijo<span class="toc-arrow">→</span></button><button class="toc-btn" onclick="irA('p3')"><span class="toc-num">7</span>Progresión, resultado y fidelidad<span class="toc-arrow">→</span></button><button class="toc-btn" onclick="irA('m0')"><span class="toc-num">8</span>Fundamentos de la versión final<span class="toc-arrow">→</span></button><button class="toc-btn" onclick="irA('b1')"><span class="toc-num">9</span>Bloque 1 · Reemplazo<span class="toc-arrow">→</span></button><button class="toc-btn" onclick="irA('b2')"><span class="toc-num">10</span>Bloque 2 · Recableado<span class="toc-arrow">→</span></button><button class="toc-btn" onclick="irA('b3')"><span class="toc-num">11</span>Bloque 3 · Replanteamiento<span class="toc-arrow">→</span></button><button class="toc-btn" onclick="irA('b4')"><span class="toc-num">12</span>Bloque 4 · Regocijo<span class="toc-arrow">→</span></button><button class="toc-btn" onclick="irA('f1')"><span class="toc-num">13</span>Progresión, resultado y fidelidad · versión final<span class="toc-arrow">→</span></button><button class="toc-btn" onclick="irA('cierre')"><span class="toc-num">14</span>Cierre<span class="toc-arrow">→</span></button></div></div><div class="filtro-header"><div class="filtro-label">Panorama</div><div class="filtro-title">Tesis, propósito y perfil</div></div><div data-s><h2 class="sec-titulo">Tesis central</h2><div class="destacado"><strong>La transformación comienza cuando dejamos de aceptar automáticamente nuestros pensamientos como verdad, identificamos las mentiras que nos gobiernan y entrenamos nuestra mente para interpretar y responder desde la verdad de Dios.</strong></div><p>El recorrido conserva los cuatro movimientos con los que Groeschel resume todo el libro: <strong>reemplazo, recableado, replanteamiento y regocijo</strong>.</p></div><hr class="rule"><div data-s><h2 class="sec-titulo">Propósito formativo</h2><p>Llevar al lector de una relación <strong>reactiva e inconsciente con sus pensamientos</strong> hacia una relación <strong>consciente, discernida y entrenada</strong>.</p><p>Al terminar las cuatro semanas, el lector debe ser capaz de:</p><ul class="lista"><li>reconocer pensamientos dominantes y mentiras recurrentes;</li><li>distinguir entre pensamiento, interpretación y verdad;</li><li>reemplazar conscientemente una mentira por una verdad bíblica;</li><li>construir nuevas respuestas mediante repetición y meditación;</li><li>identificar sesgos y replantear circunstancias;</li><li>convertir preocupación y pánico en oración, entrega y alabanza;</li><li>desarrollar un plan personal y sostenible de renovación mental.</li></ul></div><hr class="rule"><div data-s><h2 class="sec-titulo">Perfil del lector</h2><p>Este recorrido está diseñado para una persona que:</p><p>sabe muchas cosas verdaderas, pero descubre que no siempre vive desde ellas; repite pensamientos de miedo, insuficiencia, negatividad, culpa, control, preocupación o autosabotaje; ha intentado modificar conductas sin comprender completamente qué pensamientos las alimentan; desea aprender a renovar su mente desde una perspectiva cristiana práctica.</p><p>No necesita conocimientos previos de psicología o neurociencia.</p><p>Necesita solamente disposición para <strong>observar con honestidad lo que piensa</strong>.</p></div><hr class="rule"><div data-s><h2 class="sec-titulo">Dimensión formativa principal</h2><div class="big">Mentalidad</div><p>El libro trabaja principalmente sobre <strong>cómo interpretamos la realidad</strong> y cómo esas interpretaciones terminan influyendo en emociones, decisiones y comportamientos.</p><p>La formación no empieza preguntando únicamente:</p><div class="destacado"><strong>“¿Qué estás haciendo?”</strong></div><p>sino:</p><div class="destacado"><strong>“¿Qué estás creyendo que está produciendo la manera en que estás viviendo?”</strong></div></div></div>
+    <div class="nav-final"><button onclick="irA('portada')" class="btn-nav btn-regresar">← Portada</button><button onclick="irA('p2')" class="btn-nav btn-siguiente">Siguiente →</button></div>
+    <div class="book-footer"><div class="footer-title">Gana la guerra en tu mente · Craig Groeschel</div><div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div><div class="footer-tag">Tesis, propósito y perfil</div></div>
+  </div>
+</section>
+</div>
+<div id="p2" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Panorama</div></div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>2 min</span></div>
+    <div class="body"><div class="filtro-header"><div class="filtro-label">Panorama</div><div class="filtro-title">Modelo e introducción</div></div><div data-s><h2 class="sec-titulo">Modelo pedagógico</h2><p>El recorrido utiliza tres movimientos formativos:</p><span class="eyebrow">Entender</span><p>Reconocer qué ocurre en mi mente y por qué importa.</p><span class="eyebrow">Interiorizar</span><p>Confrontar mis pensamientos con la verdad y comenzar a formar una convicción distinta.</p><span class="eyebrow">Aplicar</span><p>Responder deliberadamente desde esa nueva verdad dentro de situaciones reales.</p><p>El proceso se repite durante las cuatro semanas:</p><div class="destacado"><strong>VER → NOMBRAR → CONFRONTAR → INTERIORIZAR → PRACTICAR.</strong></div><p>No buscamos únicamente comprensión intelectual.</p><p>Buscamos que el lector pueda decir:</p><div class="destacado"><strong>“Ya sé reconocer cuándo mi mente está tomando un viejo camino y sé qué hacer cuando ocurre.”</strong></div></div><hr class="rule"><div data-s><h2 class="sec-titulo">Introducción general</h2><p>Todos pensamos constantemente, pero muy pocas veces pensamos acerca de <strong>lo que estamos pensando</strong>.</p><p>Algunas ideas pasan por nuestra mente y desaparecen. Otras regresan una y otra vez hasta convertirse en una interpretación habitual: “no soy suficiente”, “algo malo va a pasar”, “nunca voy a cambiar”, “si no controlo esto todo saldrá mal”, “necesito que los demás me aprueben”.</p><p>Con el tiempo dejamos de escuchar esas frases como pensamientos y comenzamos a vivirlas como realidad.</p><p>Ese es el campo de trabajo de este recorrido.</p><p>Groeschel comienza llevando al lector a realizar una auditoría de sus pensamientos porque aquello que permanece invisible difícilmente puede ser transformado.</p><p>Durante cuatro semanas aprenderemos a reconocer los caminos mentales que hemos repetido, confrontarlos con verdad, construir nuevas respuestas y cambiar el punto desde el cual interpretamos nuestras circunstancias.</p><p>No estamos intentando producir pensamiento positivo.</p><p>Estamos aprendiendo a <strong>pensar desde la verdad</strong>.</p></div></div>
+    <div class="nav-final"><button onclick="irA('p1')" class="btn-nav btn-regresar">← Anterior</button><button onclick="irA('s1')" class="btn-nav btn-siguiente">Siguiente →</button></div>
+    <div class="book-footer"><div class="footer-title">Gana la guerra en tu mente · Craig Groeschel</div><div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div><div class="footer-tag">Modelo e introducción</div></div>
+  </div>
+</section>
+</div>
+<div id="s1" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Ruta de cuatro semanas</div></div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>2 min</span></div>
+    <div class="body"><div class="filtro-header"><div class="filtro-label">Ruta de cuatro semanas</div><div class="filtro-title" data-s>Semana 1 — Reemplazo</div></div><div data-s><div class="subtitulo">No creas automáticamente todo lo que piensas</div><div class="tesis-block"><div class="tesis-label">Tesis</div><div class="tesis-text"><div class="destacado"><strong>Una mentira creída puede dirigir tu vida como si fuera verdad; por eso, el primer paso de la renovación es identificarla y confrontarla.</strong></div></div></div><div class="dato-card"><div class="dato-label">Propósito</div><div class="dato-text"><p>Que el lector descubra <strong>qué pensamientos dominantes están operando actualmente en su vida</strong> y pueda identificar al menos una mentira raíz.</p></div></div><div class="dia-card"><div class="dia-t">Día 1 — Piensa en lo que piensas</div><p><strong>Entender:</strong> los pensamientos no son neutrales; influyen en la dirección de nuestra vida.</p><p><strong>Desarrollo maestro:</strong> introducir la diferencia entre tener un pensamiento y aceptar ese pensamiento como verdad. El lector comienza una auditoría mental sin intentar corregirse todavía.</p><p><strong>Aplicación:</strong> registrar durante el día pensamientos recurrentes.</p></div><div class="dia-card"><div class="dia-t">Día 2 — La mentira que parece verdad</div><p><strong>Entender:</strong> algo falso puede producir consecuencias reales si se cree profundamente.</p><p><strong>Interiorizar:</strong> observar dónde una conclusión se convirtió en identidad.</p><p><strong>Aplicación:</strong> completar:</p><div class="destacado"><strong>“Frecuentemente pienso <span class="blank"></span>. Cuando lo creo, termino <span class="blank"></span>.”</strong></div></div><div class="dia-card"><div class="dia-t">Día 3 — Encuentra la raíz</div><p>Pasar del comportamiento visible hacia la creencia que lo sostiene.</p><div class="destacado"><strong>Conducta → emoción → pensamiento → creencia.</strong></div><p>El libro insiste en que no podemos derrotar aquello que todavía no somos capaces de definir.</p></div><div class="dia-card"><div class="dia-t">Día 4 — Verdad contra mentira</div><p>Encontrar una verdad bíblica que confronte directamente la mentira identificada.</p><p>No usar una frase genérica.</p><p>La verdad debe responder específicamente al pensamiento que se quiere confrontar.</p></div><div class="dia-card"><div class="dia-t">Día 5 — Crea tu declaración</div><p>Construir:</p><div class="campos"><div class="campo"><span class="campo-l">MI MENTIRA</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LA VERDAD</span><span class="blank"></span></div><div class="campo"><span class="campo-l">MI DECLARACIÓN</span><span class="blank"></span></div></div></div><div class="dia-card"><div class="dia-t">Día 6 — Detecta el detonante</div><p>Identificar cuándo aparece con mayor frecuencia la mentira:</p><p>rechazo, cansancio, dinero, comparación, presión, incertidumbre, soledad, fracaso, conflicto.</p></div><div class="dia-card"><div class="dia-t">Día 7 — Integración</div><p>El lector termina la semana pudiendo responder:</p><div class="destacado"><strong>¿Cuál es una mentira que ya no quiero seguir tratando como verdad?</strong></div></div></div></div>
+    <div class="nav-final"><button onclick="irA('p2')" class="btn-nav btn-regresar">← Anterior</button><button onclick="irA('s2')" class="btn-nav btn-siguiente">Siguiente →</button></div>
+    <div class="book-footer"><div class="footer-title">Gana la guerra en tu mente · Craig Groeschel</div><div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div><div class="footer-tag">Semana 1 — Reemplazo</div></div>
+  </div>
+</section>
+</div>
+<div id="s2" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Ruta de cuatro semanas</div></div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>2 min</span></div>
+    <div class="body"><div class="filtro-header"><div class="filtro-label">Ruta de cuatro semanas</div><div class="filtro-title" data-s>Semana 2 — Recableado</div></div><div data-s><div class="subtitulo">No basta salir del viejo camino: necesitas construir uno nuevo</div><div class="tesis-block"><div class="tesis-label">Tesis</div><div class="tesis-text"><div class="destacado"><strong>Aquello que pensamos repetidamente se vuelve cada vez más familiar; renovar la mente requiere repetir deliberadamente la verdad hasta desarrollar una nueva respuesta.</strong></div><p>El libro utiliza la diferencia entre <strong>surco</strong> y <strong>trinchera</strong>: el primero aparece por repetición no intencional; la segunda se cava deliberadamente para conducir el pensamiento hacia otro lugar.</p></div></div><div class="dato-card"><div class="dato-label">Propósito</div><div class="dato-text"><p>Convertir una verdad reconocida intelectualmente en una verdad que comience a estar disponible espontáneamente cuando aparezca el detonante.</p></div></div><div class="dia-card"><div class="dia-t">Día 1 — Reconoce tu surco</div><p>Construir:</p><div class="destacado"><strong>Detonante → pensamiento → emoción → conducta → resultado.</strong></div></div><div class="dia-card"><div class="dia-t">Día 2 — Cava una trinchera</div><p>Diseñar conscientemente el recorrido alternativo:</p><div class="destacado"><strong>Detonante → verdad → nueva respuesta.</strong></div></div><div class="dia-card"><div class="dia-t">Día 3 — Meditar no es solo leer</div><p>Aprender la imagen de “rumiar”:</p><p>volver a una verdad, observarla, pensarla, relacionarla con la propia situación y regresar nuevamente a ella.</p></div><div class="dia-card"><div class="dia-t">Día 4 — Escríbela</div><p>Escribir físicamente la verdad y la declaración.</p><p>La escritura obliga a convertir pensamientos difusos en palabras concretas.</p></div><div class="dia-card"><div class="dia-t">Día 5 — Piénsala</div><p>Introducir conscientemente la verdad durante momentos específicos del día.</p><p>Mañana.<br>Momento de presión.<br>Noche.</p></div><div class="dia-card"><div class="dia-t">Día 6 — Confiésala</div><p>Decir conscientemente aquello que se está aprendiendo a creer.</p><p>No como fórmula mágica.</p><p>Como recordatorio deliberado.</p></div><div class="dia-card"><div class="dia-t">Día 7 — Automaticidad</div><p>Evaluar:</p><div class="destacado"><strong>¿Qué aparece primero ahora cuando llega mi detonante: la vieja mentira o la nueva verdad?</strong></div><p>La meta no es perfección inmediata, sino empezar a reducir la distancia entre <strong>detonante</strong> y <strong>verdad</strong>.</p></div></div></div>
+    <div class="nav-final"><button onclick="irA('s1')" class="btn-nav btn-regresar">← Anterior</button><button onclick="irA('s3')" class="btn-nav btn-siguiente">Siguiente →</button></div>
+    <div class="book-footer"><div class="footer-title">Gana la guerra en tu mente · Craig Groeschel</div><div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div><div class="footer-tag">Semana 2 — Recableado</div></div>
+  </div>
+</section>
+</div>
+<div id="s3" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Ruta de cuatro semanas</div></div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>2 min</span></div>
+    <div class="body"><div class="filtro-header"><div class="filtro-label">Ruta de cuatro semanas</div><div class="filtro-title" data-s>Semana 3 — Replanteamiento</div></div><div data-s><div class="subtitulo">Lo que ocurrió y lo que significa no siempre son exactamente lo mismo</div><div class="tesis-block"><div class="tesis-label">Tesis</div><div class="tesis-text"><div class="destacado"><strong>No controlamos todo lo que sucede, pero podemos revisar los filtros desde los que interpretamos aquello que sucede.</strong></div><p>Groeschel conecta esta parte con sesgos cognitivos y reestructuración: detener la reacción automática, reconocer el pensamiento y buscar una interpretación más verdadera.</p></div></div><div class="dato-card"><div class="dato-label">Propósito</div><div class="dato-text"><p>Que el lector aprenda a separar:</p><div class="destacado"><strong>HECHO → INTERPRETACIÓN → RESPUESTA.</strong></div></div></div><div class="dia-card"><div class="dia-t">Día 1 — Tus lentes</div><p>Identificar una situación en la que dos personas podrían interpretar los mismos hechos de maneras distintas.</p><p>Pregunta:</p><div class="destacado"><strong>¿Qué filtro estoy usando yo?</strong></div></div><div class="dia-card"><div class="dia-t">Día 2 — Hecho vs. historia</div><p>Dividir una hoja:</p><div class="destacado"><strong>LO QUE OCURRIÓ</strong><br><strong>LA HISTORIA QUE ME CONTÉ SOBRE LO QUE OCURRIÓ</strong></div></div><div class="dia-card"><div class="dia-t">Día 3 — Identifica el sesgo</div><p>Buscar patrones:</p><p>“siempre”,<br>“nunca”,<br>“todos”,<br>“nadie”,<br>“esto demuestra que…”.</p><p>Examinar si una experiencia anterior está determinando automáticamente la interpretación presente.</p></div><div class="dia-card"><div class="dia-t">Día 4 — Lo que Dios no hizo</div><p>Revisar una oración no contestada o un plan que no ocurrió.</p><p>No obligarse a encontrar una explicación.</p><p>Preguntar únicamente:</p><div class="destacado"><strong>“¿Puedo ver hoy algo que entonces no podía ver?”</strong></div></div><div class="dia-card"><div class="dia-t">Día 5 — Bondad colateral</div><p>Entrenar la atención para encontrar señales de bien que habían quedado ocultas detrás de la frustración.</p></div><div class="dia-card"><div class="dia-t">Día 6 — Preestructura el futuro</div><p>Escoger anticipadamente la postura con la que se entrará a una situación difícil.</p><div class="destacado"><strong>No puedo decidir el resultado, pero sí puedo decidir desde qué verdad entraré.</strong></div></div><div class="dia-card"><div class="dia-t">Día 7 — Integración</div><p>Seleccionar una situación completa y procesarla:</p><div class="destacado"><strong>Hecho → vieja interpretación → sesgo → nueva perspectiva → nueva respuesta.</strong></div></div></div></div>
+    <div class="nav-final"><button onclick="irA('s2')" class="btn-nav btn-regresar">← Anterior</button><button onclick="irA('s4')" class="btn-nav btn-siguiente">Siguiente →</button></div>
+    <div class="book-footer"><div class="footer-title">Gana la guerra en tu mente · Craig Groeschel</div><div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div><div class="footer-tag">Semana 3 — Replanteamiento</div></div>
+  </div>
+</section>
+</div>
+<div id="s4" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Ruta de cuatro semanas</div></div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>2 min</span></div>
+    <div class="body"><div class="filtro-header"><div class="filtro-label">Ruta de cuatro semanas</div><div class="filtro-title" data-s>Semana 4 — Regocijo</div></div><div data-s><div class="subtitulo">Cuando ya has tenido suficiente, recuerda quién sigue estando cerca</div><div class="tesis-block"><div class="tesis-label">Tesis</div><div class="tesis-text"><div class="destacado"><strong>La ansiedad estrecha nuestra atención alrededor del problema; oración y alabanza vuelven a colocar el problema dentro de una realidad mayor: la presencia de Dios.</strong></div></div></div><div class="dato-card"><div class="dato-label">Propósito</div><div class="dato-text"><p>Aprender a responder a presión, preocupación y pensamientos desbordados mediante conciencia de la presencia de Dios, oración, entrega y alabanza.</p></div></div><div class="dia-card"><div class="dia-t">Día 1 — Tu furgoneta azul</div><p>Identificar un detonante que provoca una respuesta desproporcionada.</p><p>Preguntar:</p><div class="destacado"><strong>¿Qué historia antigua está activando esto?</strong></div></div><div class="dia-card"><div class="dia-t">Día 2 — El Señor está cerca</div><p>Detenerse durante el día conscientemente para reconocer la presencia de Dios.</p><p>La meta no es pedir nada todavía.</p><p>Solo recordar:</p><div class="destacado"><strong>“No estoy atravesando esto solo.”</strong></div></div><div class="dia-card"><div class="dia-t">Día 3 — Convierte preocupación en oración</div><p>Cada vez que aparezca una preocupación:</p><div class="destacado"><strong>NÓMBRALA → ORA POR ELLA → ENTREGA EL RESULTADO.</strong></div></div><div class="dia-card"><div class="dia-t">Día 4 — La caja de Dios</div><p>Escribir una preocupación y depositarla físicamente en una caja como representación de entrega.</p><p>La práctica procede directamente del ejercicio propuesto por Groeschel.</p></div><div class="dia-card"><div class="dia-t">Día 5 — Alaba por el quién</div><p>No comenzar por:</p><div class="destacado"><strong>“Gracias porque todo salió bien.”</strong></div><p>Comenzar por:</p><div class="destacado"><strong>“Dios, aunque esto todavía no haya cambiado, recuerdo quién eres.”</strong></div></div><div class="dia-card"><div class="dia-t">Día 6 — Mira a través</div><p>Dividir una página:</p><div class="destacado"><strong>LO QUE ESTÁ MAL</strong><br><strong>LO QUE TAMBIÉN ESTÁ BIEN</strong></div><p>La intención no es minimizar el problema sino recuperar perspectiva.</p></div><div class="dia-card"><div class="dia-t">Día 7 — Plan personal de batalla</div><p>Construir el documento final:</p><ul class="clave"><li><strong>MI MENTIRA PRINCIPAL</strong></li><li><strong>MI VERDAD PRINCIPAL</strong></li><li><strong>MI TRINCHERA DE VERDAD</strong></li><li><strong>MI DETONANTE PRINCIPAL</strong></li><li><strong>MI REPLANTEAMIENTO</strong></li><li><strong>MI PRÁCTICA DE ORACIÓN</strong></li><li><strong>MI PRÁCTICA DE ALABANZA</strong></li></ul></div></div></div>
+    <div class="nav-final"><button onclick="irA('s3')" class="btn-nav btn-regresar">← Anterior</button><button onclick="irA('p3')" class="btn-nav btn-siguiente">Siguiente →</button></div>
+    <div class="book-footer"><div class="footer-title">Gana la guerra en tu mente · Craig Groeschel</div><div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div><div class="footer-tag">Semana 4 — Regocijo</div></div>
+  </div>
+</section>
+</div>
+<div id="p3" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Ruta de cuatro semanas</div></div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>2 min</span></div>
+    <div class="body"><div class="filtro-header"><div class="filtro-label">Ruta de cuatro semanas</div><div class="filtro-title">Progresión, resultado y fidelidad</div></div><div data-s><h2 class="sec-titulo">Progresión del recorrido</h2><p>El recorrido avanza intencionalmente en este orden:</p><p><strong>SEMANA 1 — DESCUBRO</strong><br>¿Qué estoy creyendo?</p><div class="flecha">↓</div><p><strong>SEMANA 2 — ENTRENO</strong><br>¿Qué verdad necesito aprender a pensar?</p><div class="flecha">↓</div><p><strong>SEMANA 3 — INTERPRETO</strong><br>¿Desde qué filtro estoy leyendo mi realidad?</p><div class="flecha">↓</div><p><strong>SEMANA 4 — RESPONDO</strong><br>¿Cómo viviré cuando vuelva la presión?</p><p>La transformación completa queda así:</p><div class="destacado"><strong>MENTIRA → VERDAD → REPETICIÓN → PERSPECTIVA → RESPUESTA.</strong></div></div><hr class="rule"><div data-s><h2 class="sec-titulo">Resultado final esperado</h2><p>Al terminar las cuatro semanas, el lector no debería simplemente poder explicar el libro.</p><p>Debería tener identificado y documentado:</p><ul class="lista"><li>su pensamiento dominante más destructivo;</li><li>la mentira que lo sostiene;</li><li>la verdad bíblica que lo confronta;</li><li>una declaración personal;</li><li>sus detonantes principales;</li><li>un nuevo recorrido mental;</li><li>un sesgo o interpretación que necesita replantear;</li><li>una práctica consciente de oración;</li><li>una práctica de gratitud y alabanza;</li><li>un <strong>Plan Personal de Renovación de la Mente</strong>.</li></ul><p>El éxito del recorrido se mide menos por <strong>“entiendo el concepto”</strong> y más por:</p><div class="destacado"><strong>“ahora reconozco ese pensamiento cuando aparece y respondo de una manera diferente.”</strong></div></div><hr class="rule"><div data-s><h2 class="sec-titulo">Criterios de fidelidad al libro</h2><p>El recorrido debe conservar:</p><p><strong>Los cuatro principios originales:</strong> reemplazo, recableado, replanteamiento y regocijo.</p><p>Debe mantener la distinción entre pensamiento positivo y <strong>verdad</strong>.</p><p>Debe conservar las principales imágenes pedagógicas de Groeschel cuando sean útiles: fortalezas, surcos, trincheras, lentes, filtros, furgoneta azul, caja de Dios y mirar “a través”.</p><p>Las prácticas deben provenir prioritariamente de ejercicios ya presentes en el libro.</p><p>Los textos bíblicos deben utilizarse dentro del sentido con el que aparecen en el libro y no añadirse como decoración.</p><p>No deben exagerarse como verdades científicamente demostradas aquellas afirmaciones que el libro presenta mediante fuentes divulgativas o indirectas.</p><p>No debe transformarse el recorrido en terapia psicológica ni presentar la oración como sustituto universal de acompañamiento profesional. El propio autor relata el valor de recibir consejería.</p><p>Y, sobre todo:</p><div class="destacado"><strong>el recorrido no debe enseñar simplemente a “pensar mejor”; debe enseñar a identificar qué se cree, confrontarlo con verdad y practicar una manera renovada de interpretar y responder.</strong></div></div></div>
+    <div class="nav-final"><button onclick="irA('s4')" class="btn-nav btn-regresar">← Anterior</button><button onclick="irA('m0')" class="btn-nav btn-siguiente">Siguiente →</button></div>
+    <div class="book-footer"><div class="footer-title">Gana la guerra en tu mente · Craig Groeschel</div><div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div><div class="footer-tag">Progresión, resultado y fidelidad</div></div>
+  </div>
+</section>
+</div>
+<div id="m0" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Versión final</div></div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>3 min</span></div>
+    <div class="body"><div class="filtro-header"><div class="filtro-label">Versión final</div><div class="filtro-title">Fundamentos de la versión final</div></div><p class="basado" data-s>Basado en <em>Gana la guerra en tu mente: Cambia tus pensamientos, cambia tu vida</em>, de Craig Groeschel.</p><div data-s><h2 class="sec-titulo">Tesis central</h2><div class="destacado"><strong>La transformación comienza cuando dejamos de aceptar automáticamente nuestros pensamientos como verdad, identificamos las mentiras que nos gobiernan y entrenamos nuestra mente para interpretar y responder desde la verdad de Dios.</strong></div><p>El recorrido conserva los cuatro movimientos que estructuran el libro:</p><div class="destacado"><strong>REEMPLAZO → RECABLEADO → REPLANTEAMIENTO → REGOCIJO.</strong></div></div><hr class="rule"><div data-s><h2 class="sec-titulo">Propósito formativo</h2><p>Este recorrido busca llevar al lector de una relación inconsciente y reactiva con sus pensamientos hacia una relación consciente, discernida e intencional.</p><p>No pretende enseñar simplemente a pensar de manera positiva.</p><p>Pretende enseñar a:</p><p>reconocer pensamientos dominantes; descubrir las mentiras que los sostienen; confrontarlas con la verdad; interiorizar una nueva manera de pensar; revisar los filtros desde los cuales se interpreta la realidad; y responder a presión, miedo o ansiedad desde oración, entrega, verdad y alabanza.</p><p>El resultado esperado no es que el lector pueda explicar bien el libro.</p><p>El resultado esperado es que pueda reconocer:</p><div class="destacado"><strong>“Esto es lo que estoy pensando. Esto es lo que estoy creyendo. Esto es lo que es verdad. Y esta es la respuesta que voy a practicar.”</strong></div></div><hr class="rule"><div data-s><h2 class="sec-titulo">Perfil del lector</h2><p>El recorrido está dirigido a una persona que reconoce alguna de estas experiencias:</p><p>sabe verdades que todavía no gobiernan su vida; repite pensamientos de miedo, insuficiencia, comparación, negatividad, culpa, control o preocupación; vuelve una y otra vez a determinados comportamientos aunque sinceramente desea cambiarlos; interpreta algunas circunstancias desde heridas o experiencias anteriores; o siente que determinados pensamientos aparecen de forma casi automática.</p><p>No necesita conocimientos previos de psicología, neurociencia o teología.</p><p>Necesita disposición para observar honestamente lo que ocurre en su mente y practicar una respuesta diferente.</p></div><hr class="rule"><div data-s><h2 class="sec-titulo">Dimensión formativa</h2><h3 class="sub">Mentalidad</h3><p>El núcleo formativo del libro se concentra en la manera en que una persona <strong>interpreta</strong> su realidad.</p><p>La pregunta principal no es solamente:</p><div class="destacado"><strong>¿Qué hago?</strong></div><p>La pregunta anterior es:</p><div class="destacado"><strong>¿Qué pienso y qué estoy creyendo para que esta manera de actuar tenga sentido para mí?</strong></div><p>Por eso el recorrido trabaja desde la raíz:</p><div class="destacado"><strong>CREENCIA → PENSAMIENTO → INTERPRETACIÓN → RESPUESTA → CONDUCTA.</strong></div></div><hr class="rule"><div data-s><h2 class="sec-titulo">Modelo pedagógico</h2><p>El recorrido utiliza tres movimientos formativos permanentes:</p><h3 class="sub">Entender</h3><p>Reconocer qué está ocurriendo y adquirir lenguaje para identificarlo.</p><h3 class="sub">Interiorizar</h3><p>Llevar la verdad desde la comprensión intelectual hacia la convicción personal.</p><h3 class="sub">Aplicar</h3><p>Practicar deliberadamente una nueva respuesta dentro de situaciones reales.</p><p>Cada semana sigue una progresión sencilla:</p><div class="destacado"><strong>VER → NOMBRAR → CONFRONTAR → INTERIORIZAR → PRACTICAR.</strong></div><p>El recorrido no pretende producir únicamente conocimiento.</p><p>Pretende formar una nueva manera de responder.</p></div></div>
+    <div class="nav-final"><button onclick="irA('p3')" class="btn-nav btn-regresar">← Anterior</button><button onclick="irA('b1')" class="btn-nav btn-siguiente">Siguiente →</button></div>
+    <div class="book-footer"><div class="footer-title">Gana la guerra en tu mente · Craig Groeschel</div><div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div><div class="footer-tag">Fundamentos de la versión final</div></div>
+  </div>
+</section>
+</div>
+<div id="b1" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Versión final</div></div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>2 min</span></div>
+    <div class="body"><div class="filtro-header"><div class="filtro-label">Versión final</div><div class="filtro-title" data-s>Bloque 1 · Reemplazo</div></div><div data-s><div class="subtitulo">No creas automáticamente todo lo que piensas</div><div class="tesis-block"><div class="tesis-label">Tesis</div><div class="tesis-text"><div class="destacado"><strong>Una mentira creída puede dirigir tu vida como si fuera verdad; por eso, la renovación comienza identificando la mentira y confrontándola con verdad.</strong></div></div></div><div class="dato-card"><div class="dato-label">Propósito</div><div class="dato-text"><p>Que el lector descubra qué pensamientos dominantes están operando actualmente en su vida y pueda identificar al menos una mentira raíz que esté afectando emociones, decisiones o comportamientos.</p></div></div><span class="eyebrow">Desarrollo</span><div class="problema"><p>Groeschel comienza estableciendo que nuestros pensamientos dominantes influyen profundamente en la dirección de nuestra vida. El problema aparece cuando dejamos de distinguir entre <strong>tener un pensamiento</strong> y <strong>poseer una verdad</strong>.</p><p>Una idea falsa puede producir consecuencias reales si la aceptamos durante suficiente tiempo.</p><p>Por eso el primer movimiento consiste en observar.</p><p>Antes de intentar cambiar una conducta, el lector necesita reconocer qué narrativa interior acompaña esa conducta.</p><p>La auditoría mental propuesta en el libro convierte pensamientos difusos en palabras visibles. Groeschel invita a registrar los pensamientos habituales, observar cuándo aparecen y descubrir sus patrones.</p><p>Después comienza el descenso hacia la raíz:</p><ul class="clave"><li><strong>¿Qué pienso?</strong></li><li><strong>¿Qué siento cuando lo pienso?</strong></li><li><strong>¿Qué hago cuando lo creo?</strong></li><li><strong>¿Qué mentira tendría que creer para que esta conducta tuviera sentido?</strong></li></ul><p>El objetivo no es condenarse por tener determinados pensamientos.</p><p>El objetivo es aprender a identificarlos antes de que sigan gobernando automáticamente.</p><p>Una vez descubierta la mentira, se busca una verdad que responda exactamente a ella.</p><p>No una frase motivacional.</p><p>No una declaración desconectada de la realidad.</p><p>Una verdad capaz de confrontar la mentira específica.</p></div><span class="eyebrow">Qué entender</span><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">No todo pensamiento merece ser creído.</div></div></div><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Pensar algo muchas veces no lo convierte en verdad.</div></div></div><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La conducta visible puede ser el resultado de una creencia más profunda.</div></div></div><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Una mentira sin identificar conserva poder porque opera sin ser examinada.</div></div></div><div class="veredicto-card"><div class="veredicto-label">Qué interiorizar</div><div class="veredicto-text"><div class="destacado"><strong>“Puedo observar mis pensamientos sin someterme automáticamente a ellos.”</strong></div></div></div><div class="alerta-card"><div class="alerta-label">Qué cambiar</div><div class="alerta-text"><p>Pasar de:</p><div class="destacado"><strong>“Yo soy así.”</strong></div><p>a:</p><div class="destacado"><strong>“Esto es algo que estoy pensando o creyendo, y puedo examinarlo.”</strong></div></div></div><div class="accion-card"><div class="accion-label">Aplicación</div><div class="accion-text"><p>Completar:</p><div class="campos"><div class="campo"><span class="campo-l">PENSAMIENTO RECURRENTE</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LO QUE SIENTO CUANDO LO CREO</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LO QUE TERMINO HACIENDO</span><span class="blank"></span></div><div class="campo"><span class="campo-l">MENTIRA RAÍZ</span><span class="blank"></span></div><div class="campo"><span class="campo-l">VERDAD QUE LA CONFRONTA</span><span class="blank"></span></div><div class="campo"><span class="campo-l">DECLARACIÓN PERSONAL</span><span class="blank"></span></div></div></div></div></div></div>
+    <div class="nav-final"><button onclick="irA('m0')" class="btn-nav btn-regresar">← Anterior</button><button onclick="irA('b2')" class="btn-nav btn-siguiente">Siguiente →</button></div>
+    <div class="book-footer"><div class="footer-title">Gana la guerra en tu mente · Craig Groeschel</div><div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div><div class="footer-tag">Bloque 1 · Reemplazo</div></div>
+  </div>
+</section>
+</div>
+<div id="b2" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Versión final</div></div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>2 min</span></div>
+    <div class="body"><div class="filtro-header"><div class="filtro-label">Versión final</div><div class="filtro-title" data-s>Bloque 2 · Recableado</div></div><div data-s><div class="subtitulo">Construye un camino nuevo para la verdad</div><div class="tesis-block"><div class="tesis-label">Tesis</div><div class="tesis-text"><div class="destacado"><strong>Los pensamientos repetidos se vuelven cada vez más familiares; por eso renovar la mente requiere practicar deliberadamente una nueva forma de pensar.</strong></div></div></div><div class="dato-card"><div class="dato-label">Propósito</div><div class="dato-text"><p>Que el lector deje de pensar únicamente en “eliminar” pensamientos dañinos y aprenda a construir una nueva respuesta mental mediante verdad, repetición y meditación.</p></div></div><span class="eyebrow">Desarrollo</span><div class="problema"><p>Groeschel utiliza la imagen de los <strong>surcos</strong>.</p><p>Cuando un vehículo pasa repetidamente por el mismo lugar, termina creando un camino que después resulta más fácil recorrer.</p><p>El libro utiliza esa imagen para explicar lo que ocurre con pensamientos y respuestas repetidas.</p><p>El antiguo camino se vuelve familiar.</p><p>Ante determinado detonante, la mente ya sabe adónde ir.</p><p>El problema no se resuelve solamente diciendo:</p><div class="destacado"><strong>“Ya no voy a pensar esto.”</strong></div><p>Necesitamos otro camino.</p><p>Groeschel llama a ese nuevo camino una <strong>trinchera de verdad</strong>: una ruta construida deliberadamente mediante una verdad específica repetida hasta convertirse en una respuesta cada vez más disponible.</p><p>Aquí aparece la importancia de la meditación.</p><p>El libro utiliza la imagen de “rumiar”: tomar una verdad, volver a ella, observarla, pensarla, relacionarla con la propia vida y regresar nuevamente.</p><p>No basta con conocer una verdad.</p><p>Necesitamos familiarizarnos con ella.</p><p>Groeschel propone escribir declaraciones, leerlas, pensarlas y repetirlas. La intención no es producir autosugestión, sino llevar una verdad conocida hacia una convicción practicada.</p><p>La meta práctica es reducir progresivamente la distancia entre:</p><div class="destacado"><strong>DETONANTE → VIEJA MENTIRA</strong></div><p>y construir:</p><div class="destacado"><strong>DETONANTE → VERDAD → NUEVA RESPUESTA.</strong></div></div><span class="eyebrow">Qué entender</span><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La repetición puede fortalecer tanto pensamientos saludables como destructivos.</div></div></div><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Abandonar una vieja respuesta no significa haber construido automáticamente una nueva.</div></div></div><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La verdad necesita ser accesible precisamente cuando aparece el detonante.</div></div></div><div class="veredicto-card"><div class="veredicto-label">Qué interiorizar</div><div class="veredicto-text"><div class="destacado"><strong>“Lo que he practicado durante años puede sentirse natural sin ser inevitable.”</strong></div></div></div><div class="alerta-card"><div class="alerta-label">Qué cambiar</div><div class="alerta-text"><p>Pasar de:</p><div class="destacado"><strong>“Espero recordar la verdad cuando la necesite.”</strong></div><p>a:</p><div class="destacado"><strong>“Voy a entrenar la verdad antes de necesitarla.”</strong></div></div></div><div class="accion-card"><div class="accion-label">Aplicación</div><div class="accion-text"><p>Construir la propia trinchera:</p><div class="campos"><div class="campo"><span class="campo-l">MI DETONANTE</span><span class="blank"></span></div><div class="campo"><span class="campo-l">MI VIEJO PENSAMIENTO</span><span class="blank"></span></div><div class="campo"><span class="campo-l">MI VIEJA RESPUESTA</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LA VERDAD QUE QUIERO INTERIORIZAR</span><span class="blank"></span></div><div class="campo"><span class="campo-l">MI NUEVA DECLARACIÓN</span><span class="blank"></span></div><div class="campo"><span class="campo-l">MI NUEVA RESPUESTA DESEADA</span><span class="blank"></span></div></div><p>Practicarla conscientemente al comenzar el día, frente al detonante y antes de dormir.</p></div></div></div></div>
+    <div class="nav-final"><button onclick="irA('b1')" class="btn-nav btn-regresar">← Anterior</button><button onclick="irA('b3')" class="btn-nav btn-siguiente">Siguiente →</button></div>
+    <div class="book-footer"><div class="footer-title">Gana la guerra en tu mente · Craig Groeschel</div><div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div><div class="footer-tag">Bloque 2 · Recableado</div></div>
+  </div>
+</section>
+</div>
+<div id="b3" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Versión final</div></div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>3 min</span></div>
+    <div class="body"><div class="filtro-header"><div class="filtro-label">Versión final</div><div class="filtro-title" data-s>Bloque 3 · Replanteamiento</div></div><div data-s><div class="subtitulo">Cambia el marco desde el que interpretas tu realidad</div><div class="tesis-block"><div class="tesis-label">Tesis</div><div class="tesis-text"><div class="destacado"><strong>No podemos controlar todo lo que nos sucede, pero podemos examinar los filtros desde los cuales estamos interpretando aquello que sucede.</strong></div></div></div><div class="dato-card"><div class="dato-label">Propósito</div><div class="dato-text"><p>Que el lector aprenda a separar los hechos de sus interpretaciones, reconocer sesgos personales y construir una mirada más verdadera y saludable sobre pasado, presente y futuro.</p></div></div><span class="eyebrow">Desarrollo</span><div class="problema"><p>Groeschel utiliza la imagen de unos lentes defectuosos.</p><p>Si los lentes alteran la imagen, el problema no necesariamente está en aquello que estamos mirando.</p><p>Puede estar en el filtro.</p><p>Los seres humanos no procesamos cada experiencia de manera neutral. Nuestra historia, expectativas, heridas, temores y creencias participan en la interpretación.</p><p>Eso significa que dos personas pueden vivir una situación semejante y producir conclusiones completamente distintas.</p><p>Groeschel conecta esta realidad con los <strong>sesgos cognitivos</strong> y con el replanteamiento: detener la reacción automática, identificar la interpretación y buscar una lectura más objetiva y saludable.</p><p>Una de las prácticas centrales consiste en distinguir:</p><p><strong>HECHO</strong> de <strong>HISTORIA</strong>.</p><p>El hecho responde:</p><div class="destacado"><strong>¿Qué ocurrió realmente?</strong></div><p>La historia responde:</p><div class="destacado"><strong>¿Qué significado estoy atribuyendo a lo ocurrido?</strong></div><p>Esa distinción permite revisar experiencias del pasado.</p><p>El libro invita incluso a observar algunas oraciones no contestadas desde la distancia y reconocer ocasiones en las que aquello que parecía una pérdida terminó produciendo resultados inesperados.</p><p>No significa inventar una explicación espiritual para cada tragedia.</p><p>Significa reconocer que nuestra primera interpretación no siempre es la interpretación final.</p><p>Groeschel extiende la idea hacia el futuro mediante la <strong>preestructuración</strong>.</p><p>Así como podemos replantear algo que ya ocurrió, podemos decidir anticipadamente desde qué postura entraremos a una situación que todavía no ha sucedido.</p><p>No controlamos el resultado.</p><p>Podemos preparar nuestra perspectiva.</p></div><span class="eyebrow">Qué entender</span><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Los hechos y la interpretación de los hechos no son exactamente lo mismo.</div></div></div><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Una experiencia anterior puede convertirse en el filtro con el que interpretamos nuevas experiencias.</div></div></div><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">No todo pensamiento automático representa objetivamente la realidad.</div></div></div><div class="veredicto-card"><div class="veredicto-label">Qué interiorizar</div><div class="veredicto-text"><div class="destacado"><strong>“Puedo revisar la historia que me estoy contando sin negar lo que realmente ocurrió.”</strong></div></div></div><div class="alerta-card"><div class="alerta-label">Qué cambiar</div><div class="alerta-text"><p>Pasar de:</p><div class="destacado"><strong>“Esto ocurrió, por lo tanto significa esto.”</strong></div><p>a:</p><div class="destacado"><strong>“Esto ocurrió. Ahora necesito examinar qué significado estoy atribuyéndole.”</strong></div></div></div><div class="accion-card"><div class="accion-label">Aplicación</div><div class="accion-text"><p>Trabajar una circunstancia real:</p><div class="campos"><div class="campo"><span class="campo-l">HECHO</span><span class="blank"></span></div><div class="campo"><span class="campo-l">MI INTERPRETACIÓN AUTOMÁTICA</span><span class="blank"></span></div><div class="campo"><span class="campo-l">EMOCIÓN QUE PRODUCE</span><span class="blank"></span></div><div class="campo"><span class="campo-l">POSIBLE SESGO O FILTRO</span><span class="blank"></span></div><div class="campo"><span class="campo-l">QUÉ OTRA INFORMACIÓN DEBO CONSIDERAR</span><span class="blank"></span></div><div class="campo"><span class="campo-l">NUEVA PERSPECTIVA</span><span class="blank"></span></div><div class="campo"><span class="campo-l">NUEVA RESPUESTA</span><span class="blank"></span></div></div><p>Y ante una situación futura:</p><div class="destacado"><strong>“No puedo controlar lo que sucederá, pero entraré recordando <span class="blank"></span>.”</strong></div></div></div></div></div>
+    <div class="nav-final"><button onclick="irA('b2')" class="btn-nav btn-regresar">← Anterior</button><button onclick="irA('b4')" class="btn-nav btn-siguiente">Siguiente →</button></div>
+    <div class="book-footer"><div class="footer-title">Gana la guerra en tu mente · Craig Groeschel</div><div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div><div class="footer-tag">Bloque 3 · Replanteamiento</div></div>
+  </div>
+</section>
+</div>
+<div id="b4" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Versión final</div></div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>3 min</span></div>
+    <div class="body"><div class="filtro-header"><div class="filtro-label">Versión final</div><div class="filtro-title" data-s>Bloque 4 · Regocijo</div></div><div data-s><div class="subtitulo">Cuando el problema llena tu visión, recuerda quién sigue cerca</div><div class="tesis-block"><div class="tesis-label">Tesis</div><div class="tesis-text"><div class="destacado"><strong>Cuando la presión estrecha nuestra atención alrededor del problema, oración y alabanza vuelven a colocar ese problema dentro de una realidad mayor: la presencia de Dios.</strong></div></div></div><div class="dato-card"><div class="dato-label">Propósito</div><div class="dato-text"><p>Que el lector aprenda a reconocer sus detonantes de ansiedad o pánico y responda mediante conciencia de la presencia de Dios, oración, entrega y una perspectiva de alabanza.</p></div></div><span class="eyebrow">Desarrollo</span><div class="problema"><p>Groeschel comienza esta parte mostrando cómo una experiencia antigua puede crear un detonante presente.</p><p>Su ejemplo son las furgonetas azules.</p><p>Una situación de peligro durante su infancia produjo una asociación que permaneció incluso cuando aquella amenaza ya había desaparecido.</p><p>Todos tenemos nuestras propias “furgonetas azules”.</p><p>Situaciones que activan rápidamente miedo, control, enojo o ansiedad.</p><p>El problema se intensifica cuando nuestra atención queda absorbida por aquello que amenaza.</p><p>La historia de Elías ofrece la imagen central: después de una gran victoria llega al agotamiento, pierde perspectiva y pide morir.</p><p>Groeschel formula entonces una de sus principales ideas:</p><p>podemos obsesionarnos tanto con <strong>la presencia de nuestros problemas</strong> que perdemos conciencia de <strong>la presencia de Dios</strong>.</p><p>Elías encuentra a Dios no en el espectáculo sino en el susurro.</p><p>El susurro exige cercanía.</p><p>La oración aparece entonces como respuesta a la conciencia de que Dios está cerca.</p><p>No requiere palabras perfectas.</p><p>Requiere honestidad.</p><p>La <strong>caja de Dios</strong> convierte esa entrega en un gesto tangible: escribir aquello que preocupa, orar por ello y depositarlo en una caja como símbolo de confianza.</p><p>Después aparece la alabanza.</p><p>Groeschel utiliza a Pablo y Silas para mostrar una alabanza que ocurre <strong>antes</strong> de que cambien las circunstancias.</p><p>No se alaba porque todo salió como se esperaba.</p><p>Se alaba recordando quién es Dios incluso cuando el “qué” todavía duele.</p><p>El último movimiento consiste en aprender a <strong>mirar a través</strong>, no solamente hacia.</p><p>No negar el problema.</p><p>Ampliar nuevamente el campo visual.</p></div><span class="eyebrow">Qué entender</span><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Una dificultad real puede convertirse mentalmente en toda la realidad.</div></div></div><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">El pánico estrecha nuestra atención.</div></div></div><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La oración no exige negar el problema; permite entregarlo.</div></div></div><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La alabanza no necesita esperar hasta que las circunstancias cambien.</div></div></div><div class="veredicto-card"><div class="veredicto-label">Qué interiorizar</div><div class="veredicto-text"><div class="destacado"><strong>“La presencia de un problema no significa la ausencia de Dios.”</strong></div></div></div><div class="alerta-card"><div class="alerta-label">Qué cambiar</div><div class="alerta-text"><p>Pasar de:</p><div class="destacado"><strong>“Todo depende de mí.”</strong></div><p>a:</p><div class="destacado"><strong>“Haré responsablemente lo que me corresponde y entregaré a Dios aquello que no puedo controlar.”</strong></div></div></div><div class="accion-card"><div class="accion-label">Aplicación</div><div class="accion-text"><p>Completar el plan final:</p><div class="campos"><div class="campo"><span class="campo-l">MI DETONANTE PRINCIPAL</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LO QUE MI MIEDO ME DICE</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LO QUE ES VERDAD</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LO QUE PUEDO HACER RESPONSABLEMENTE</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LO QUE NECESITO ENTREGAR</span><span class="blank"></span></div><div class="campo"><span class="campo-l">MI ORACIÓN</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LO QUE PUEDO AGRADECER AUN AHORA</span><span class="blank"></span></div></div></div></div></div></div>
+    <div class="nav-final"><button onclick="irA('b3')" class="btn-nav btn-regresar">← Anterior</button><button onclick="irA('f1')" class="btn-nav btn-siguiente">Siguiente →</button></div>
+    <div class="book-footer"><div class="footer-title">Gana la guerra en tu mente · Craig Groeschel</div><div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div><div class="footer-tag">Bloque 4 · Regocijo</div></div>
+  </div>
+</section>
+</div>
+<div id="f1" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Versión final</div></div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>2 min</span></div>
+    <div class="body"><div class="filtro-header"><div class="filtro-label">Versión final</div><div class="filtro-title">Progresión, resultado y fidelidad · versión final</div></div><div data-s><h2 class="sec-titulo">Progresión del recorrido</h2><p>El recorrido produce una progresión intencional.</p><h3 class="sub">Semana 1 — Descubro</h3><div class="destacado"><strong>¿Qué estoy creyendo?</strong></div><p>El lector observa y nombra.</p><h3 class="sub">Semana 2 — Entreno</h3><div class="destacado"><strong>¿Qué verdad necesito aprender a pensar?</strong></div><p>El lector construye y practica.</p><h3 class="sub">Semana 3 — Interpreto</h3><div class="destacado"><strong>¿Desde qué filtro estoy leyendo mi realidad?</strong></div><p>El lector revisa y replantea.</p><h3 class="sub">Semana 4 — Respondo</h3><div class="destacado"><strong>¿Cómo viviré cuando vuelva la presión?</strong></div><p>El lector ora, entrega, alaba y actúa.</p><p>La secuencia completa es:</p><div class="big">Mentira → verdad → repetición → perspectiva → respuesta</div><p>El recorrido comienza haciendo visible un pensamiento y termina formando una respuesta.</p></div><hr class="rule"><div data-s><h2 class="sec-titulo">Resultado final esperado</h2><p>Al finalizar el recorrido, cada lector deberá tener construido su propio:</p><div class="big">Plan personal de renovación de la mente</div><p>Con los siguientes elementos:</p><ul class="clave plan"><li><strong>1. Mi pensamiento dominante más destructivo.</strong></li><li><strong>2. La mentira raíz que lo sostiene.</strong></li><li><strong>3. La verdad bíblica que lo confronta.</strong></li><li><strong>4. Mi declaración personal.</strong></li><li><strong>5. Mis principales detonantes.</strong></li><li><strong>6. Mi vieja secuencia mental.</strong></li><li><strong>7. Mi nueva trinchera de verdad.</strong></li><li><strong>8. El filtro o sesgo que necesito revisar.</strong></li><li><strong>9. Una circunstancia que necesito replantear.</strong></li><li><strong>10. Una situación futura que necesito preestructurar.</strong></li><li><strong>11. Mi práctica de oración y entrega.</strong></li><li><strong>12. Mi práctica de gratitud y alabanza.</strong></li></ul><p>El resultado no se mide solamente preguntando:</p><div class="destacado"><strong>“¿Qué aprendiste?”</strong></div><p>Se mide preguntando:</p><div class="destacado"><strong>“¿Qué haces ahora cuando aparece nuevamente el pensamiento que antes te gobernaba?”</strong></div></div><hr class="rule"><div data-s><h2 class="sec-titulo">Criterios de fidelidad al libro</h2><p>El recorrido debe conservar los cuatro movimientos originales de Groeschel:</p><div class="destacado"><strong>REEMPLAZO → RECABLEADO → REPLANTEAMIENTO → REGOCIJO.</strong></div><p>Debe preservar la tesis de que el objetivo no es pensamiento positivo, sino confrontar mentira con verdad.</p><p>Debe mantener las imágenes pedagógicas centrales cuando ayuden al aprendizaje:</p><div class="destacado"><strong>fortaleza, surco, trinchera, lentes, filtros, furgoneta azul, caja de Dios y mirar a través.</strong></div><p>Las prácticas deben surgir prioritariamente de ejercicios contenidos en el libro.</p><p>Los textos bíblicos deben utilizarse por su relación real con el argumento del autor.</p><p>Las afirmaciones científicas deben presentarse con prudencia. El libro mezcla referencias académicas con fuentes divulgativas y algunas afirmaciones indirectas, por lo que la neurociencia no debe convertirse en el fundamento central del recorrido.</p><p>El recorrido tampoco debe presentar toda ansiedad, agotamiento o dificultad emocional exclusivamente como un problema espiritual.</p><p>Groeschel mismo relata haber buscado consejería y recomienda considerar acompañamiento cuando sea necesario.</p><p>La fidelidad esencial puede resumirse así:</p><div class="destacado"><strong>identifica la mentira → encuentra la verdad → practica la verdad → revisa tu perspectiva → responde desde oración y alabanza.</strong></div></div></div>
+    <div class="nav-final"><button onclick="irA('b4')" class="btn-nav btn-regresar">← Anterior</button><button onclick="irA('cierre')" class="btn-nav btn-siguiente">Siguiente →</button></div>
+    <div class="book-footer"><div class="footer-title">Gana la guerra en tu mente · Craig Groeschel</div><div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div><div class="footer-tag">Progresión, resultado y fidelidad · versión final</div></div>
+  </div>
+</section>
+</div>
+<div id="cierre" class="pagina oculta">
+<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+  <div class="page">
+    <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Cierre</div></div>
+    <div class="lectura-meta">⏱ Tiempo estimado: <span>1 min</span></div>
+    <div class="body"><div class="filtro-header"><div class="filtro-label">Cierre</div><div class="filtro-title">Cierre</div></div><div data-s><p>El recorrido completo puede conservarse en una sola secuencia:</p><ul class="clave"><li><strong>OBSERVA EL PENSAMIENTO.</strong></li><li><strong>NOMBRA LA MENTIRA.</strong></li><li><strong>CONFRÓNTALA CON VERDAD.</strong></li><li><strong>ENTRENA ESA VERDAD.</strong></li><li><strong>REVISA TU PERSPECTIVA.</strong></li><li><strong>ENTREGA LO QUE NO CONTROLAS.</strong></li><li><strong>RESPONDE DESDE LA VERDAD QUE ESTÁS APRENDIENDO A VIVIR.</strong></li></ul><p>Ese es el corazón formativo de <em>Gana la guerra en tu mente</em>.</p></div></div>
+    <div class="nav-final"><button onclick="irA('f1')" class="btn-nav btn-regresar">← Anterior</button><button onclick="irA('portada')" class="btn-nav btn-siguiente">Volver a la portada</button></div>
+    <div class="book-footer"><div class="footer-title">Gana la guerra en tu mente · Craig Groeschel</div><div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div><div class="footer-tag">Cierre</div></div>
+  </div>
+</section>
+</div>
+<script>
+  var FUENTES = ['fuente-s','fuente-m','fuente-l','fuente-xl'];
+  var FUENTE_LABELS = ['S','M','L','XL'];
+  var fuenteIdx = 1;
+
+  var PAGINAS = ["portada", "p1", "p2", "s1", "s2", "s3", "s4", "p3", "m0", "b1", "b2", "b3", "b4", "f1", "cierre"];
+  var paginaActual = 'portada';
+  var TIEMPOS = {"p1": "2 min", "p2": "2 min", "s1": "2 min", "s2": "2 min", "s3": "2 min", "s4": "2 min", "p3": "2 min", "m0": "3 min", "b1": "2 min", "b2": "2 min", "b3": "3 min", "b4": "3 min", "f1": "2 min", "cierre": "1 min"};
+
+  function toggleConfig() {
+    var panel = document.getElementById('config-panel');
+    var overlay = document.getElementById('config-overlay');
+    if (panel.classList.contains('abierto')) {
+      cerrarConfig();
+    } else {
+      panel.classList.add('visible');
+      overlay.classList.add('activo');
+      requestAnimationFrame(function() { panel.classList.add('abierto'); });
+    }
+  }
+
+  function cerrarConfig() {
+    var panel = document.getElementById('config-panel');
+    panel.classList.remove('abierto');
+    document.getElementById('config-overlay').classList.remove('activo');
+    setTimeout(function() { panel.classList.remove('visible'); }, 200);
+  }
+
+  function toggleDark() {
+    var dark = document.body.classList.toggle('dark');
+    document.getElementById('toggle-dark').checked = dark;
+  }
+
+  function toggleLectura() {
+    var lectura = document.body.classList.toggle('modo-lectura');
+    document.getElementById('toggle-lectura').checked = lectura;
+  }
+
+  function cambiarFuente(dir) {
+    var nuevo = Math.max(0, Math.min(FUENTES.length - 1, fuenteIdx + dir));
+    if (nuevo === fuenteIdx) return;
+    fuenteIdx = nuevo;
+    document.querySelectorAll('.body').forEach(function(b) {
+      FUENTES.forEach(function(c) { b.classList.remove(c); });
+      b.classList.add(FUENTES[fuenteIdx]);
+    });
+    document.getElementById('fuente-nivel').textContent = FUENTE_LABELS[fuenteIdx];
+  }
+
+  function abrirMenu() {
+    document.getElementById('menu-panel').classList.add('abierto');
+    document.getElementById('menu-overlay').classList.add('activo');
+    cerrarConfig();
+  }
+
+  function cerrarMenu() {
+    document.getElementById('menu-panel').classList.remove('abierto');
+    document.getElementById('menu-overlay').classList.remove('activo');
+  }
+
+  function irA(id) {
+    document.querySelectorAll('.pagina').forEach(function(p) {
+      p.classList.remove('visible'); p.classList.add('oculta');
+    });
+    var d = document.getElementById(id);
+    d.classList.remove('oculta'); d.classList.add('visible'); d.scrollTop = 0;
+    paginaActual = id;
+    var esPortada = id === 'portada';
+    document.getElementById('menu-btn').style.display = esPortada ? 'none' : 'flex';
+    document.getElementById('btn-config').style.display = esPortada ? 'none' : 'flex';
+    var barra = document.getElementById('barra-progreso');
+    barra.style.display = esPortada ? 'none' : 'block';
+    barra.style.width = '0%';
+    if (TIEMPOS[id]) { var m = d.querySelector('.lectura-meta span'); if (m) m.textContent = TIEMPOS[id]; }
+    document.querySelectorAll('.menu-item').forEach(function(b) { b.classList.toggle('activo', b.dataset.page === id); });
+    cerrarMenu();
+    cerrarConfig();
+    d.onscroll = function() {
+      var s = d.scrollHeight - d.clientHeight;
+      if (s <= 0) { barra.style.width = '100%'; return; }
+      barra.style.width = Math.min(100, Math.round((d.scrollTop / s) * 100)) + '%';
+    };
+  }
+
+  var sx = 0, sy = 0, sm = false;
+  document.addEventListener('touchstart', function(e) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; sm = false; }, { passive: true });
+  document.addEventListener('touchmove', function() { sm = true; }, { passive: true });
+  document.addEventListener('touchend', function(e) {
+    if (!sm) return;
+    var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    if (document.getElementById('menu-panel').classList.contains('abierto')) return;
+    if (document.getElementById('config-panel').classList.contains('abierto')) return;
+    var idx = PAGINAS.indexOf(paginaActual);
+    if (dx < 0 && idx < PAGINAS.length - 1) irA(PAGINAS[idx + 1]);
+    else if (dx > 0 && idx > 0) irA(PAGINAS[idx - 1]);
+  }, { passive: true });
+
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var h = a.getAttribute('href');
+    if (h === '#') return;
+    var t = document.querySelector(h);
+    if (t) {
+      e.preventDefault();
+      var pv = document.querySelector('.pagina.visible');
+      if (!pv) return;
+      pv.scrollTo({ top: t.getBoundingClientRect().top - pv.getBoundingClientRect().top + pv.scrollTop - 16, behavior: 'smooth' });
+    }
+  });
+</script>
+</body>
+</html>
