@@ -312,9 +312,16 @@
   @media(max-width:780px){.body{padding:2rem 2rem 3rem;}.libro-header{padding:1.25rem 2rem;}.nav-final{padding:1.75rem 2rem;}.book-footer{padding:0.85rem 2rem;}.toc{padding:1.25rem 1.5rem;}}
   @media(max-width:600px){.p-titulo{font-size:clamp(1.9rem,7vw,2.6rem);}.page{box-shadow:none;}.libro-header{padding:1rem 1.25rem;flex-direction:column;align-items:flex-start;gap:0.4rem;}.libro-header-titulo{font-size:0.85rem;}.body{padding:1.35rem 1.1rem 2rem;}.filtro-title{font-size:0.98rem;}.tesis-text{font-size:0.98rem;}.idea-text{font-size:14px;}.accion-text{font-size:14.5px;}.accion-question{font-size:0.97rem;}.dato-text{font-size:0.98rem;}.problema{font-size:14.5px;padding:1rem 1.1rem;}.toc{padding:1.1rem 1rem;}.toc-btn{font-size:14px;padding:9px 11px;}.tesis-block{padding:1.4rem 1.25rem;}.dato-card{padding:1.25rem 1.4rem;}.accion-card{padding:1.1rem 1.25rem;}.filtro-header{padding:0.75rem 1rem;margin-bottom:1.75rem;}.author-card{gap:0.85rem;padding:1rem 1.1rem;}.author-monogram{width:42px;height:42px;font-size:1.1rem;}.idea{gap:0.65rem;margin-bottom:1.25rem;}.idea-num{width:22px;height:22px;font-size:10px;}.com-grid{grid-template-columns:1fr;}.eval-header{flex-direction:column;gap:0.35rem;}.nav-final{padding:1.35rem 1.1rem;gap:0.6rem;}.btn-nav{font-size:0.88rem;padding:0.65rem 1.25rem;flex:1;justify-content:center;}.book-footer{padding:0.85rem 1.25rem;}.eval-text{font-size:14px;}#config-panel{right:0.5rem;width:195px;}}
   @media(max-width:380px){.p-titulo{font-size:1.8rem;}.body{padding:1.1rem 0.9rem 1.75rem;}.btn-nav{font-size:0.82rem;padding:0.6rem 0.9rem;}}
+
+/* BOOKCLUB HOME LINK */
+#bookclub-home{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:9998;display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:.45rem .8rem;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(15,15,14,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#fff;text-decoration:none;font-family:var(--font-body,system-ui,sans-serif);font-size:10px;font-weight:600;letter-spacing:.12em;line-height:1;text-transform:uppercase;box-shadow:0 2px 12px rgba(0,0,0,.22);transition:background .2s,transform .15s,border-color .2s}
+#bookclub-home:hover{background:rgba(15,15,14,.9);border-color:rgba(255,255,255,.38);transform:translateX(-50%) translateY(-1px)}
+@media(max-width:480px){#bookclub-home{top:.85rem;min-height:34px;padding:.42rem .7rem;font-size:9px;letter-spacing:.1em}}
 </style>
 </head>
 <body>
+<a id="bookclub-home" href="../index.html" aria-label="Volver a BOOKCLUB">← BOOKCLUB</a>
+
 <div id="menu-overlay" onclick="cerrarMenu()"></div>
 <div id="menu-panel">
   <div class="menu-header">

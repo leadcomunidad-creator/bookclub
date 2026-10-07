@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#FAFAF7" id="theme-color-meta">
+<meta name="theme-color" content="#F3F4F6" id="theme-color-meta">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -25,47 +25,212 @@
 <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png">
 <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
 <title>BOOKCLUB — Ideas que vale la pena conservar</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#FAFAF7;--surface:#FFF;--surface-2:#F3F2ED;--border:#E8E8E3;--border-strong:#CCCCC5;--text:#111110;--text-2:#555550;--text-3:#8B8B83;--accent:#3730A3;--accent-soft:#EEF0FF;--font-display:'Fraunces',Georgia,serif;--font-body:'Inter',system-ui,sans-serif;--radius:8px;--radius-lg:14px;--shadow:0 1px 3px rgba(0,0,0,.05),0 7px 28px rgba(0,0,0,.045);--shadow-hover:0 5px 12px rgba(0,0,0,.08),0 16px 34px rgba(0,0,0,.08)}
-body.dark{--bg:#0F0F0E;--surface:#1A1A18;--surface-2:#20201D;--border:#2A2A26;--border-strong:#41413A;--text:#F0F0EB;--text-2:#ADADA4;--text-3:#77776E;--accent:#9AA2FF;--accent-soft:#20213B;--shadow:0 2px 14px rgba(0,0,0,.24);--shadow-hover:0 8px 28px rgba(0,0,0,.34)}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100vh;transition:background .25s,color .25s}.header{position:sticky;top:0;z-index:50;height:62px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}.brand{display:flex;align-items:baseline;gap:.65rem}.brand-main{font-family:var(--font-display);font-size:1.16rem;font-weight:600;letter-spacing:.02em}.brand-sub{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}.header-actions{display:flex;align-items:center;gap:.55rem}.icon-btn,.install-btn{border:1px solid var(--border);background:var(--surface);color:var(--text-2);cursor:pointer;transition:.15s}.icon-btn{width:38px;height:38px;border-radius:50%;font-size:1rem}.install-btn{display:none;border-radius:30px;padding:.55rem .9rem;font:500 .76rem var(--font-body)}.install-btn.visible{display:block}.icon-btn:hover,.install-btn:hover{border-color:var(--border-strong);color:var(--text)}main{max-width:1000px;margin:0 auto}.hero{padding:4.4rem 2rem 2.4rem}.hero-kicker{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:1rem}.hero h1{font-family:var(--font-display);font-size:clamp(2.25rem,5vw,3.8rem);font-weight:300;line-height:1.06;letter-spacing:-.035em;max-width:760px}.hero h1 em{font-weight:300}.hero-purpose{font-family:var(--font-display);font-size:clamp(1.15rem,2.5vw,1.48rem);font-weight:300;font-style:italic;color:var(--text-2);margin-top:1.15rem}.hero-desc{font-size:.94rem;color:var(--text-2);line-height:1.75;margin-top:.45rem}.search-wrap{padding:0 2rem 1.65rem}.search{position:relative;max-width:520px}.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-3);pointer-events:none}.search input{width:100%;padding:.78rem 2.7rem .78rem 2.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--text);font:.9rem var(--font-body);outline:none;transition:.15s}.search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent)}.search input::placeholder{color:var(--text-3)}.search-clear{display:none;position:absolute;right:7px;top:50%;transform:translateY(-50%);width:30px;height:30px;border:0;background:transparent;color:var(--text-3);cursor:pointer;font-size:1rem}.search-clear.visible{display:block}.explore{padding:0 2rem 2rem;border-bottom:1px solid var(--border)}.explore-label{font-size:.7rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--text-3);margin-bottom:.75rem}.mode-row{display:flex;gap:.5rem;flex-wrap:wrap}.pill{border:1px solid var(--border);background:var(--surface);color:var(--text-2);border-radius:40px;padding:.46rem .86rem;font:500 .79rem var(--font-body);cursor:pointer;white-space:nowrap;transition:.15s}.pill:hover{border-color:var(--border-strong);color:var(--text)}.pill.active{background:var(--text);border-color:var(--text);color:var(--bg)}.explore-panel{display:none;margin-top:1rem;padding:1rem;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-lg)}.explore-panel.visible{display:block}.panel-title{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);font-weight:600;margin-bottom:.75rem}.option-wrap{display:flex;flex-wrap:wrap;gap:.45rem}.option-btn{border:1px solid var(--border);background:var(--surface);color:var(--text-2);border-radius:40px;padding:.43rem .78rem;font:400 .78rem var(--font-body);cursor:pointer}.option-btn.active{border-color:var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:500}.subroute{margin-top:.9rem;padding-top:.9rem;border-top:1px solid var(--border)}.want-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem}.want-btn{border:1px solid var(--border);background:var(--surface);color:var(--text-2);border-radius:var(--radius);padding:.78rem .9rem;text-align:left;font:400 .82rem/1.35 var(--font-body);cursor:pointer;transition:.15s}.want-btn:hover{border-color:var(--border-strong);color:var(--text)}.want-btn.active{border-color:var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:500}.results{padding:1.75rem 2rem 4rem}.result-state{min-height:28px;display:flex;align-items:center;flex-wrap:wrap;gap:.55rem;margin-bottom:1.25rem;font-size:.8rem;color:var(--text-3)}.result-state strong{color:var(--text);font-weight:600}.clear-filter{border:0;background:transparent;color:var(--accent);font:500 .76rem var(--font-body);cursor:pointer;padding:.2rem}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.25rem}.card{display:flex;flex-direction:column;overflow:hidden;text-decoration:none;color:inherit;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow);transition:.2s}.card:hover{transform:translateY(-3px);border-color:var(--border-strong);box-shadow:var(--shadow-hover)}.card-band{height:5px}.cover{height:126px;display:flex;align-items:center;justify-content:center;padding:1.3rem;position:relative;overflow:hidden}.cover::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,.06),rgba(0,0,0,.08))}.cover-title{font-family:var(--font-display);font-size:1.08rem;font-style:italic;font-weight:600;color:rgba(255,255,255,.94);text-align:center;line-height:1.27;text-shadow:0 1px 5px rgba(0,0,0,.28);z-index:1}.card-body{display:flex;flex:1;flex-direction:column;gap:.58rem;padding:1.05rem 1.15rem 1.15rem}.author{font-size:.72rem;font-weight:600;letter-spacing:.055em;text-transform:uppercase;color:var(--text-3)}.title{font-family:var(--font-display);font-size:1.06rem;font-weight:400;line-height:1.32}.desc{font-size:.8rem;color:var(--text-2);line-height:1.58;flex:1}.card-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:.75rem;border-top:1px solid var(--border);padding-top:.75rem;margin-top:.15rem}.tags{display:flex;gap:.35rem;flex-wrap:wrap}.tag{font-size:.67rem;font-weight:500;color:var(--accent);background:var(--accent-soft);border-radius:30px;padding:.18rem .5rem}.mins{font-size:.7rem;color:var(--text-3);white-space:nowrap}.empty{display:none;text-align:center;padding:5rem 1rem;color:var(--text-3)}.empty.visible{display:block}.empty h2{font-family:var(--font-display);font-weight:300;font-style:italic;color:var(--text-2);margin-bottom:.45rem}.footer{border-top:1px solid var(--border);padding:1.5rem 1rem;text-align:center;color:var(--text-3);font-size:.75rem}
-@media(max-width:650px){.header{padding:0 1rem}.brand-sub{display:none}.hero{padding:2.8rem 1rem 1.7rem}.search-wrap,.explore{padding-left:1rem;padding-right:1rem}.mode-row{overflow-x:auto;flex-wrap:nowrap;padding-bottom:.25rem;scrollbar-width:none}.mode-row::-webkit-scrollbar{display:none}.explore-panel{padding:.85rem}.want-list{grid-template-columns:1fr}.results{padding:1.4rem 1rem 3rem}.grid{grid-template-columns:1fr 1fr;gap:.8rem}.cover{height:92px}.cover-title{font-size:.86rem}.card-body{padding:.8rem .9rem .9rem}.desc{display:none}.title{font-size:.93rem}.card-foot{align-items:flex-start;flex-direction:column}.mins{align-self:flex-end}.install-btn{font-size:0;padding:.5rem;width:38px;height:38px}.install-btn::after{content:'+';font-size:1.2rem}}
-@media(max-width:385px){.grid{grid-template-columns:1fr}}
+:root{
+  --bg:#F3F4F6;--surface:#FFFFFF;--sunk:#E9EBEF;--line:#DDE0E6;--line-2:#C3C8D1;
+  --ink:#14161C;--ink-2:#4A505C;--ink-3:#7B8290;--accent:#3B3FD8;--accent-soft:#E7E8FB;--on-accent:#fff;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;--sans:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --r-md:10px;--r-pill:99px;--pad:clamp(1.1rem,4vw,3rem);
+  --lift:0 2px 4px rgba(20,22,28,.10),0 14px 28px -10px rgba(20,22,28,.28)
+}
+body.dark{
+  --bg:#0B0C10;--surface:#14161C;--sunk:#101217;--line:#23262F;--line-2:#363A46;
+  --ink:#ECEEF3;--ink-2:#A6ACB9;--ink-3:#6E7482;--accent:#9CA0FF;--accent-soft:#1C1E3A;--on-accent:#0B0C10;
+  --lift:0 2px 4px rgba(0,0,0,.5),0 16px 30px -10px rgba(0,0,0,.7)
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .25s,color .25s}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+
+/* Header */
+.header{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.header .wrap{height:60px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:.6rem;font-family:var(--serif);font-weight:600;font-size:1.2rem;letter-spacing:.06em}
+.mark{width:22px;height:22px;display:flex;align-items:flex-end;gap:2px}
+.mark i{display:block;width:5px;background:var(--ink);border-radius:1px}
+.mark i:nth-child(1){height:70%}.mark i:nth-child(2){height:100%;background:var(--accent)}.mark i:nth-child(3){height:55%}
+.actions{display:flex;gap:.5rem;align-items:center}
+.icon-btn,.install-btn{border:1px solid var(--line);background:var(--surface);color:var(--ink-2);transition:border-color .15s,color .15s}
+.icon-btn{width:38px;height:38px;border-radius:50%;font-size:1rem;display:grid;place-items:center}
+.install-btn{display:none;border-radius:var(--r-pill);padding:.5rem .95rem;font-size:.8rem;font-weight:500}
+.install-btn.visible{display:block}
+.icon-btn:hover,.install-btn:hover{border-color:var(--line-2);color:var(--ink)}
+
+/* Hero (vertical spacing only: never touches the .wrap side padding) */
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:2rem 3rem;align-items:end;padding-top:clamp(2.5rem,7vw,5.5rem);padding-bottom:clamp(2rem,4vw,3.2rem)}
+.hero-copy{padding-bottom:.6rem;min-width:0}
+.hero-line{font-family:var(--serif);font-style:italic;font-size:clamp(1.05rem,2vw,1.3rem);color:var(--accent);margin-bottom:1.1rem}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.5rem,6.2vw,4.9rem);line-height:1;letter-spacing:-.03em;font-variation-settings:'opsz' 72;max-width:12ch}
+.hero-purpose{margin-top:1.5rem;font-size:1.02rem;color:var(--ink-2);max-width:34ch}
+
+/* Shelf: spines drawn from real catalog data (height = reading time, width = chapters) */
+.shelf-col{min-width:0}
+.shelf{--s:1;position:relative;display:flex;align-items:flex-end;justify-content:flex-end;gap:6px;height:calc(300px*var(--s));padding:0;border-bottom:3px solid var(--ink)}
+.spine{position:relative;display:flex;align-items:center;justify-content:center;flex:0 0 auto;height:calc(var(--h)*1px*var(--s));width:calc(var(--w)*1px*var(--s));border-radius:3px 3px 1px 1px;text-decoration:none;overflow:hidden;transition:transform .25s cubic-bezier(.2,.8,.2,1),opacity .25s,filter .25s,box-shadow .25s}
+.spine::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.16),transparent 22%,transparent 78%,rgba(0,0,0,.22))}
+.spine span{position:relative;writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--serif);font-weight:500;font-size:calc(.92rem*var(--s));letter-spacing:.02em;color:rgba(255,255,255,.95);white-space:nowrap;max-height:88%;overflow:hidden;text-overflow:ellipsis}
+.spine:hover,.spine:focus-visible{transform:translateY(-14px);box-shadow:var(--lift)}
+.spine.dim{opacity:.22;filter:grayscale(.8)}
+.shelf-note{margin-top:.8rem;font-size:.78rem;color:var(--ink-3);text-align:right}
+@keyframes rise{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.shelf.intro .spine{animation:rise .7s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i)*70ms)}
+
+/* Toolbar */
+.toolbar{position:sticky;top:60px;z-index:50;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.toolbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-top:.7rem;padding-bottom:.7rem}
+.modes{display:flex;gap:2px;padding:3px;min-width:0;background:var(--sunk);border:1px solid var(--line);border-radius:var(--r-pill);overflow-x:auto;scrollbar-width:none}
+.modes::-webkit-scrollbar{display:none}
+.mode{flex:0 0 auto;border:0;background:transparent;color:var(--ink-2);padding:.45rem 1rem;border-radius:var(--r-pill);font-size:.78rem;font-weight:600;letter-spacing:.06em;white-space:nowrap;transition:background .2s,color .2s}
+.mode:hover{color:var(--ink)}
+.mode.active{background:var(--ink);color:var(--bg)}
+.search{position:relative;flex:0 1 340px;min-width:0;width:100%}
+.search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-3);pointer-events:none}
+.search input{width:100%;height:42px;padding:0 2.6rem;border:1px solid var(--line);border-radius:var(--r-pill);background:var(--surface);outline:none;font-size:.9rem;transition:border-color .15s,box-shadow .15s}
+.search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 16%,transparent)}
+.search input::placeholder{color:var(--ink-3)}
+.search input::-webkit-search-cancel-button{display:none}
+.search-clear{display:none;position:absolute;right:6px;top:50%;transform:translateY(-50%);width:30px;height:30px;border:0;border-radius:50%;background:transparent;color:var(--ink-3);font-size:1.1rem}
+.search-clear.visible{display:block}
+.search-clear:hover{color:var(--ink)}
+
+/* Filter panel */
+.panel{display:none;padding:1.4rem 0 0}
+.panel.visible{display:block;animation:open .22s ease-out}
+@keyframes open{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.panel-title{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--ink-2);margin-bottom:.8rem}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink-2);border-radius:var(--r-pill);padding:.45rem .95rem;font-size:.84rem;transition:border-color .15s,color .15s,background .15s}
+.chip:hover{border-color:var(--line-2);color:var(--ink)}
+.chip.active{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:500}
+.sub{margin-top:1.2rem;padding-left:1rem;border-left:2px solid var(--accent)}
+.wants{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr));gap:.6rem}
+.want{border:1px solid var(--line);background:var(--surface);color:var(--ink-2);border-radius:var(--r-md);padding:.85rem 1rem;text-align:left;font-family:var(--serif);font-size:1.02rem;line-height:1.3;transition:border-color .15s,color .15s,background .15s}
+.want:hover{border-color:var(--line-2);color:var(--ink)}
+.want.active{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+
+/* Results */
+.results{padding-top:2rem;padding-bottom:5rem}
+.state{min-height:30px;display:flex;align-items:center;flex-wrap:wrap;gap:.6rem;margin-bottom:1.6rem;font-size:.86rem;color:var(--ink-3)}
+.state strong{color:var(--ink);font-weight:600}
+.clear-filter{border:1px solid var(--line);background:var(--surface);color:var(--accent);border-radius:var(--r-pill);padding:.2rem .7rem;font-size:.78rem;font-weight:500}
+.clear-filter:hover{border-color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:2.4rem 1.6rem}
+.book{display:flex;flex-direction:column;gap:.9rem;min-width:0;color:inherit;text-decoration:none}
+.cover{position:relative;aspect-ratio:2/3;display:flex;flex-direction:column;justify-content:space-between;padding:1.3rem 1.1rem 1.1rem 1.5rem;border-radius:3px 8px 8px 3px;overflow:hidden;color:#fff;box-shadow:0 1px 2px rgba(20,22,28,.18),0 10px 22px -12px rgba(20,22,28,.5);transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s}
+.cover::before{content:'';position:absolute;inset:0 auto 0 0;width:12px;background:linear-gradient(90deg,rgba(0,0,0,.28),rgba(255,255,255,.1) 60%,transparent)}
+.cover::after{content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,.12),transparent 45%,rgba(0,0,0,.18));pointer-events:none}
+.cover-title{position:relative;z-index:1;font-family:var(--serif);font-weight:500;font-size:clamp(1.35rem,2.2vw,1.7rem);line-height:1.08;letter-spacing:-.01em;text-shadow:0 1px 8px rgba(0,0,0,.25);overflow-wrap:anywhere}
+.cover-author{position:relative;z-index:1;font-size:.78rem;font-weight:500;opacity:.88}
+.cover-rule{position:relative;z-index:1;width:28px;height:2px;background:rgba(255,255,255,.7);margin:.7rem 0}
+.book:hover .cover,.book:focus-visible .cover{transform:translateY(-6px) rotate(-.4deg);box-shadow:var(--lift)}
+.book-meta{display:flex;flex-direction:column;gap:.5rem;padding:0 .15rem}
+.book-line{display:flex;justify-content:space-between;gap:.6rem;font-size:.8rem;color:var(--ink-3)}
+.book-line b{color:var(--ink);font-weight:600}
+.book-desc{font-size:.88rem;line-height:1.55;color:var(--ink-2);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.tags{display:flex;flex-wrap:wrap;gap:.35rem}
+.tag{font-size:.72rem;font-weight:500;color:var(--accent);background:var(--accent-soft);border-radius:var(--r-pill);padding:.2rem .6rem}
+.empty{display:none;max-width:420px;padding:3rem 0}
+.empty.visible{display:block}
+.empty h2{font-family:var(--serif);font-weight:400;font-size:1.7rem;line-height:1.15;margin-bottom:.6rem}
+.empty p{color:var(--ink-2);margin-bottom:1.1rem}
+.empty button{border:1px solid var(--ink);background:var(--ink);color:var(--bg);border-radius:var(--r-pill);padding:.55rem 1.1rem;font-size:.85rem;font-weight:500}
+.footer{border-top:1px solid var(--line);padding-top:2rem;padding-bottom:2rem;color:var(--ink-3);font-size:.82rem}
+.footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.footer b{font-family:var(--serif);font-weight:600;letter-spacing:.06em;color:var(--ink)}
+
+/* Tablet */
+@media(max-width:900px){
+  .hero{grid-template-columns:minmax(0,1fr);align-items:start}
+  .hero h1{max-width:14ch}
+  .shelf{--s:.82;justify-content:flex-start;overflow-x:auto;overflow-y:hidden;padding-top:18px;height:calc(300px*var(--s) + 18px);scrollbar-width:none}
+  .shelf::-webkit-scrollbar{display:none}
+  .shelf-note{text-align:left}
+  .toolbar .wrap{flex-wrap:wrap}
+  .search{flex:1 1 280px}
+  .modes{flex:0 0 auto;max-width:100%}
+}
+/* Mobile */
+@media(max-width:700px){
+  .toolbar{position:static}
+  .toolbar .wrap{flex-direction:column-reverse;align-items:stretch;gap:.7rem}
+  .search{flex-basis:auto}
+  .shelf{--s:.7}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:1.8rem .9rem}
+  .cover{padding:1rem .8rem .85rem 1.15rem}
+  .cover-title{font-size:1.12rem}
+  .book-desc{display:none}
+  .book-line{flex-direction:column;gap:0}
+  .install-btn{font-size:0;padding:0;width:38px;height:38px}
+  .install-btn::after{content:'+';font-size:1.25rem;color:var(--ink-2)}
+}
+@media(max-width:360px){.grid{grid-template-columns:minmax(0,1fr)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 <header class="header">
-  <div class="brand"><span class="brand-main">BOOKCLUB</span></div>
-  <div class="header-actions"><button id="btn-install" class="install-btn" type="button">Instalar BOOKCLUB</button><button id="btn-dark" class="icon-btn" type="button" aria-label="Cambiar apariencia">☽</button></div>
-</header>
-<main>
-  <section class="hero">
-    <div class="hero-kicker">Ideas que vale la pena conservar.</div>
-    <h1>Descubre qué merece tu <em>tiempo de lectura.</em></h1>
-    <p class="hero-purpose">Una biblioteca de libros para pensar, crecer y enseñar.</p>
-  </section>
-  <section class="search-wrap">
-    <div class="search"><span class="search-icon">⌕</span><input id="search-input" type="search" placeholder="Buscar por título o autor…" autocomplete="off"><button id="search-clear" class="search-clear" type="button" aria-label="Borrar búsqueda">×</button></div>
-  </section>
-  <section class="explore">
-    <div class="explore-label">Explorar por</div>
-    <div class="mode-row" id="mode-row">
-      <button class="pill active" data-mode="todos">TODOS</button>
-      <button class="pill" data-mode="ruta">RUTA</button>
-      <button class="pill" data-mode="autor">AUTOR</button>
-      <button class="pill" data-mode="tema">TEMA</button>
-      <button class="pill" data-mode="quiero">QUIERO…</button>
+  <div class="wrap">
+    <div class="brand"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>BOOKCLUB</div>
+    <div class="actions">
+      <button id="btn-install" class="install-btn" type="button">Instalar BOOKCLUB</button>
+      <button id="btn-dark" class="icon-btn" type="button" aria-label="Cambiar apariencia">☽</button>
     </div>
-    <div id="explore-panel" class="explore-panel"></div>
+  </div>
+</header>
+
+<main>
+  <section class="wrap hero">
+    <div class="hero-copy">
+      <p class="hero-line">Ideas que vale la pena conservar.</p>
+      <h1>Descubre qué merece tu tiempo de lectura.</h1>
+      <p class="hero-purpose">Una biblioteca de libros para pensar, crecer y enseñar.</p>
+    </div>
+    <div class="shelf-col">
+      <div class="shelf" id="shelf" aria-label="Estantería de libros"></div>
+      <p class="shelf-note" id="shelf-note"></p>
+    </div>
   </section>
-  <section class="results">
-    <div id="result-state" class="result-state">Cargando…</div>
+
+  <div class="toolbar" id="toolbar">
+    <div class="wrap">
+      <div class="modes" id="mode-row" aria-label="Explorar por">
+        <button class="mode active" data-mode="todos" type="button">TODOS</button>
+        <button class="mode" data-mode="ruta" type="button">RUTA</button>
+        <button class="mode" data-mode="autor" type="button">AUTOR</button>
+        <button class="mode" data-mode="tema" type="button">TEMA</button>
+        <button class="mode" data-mode="quiero" type="button">QUIERO…</button>
+      </div>
+      <div class="search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="search-input" type="search" placeholder="Buscar por título o autor…" autocomplete="off" aria-label="Buscar por título o autor">
+        <button id="search-clear" class="search-clear" type="button" aria-label="Borrar búsqueda">×</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div id="explore-panel" class="panel"></div>
+  </div>
+  <section class="wrap results">
+    <div id="result-state" class="state" aria-live="polite">Cargando…</div>
     <div id="grid" class="grid"></div>
-    <div id="empty" class="empty"><h2>No encontramos libros para esta búsqueda.</h2><p>Prueba otro término o vuelve a Todos.</p></div>
+    <div id="empty" class="empty">
+      <h2>No encontramos libros para esta búsqueda.</h2>
+      <p>Prueba otro término o vuelve a Todos.</p>
+      <button id="reset-all" type="button">Ver todos los libros</button>
+    </div>
   </section>
 </main>
-<footer class="footer">BOOKCLUB · Ideas que vale la pena conservar.</footer>
+
+<footer class="footer"><div class="wrap"><span><b>BOOKCLUB</b> · Ideas que vale la pena conservar.</span><span>Una biblioteca de libros para pensar, crecer y enseñar.</span></div></footer>
+
 <script>
 (function(){
 'use strict';
@@ -76,25 +241,97 @@ var routeSubs={mentalidad:['identidad','sanidad','renovacion'],capacidad:['espir
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function norm(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();}
 function unique(arr){return Array.from(new Set(arr)).sort(function(a,b){return a.localeCompare(b,'es',{sensitivity:'base'});});}
+function grad(l,deg){return 'linear-gradient('+(deg||160)+'deg,'+esc(l.color_portada_inicio)+' 0%,'+esc(l.color_portada_fin)+' 100%)';}
+function chip(cls,attr,val,label,on){return '<button type="button" class="'+cls+(on?' active':'')+'" '+attr+'="'+esc(val)+'">'+esc(label)+'</button>';}
+
 function setMode(m){mode=m;selection=null;routeMajor=null;document.querySelectorAll('[data-mode]').forEach(function(b){b.classList.toggle('active',b.dataset.mode===m);});renderPanel();render();}
 function selectValue(v){selection=v;renderPanel();render();}
 function selectRouteMajor(v){routeMajor=v;selection=null;renderPanel();render();}
-function renderPanel(){var p=document.getElementById('explore-panel');if(mode==='todos'){p.className='explore-panel';p.innerHTML='';return;}p.className='explore-panel visible';var h='';if(mode==='ruta'){h='<div class="panel-title">Ruta formativa</div><div class="option-wrap">'+['mentalidad','capacidad','habilidad'].map(function(x){return '<button class="option-btn '+(routeMajor===x?'active':'')+'" data-route="'+x+'">'+labelsExp[x]+'</button>';}).join('')+'</div>';if(routeMajor){h+='<div class="subroute"><div class="panel-title">'+labelsExp[routeMajor]+'</div><div class="option-wrap"><button class="option-btn '+(selection===null?'active':'')+'" data-subroute="">Todas</button>'+routeSubs[routeMajor].map(function(x){return '<button class="option-btn '+(selection===x?'active':'')+'" data-subroute="'+x+'">'+labelsSub[x]+'</button>';}).join('')+'</div></div>';}}
-if(mode==='autor'){var vals=unique(libros.map(function(l){return l.autor;}));h='<div class="panel-title">Autores</div><div class="option-wrap">'+vals.map(function(v){return '<button class="option-btn '+(selection===v?'active':'')+'" data-select="'+esc(v)+'">'+esc(v)+'</button>';}).join('')+'</div>';}
-if(mode==='tema'){var temas=unique(libros.flatMap(function(l){return l.temas||[];}));h='<div class="panel-title">Temas</div><div class="option-wrap">'+temas.map(function(v){return '<button class="option-btn '+(selection===v?'active':'')+'" data-select="'+esc(v)+'">'+esc(v)+'</button>';}).join('')+'</div>';}
-if(mode==='quiero'){var wants=unique(libros.flatMap(function(l){return l.quiero||[];}));h='<div class="panel-title">¿Qué quieres trabajar?</div><div class="want-list">'+wants.map(function(v){return '<button class="want-btn '+(selection===v?'active':'')+'" data-select="'+esc(v)+'">'+esc(v)+'</button>';}).join('')+'</div>';}
-p.innerHTML=h;}
-function matches(l){if(search&&!(norm(l.titulo+' '+l.autor).includes(norm(search))))return false;if(mode==='ruta'){if(routeMajor&&l.expedicion!==routeMajor)return false;if(selection&&l.sub_expedicion!==selection)return false;}if(mode==='autor'&&selection&&l.autor!==selection)return false;if(mode==='tema'&&selection&&!(l.temas||[]).includes(selection))return false;if(mode==='quiero'&&selection&&!(l.quiero||[]).includes(selection))return false;return true;}
-function stateText(total){var bits=[];if(mode==='ruta'&&routeMajor){bits.push(labelsExp[routeMajor]+(selection?' → '+labelsSub[selection]:''));}else if(mode==='autor'&&selection){bits.push('Autor: '+selection);}else if(mode==='tema'&&selection){bits.push('Tema: '+selection);}else if(mode==='quiero'&&selection){bits.push('Quiero: '+selection);}if(search)bits.push('buscando “'+search+'”');var prefix=bits.length?'<strong>'+esc(bits.join(' · '))+'</strong> · ':'';var clear=(mode!=='todos'&&(routeMajor||selection))?' <button class="clear-filter" id="clear-filter">Limpiar filtro</button>':'';return prefix+'<strong>'+total+'</strong> '+(total===1?'libro':'libros')+clear;}
-function card(l){var grad='linear-gradient(145deg,'+l.color_portada_inicio+' 0%,'+l.color_portada_fin+' 100%)';return '<a class="card" href="'+esc(l.archivo)+'" target="_blank" rel="noopener noreferrer"><div class="card-band" style="background:'+esc(l.color_acento)+'"></div><div class="cover" style="background:'+grad+'"><div class="cover-title">'+esc(l.titulo)+'</div></div><div class="card-body"><div class="author">'+esc(l.autor)+' · '+esc(l.anio)+'</div><div class="title">'+esc(l.titulo)+'</div><div class="desc">'+esc(l.descripcion)+'</div><div class="card-foot"><div class="tags"><span class="tag">'+esc(labelsExp[l.expedicion]||'')+'</span><span class="tag">'+esc(labelsSub[l.sub_expedicion]||'')+'</span></div><div class="mins">'+esc(l.tiempo_lectura_min)+' min</div></div></div></a>';}
-function render(){var filtered=libros.filter(matches),g=document.getElementById('grid'),e=document.getElementById('empty'),s=document.getElementById('result-state');s.innerHTML=stateText(filtered.length);if(filtered.length){g.innerHTML=filtered.map(card).join('');e.classList.remove('visible');}else{g.innerHTML='';e.classList.add('visible');}var c=document.getElementById('clear-filter');if(c)c.onclick=function(){selection=null;routeMajor=null;renderPanel();render();};}
+function resetFilters(){selection=null;routeMajor=null;renderPanel();render();}
+
+function renderPanel(){
+  var p=document.getElementById('explore-panel'),h='';
+  if(mode==='todos'){p.className='panel';p.innerHTML='';return;}
+  p.className='panel visible';
+  if(mode==='ruta'){
+    h='<div class="panel-title">Elige una ruta formativa</div><div class="chips">'+['mentalidad','capacidad','habilidad'].map(function(x){return chip('chip','data-route',x,labelsExp[x],routeMajor===x);}).join('')+'</div>';
+    if(routeMajor){h+='<div class="sub"><div class="panel-title">'+labelsExp[routeMajor]+'</div><div class="chips">'+chip('chip','data-subroute','','Todas',selection===null)+routeSubs[routeMajor].map(function(x){return chip('chip','data-subroute',x,labelsSub[x],selection===x);}).join('')+'</div></div>';}
+  }
+  if(mode==='autor'){h='<div class="panel-title">Autores</div><div class="chips">'+unique(libros.map(function(l){return l.autor;})).map(function(v){return chip('chip','data-select',v,v,selection===v);}).join('')+'</div>';}
+  if(mode==='tema'){h='<div class="panel-title">Temas</div><div class="chips">'+unique(libros.flatMap(function(l){return l.temas||[];})).map(function(v){return chip('chip','data-select',v,v,selection===v);}).join('')+'</div>';}
+  if(mode==='quiero'){h='<div class="panel-title">¿Qué quieres trabajar?</div><div class="wants">'+unique(libros.flatMap(function(l){return l.quiero||[];})).map(function(v){return chip('want','data-select',v,v,selection===v);}).join('')+'</div>';}
+  p.innerHTML=h;
+}
+function matches(l){
+  if(search&&!(norm(l.titulo+' '+l.autor).includes(norm(search))))return false;
+  if(mode==='ruta'){if(routeMajor&&l.expedicion!==routeMajor)return false;if(selection&&l.sub_expedicion!==selection)return false;}
+  if(mode==='autor'&&selection&&l.autor!==selection)return false;
+  if(mode==='tema'&&selection&&!(l.temas||[]).includes(selection))return false;
+  if(mode==='quiero'&&selection&&!(l.quiero||[]).includes(selection))return false;
+  return true;
+}
+function stateText(total){
+  var bits=[];
+  if(mode==='ruta'&&routeMajor){bits.push(labelsExp[routeMajor]+(selection?' → '+labelsSub[selection]:''));}
+  else if(mode==='autor'&&selection){bits.push('Autor: '+selection);}
+  else if(mode==='tema'&&selection){bits.push('Tema: '+selection);}
+  else if(mode==='quiero'&&selection){bits.push('Quiero: '+selection);}
+  if(search)bits.push('buscando “'+search+'”');
+  var prefix=bits.length?'<strong>'+esc(bits.join(' · '))+'</strong> · ':'';
+  var clear=(mode!=='todos'&&(routeMajor||selection))?'<button class="clear-filter" id="clear-filter" type="button">Limpiar filtro</button>':'';
+  return prefix+'<span><strong>'+total+'</strong> '+(total===1?'libro':'libros')+'</span>'+clear;
+}
+function card(l){
+  var cover='<div class="cover" style="background:'+grad(l)+'"><div class="cover-title">'+esc(l.titulo)+'</div><div><div class="cover-rule"></div><div class="cover-author">'+esc(l.autor)+'</div></div></div>';
+  var meta='<div class="book-meta"><div class="book-line"><span><b>'+esc(l.autor)+'</b> · '+esc(l.anio)+'</span><span>'+esc(l.tiempo_lectura_min)+' min</span></div><div class="book-desc">'+esc(l.descripcion)+'</div><div class="tags"><span class="tag">'+esc(labelsExp[l.expedicion]||'')+'</span><span class="tag">'+esc(labelsSub[l.sub_expedicion]||'')+'</span></div></div>';
+  return '<a class="book" href="'+esc(l.archivo)+'" target="_blank" rel="noopener noreferrer" aria-label="'+esc(l.titulo+', '+l.autor+', '+l.tiempo_lectura_min+' minutos')+'">'+cover+meta+'</a>';
+}
+function renderShelf(){
+  var s=document.getElementById('shelf'),maxT=Math.max.apply(null,libros.map(function(l){return l.tiempo_lectura_min;}).concat([1]));
+  s.innerHTML=libros.map(function(l,i){
+    var h=150+Math.round((l.tiempo_lectura_min/maxT)*130),w=46+Math.min(l.capitulos||1,16)*2;
+    return '<a class="spine" data-href="'+esc(l.archivo)+'" href="'+esc(l.archivo)+'" target="_blank" rel="noopener noreferrer" title="'+esc(l.titulo+' — '+l.autor)+'" style="--i:'+i+';--h:'+h+';--w:'+w+';background:'+grad(l,180)+'"><span>'+esc(l.titulo)+'</span></a>';
+  }).join('');
+  s.classList.add('intro');
+  document.getElementById('shelf-note').textContent=libros.length+' libros · cada lomo mide su tiempo de lectura';
+}
+function render(){
+  var filtered=libros.filter(matches),g=document.getElementById('grid'),e=document.getElementById('empty');
+  document.getElementById('result-state').innerHTML=stateText(filtered.length);
+  if(filtered.length){g.innerHTML=filtered.map(card).join('');e.classList.remove('visible');}
+  else{g.innerHTML='';e.classList.add('visible');}
+  var ok={};filtered.forEach(function(l){ok[l.archivo]=1;});
+  document.querySelectorAll('.spine').forEach(function(sp){sp.classList.toggle('dim',!ok[sp.dataset.href]);});
+  var c=document.getElementById('clear-filter');if(c)c.onclick=resetFilters;
+}
+
 document.getElementById('mode-row').addEventListener('click',function(e){var b=e.target.closest('[data-mode]');if(b)setMode(b.dataset.mode);});
-document.getElementById('explore-panel').addEventListener('click',function(e){var r=e.target.closest('[data-route]');if(r){selectRouteMajor(r.dataset.route);return;}var sr=e.target.closest('[data-subroute]');if(sr){selectValue(sr.dataset.subroute||null);return;}var s=e.target.closest('[data-select]');if(s)selectValue(s.dataset.select);});
-var inp=document.getElementById('search-input'),clr=document.getElementById('search-clear');inp.addEventListener('input',function(){search=this.value.trim();clr.classList.toggle('visible',!!search);render();});clr.addEventListener('click',function(){inp.value='';search='';clr.classList.remove('visible');inp.focus();render();});
-function applyTheme(dark){document.body.classList.toggle('dark',dark);document.getElementById('btn-dark').textContent=dark?'☀':'☽';document.getElementById('theme-color-meta').setAttribute('content',dark?'#0F0F0E':'#FAFAF7');localStorage.setItem('bookclub-theme',dark?'dark':'light');}
-var saved=localStorage.getItem('bookclub-theme');applyTheme(saved==='dark'||(!saved&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches));document.getElementById('btn-dark').addEventListener('click',function(){applyTheme(!document.body.classList.contains('dark'));});
-var installPrompt=null,ib=document.getElementById('btn-install');window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();installPrompt=e;ib.classList.add('visible');});ib.addEventListener('click',async function(){if(!installPrompt)return;installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;ib.classList.remove('visible');});window.addEventListener('appinstalled',function(){ib.classList.remove('visible');installPrompt=null;});
-fetch('libros.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error();return r.json();}).then(function(d){libros=d.libros||[];renderPanel();render();}).catch(function(){document.getElementById('result-state').textContent='No se pudo cargar la biblioteca.';document.getElementById('empty').classList.add('visible');});
+document.getElementById('explore-panel').addEventListener('click',function(e){
+  var r=e.target.closest('[data-route]');if(r){selectRouteMajor(r.dataset.route);return;}
+  var sr=e.target.closest('[data-subroute]');if(sr){selectValue(sr.dataset.subroute||null);return;}
+  var s=e.target.closest('[data-select]');if(s)selectValue(s.dataset.select);
+});
+var inp=document.getElementById('search-input'),clr=document.getElementById('search-clear');
+inp.addEventListener('input',function(){search=this.value.trim();clr.classList.toggle('visible',!!search);render();});
+clr.addEventListener('click',function(){inp.value='';search='';clr.classList.remove('visible');inp.focus();render();});
+document.getElementById('reset-all').addEventListener('click',function(){inp.value='';search='';clr.classList.remove('visible');setMode('todos');});
+
+function applyTheme(dark){
+  document.body.classList.toggle('dark',dark);
+  document.getElementById('btn-dark').textContent=dark?'☀':'☽';
+  document.getElementById('theme-color-meta').setAttribute('content',dark?'#0B0C10':'#F3F4F6');
+  try{localStorage.setItem('bookclub-theme',dark?'dark':'light');}catch(e){}
+}
+var saved=null;try{saved=localStorage.getItem('bookclub-theme');}catch(e){}
+applyTheme(saved==='dark'||(!saved&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches));
+document.getElementById('btn-dark').addEventListener('click',function(){applyTheme(!document.body.classList.contains('dark'));});
+
+var installPrompt=null,ib=document.getElementById('btn-install');
+window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();installPrompt=e;ib.classList.add('visible');});
+ib.addEventListener('click',async function(){if(!installPrompt)return;installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;ib.classList.remove('visible');});
+window.addEventListener('appinstalled',function(){ib.classList.remove('visible');installPrompt=null;});
+
+fetch('libros.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error();return r.json();}).then(function(d){libros=d.libros||[];renderShelf();renderPanel();render();}).catch(function(){document.getElementById('result-state').textContent='No se pudo cargar la biblioteca.';document.getElementById('empty').classList.add('visible');});
 if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
 })();
 </script>
