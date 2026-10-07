@@ -3,631 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mentor de Conocimiento — Biblioteca</title>
+<meta name="theme-color" content="#FAFAF7" id="theme-color-meta">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="BOOKCLUB">
+<meta name="description" content="BOOKCLUB: una biblioteca de libros para pensar, crecer y enseñar. Descubre qué merece tu tiempo de lectura.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BOOKCLUB">
+<meta property="og:title" content="BOOKCLUB — Ideas que vale la pena conservar">
+<meta property="og:description" content="Descubre qué merece tu tiempo de lectura. Una biblioteca de libros para pensar, crecer y enseñar.">
+<meta property="og:image" content="https://raw.githubusercontent.com/leadcomunidad-creator/bookclub/main/assets/previews/bookclub.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BOOKCLUB — Ideas que vale la pena conservar">
+<meta name="twitter:description" content="Descubre qué merece tu tiempo de lectura.">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/leadcomunidad-creator/bookclub/main/assets/previews/bookclub.jpg">
+<link rel="canonical" href="./">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png">
+<link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+<title>BOOKCLUB — Ideas que vale la pena conservar</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-
-  /* ══════════════════════════════
-     TOKENS
-  ══════════════════════════════ */
-  :root {
-    --bg:           #FAFAF7;
-    --surface:      #FFFFFF;
-    --border:       #E8E8E3;
-    --border-strong:#CCCCC5;
-    --text:         #111110;
-    --text-2:       #555550;
-    --text-3:       #999990;
-    --acento:       #3730A3;
-    --acento-suave: #EEF0FF;
-
-    --font-display: 'Fraunces', Georgia, serif;
-    --font-body:    'Inter', system-ui, sans-serif;
-
-    --radio:  6px;
-    --radio-lg: 10px;
-    --sombra: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
-    --sombra-hover: 0 4px 8px rgba(0,0,0,0.08), 0 12px 32px rgba(0,0,0,0.08);
-  }
-
-  /* ── Dark ── */
-  body.dark {
-    --bg:           #0F0F0E;
-    --surface:      #1A1A18;
-    --border:       #2A2A26;
-    --border-strong:#3A3A34;
-    --text:         #F0F0EB;
-    --text-2:       #A0A098;
-    --text-3:       #606058;
-    --acento:       #818CF8;
-    --acento-suave: #1E1F3A;
-    --sombra: 0 1px 3px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.2);
-    --sombra-hover: 0 4px 8px rgba(0,0,0,0.4), 0 12px 32px rgba(0,0,0,0.3);
-  }
-
-  /* ── Reset ── */
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: var(--font-body);
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    transition: background 0.3s, color 0.3s;
-  }
-
-  /* ══════════════════════════════
-     HEADER
-  ══════════════════════════════ */
-  .header {
-    position: sticky; top: 0; z-index: 100;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    padding: 0 2rem;
-    display: flex; align-items: center;
-    justify-content: space-between;
-    height: 60px;
-    backdrop-filter: blur(12px);
-  }
-  .header-marca {
-    display: flex; align-items: baseline; gap: 0.6rem;
-  }
-  .header-marca-titulo {
-    font-family: var(--font-display);
-    font-size: 1.1rem; font-weight: 600;
-    color: var(--text); letter-spacing: -0.01em;
-  }
-  .header-marca-sep {
-    color: var(--border-strong); font-size: 1rem;
-  }
-  .header-marca-sub {
-    font-size: 0.78rem; font-weight: 400;
-    color: var(--text-3); letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-  .header-acciones {
-    display: flex; align-items: center; gap: 0.75rem;
-  }
-  .btn-icon {
-    width: 36px; height: 36px; border-radius: 50%;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    color: var(--text-2); font-size: 0.95rem;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; transition: all 0.15s;
-  }
-  .btn-icon:hover { border-color: var(--border-strong); color: var(--text); }
-
-  /* ══════════════════════════════
-     HERO
-  ══════════════════════════════ */
-  .hero {
-    max-width: 960px; margin: 0 auto;
-    padding: 4rem 2rem 2.5rem;
-  }
-  .hero-eyebrow {
-    font-size: 0.72rem; font-weight: 500;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--acento); margin-bottom: 1rem;
-  }
-  .hero-titulo {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 300; line-height: 1.2;
-    color: var(--text); letter-spacing: -0.02em;
-    margin-bottom: 0.75rem;
-  }
-  .hero-titulo em {
-    font-style: italic; font-weight: 300;
-  }
-  .hero-desc {
-    font-size: 0.95rem; color: var(--text-2);
-    line-height: 1.7; max-width: 480px;
-  }
-
-  /* ══════════════════════════════
-     BÚSQUEDA
-  ══════════════════════════════ */
-  .busqueda-wrap {
-    max-width: 960px; margin: 0 auto;
-    padding: 0 2rem 1.5rem;
-  }
-  .busqueda {
-    position: relative; max-width: 400px;
-  }
-  .busqueda-icon {
-    position: absolute; left: 12px; top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-3); font-size: 0.85rem;
-    pointer-events: none;
-  }
-  .busqueda input {
-    width: 100%;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radio);
-    padding: 0.6rem 0.75rem 0.6rem 2.25rem;
-    font-family: var(--font-body);
-    font-size: 0.9rem; color: var(--text);
-    transition: border-color 0.15s, box-shadow 0.15s;
-    outline: none;
-  }
-  .busqueda input::placeholder { color: var(--text-3); }
-  .busqueda input:focus {
-    border-color: var(--acento);
-    box-shadow: 0 0 0 3px rgba(55,48,163,0.08);
-  }
-  body.dark .busqueda input:focus {
-    box-shadow: 0 0 0 3px rgba(129,140,248,0.12);
-  }
-
-  /* ══════════════════════════════
-     FILTROS
-  ══════════════════════════════ */
-  .filtros-wrap {
-    max-width: 960px; margin: 0 auto;
-    padding: 0 2rem 2rem;
-    border-bottom: 1px solid var(--border);
-  }
-  .filtros-label {
-    font-size: 0.72rem; font-weight: 500;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--text-3); margin-bottom: 0.75rem;
-  }
-  .filtros-grupo {
-    display: flex; flex-wrap: wrap; gap: 0.5rem;
-    margin-bottom: 0.6rem;
-  }
-  .filtro-btn {
-    font-family: var(--font-body);
-    font-size: 0.83rem; font-weight: 500;
-    padding: 0.4rem 0.85rem;
-    border-radius: 40px;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    color: var(--text-2);
-    cursor: pointer; transition: all 0.15s;
-    white-space: nowrap;
-  }
-  .filtro-btn:hover {
-    border-color: var(--border-strong);
-    color: var(--text);
-  }
-  .filtro-btn.activo {
-    background: var(--text);
-    border-color: var(--text);
-    color: var(--bg);
-  }
-  .filtro-btn.sub {
-    font-size: 0.78rem; font-weight: 400;
-    padding: 0.3rem 0.75rem;
-    background: transparent;
-  }
-  .filtro-btn.sub.activo {
-    background: var(--acento-suave);
-    border-color: var(--acento);
-    color: var(--acento);
-  }
-  .subfiltros {
-    display: none; flex-wrap: wrap; gap: 0.4rem;
-    margin-top: 0.5rem;
-  }
-  .subfiltros.visible { display: flex; }
-
-  /* ══════════════════════════════
-     GRID DE LIBROS
-  ══════════════════════════════ */
-  .grid-wrap {
-    max-width: 960px; margin: 0 auto;
-    padding: 2rem 2rem 4rem;
-  }
-  .grid-meta {
-    font-size: 0.8rem; color: var(--text-3);
-    margin-bottom: 1.5rem;
-  }
-  .grid-meta span { color: var(--text); font-weight: 500; }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1.25rem;
-  }
-
-  /* ── Tarjeta ── */
-  .tarjeta {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radio-lg);
-    overflow: hidden;
-    cursor: pointer;
-    text-decoration: none;
-    display: flex; flex-direction: column;
-    transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
-    box-shadow: var(--sombra);
-  }
-  .tarjeta:hover {
-    box-shadow: var(--sombra-hover);
-    transform: translateY(-3px);
-    border-color: var(--border-strong);
-  }
-
-  /* Banda de color del libro */
-  .tarjeta-banda {
-    height: 6px;
-    flex-shrink: 0;
-    transition: height 0.2s;
-  }
-  .tarjeta:hover .tarjeta-banda { height: 9px; }
-
-  /* Mini portada */
-  .tarjeta-portada {
-    height: 120px;
-    display: flex; align-items: center; justify-content: center;
-    padding: 1.25rem;
-    position: relative; overflow: hidden;
-  }
-  .tarjeta-portada-titulo {
-    font-family: var(--font-display);
-    font-size: 1rem; font-weight: 600; font-style: italic;
-    color: rgba(255,255,255,0.92);
-    text-align: center; line-height: 1.3;
-    position: relative; z-index: 1;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.25);
-  }
-  .tarjeta-portada-overlay {
-    position: absolute; inset: 0;
-    background: rgba(0,0,0,0.08);
-  }
-
-  /* Cuerpo */
-  .tarjeta-cuerpo {
-    padding: 1.1rem 1.25rem 1.25rem;
-    flex: 1; display: flex; flex-direction: column; gap: 0.6rem;
-  }
-  .tarjeta-autor {
-    font-size: 0.78rem; font-weight: 500;
-    color: var(--text-3); letter-spacing: 0.02em;
-    text-transform: uppercase;
-  }
-  .tarjeta-titulo {
-    font-family: var(--font-display);
-    font-size: 1.05rem; font-weight: 400;
-    color: var(--text); line-height: 1.35;
-    letter-spacing: -0.01em;
-  }
-  .tarjeta-desc {
-    font-size: 0.82rem; color: var(--text-2);
-    line-height: 1.6; flex: 1;
-  }
-  .tarjeta-footer {
-    display: flex; align-items: center;
-    justify-content: space-between;
-    padding-top: 0.75rem;
-    border-top: 1px solid var(--border);
-    margin-top: auto;
-  }
-  .tarjeta-tags {
-    display: flex; gap: 0.4rem; flex-wrap: wrap;
-  }
-  .tarjeta-tag {
-    font-size: 0.7rem; font-weight: 500;
-    padding: 2px 8px; border-radius: 20px;
-    background: var(--acento-suave);
-    color: var(--acento);
-    letter-spacing: 0.03em;
-  }
-  .tarjeta-meta {
-    font-size: 0.72rem; color: var(--text-3);
-    white-space: nowrap;
-  }
-
-  /* ══════════════════════════════
-     VACÍO
-  ══════════════════════════════ */
-  .vacio {
-    display: none;
-    flex-direction: column; align-items: center;
-    padding: 5rem 2rem; text-align: center;
-  }
-  .vacio.visible { display: flex; }
-  .vacio-icon { font-size: 2.5rem; margin-bottom: 1.25rem; opacity: 0.3; }
-  .vacio-titulo {
-    font-family: var(--font-display);
-    font-size: 1.25rem; font-weight: 300; font-style: italic;
-    color: var(--text-2); margin-bottom: 0.5rem;
-  }
-  .vacio-sub { font-size: 0.88rem; color: var(--text-3); }
-
-  /* ══════════════════════════════
-     FOOTER
-  ══════════════════════════════ */
-  .footer {
-    border-top: 1px solid var(--border);
-    padding: 1.5rem 2rem;
-    text-align: center;
-    font-size: 0.78rem; color: var(--text-3);
-  }
-
-  /* ══════════════════════════════
-     RESPONSIVE
-  ══════════════════════════════ */
-  @media (max-width: 600px) {
-    .header { padding: 0 1rem; }
-    .header-marca-sub { display: none; }
-    .hero { padding: 2.5rem 1rem 1.5rem; }
-    .busqueda-wrap { padding: 0 1rem 1.25rem; }
-    .busqueda { max-width: 100%; }
-    .filtros-wrap { padding: 0 1rem 1.5rem; }
-    .grid-wrap { padding: 1.5rem 1rem 3rem; }
-    .grid { grid-template-columns: 1fr 1fr; gap: 0.85rem; }
-    .tarjeta-portada { height: 90px; }
-    .tarjeta-portada-titulo { font-size: 0.85rem; }
-    .tarjeta-cuerpo { padding: 0.85rem 1rem 1rem; }
-    .tarjeta-titulo { font-size: 0.92rem; }
-    .tarjeta-desc { display: none; }
-  }
-  @media (max-width: 380px) {
-    .grid { grid-template-columns: 1fr; }
-  }
-
+:root{--bg:#FAFAF7;--surface:#FFF;--surface-2:#F3F2ED;--border:#E8E8E3;--border-strong:#CCCCC5;--text:#111110;--text-2:#555550;--text-3:#8B8B83;--accent:#3730A3;--accent-soft:#EEF0FF;--font-display:'Fraunces',Georgia,serif;--font-body:'Inter',system-ui,sans-serif;--radius:8px;--radius-lg:14px;--shadow:0 1px 3px rgba(0,0,0,.05),0 7px 28px rgba(0,0,0,.045);--shadow-hover:0 5px 12px rgba(0,0,0,.08),0 16px 34px rgba(0,0,0,.08)}
+body.dark{--bg:#0F0F0E;--surface:#1A1A18;--surface-2:#20201D;--border:#2A2A26;--border-strong:#41413A;--text:#F0F0EB;--text-2:#ADADA4;--text-3:#77776E;--accent:#9AA2FF;--accent-soft:#20213B;--shadow:0 2px 14px rgba(0,0,0,.24);--shadow-hover:0 8px 28px rgba(0,0,0,.34)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100vh;transition:background .25s,color .25s}.header{position:sticky;top:0;z-index:50;height:62px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}.brand{display:flex;align-items:baseline;gap:.65rem}.brand-main{font-family:var(--font-display);font-size:1.16rem;font-weight:600;letter-spacing:.02em}.brand-sub{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}.header-actions{display:flex;align-items:center;gap:.55rem}.icon-btn,.install-btn{border:1px solid var(--border);background:var(--surface);color:var(--text-2);cursor:pointer;transition:.15s}.icon-btn{width:38px;height:38px;border-radius:50%;font-size:1rem}.install-btn{display:none;border-radius:30px;padding:.55rem .9rem;font:500 .76rem var(--font-body)}.install-btn.visible{display:block}.icon-btn:hover,.install-btn:hover{border-color:var(--border-strong);color:var(--text)}main{max-width:1000px;margin:0 auto}.hero{padding:4.4rem 2rem 2.4rem}.hero-kicker{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:1rem}.hero h1{font-family:var(--font-display);font-size:clamp(2.25rem,5vw,3.8rem);font-weight:300;line-height:1.06;letter-spacing:-.035em;max-width:760px}.hero h1 em{font-weight:300}.hero-purpose{font-family:var(--font-display);font-size:clamp(1.15rem,2.5vw,1.48rem);font-weight:300;font-style:italic;color:var(--text-2);margin-top:1.15rem}.hero-desc{font-size:.94rem;color:var(--text-2);line-height:1.75;margin-top:.45rem}.search-wrap{padding:0 2rem 1.65rem}.search{position:relative;max-width:520px}.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-3);pointer-events:none}.search input{width:100%;padding:.78rem 2.7rem .78rem 2.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--text);font:.9rem var(--font-body);outline:none;transition:.15s}.search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent)}.search input::placeholder{color:var(--text-3)}.search-clear{display:none;position:absolute;right:7px;top:50%;transform:translateY(-50%);width:30px;height:30px;border:0;background:transparent;color:var(--text-3);cursor:pointer;font-size:1rem}.search-clear.visible{display:block}.explore{padding:0 2rem 2rem;border-bottom:1px solid var(--border)}.explore-label{font-size:.7rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--text-3);margin-bottom:.75rem}.mode-row{display:flex;gap:.5rem;flex-wrap:wrap}.pill{border:1px solid var(--border);background:var(--surface);color:var(--text-2);border-radius:40px;padding:.46rem .86rem;font:500 .79rem var(--font-body);cursor:pointer;white-space:nowrap;transition:.15s}.pill:hover{border-color:var(--border-strong);color:var(--text)}.pill.active{background:var(--text);border-color:var(--text);color:var(--bg)}.explore-panel{display:none;margin-top:1rem;padding:1rem;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-lg)}.explore-panel.visible{display:block}.panel-title{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);font-weight:600;margin-bottom:.75rem}.option-wrap{display:flex;flex-wrap:wrap;gap:.45rem}.option-btn{border:1px solid var(--border);background:var(--surface);color:var(--text-2);border-radius:40px;padding:.43rem .78rem;font:400 .78rem var(--font-body);cursor:pointer}.option-btn.active{border-color:var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:500}.subroute{margin-top:.9rem;padding-top:.9rem;border-top:1px solid var(--border)}.want-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem}.want-btn{border:1px solid var(--border);background:var(--surface);color:var(--text-2);border-radius:var(--radius);padding:.78rem .9rem;text-align:left;font:400 .82rem/1.35 var(--font-body);cursor:pointer;transition:.15s}.want-btn:hover{border-color:var(--border-strong);color:var(--text)}.want-btn.active{border-color:var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:500}.results{padding:1.75rem 2rem 4rem}.result-state{min-height:28px;display:flex;align-items:center;flex-wrap:wrap;gap:.55rem;margin-bottom:1.25rem;font-size:.8rem;color:var(--text-3)}.result-state strong{color:var(--text);font-weight:600}.clear-filter{border:0;background:transparent;color:var(--accent);font:500 .76rem var(--font-body);cursor:pointer;padding:.2rem}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.25rem}.card{display:flex;flex-direction:column;overflow:hidden;text-decoration:none;color:inherit;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow);transition:.2s}.card:hover{transform:translateY(-3px);border-color:var(--border-strong);box-shadow:var(--shadow-hover)}.card-band{height:5px}.cover{height:126px;display:flex;align-items:center;justify-content:center;padding:1.3rem;position:relative;overflow:hidden}.cover::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,.06),rgba(0,0,0,.08))}.cover-title{font-family:var(--font-display);font-size:1.08rem;font-style:italic;font-weight:600;color:rgba(255,255,255,.94);text-align:center;line-height:1.27;text-shadow:0 1px 5px rgba(0,0,0,.28);z-index:1}.card-body{display:flex;flex:1;flex-direction:column;gap:.58rem;padding:1.05rem 1.15rem 1.15rem}.author{font-size:.72rem;font-weight:600;letter-spacing:.055em;text-transform:uppercase;color:var(--text-3)}.title{font-family:var(--font-display);font-size:1.06rem;font-weight:400;line-height:1.32}.desc{font-size:.8rem;color:var(--text-2);line-height:1.58;flex:1}.card-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:.75rem;border-top:1px solid var(--border);padding-top:.75rem;margin-top:.15rem}.tags{display:flex;gap:.35rem;flex-wrap:wrap}.tag{font-size:.67rem;font-weight:500;color:var(--accent);background:var(--accent-soft);border-radius:30px;padding:.18rem .5rem}.mins{font-size:.7rem;color:var(--text-3);white-space:nowrap}.empty{display:none;text-align:center;padding:5rem 1rem;color:var(--text-3)}.empty.visible{display:block}.empty h2{font-family:var(--font-display);font-weight:300;font-style:italic;color:var(--text-2);margin-bottom:.45rem}.footer{border-top:1px solid var(--border);padding:1.5rem 1rem;text-align:center;color:var(--text-3);font-size:.75rem}
+@media(max-width:650px){.header{padding:0 1rem}.brand-sub{display:none}.hero{padding:2.8rem 1rem 1.7rem}.search-wrap,.explore{padding-left:1rem;padding-right:1rem}.mode-row{overflow-x:auto;flex-wrap:nowrap;padding-bottom:.25rem;scrollbar-width:none}.mode-row::-webkit-scrollbar{display:none}.explore-panel{padding:.85rem}.want-list{grid-template-columns:1fr}.results{padding:1.4rem 1rem 3rem}.grid{grid-template-columns:1fr 1fr;gap:.8rem}.cover{height:92px}.cover-title{font-size:.86rem}.card-body{padding:.8rem .9rem .9rem}.desc{display:none}.title{font-size:.93rem}.card-foot{align-items:flex-start;flex-direction:column}.mins{align-self:flex-end}.install-btn{font-size:0;padding:.5rem;width:38px;height:38px}.install-btn::after{content:'+';font-size:1.2rem}}
+@media(max-width:385px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-
-<!-- HEADER -->
 <header class="header">
-  <div class="header-marca">
-    <span class="header-marca-titulo">Mentor de Conocimiento</span>
-    <span class="header-marca-sep">·</span>
-    <span class="header-marca-sub">Biblioteca</span>
-  </div>
-  <div class="header-acciones">
-    <button class="btn-icon" onclick="toggleDark()" id="btn-dark" title="Modo oscuro">☽</button>
-  </div>
+  <div class="brand"><span class="brand-main">BOOKCLUB</span></div>
+  <div class="header-actions"><button id="btn-install" class="install-btn" type="button">Instalar BOOKCLUB</button><button id="btn-dark" class="icon-btn" type="button" aria-label="Cambiar apariencia">☽</button></div>
 </header>
-
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-eyebrow">The Way · College</div>
-  <h1 class="hero-titulo">Lecturas que <em>forman</em><br>el camino</h1>
-  <p class="hero-desc">Resúmenes profundos de libros seleccionados para cada etapa del proceso de formación.</p>
-</div>
-
-<!-- BÚSQUEDA -->
-<div class="busqueda-wrap">
-  <div class="busqueda">
-    <span class="busqueda-icon">⌕</span>
-    <input type="text" id="input-busqueda" placeholder="Buscar por título o autor…" autocomplete="off">
-  </div>
-</div>
-
-<!-- FILTROS -->
-<div class="filtros-wrap">
-  <div class="filtros-label">Expedición</div>
-  <div class="filtros-grupo" id="filtros-principales">
-    <button class="filtro-btn activo" data-filtro="todos">Todos</button>
-    <button class="filtro-btn" data-filtro="mentalidad">Mentalidad</button>
-    <button class="filtro-btn" data-filtro="capacidad">Capacidad</button>
-    <button class="filtro-btn" data-filtro="habilidad">Habilidad</button>
-  </div>
-
-  <!-- Subfiltros Mentalidad -->
-  <div class="subfiltros" id="sub-mentalidad">
-    <button class="filtro-btn sub activo" data-sub="todos-mentalidad">Todas</button>
-    <button class="filtro-btn sub" data-sub="identidad">Identidad</button>
-    <button class="filtro-btn sub" data-sub="sanidad">Sanidad</button>
-    <button class="filtro-btn sub" data-sub="renovacion">Renovación</button>
-  </div>
-
-  <!-- Subfiltros Capacidad -->
-  <div class="subfiltros" id="sub-capacidad">
-    <button class="filtro-btn sub activo" data-sub="todos-capacidad">Todas</button>
-    <button class="filtro-btn sub" data-sub="espiritual">Inteligencia Espiritual</button>
-    <button class="filtro-btn sub" data-sub="emocional">Inteligencia Emocional</button>
-    <button class="filtro-btn sub" data-sub="fisica">Inteligencia Física</button>
-  </div>
-
-  <!-- Subfiltros Habilidad -->
-  <div class="subfiltros" id="sub-habilidad">
-    <button class="filtro-btn sub activo" data-sub="todos-habilidad">Todas</button>
-    <button class="filtro-btn sub" data-sub="personal">Personal</button>
-    <button class="filtro-btn sub" data-sub="relacional">Relacional</button>
-    <button class="filtro-btn sub" data-sub="vocacional">Vocacional</button>
-  </div>
-</div>
-
-<!-- GRID -->
-<div class="grid-wrap">
-  <div class="grid-meta" id="grid-meta">Cargando…</div>
-  <div class="grid" id="grid"></div>
-  <div class="vacio" id="vacio">
-    <div class="vacio-icon">◎</div>
-    <div class="vacio-titulo">Sin resultados</div>
-    <div class="vacio-sub">Prueba con otro término o filtro</div>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer class="footer">
-  Mentor de Conocimiento · The Way College
-</footer>
-
+<main>
+  <section class="hero">
+    <div class="hero-kicker">Ideas que vale la pena conservar.</div>
+    <h1>Descubre qué merece tu <em>tiempo de lectura.</em></h1>
+    <p class="hero-purpose">Una biblioteca de libros para pensar, crecer y enseñar.</p>
+  </section>
+  <section class="search-wrap">
+    <div class="search"><span class="search-icon">⌕</span><input id="search-input" type="search" placeholder="Buscar por título o autor…" autocomplete="off"><button id="search-clear" class="search-clear" type="button" aria-label="Borrar búsqueda">×</button></div>
+  </section>
+  <section class="explore">
+    <div class="explore-label">Explorar por</div>
+    <div class="mode-row" id="mode-row">
+      <button class="pill active" data-mode="todos">TODOS</button>
+      <button class="pill" data-mode="ruta">RUTA</button>
+      <button class="pill" data-mode="autor">AUTOR</button>
+      <button class="pill" data-mode="tema">TEMA</button>
+      <button class="pill" data-mode="quiero">QUIERO…</button>
+    </div>
+    <div id="explore-panel" class="explore-panel"></div>
+  </section>
+  <section class="results">
+    <div id="result-state" class="result-state">Cargando…</div>
+    <div id="grid" class="grid"></div>
+    <div id="empty" class="empty"><h2>No encontramos libros para esta búsqueda.</h2><p>Prueba otro término o vuelve a Todos.</p></div>
+  </section>
+</main>
+<footer class="footer">BOOKCLUB · Ideas que vale la pena conservar.</footer>
 <script>
-  /* ══════════════════════════════
-     ESTADO
-  ══════════════════════════════ */
-  var libros = [];
-  var filtroActivo = 'todos';
-  var subFiltroActivo = null;
-  var busqueda = '';
-
-  /* ══════════════════════════════
-     DARK MODE
-  ══════════════════════════════ */
-  function toggleDark() {
-    var dark = document.body.classList.toggle('dark');
-    document.getElementById('btn-dark').textContent = dark ? '☀' : '☽';
-  }
-
-  /* ══════════════════════════════
-     CARGAR DATOS
-  ══════════════════════════════ */
-  fetch('libros.json')
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      libros = data.libros;
-      renderizar();
-    })
-    .catch(function() {
-      // Fallback con datos de ejemplo si no encuentra el JSON
-      libros = [
-        {
-          titulo: "El Regreso del Hijo Pródigo",
-          autor: "Henri J. M. Nouwen",
-          anio: 1992,
-          expedicion: "mentalidad",
-          sub_expedicion: "identidad",
-          color_acento: "#312C8A",
-          color_portada_inicio: "#0F0D33",
-          color_portada_fin: "#4E3DBB",
-          tiempo_lectura_min: 48,
-          capitulos: 12,
-          archivo: "libros/el-regreso-del-hijo-prodigo.html",
-          descripcion: "El camino espiritual recorrido a través de los tres personajes de la parábola: el hijo que huye, el hijo que juzga y el padre que ama sin condición."
-        }
-      ];
-      renderizar();
-    });
-
-  /* ══════════════════════════════
-     FILTROS
-  ══════════════════════════════ */
-  document.getElementById('filtros-principales').addEventListener('click', function(e) {
-    var btn = e.target.closest('.filtro-btn');
-    if (!btn) return;
-    var f = btn.dataset.filtro;
-
-    // Actualizar botones principales
-    document.querySelectorAll('#filtros-principales .filtro-btn').forEach(function(b) {
-      b.classList.toggle('activo', b.dataset.filtro === f);
-    });
-
-    filtroActivo = f;
-    subFiltroActivo = null;
-
-    // Mostrar/ocultar subfiltros
-    ['mentalidad','capacidad','habilidad'].forEach(function(exp) {
-      var el = document.getElementById('sub-' + exp);
-      if (exp === f) {
-        el.classList.add('visible');
-        // Reset subfiltro activo
-        el.querySelectorAll('.filtro-btn').forEach(function(b, i) {
-          b.classList.toggle('activo', i === 0);
-        });
-      } else {
-        el.classList.remove('visible');
-      }
-    });
-
-    renderizar();
-  });
-
-  // Subfiltros
-  ['mentalidad','capacidad','habilidad'].forEach(function(exp) {
-    document.getElementById('sub-' + exp).addEventListener('click', function(e) {
-      var btn = e.target.closest('.filtro-btn');
-      if (!btn) return;
-      var sub = btn.dataset.sub;
-
-      this.querySelectorAll('.filtro-btn').forEach(function(b) {
-        b.classList.toggle('activo', b.dataset.sub === sub);
-      });
-
-      subFiltroActivo = sub.startsWith('todos-') ? null : sub;
-      renderizar();
-    });
-  });
-
-  /* ══════════════════════════════
-     BÚSQUEDA
-  ══════════════════════════════ */
-  document.getElementById('input-busqueda').addEventListener('input', function() {
-    busqueda = this.value.toLowerCase().trim();
-    renderizar();
-  });
-
-  /* ══════════════════════════════
-     RENDERIZAR
-  ══════════════════════════════ */
-  function renderizar() {
-    var filtrados = libros.filter(function(l) {
-      // Filtro expedición
-      if (filtroActivo !== 'todos' && l.expedicion !== filtroActivo) return false;
-      // Subfiltro
-      if (subFiltroActivo && l.sub_expedicion !== subFiltroActivo) return false;
-      // Búsqueda
-      if (busqueda) {
-        var haystack = (l.titulo + ' ' + l.autor).toLowerCase();
-        if (!haystack.includes(busqueda)) return false;
-      }
-      return true;
-    });
-
-    var grid = document.getElementById('grid');
-    var vacio = document.getElementById('vacio');
-    var meta = document.getElementById('grid-meta');
-
-    if (filtrados.length === 0) {
-      grid.innerHTML = '';
-      vacio.classList.add('visible');
-      meta.innerHTML = '';
-    } else {
-      vacio.classList.remove('visible');
-      var total = filtrados.length;
-      meta.innerHTML = '<span>' + total + '</span> ' + (total === 1 ? 'libro' : 'libros');
-      grid.innerHTML = filtrados.map(tarjetaHTML).join('');
-    }
-  }
-
-  function tarjetaHTML(libro) {
-    var grad = 'linear-gradient(145deg, ' + libro.color_portada_inicio + ' 0%, ' + libro.color_portada_fin + ' 100%)';
-    var subLabel = etiquetaSub(libro.expedicion, libro.sub_expedicion);
-    var expLabel = etiquetaExp(libro.expedicion);
-
-    return '<a class="tarjeta" href="' + libro.archivo + '" target="_blank" rel="noopener noreferrer">' +
-      '<div class="tarjeta-banda" style="background:' + libro.color_acento + '"></div>' +
-      '<div class="tarjeta-portada" style="background:' + grad + '">' +
-        '<div class="tarjeta-portada-overlay"></div>' +
-        '<div class="tarjeta-portada-titulo">' + libro.titulo + '</div>' +
-      '</div>' +
-      '<div class="tarjeta-cuerpo">' +
-        '<div class="tarjeta-autor">' + libro.autor + ' · ' + libro.anio + '</div>' +
-        '<div class="tarjeta-titulo">' + libro.titulo + '</div>' +
-        '<div class="tarjeta-desc">' + libro.descripcion + '</div>' +
-        '<div class="tarjeta-footer">' +
-          '<div class="tarjeta-tags">' +
-            (expLabel ? '<span class="tarjeta-tag">' + expLabel + '</span>' : '') +
-            (subLabel ? '<span class="tarjeta-tag">' + subLabel + '</span>' : '') +
-          '</div>' +
-          '<div class="tarjeta-meta">' + libro.tiempo_lectura_min + ' min</div>' +
-        '</div>' +
-      '</div>' +
-    '</a>';
-  }
-
-  function etiquetaExp(exp) {
-    var map = { mentalidad: 'Mentalidad', capacidad: 'Capacidad', habilidad: 'Habilidad' };
-    return map[exp] || '';
-  }
-
-  function etiquetaSub(exp, sub) {
-    var map = {
-      identidad: 'Identidad', sanidad: 'Sanidad', renovacion: 'Renovación',
-      espiritual: 'Int. Espiritual', emocional: 'Int. Emocional', fisica: 'Int. Física',
-      personal: 'Personal', relacional: 'Relacional', vocacional: 'Vocacional'
-    };
-    return map[sub] || '';
-  }
+(function(){
+'use strict';
+var libros=[],mode='todos',selection=null,routeMajor=null,search='';
+var labelsExp={mentalidad:'Mentalidad',capacidad:'Capacidad',habilidad:'Habilidad'};
+var labelsSub={identidad:'Identidad',sanidad:'Sanidad',renovacion:'Renovación',espiritual:'Inteligencia Espiritual',emocional:'Inteligencia Emocional',fisica:'Inteligencia Física',personal:'Personal',relacional:'Relacional',vocacional:'Vocacional'};
+var routeSubs={mentalidad:['identidad','sanidad','renovacion'],capacidad:['espiritual','emocional','fisica'],habilidad:['personal','relacional','vocacional']};
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function norm(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();}
+function unique(arr){return Array.from(new Set(arr)).sort(function(a,b){return a.localeCompare(b,'es',{sensitivity:'base'});});}
+function setMode(m){mode=m;selection=null;routeMajor=null;document.querySelectorAll('[data-mode]').forEach(function(b){b.classList.toggle('active',b.dataset.mode===m);});renderPanel();render();}
+function selectValue(v){selection=v;renderPanel();render();}
+function selectRouteMajor(v){routeMajor=v;selection=null;renderPanel();render();}
+function renderPanel(){var p=document.getElementById('explore-panel');if(mode==='todos'){p.className='explore-panel';p.innerHTML='';return;}p.className='explore-panel visible';var h='';if(mode==='ruta'){h='<div class="panel-title">Ruta formativa</div><div class="option-wrap">'+['mentalidad','capacidad','habilidad'].map(function(x){return '<button class="option-btn '+(routeMajor===x?'active':'')+'" data-route="'+x+'">'+labelsExp[x]+'</button>';}).join('')+'</div>';if(routeMajor){h+='<div class="subroute"><div class="panel-title">'+labelsExp[routeMajor]+'</div><div class="option-wrap"><button class="option-btn '+(selection===null?'active':'')+'" data-subroute="">Todas</button>'+routeSubs[routeMajor].map(function(x){return '<button class="option-btn '+(selection===x?'active':'')+'" data-subroute="'+x+'">'+labelsSub[x]+'</button>';}).join('')+'</div></div>';}}
+if(mode==='autor'){var vals=unique(libros.map(function(l){return l.autor;}));h='<div class="panel-title">Autores</div><div class="option-wrap">'+vals.map(function(v){return '<button class="option-btn '+(selection===v?'active':'')+'" data-select="'+esc(v)+'">'+esc(v)+'</button>';}).join('')+'</div>';}
+if(mode==='tema'){var temas=unique(libros.flatMap(function(l){return l.temas||[];}));h='<div class="panel-title">Temas</div><div class="option-wrap">'+temas.map(function(v){return '<button class="option-btn '+(selection===v?'active':'')+'" data-select="'+esc(v)+'">'+esc(v)+'</button>';}).join('')+'</div>';}
+if(mode==='quiero'){var wants=unique(libros.flatMap(function(l){return l.quiero||[];}));h='<div class="panel-title">¿Qué quieres trabajar?</div><div class="want-list">'+wants.map(function(v){return '<button class="want-btn '+(selection===v?'active':'')+'" data-select="'+esc(v)+'">'+esc(v)+'</button>';}).join('')+'</div>';}
+p.innerHTML=h;}
+function matches(l){if(search&&!(norm(l.titulo+' '+l.autor).includes(norm(search))))return false;if(mode==='ruta'){if(routeMajor&&l.expedicion!==routeMajor)return false;if(selection&&l.sub_expedicion!==selection)return false;}if(mode==='autor'&&selection&&l.autor!==selection)return false;if(mode==='tema'&&selection&&!(l.temas||[]).includes(selection))return false;if(mode==='quiero'&&selection&&!(l.quiero||[]).includes(selection))return false;return true;}
+function stateText(total){var bits=[];if(mode==='ruta'&&routeMajor){bits.push(labelsExp[routeMajor]+(selection?' → '+labelsSub[selection]:''));}else if(mode==='autor'&&selection){bits.push('Autor: '+selection);}else if(mode==='tema'&&selection){bits.push('Tema: '+selection);}else if(mode==='quiero'&&selection){bits.push('Quiero: '+selection);}if(search)bits.push('buscando “'+search+'”');var prefix=bits.length?'<strong>'+esc(bits.join(' · '))+'</strong> · ':'';var clear=(mode!=='todos'&&(routeMajor||selection))?' <button class="clear-filter" id="clear-filter">Limpiar filtro</button>':'';return prefix+'<strong>'+total+'</strong> '+(total===1?'libro':'libros')+clear;}
+function card(l){var grad='linear-gradient(145deg,'+l.color_portada_inicio+' 0%,'+l.color_portada_fin+' 100%)';return '<a class="card" href="'+esc(l.archivo)+'" target="_blank" rel="noopener noreferrer"><div class="card-band" style="background:'+esc(l.color_acento)+'"></div><div class="cover" style="background:'+grad+'"><div class="cover-title">'+esc(l.titulo)+'</div></div><div class="card-body"><div class="author">'+esc(l.autor)+' · '+esc(l.anio)+'</div><div class="title">'+esc(l.titulo)+'</div><div class="desc">'+esc(l.descripcion)+'</div><div class="card-foot"><div class="tags"><span class="tag">'+esc(labelsExp[l.expedicion]||'')+'</span><span class="tag">'+esc(labelsSub[l.sub_expedicion]||'')+'</span></div><div class="mins">'+esc(l.tiempo_lectura_min)+' min</div></div></div></a>';}
+function render(){var filtered=libros.filter(matches),g=document.getElementById('grid'),e=document.getElementById('empty'),s=document.getElementById('result-state');s.innerHTML=stateText(filtered.length);if(filtered.length){g.innerHTML=filtered.map(card).join('');e.classList.remove('visible');}else{g.innerHTML='';e.classList.add('visible');}var c=document.getElementById('clear-filter');if(c)c.onclick=function(){selection=null;routeMajor=null;renderPanel();render();};}
+document.getElementById('mode-row').addEventListener('click',function(e){var b=e.target.closest('[data-mode]');if(b)setMode(b.dataset.mode);});
+document.getElementById('explore-panel').addEventListener('click',function(e){var r=e.target.closest('[data-route]');if(r){selectRouteMajor(r.dataset.route);return;}var sr=e.target.closest('[data-subroute]');if(sr){selectValue(sr.dataset.subroute||null);return;}var s=e.target.closest('[data-select]');if(s)selectValue(s.dataset.select);});
+var inp=document.getElementById('search-input'),clr=document.getElementById('search-clear');inp.addEventListener('input',function(){search=this.value.trim();clr.classList.toggle('visible',!!search);render();});clr.addEventListener('click',function(){inp.value='';search='';clr.classList.remove('visible');inp.focus();render();});
+function applyTheme(dark){document.body.classList.toggle('dark',dark);document.getElementById('btn-dark').textContent=dark?'☀':'☽';document.getElementById('theme-color-meta').setAttribute('content',dark?'#0F0F0E':'#FAFAF7');localStorage.setItem('bookclub-theme',dark?'dark':'light');}
+var saved=localStorage.getItem('bookclub-theme');applyTheme(saved==='dark'||(!saved&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches));document.getElementById('btn-dark').addEventListener('click',function(){applyTheme(!document.body.classList.contains('dark'));});
+var installPrompt=null,ib=document.getElementById('btn-install');window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();installPrompt=e;ib.classList.add('visible');});ib.addEventListener('click',async function(){if(!installPrompt)return;installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;ib.classList.remove('visible');});window.addEventListener('appinstalled',function(){ib.classList.remove('visible');installPrompt=null;});
+fetch('libros.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error();return r.json();}).then(function(d){libros=d.libros||[];renderPanel();render();}).catch(function(){document.getElementById('result-state').textContent='No se pudo cargar la biblioteca.';document.getElementById('empty').classList.add('visible');});
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
+})();
 </script>
 </body>
 </html>

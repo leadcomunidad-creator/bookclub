@@ -1,6 +1,6 @@
 {
-  "proyecto": "Mentor de Conocimiento",
-  "version": "1.0",
+  "proyecto": "BOOKCLUB",
+  "version": "2.0",
   "libros": [
     {
       "titulo": "El Regreso del Hijo Pródigo",
@@ -8,13 +8,18 @@
       "anio": 1992,
       "expedicion": "mentalidad",
       "sub_expedicion": "identidad",
+      "temas": ["Pertenencia", "Gracia", "Resentimiento", "Perdón", "Amor del Padre"],
+      "quiero": ["Volver a sentirme en casa con Dios", "Sanar el resentimiento", "Recibir y dar gracia", "Comprender el amor del Padre"],
       "color_acento": "#312C8A",
       "color_portada_inicio": "#0F0D33",
       "color_portada_fin": "#4E3DBB",
       "tiempo_lectura_min": 48,
       "capitulos": 12,
       "archivo": "libros/el-regreso-del-hijo-prodigo.html",
-      "descripcion": "El camino espiritual recorrido a través de los tres personajes de la parábola: el hijo que huye, el hijo que juzga y el padre que ama sin condición."
+      "descripcion": "El camino espiritual recorrido a través de los tres personajes de la parábola: el hijo que huye, el hijo que juzga y el padre que ama sin condición.",
+      "preview_titulo": "El Regreso del Hijo Pródigo",
+      "preview_subtitulo": "Meditaciones frente a un cuadro de Rembrandt",
+      "preview_imagen": "assets/previews/el-regreso-del-hijo-prodigo.jpg"
     },
     {
       "titulo": "Sentarse, Caminar, Permanecer en Pie",
@@ -22,13 +27,18 @@
       "anio": 1957,
       "expedicion": "mentalidad",
       "sub_expedicion": "identidad",
+      "temas": ["Descanso", "Gracia", "Obediencia", "Vida cristiana", "Guerra espiritual"],
+      "quiero": ["Dejar de vivir desde el esfuerzo", "Aprender a descansar en lo que Cristo hizo", "Vivir mi fe en lo cotidiano", "Enfrentar oposición espiritual"],
       "color_acento": "#7C5A1E",
       "color_portada_inicio": "#1A1208",
       "color_portada_fin": "#A67C3A",
       "tiempo_lectura_min": 32,
       "capitulos": 3,
       "archivo": "libros/sit-walk-stand.html",
-      "descripcion": "La vida cristiana no comienza con el esfuerzo sino con el descanso: solo quien primero se sienta puede después caminar con poder y mantenerse en pie ante el enemigo."
+      "descripcion": "La vida cristiana no comienza con el esfuerzo sino con el descanso: solo quien primero se sienta puede después caminar con poder y mantenerse en pie ante el enemigo.",
+      "preview_titulo": "Sentarse, Caminar, Permanecer en Pie",
+      "preview_subtitulo": "La postura del creyente ante Dios, el mundo y el enemigo",
+      "preview_imagen": "assets/previews/sit-walk-stand.jpg"
     },
     {
       "titulo": "La Divina Conspiración",
@@ -36,13 +46,18 @@
       "anio": 1998,
       "expedicion": "mentalidad",
       "sub_expedicion": "identidad",
+      "temas": ["Reino de Dios", "Discipulado", "Carácter", "Sermón del Monte", "Oración"],
+      "quiero": ["Entender el Reino de Dios", "Aprender a vivir como discípulo de Jesús", "Transformar mi carácter", "Llevar las enseñanzas de Jesús a la vida diaria"],
       "color_acento": "#1E3A8A",
       "color_portada_inicio": "#030712",
       "color_portada_fin": "#D4AF37",
       "tiempo_lectura_min": 125,
       "capitulos": 10,
       "archivo": "libros/la-divina-conspiracion.html",
-      "descripcion": "Una visión del Reino de Dios como realidad presente y disponible ahora, donde el discipulado consiste en aprender a vivir la vida que Jesús viviría si estuviera en nuestro lugar."
+      "descripcion": "Una visión del Reino de Dios como realidad presente y disponible ahora, donde el discipulado consiste en aprender a vivir la vida que Jesús viviría si estuviera en nuestro lugar.",
+      "preview_titulo": "La Divina Conspiración",
+      "preview_subtitulo": "Nuestra vida escondida en Dios",
+      "preview_imagen": "assets/previews/la-divina-conspiracion.jpg"
     },
     {
       "titulo": "Jesús Es _____",
@@ -50,13 +65,18 @@
       "anio": 2013,
       "expedicion": "mentalidad",
       "sub_expedicion": "identidad",
+      "temas": ["Jesús", "Gracia", "Presencia", "Alegría", "Resurrección"],
+      "quiero": ["Conocer mejor a Jesús", "Corregir una imagen distorsionada de Dios", "Aprender a recibir gracia", "Confiar en la presencia de Jesús"],
       "color_acento": "#8B1A1A",
       "color_portada_inicio": "#080305",
       "color_portada_fin": "#C0392B",
       "tiempo_lectura_min": 130,
       "capitulos": 16,
       "archivo": "libros/jesus-es.html",
-      "descripcion": "Una invitación a limpiar la imagen que cargamos de Jesús y redescubrirlo como amigo, gracia, camino, alegría, presencia y vida."
+      "descripcion": "Una invitación a limpiar la imagen que cargamos de Jesús y redescubrirlo como amigo, gracia, camino, alegría, presencia y vida.",
+      "preview_titulo": "Jesús Es _____",
+      "preview_subtitulo": "Redescubrir a Jesús más allá de nuestras ideas sobre Él",
+      "preview_imagen": "assets/previews/jesus-es.jpg"
     },
     {
       "titulo": "Gana la guerra en tu mente",
@@ -64,13 +84,18 @@
       "anio": 2021,
       "expedicion": "mentalidad",
       "sub_expedicion": "renovacion",
+      "temas": ["Pensamientos", "Verdad", "Hábitos mentales", "Ansiedad", "Perspectiva"],
+      "quiero": ["Renovar mi mente", "Romper patrones de pensamiento", "Identificar mentiras que estoy creyendo", "Manejar pensamientos de ansiedad"],
       "color_acento": "#2E2A7A",
       "color_portada_inicio": "#07061F",
       "color_portada_fin": "#1C6F78",
       "tiempo_lectura_min": 75,
       "capitulos": 12,
       "archivo": "libros/gana-la-guerra-en-tu-mente.html",
-      "descripcion": "Una guía práctica para identificar las mentiras que gobiernan la mente, reemplazarlas por verdad y entrenar nuevas respuestas mediante reemplazo, recableado, replanteamiento y regocijo."
+      "descripcion": "Una guía práctica para identificar las mentiras que gobiernan la mente, reemplazarlas por verdad y entrenar nuevas respuestas mediante reemplazo, recableado, replanteamiento y regocijo.",
+      "preview_titulo": "Gana la guerra en tu mente",
+      "preview_subtitulo": "Cambia tus pensamientos, cambia tu vida",
+      "preview_imagen": "assets/previews/gana-la-guerra-en-tu-mente.jpg"
     }
   ]
 }
