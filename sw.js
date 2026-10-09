@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'bookclub-v2-20261006';
+const CACHE_VERSION = 'bookclub-v3-20261009';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [

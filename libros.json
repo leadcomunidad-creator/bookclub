@@ -1,8 +1,9 @@
 {
   "proyecto": "BOOKCLUB",
-  "version": "2.0",
+  "version": "3.0",
   "libros": [
     {
+      "tipo": "resumen",
       "titulo": "El Regreso del Hijo Pródigo",
       "autor": "Henri J. M. Nouwen",
       "anio": 1992,
@@ -22,25 +23,7 @@
       "preview_imagen": "assets/previews/el-regreso-del-hijo-prodigo.jpg"
     },
     {
-      "titulo": "Sentarse, Caminar, Permanecer en Pie",
-      "autor": "Watchman Nee",
-      "anio": 1957,
-      "expedicion": "mentalidad",
-      "sub_expedicion": "identidad",
-      "temas": ["Descanso", "Gracia", "Obediencia", "Vida cristiana", "Guerra espiritual"],
-      "quiero": ["Dejar de vivir desde el esfuerzo", "Aprender a descansar en lo que Cristo hizo", "Vivir mi fe en lo cotidiano", "Enfrentar oposición espiritual"],
-      "color_acento": "#7C5A1E",
-      "color_portada_inicio": "#1A1208",
-      "color_portada_fin": "#A67C3A",
-      "tiempo_lectura_min": 32,
-      "capitulos": 3,
-      "archivo": "libros/sit-walk-stand.html",
-      "descripcion": "La vida cristiana no comienza con el esfuerzo sino con el descanso: solo quien primero se sienta puede después caminar con poder y mantenerse en pie ante el enemigo.",
-      "preview_titulo": "Sentarse, Caminar, Permanecer en Pie",
-      "preview_subtitulo": "La postura del creyente ante Dios, el mundo y el enemigo",
-      "preview_imagen": "assets/previews/sit-walk-stand.jpg"
-    },
-    {
+      "tipo": "resumen",
       "titulo": "La Divina Conspiración",
       "autor": "Dallas Willard",
       "anio": 1998,
@@ -60,6 +43,7 @@
       "preview_imagen": "assets/previews/la-divina-conspiracion.jpg"
     },
     {
+      "tipo": "resumen",
       "titulo": "Jesús Es _____",
       "autor": "Judah Smith",
       "anio": 2013,
@@ -79,6 +63,7 @@
       "preview_imagen": "assets/previews/jesus-es.jpg"
     },
     {
+      "tipo": "resumen",
       "titulo": "Gana la guerra en tu mente",
       "autor": "Craig Groeschel",
       "anio": 2021,
@@ -92,9 +77,52 @@
       "tiempo_lectura_min": 75,
       "capitulos": 12,
       "archivo": "libros/gana-la-guerra-en-tu-mente.html",
+      "clave_progreso": "bookclub-gana-guerra-progreso",
       "descripcion": "Una guía práctica para identificar las mentiras que gobiernan la mente, reemplazarlas por verdad y entrenar nuevas respuestas mediante reemplazo, recableado, replanteamiento y regocijo.",
       "preview_titulo": "Gana la guerra en tu mente",
       "preview_subtitulo": "Cambia tus pensamientos, cambia tu vida",
+      "preview_imagen": "assets/previews/gana-la-guerra-en-tu-mente.jpg"
+    },
+    {
+      "tipo": "libro",
+      "titulo": "Gana la guerra en tu mente",
+      "autor": "Craig Groeschel",
+      "anio": 2021,
+      "expedicion": "mentalidad",
+      "sub_expedicion": "renovacion",
+      "temas": ["Pensamientos", "Verdad", "Hábitos mentales", "Ansiedad", "Perspectiva"],
+      "quiero": ["Leer la obra completa", "Renovar mi mente", "Romper patrones de pensamiento", "Manejar pensamientos de ansiedad"],
+      "color_acento": "#2E2A7A",
+      "color_portada_inicio": "#07061F",
+      "color_portada_fin": "#1C6F78",
+      "tiempo_lectura_min": 300,
+      "capitulos": 12,
+      "archivo": "libros-completos/gana-la-guerra-en-tu-mente.html",
+      "clave_progreso": "bookclub-gana-guerra-libro-progreso",
+      "descripcion": "La edición completa de Gana la guerra en tu mente, con capítulos, ejercicios, notas y material de cierre.",
+      "preview_titulo": "Gana la guerra en tu mente",
+      "preview_subtitulo": "Libro completo",
+      "preview_imagen": "assets/previews/gana-la-guerra-en-tu-mente.jpg"
+    },
+    {
+      "tipo": "curso",
+      "titulo": "Gana la guerra en tu mente",
+      "autor": "Craig Groeschel",
+      "anio": 2021,
+      "expedicion": "mentalidad",
+      "sub_expedicion": "renovacion",
+      "temas": ["Reemplazo", "Recableado", "Replanteamiento", "Regocijo"],
+      "quiero": ["Aplicar los cuatro principios", "Crear una ruta de renovación", "Convertir ideas en práctica"],
+      "color_acento": "#2E2A7A",
+      "color_portada_inicio": "#07061F",
+      "color_portada_fin": "#1C6F78",
+      "tiempo_lectura_min": 30,
+      "capitulos": 4,
+      "archivo": "cursos/gana-la-guerra-en-tu-mente.html",
+      "clave_progreso": "bookclub-gana-guerra-curso-progreso",
+      "descripcion": "Una ruta formativa de cuatro semanas para pasar de pensamientos automáticos a una vida dirigida por la verdad.",
+      "preview_titulo": "Gana la guerra en tu mente",
+      "preview_subtitulo": "Curso de cuatro semanas",
       "preview_imagen": "assets/previews/gana-la-guerra-en-tu-mente.jpg"
     }
   ]

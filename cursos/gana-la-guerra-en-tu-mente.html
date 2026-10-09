@@ -19,398 +19,597 @@
   "color_portada_inicio": "#07061F",
   "color_portada_fin": "#1C6F78",
   "tiempo_lectura_total_min": 30,
-  "archivo": "libros/gana-la-guerra-en-tu-mente.html"
+  "archivo": "cursos/gana-la-guerra-en-tu-mente.html"
 }
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 
-  :root {
-    --c-acento:        #2E2A7A;
-    --c-acento-medio:  #4B45A6;
-    --c-acento-suave:  #3FC1B0;
-    --c-acento-claro:  #8FE3D6;
-    --c-acento-palido: #F1EBDC;
-    --c-acento-bg:     #D4D0E8;
+/* ═══════════════════════════════════════════════════════════
+   GANA LA GUERRA EN TU MENTE · BOOKCLUB
+   Sistema de lectura — paleta propia del libro (índigo · teal · papel crema)
+   ═══════════════════════════════════════════════════════════ */
 
-    --portada-grad: linear-gradient(155deg,#07061F 0%,#100E38 35%,#221E66 70%,#1C6F78 100%);
-    --header-grad:  linear-gradient(135deg, #100E38 0%, #221E66 100%);
+:root {
+  /* Paleta del libro (sin cambios) */
+  --c-acento:        #2E2A7A;
+  --c-acento-medio:  #4B45A6;
+  --c-acento-suave:  #3FC1B0;
+  --c-acento-claro:  #8FE3D6;
+  --c-acento-palido: #F1EBDC;
+  --c-acento-bg:     #D4D0E8;
+  --c-accion:        #138A86;
+  --c-accion-bg:     #072B35;
+  --c-accion-txt:    #D6F2EF;
+  --c-bg:            #F7F2E8;
+  --c-surface:       #FDFAF2;
+  --c-border:        #E3DDCF;
+  --c-texto:         #15132E;
+  --c-texto-2:       #4A4666;
+  --c-texto-3:       #7C7899;
+  --portada-grad: linear-gradient(155deg,#07061F 0%,#100E38 35%,#221E66 70%,#1C6F78 100%);
+  --header-grad:  linear-gradient(135deg, #100E38 0%, #221E66 100%);
 
-    --font-serif:  'Cormorant Garamond', Georgia, serif;
-    --font-body:   'Source Serif 4', Georgia, serif;
+  /* Tipografía */
+  --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-body:  var(--font-serif);
+  --font-ui:    'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
-    --c-accion:     #138A86;
-    --c-accion-bg:  #072B35;
-    --c-accion-txt: #D6F2EF;
-    --c-bg:         #F7F2E8;
-    --c-surface:    #FDFAF2;
-    --c-border:     #E3DDCF;
-    --c-texto:      #15132E;
-    --c-texto-2:    #4A4666;
-    --c-texto-3:    #7C7899;
-    --radio:        6px;
-    --radio-lg:     10px;
+  /* Tokens semánticos · modo claro (papel) */
+  --paper:   #F7F2E8;
+  --card:    #FDFAF2;
+  --tint:    #F1EBDC;
+  --rule:    #E3DDCF;
+  --rule-2:  #CFC8B6;
+  --drawer:  #FDFAF2;
+  --text:    #15132E;
+  --text-2:  #4A4666;
+  --text-3:  #7C7899;
+  --head:    #2E2A7A;
+  --head-2:  #4B45A6;
+  --mark:    #138A86;
+  --mark-ink:#0B6A68;
+  --mark-soft:#3FC1B0;
+  --focus:   #4B45A6;
+  --btn-bg:  #2E2A7A;
+  --btn-ink: #FFFFFF;
+  --card-accion: #FDFAF2;
+  --card-accion-line: #BFE0DD;
+  --shadow-card: 0 1px 2px rgba(21,19,46,.05), 0 10px 26px -16px rgba(21,19,46,.28);
+  --veredicto: linear-gradient(135deg, #100E38 0%, #201C58 100%);
+
+  /* Medidas */
+  --radius: 14px;
+  --gut: clamp(1.25rem, 5vw, 2.6rem);
+  --base: 1.125rem;
+  --lh: 1.74;
+  --barra: 3.5rem;
+  --safe-t: env(safe-area-inset-top, 0px);
+}
+body.dark {
+  --paper:   #100E38;
+  --card:    #1A1746;
+  --tint:    #1A1746;
+  --rule:    #2F2B6B;
+  --rule-2:  #3C3786;
+  --drawer:  #07061F;
+  --text:    #D9D5EE;
+  --text-2:  #B6B3D6;
+  --text-3:  #8E8BC9;
+  --head:    #B9B6F0;
+  --head-2:  #A9A7E0;
+  --mark:    #3FC1B0;
+  --mark-ink:#5CD0C8;
+  --mark-soft:#3FC1B0;
+  --focus:   #8FE3D6;
+  --btn-bg:  #3FC1B0;
+  --btn-ink: #100E38;
+  --card-accion: #0A1F2C;
+  --card-accion-line: #17394A;
+  --shadow-card: none;
+  --veredicto: linear-gradient(135deg, #1B1850 0%, #2E2A7A 100%);
+}
+@media (min-width: 900px) { :root { --base: 1.2rem; } }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  font-family: var(--font-serif); color: var(--text); background: var(--paper);
+  -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent;
+  text-rendering: optimizeLegibility; font-optical-sizing: auto;
+  transition: background .3s ease, color .3s ease;
+}
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+::selection { background: color-mix(in srgb, var(--mark-soft) 38%, transparent); }
+
+/* ── PÁGINAS ── */
+.pagina {
+  position: fixed; inset: 0; overflow-y: auto; overflow-x: hidden;
+  background: var(--paper); overscroll-behavior: contain;
+  scrollbar-width: thin; scrollbar-color: var(--rule-2) transparent;
+  transition: opacity .38s ease, transform .38s cubic-bezier(.2,.7,.2,1), visibility 0s;
+}
+.pagina.oculta  { opacity: 0; pointer-events: none; transform: translateY(14px); visibility: hidden; transition: opacity .28s ease, transform .28s ease, visibility 0s linear .28s; }
+.pagina.visible { opacity: 1; pointer-events: auto; transform: none; visibility: visible; }
+.hoja { min-height: 100%; }
+
+/* ── BARRA DE PROGRESO ── */
+#barra-progreso {
+  position: fixed; top: 0; left: 0; z-index: 9992; height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--c-acento-suave), var(--c-accion));
+  display: none; border-radius: 0 3px 3px 0; transition: width .12s linear;
+}
+
+/* ── BARRA SUPERIOR + CONTROLES ── */
+#topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 9990;
+  height: calc(var(--barra) + var(--safe-t));
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(14px) saturate(1.2); -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  border-bottom: 1px solid var(--rule); display: none; transition: transform .3s ease;
+}
+body:not(.en-portada) #topbar { display: block; }
+
+#menu-btn, #btn-config {
+  position: fixed; top: calc(.5rem + var(--safe-t)); z-index: 9998;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--card); border: 1px solid var(--rule); color: var(--text-2);
+  font-size: 1.05rem; line-height: 1; display: none; align-items: center; justify-content: center;
+  transition: transform .3s ease, opacity .3s ease, border-color .15s, color .15s, background .15s;
+}
+#menu-btn   { left: max(.75rem, env(safe-area-inset-left, 0px)); }
+#btn-config { right: max(.75rem, env(safe-area-inset-right, 0px)); }
+#menu-btn:hover, #btn-config:hover { border-color: var(--rule-2); color: var(--text); }
+#menu-btn:active, #btn-config:active { transform: scale(.94); }
+
+#bookclub-home {
+  position: fixed; top: calc(.625rem + var(--safe-t)); left: calc(max(.75rem, env(safe-area-inset-left, 0px)) + 40px + .6rem); z-index: 9998;
+  display: inline-flex; align-items: center; justify-content: center; height: 36px; padding: 0 .95rem;
+  border: 1px solid var(--rule); border-radius: 99px; background: var(--card); color: var(--text-2);
+  text-decoration: none; font: 600 10.5px/1 var(--font-ui); letter-spacing: .14em; text-transform: uppercase;
+  transition: transform .3s ease, opacity .3s ease, border-color .15s, color .15s, background .15s;
+}
+#bookclub-home:hover { border-color: var(--rule-2); color: var(--text); }
+body.en-portada #bookclub-home {
+  top: calc(1rem + var(--safe-t)); left: 1rem;
+  background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.22); color: #E6E2F5;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+body.en-portada #bookclub-home:hover { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.4); color: #fff; }
+
+#tb-info {
+  position: fixed; top: calc(.5rem + var(--safe-t)); right: calc(max(.75rem, env(safe-area-inset-right, 0px)) + 40px + .75rem);
+  height: 40px; z-index: 9998; display: none; align-items: center; gap: .65rem;
+  font: 500 12px/1 var(--font-ui); letter-spacing: .04em; color: var(--text-2);
+  transition: transform .3s ease, opacity .3s ease; pointer-events: none;
+}
+body:not(.en-portada) #tb-info { display: flex; }
+.tb-label { color: var(--text-3); text-transform: uppercase; letter-spacing: .14em; font-size: 10.5px; font-weight: 600; }
+.tb-pos { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--text); }
+.tb-pos i { font-style: normal; color: var(--text-3); font-weight: 500; }
+
+/* En móvil la barra se oculta al bajar y reaparece al subir */
+body.bar-oculta #topbar { transform: translateY(-100%); }
+body.bar-oculta #menu-btn, body.bar-oculta #btn-config, body.bar-oculta #bookclub-home, body.bar-oculta #tb-info {
+  transform: translateY(-4.5rem); opacity: 0; pointer-events: none;
+}
+@media (min-width: 901px) {
+  body.bar-oculta #topbar { transform: none; }
+  body.bar-oculta #menu-btn, body.bar-oculta #btn-config, body.bar-oculta #bookclub-home, body.bar-oculta #tb-info { transform: none; opacity: 1; pointer-events: auto; }
+  body.bar-oculta #tb-info { pointer-events: none; }
+}
+
+/* ── PORTADA ── */
+.portada-sec {
+  min-height: 100vh; min-height: 100dvh; position: relative; overflow: hidden;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+  padding: 5rem 1.75rem 4.5rem;
+  background:
+    radial-gradient(58% 46% at 78% 14%, rgba(63,193,176,.20), transparent 62%),
+    radial-gradient(80% 60% at 8% 100%, rgba(75,69,166,.38), transparent 62%),
+    var(--portada-grad);
+}
+#portada .c1 { position: absolute; top: -100px; right: -100px; width: 480px; height: 480px; border-radius: 50%; background: rgba(255,255,255,0.02); pointer-events: none; animation: flotar 9s ease-in-out infinite; }
+#portada .c2 { position: absolute; bottom: -120px; left: -80px; width: 520px; height: 520px; border-radius: 50%; background: rgba(255,255,255,0.015); pointer-events: none; animation: flotar 11s ease-in-out infinite reverse; }
+#portada .c3 { position: absolute; top: 50%; right: -180px; transform: translateY(-50%); width: 350px; height: 350px; border-radius: 50%; border: 1px solid rgba(63,193,176,0.1); pointer-events: none; animation: rotar 35s linear infinite; }
+@keyframes flotar { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-20px) scale(1.015); } }
+@keyframes rotar { from { transform: translateY(-50%) rotate(0deg); } to { transform: translateY(-50%) rotate(360deg); } }
+@keyframes entrar { to { opacity: 1; transform: translateY(0); } }
+@keyframes subir { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+.portada-inner { position: relative; z-index: 1; max-width: 36rem; display: flex; flex-direction: column; align-items: center; opacity: 0; transform: translateY(28px); animation: entrar 1s cubic-bezier(.22,1,.36,1) .2s forwards; }
+.p-eyebrow { font: 600 10.5px/1.4 var(--font-ui); letter-spacing: .34em; text-transform: uppercase; color: #8E8BC9; margin-bottom: 2.4rem; opacity: 0; animation: entrar .8s ease .5s forwards; }
+.p-ornament { margin-bottom: 1.6rem; opacity: 0; animation: entrar .8s ease .65s forwards; }
+.p-titulo { font-family: var(--font-serif); font-size: clamp(2.7rem, 9vw, 4.7rem); font-weight: 300; color: #F3EBDD; line-height: 1.03; text-align: center; letter-spacing: -.022em; opacity: 0; animation: entrar .9s ease .75s forwards; }
+.p-titulo strong { font-weight: 500; color: #8FE3D6; display: block; }
+.p-rule { width: 64px; height: 1px; background: linear-gradient(90deg, transparent, var(--c-acento-suave), transparent); margin: 2rem 0 1.8rem; opacity: 0; animation: entrar .8s ease .9s forwards; }
+.p-autor { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 400; font-style: italic; color: #C9C7EE; letter-spacing: .03em; margin-bottom: .3rem; opacity: 0; animation: entrar .8s ease 1s forwards; }
+.p-fechas { font: 500 .8rem/1 var(--font-ui); color: #8E8BC9; letter-spacing: .16em; margin-bottom: 3rem; opacity: 0; animation: entrar .8s ease 1.05s forwards; }
+.p-sub { font-family: var(--font-serif); font-style: italic; font-size: 1.15rem; color: #C9C7EE; margin-bottom: 2.4rem; max-width: 30ch; line-height: 1.5; opacity: 0; animation: entrar .8s ease 1.05s forwards; }
+.p-badge { border: 1px solid rgba(63,193,176,.3); color: #A9E8DF; font: 600 10px/1 var(--font-ui); letter-spacing: .24em; padding: .6rem 1.15rem; border-radius: 99px; text-transform: uppercase; margin-bottom: 3rem; background: rgba(63,193,176,.07); opacity: 0; animation: entrar .8s ease 1.15s forwards; }
+.btn-leer {
+  display: inline-flex; align-items: center; gap: .6rem; background: var(--c-acento-suave); color: #100E38;
+  font: 600 .98rem/1 var(--font-ui); letter-spacing: .03em; padding: 1.05rem 2.2rem; border-radius: 99px; border: 0;
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.1) inset;
+  transition: transform .2s ease, background .2s ease, box-shadow .2s ease; opacity: 0; animation: entrar .9s cubic-bezier(.22,1,.36,1) 1.3s forwards;
+}
+.btn-leer:hover { background: #8FE3D6; transform: translateY(-2px); box-shadow: 0 16px 36px -12px rgba(0,0,0,.6); }
+.btn-leer:active { transform: translateY(0) scale(.98); }
+.p-footer { position: absolute; bottom: 1.6rem; left: 0; right: 0; padding: 0 1rem; text-align: center; font: 500 10px/1.4 var(--font-ui); letter-spacing: .22em; color: #7471AE; text-transform: uppercase; opacity: 0; animation: entrar .8s ease 1.5s forwards; }
+
+/* ── LAYOUT DE LECTURA ── */
+.page { max-width: 46rem; margin: 0 auto; padding-top: calc(var(--barra) + var(--safe-t)); }
+
+.libro-header {
+  display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: .3rem 1rem;
+  padding: 1.7rem var(--gut) 0; font-family: var(--font-ui);
+}
+.libro-header-titulo { font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--text-2); }
+.libro-header-paso   { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--head-2); white-space: nowrap; }
+.lectura-meta { padding: .55rem var(--gut) 0; font: 500 12.5px/1.4 var(--font-ui); letter-spacing: .02em; color: var(--text-2); }
+.lectura-meta span { color: var(--head); font-weight: 700; }
+
+.body {
+  --escala: 1;
+  padding: 1.1rem var(--gut) 1rem;
+  font-size: calc(var(--base) * var(--escala)); line-height: var(--lh); color: var(--text);
+}
+.body.fuente-s  { --escala: .9; }
+.body.fuente-m  { --escala: 1; }
+.body.fuente-l  { --escala: 1.12; }
+.body.fuente-xl { --escala: 1.27; }
+.body p { margin: 0 0 1.05em; text-wrap: pretty; }
+.body p:last-child { margin-bottom: 0; }
+.body strong { font-weight: 600; }
+.body em { font-style: italic; }
+
+/* ── Apertura de capítulo ── */
+.filtro-header { border: 0; background: none; padding: 0; margin: 1.5rem 0 1.7rem; }
+.pagina.visible .filtro-header, .pagina.visible .subtitulo { animation: subir .6s cubic-bezier(.2,.7,.2,1) both; }
+.pagina.visible .subtitulo { animation-delay: .06s; }
+.filtro-label {
+  display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem;
+  font: 700 11px/1 var(--font-ui); letter-spacing: .22em; text-transform: uppercase; color: var(--mark-ink);
+}
+.filtro-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+.filtro-title {
+  font-family: var(--font-serif); font-weight: 500; font-style: normal; color: var(--head);
+  font-size: 1.85em; line-height: 1.12; letter-spacing: -.016em; text-wrap: balance;
+}
+@media (min-width: 720px) { .filtro-title { font-size: 2.35em; } }
+
+.subtitulo {
+  font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: 1.2em; line-height: 1.45;
+  color: var(--head-2); margin: 0 0 1.9rem; padding-left: 1rem; border-left: 2px solid var(--mark-soft); text-wrap: balance;
+}
+
+/* ── Etiquetas de sección ── */
+.eyebrow {
+  display: flex; align-items: center; gap: .8rem; margin: 2.7rem 0 1.05rem; padding: 0;
+  font: 700 11px/1 var(--font-ui); letter-spacing: .2em; text-transform: uppercase; color: var(--head-2);
+}
+.eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+/* ── Idea central ── */
+.tesis-block {
+  position: relative; margin: 1.5rem 0; padding: 1.5rem 1.6rem 1.55rem;
+  background: var(--tint); border: 1px solid var(--rule); border-left: 4px solid var(--mark-soft);
+  border-radius: 6px var(--radius) var(--radius) 6px;
+}
+.tesis-label { margin-bottom: .8rem; font: 700 10.5px/1 var(--font-ui); letter-spacing: .22em; text-transform: uppercase; color: var(--head-2); }
+.tesis-text { font-family: var(--font-serif); font-style: normal; font-size: 1.12em; line-height: 1.5; color: var(--text); }
+.tesis-text p { margin-bottom: .8rem; font-size: .9em; line-height: 1.65; color: var(--text-2); }
+.tesis-text .destacado { border: 0; padding: 0; margin: 0 0 .85rem; font-style: normal; font-size: 1.04em; line-height: 1.48; color: var(--head); font-weight: 500; }
+.tesis-text .destacado:last-child { margin-bottom: 0; }
+.tesis-text .destacado strong { font-weight: 500; }
+
+/* ── Prosa principal ── */
+.problema { background: var(--card); border: 1px solid var(--rule); border-radius: var(--radius); padding: 1.15rem 1.35rem; line-height: 1.75; }
+.problema.prosa { background: none; border: 0; border-radius: 0; padding: 0; line-height: var(--lh); hyphens: auto; -webkit-hyphens: auto; }
+.problema.prosa p { margin-bottom: 1.15em; }
+@media (min-width: 560px) {
+  .problema.prosa > p:first-child::first-letter {
+    float: left; font-family: var(--font-serif); font-weight: 500; font-size: 3.55em; line-height: .8;
+    padding: .07em .1em 0 0; margin-top: .03em; color: var(--head);
   }
+}
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; overflow: hidden; }
-  body { font-family: var(--font-body); color: var(--c-texto); background: var(--c-bg); }
+/* ── Bullets de impacto ── */
+.idea { display: flex; align-items: flex-start; gap: .9rem; padding: .85rem 0; margin: 0; border-top: 1px solid var(--rule); }
+.eyebrow + .idea { border-top: 0; padding-top: .2rem; }
+.idea-body { flex: 1; min-width: 0; }
+.idea-text { font-size: .98em; line-height: 1.62; }
+.idea-num {
+  flex: none; width: 1.9rem; height: 1.9rem; margin-top: .05rem; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font: 700 .72em/1 var(--font-ui); color: var(--head); background: var(--tint); border: 1px solid var(--rule-2);
+}
+.idea-num.dot { width: .8rem; height: auto; margin-top: .72rem; background: none; border: 0; font-size: 0; justify-content: flex-start; }
+.idea-num.dot::before { content: ''; width: .42rem; height: .42rem; background: var(--mark-soft); transform: rotate(45deg); border-radius: 1px; }
 
-  /* ── PÁGINAS ── */
-  .pagina { position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow-y: auto; transition: opacity 0.4s ease, transform 0.4s ease; }
-  .pagina.oculta  { opacity: 0; pointer-events: none; transform: translateY(20px); }
-  .pagina.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+/* ── Destacado ── */
+.destacado {
+  font-family: var(--font-serif); font-style: italic; font-size: 1.1em; line-height: 1.6; color: var(--mark-ink);
+  border-left: 3px solid var(--mark); padding: .1rem 0 .1rem 1rem; margin: 1rem 0; text-wrap: pretty;
+}
+.destacado strong { font-weight: 500; }
 
-  /* ── BARRA PROGRESO ── */
-  #barra-progreso { position: fixed; top: 0; left: 0; z-index: 10000; height: 3px; width: 0%; background: linear-gradient(90deg, var(--c-acento-suave), var(--c-accion)); display: none; border-radius: 0 2px 2px 0; }
+/* ── Dato clave ── */
+.dato-card {
+  margin: 1.8rem 0 1.4rem; padding: 1.5rem 1.6rem; background: var(--c-accion-bg); color: var(--c-accion-txt);
+  border: 1px solid #0F4350; border-radius: var(--radius);
+}
+body.dark .dato-card { border-color: #17394A; }
+.dato-label { display: flex; align-items: center; gap: .6rem; margin-bottom: .85rem; font: 700 10.5px/1 var(--font-ui); letter-spacing: .22em; text-transform: uppercase; color: #5CD0C8; }
+.dato-label::before { content: ''; width: 18px; height: 1px; background: #5CD0C8; }
+.dato-text { font-family: var(--font-serif); font-size: 1em; line-height: 1.7; color: var(--c-accion-txt); }
+.dato-text .destacado { border: 0; padding: 0; margin: 0 0 1rem; font-size: 1.14em; line-height: 1.5; color: #8FE3D6; }
+.dato-text .destacado:last-child { margin-bottom: 0; }
+.dato-text .destacado + .destacado { padding-top: 1rem; border-top: 1px solid rgba(143,227,214,.18); }
 
-  /* ── PORTADA ── */
-  #portada .c1 { position: absolute; top: -100px; right: -100px; width: 480px; height: 480px; border-radius: 50%; background: rgba(255,255,255,0.02); pointer-events: none; animation: flotar 9s ease-in-out infinite; }
-  #portada .c2 { position: absolute; bottom: -120px; left: -80px; width: 520px; height: 520px; border-radius: 50%; background: rgba(255,255,255,0.015); pointer-events: none; animation: flotar 11s ease-in-out infinite reverse; }
-  #portada .c3 { position: absolute; top: 50%; right: -180px; transform: translateY(-50%); width: 350px; height: 350px; border-radius: 50%; border: 1px solid rgba(63,193,176,0.08); pointer-events: none; animation: rotar 35s linear infinite; }
+/* ── Reflexión ── */
+.alerta-card {
+  margin: 1.4rem 0; padding: 1.35rem 1.55rem; border-radius: var(--radius);
+  background: color-mix(in srgb, var(--mark-soft) 9%, transparent); border: 1px solid color-mix(in srgb, var(--mark-soft) 34%, transparent);
+}
+.alerta-label { margin-bottom: .7rem; font: 700 10.5px/1 var(--font-ui); letter-spacing: .22em; text-transform: uppercase; color: var(--mark-ink); }
+.alerta-text { font-size: inherit; line-height: 1.7; font-style: italic; }
+.alerta-text .destacado { border: 0; padding: 0; margin: 0; color: var(--text); font-size: 1.08em; line-height: 1.58; }
+.alerta-text p { color: var(--text-2); }
 
-  @keyframes flotar { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-20px) scale(1.015); } }
-  @keyframes rotar { from { transform: translateY(-50%) rotate(0deg); } to { transform: translateY(-50%) rotate(360deg); } }
+/* ── Práctica / acción ── */
+.accion-card {
+  margin: 1.4rem 0; padding: 1.5rem 1.6rem 1.6rem; background: var(--card-accion);
+  border: 1px solid var(--card-accion-line); border-top: 3px solid var(--c-accion); border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+.accion-label { margin-bottom: .85rem; font: 700 10.5px/1 var(--font-ui); letter-spacing: .22em; text-transform: uppercase; color: var(--mark-ink); }
+.accion-text { font-size: inherit; line-height: 1.7; }
+.accion-text p { font-size: .97em; }
+.accion-text .destacado { color: var(--mark-ink); font-size: 1.08em; }
+.accion-question { font-family: var(--font-serif); font-style: italic; font-size: 1.05em; color: var(--mark-ink); line-height: 1.7; border-left: 2.5px solid var(--c-accion); padding-left: 1rem; margin: .9rem 0; }
 
-  .portada-inner { position: relative; z-index: 1; max-width: 580px; display: flex; flex-direction: column; align-items: center; opacity: 0; transform: translateY(28px); animation: entrar 1s cubic-bezier(0.22,1,0.36,1) 0.2s forwards; }
-  @keyframes entrar { to { opacity: 1; transform: translateY(0); } }
+.campos { display: flex; flex-direction: column; gap: 1rem; margin: 1.1rem 0 1.2rem; }
+.campo { display: flex; flex-direction: column; align-items: stretch; gap: .35rem; }
+.campo-l { font: 700 10.5px/1.35 var(--font-ui); letter-spacing: .14em; text-transform: uppercase; color: var(--mark-ink); }
+.campo-v { font-size: .94em; line-height: 1.6; color: var(--text-2); }
+.campo-v > .blank:only-child { display: block; height: 1.7em; min-width: 0; margin: 0; }
+.blank { display: inline-block; min-width: 5.5em; border-bottom: 1.5px solid var(--mark-soft); margin: 0 .15em; }
 
-  .p-eyebrow { font-family: var(--font-body); font-size: 10px; letter-spacing: 0.38em; text-transform: uppercase; color: #8E8BC9; margin-bottom: 2.75rem; opacity: 0; animation: entrar 0.8s ease 0.5s forwards; }
-  .p-ornament { font-size: 1.2rem; color: rgba(63,193,176,0.3); letter-spacing: 0.8em; margin-bottom: 1.5rem; opacity: 0; animation: entrar 0.8s ease 0.65s forwards; }
-  .p-titulo { font-family: var(--font-serif); font-size: clamp(2.4rem, 6vw, 3.8rem); font-weight: 300; color: #F3EBDD; line-height: 1.18; text-align: center; letter-spacing: 0.02em; opacity: 0; animation: entrar 0.9s ease 0.75s forwards; }
-  .p-titulo strong { font-weight: 600; color: #8FE3D6; display: block; }
-  .p-rule { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--c-acento-suave), transparent); margin: 2rem 0; opacity: 0; animation: entrar 0.8s ease 0.9s forwards; }
-  .p-autor { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 300; color: #A9A7E0; letter-spacing: 0.18em; margin-bottom: 0.35rem; opacity: 0; animation: entrar 0.8s ease 1s forwards; }
-  .p-fechas { font-size: 0.82rem; color: #7471AE; letter-spacing: 0.08em; margin-bottom: 3rem; font-family: var(--font-body); opacity: 0; animation: entrar 0.8s ease 1.05s forwards; }
-  .p-badge { border: 1px solid rgba(63,193,176,0.22); color: #8E8BC9; font-size: 9.5px; letter-spacing: 0.24em; padding: 6px 18px; border-radius: 40px; text-transform: uppercase; margin-bottom: 3.5rem; font-family: var(--font-body); opacity: 0; animation: entrar 0.8s ease 1.15s forwards; }
-  .btn-leer { display: inline-flex; align-items: center; gap: 10px; background: var(--c-acento-suave); color: #100E38; font-family: var(--font-serif); font-size: 1.05rem; font-weight: 600; padding: 1rem 2.75rem; border-radius: 4px; letter-spacing: 0.06em; box-shadow: 0 4px 24px rgba(0,0,0,0.35); transition: all 0.2s; border: none; cursor: pointer; opacity: 0; animation: entrar 0.9s cubic-bezier(0.22,1,0.36,1) 1.3s forwards; }
-  .btn-leer:hover { background: #8FE3D6; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
-  .p-footer { position: absolute; bottom: 1.75rem; left: 0; right: 0; text-align: center; font-size: 9.5px; letter-spacing: 0.2em; color: #4B4A88; text-transform: uppercase; font-family: var(--font-body); opacity: 0; animation: entrar 0.8s ease 1.5s forwards; }
+.clave { list-style: none; margin: 1rem 0; padding: 0; display: flex; flex-direction: column; gap: .5rem; }
+.clave li { background: var(--tint); border: 1px solid var(--rule); border-left: 3px solid var(--mark-soft); padding: .6rem .95rem; border-radius: 4px 10px 10px 4px; line-height: 1.55; font-size: .96em; }
 
-  /* ── LAYOUT CONTENIDO ── */
-  .page { max-width: 720px; margin: 0 auto; background: var(--c-surface); border-radius: var(--radio); box-shadow: 0 4px 32px rgba(0,0,0,0.08); overflow: hidden; }
-  .libro-header { background: var(--header-grad); padding: 1.75rem 3rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-  .libro-header-titulo { font-family: var(--font-serif); font-style: italic; font-size: 1rem; color: #3FC1B0; font-weight: 300; }
-  .libro-header-paso { font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #2E2A7A; background: rgba(255,255,255,0.06); padding: 4px 12px; border-radius: 20px; white-space: nowrap; font-family: var(--font-body); }
-  .lectura-meta { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1.5rem; background: rgba(0,0,0,0.04); border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 10.5px; letter-spacing: 0.12em; color: var(--c-texto-3); text-transform: uppercase; font-family: var(--font-body); }
-  .lectura-meta span { color: var(--c-acento-medio); font-weight: 600; }
-  .body { padding: 2.75rem 3.5rem 3.5rem; }
+/* ── Veredicto ── */
+.veredicto-card { margin: 1.5rem 0; padding: 1.75rem 1.8rem; background: var(--veredicto); border-radius: var(--radius); border: 1px solid rgba(143,227,214,.14); color: #E6E2F5; }
+.veredicto-label { margin-bottom: .75rem; font: 700 10.5px/1 var(--font-ui); letter-spacing: .22em; text-transform: uppercase; color: var(--c-acento-claro); }
+.veredicto-badge { display: inline-block; margin-bottom: 1rem; padding: .35rem .95rem; border-radius: 99px; background: rgba(63,193,176,.16); border: 1px solid rgba(63,193,176,.38); color: #8FE3D6; font-family: var(--font-serif); font-style: italic; font-size: 1.02em; }
+.veredicto-text { font-size: inherit; line-height: 1.8; color: #E6E2F5; }
+.veredicto-text strong { color: #fff; }
+.veredicto-text .destacado { color: #8FE3D6; border-color: #3FC1B0; }
+.veredicto-text p { margin-bottom: .9rem; }
 
-  /* ── TOC ── */
-  .toc { background: var(--c-acento-palido); border-radius: var(--radio-lg); padding: 1.5rem 1.75rem; margin-bottom: 3rem; }
-  .toc-titulo { font-family: var(--font-body); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-acento-medio); margin-bottom: 1rem; }
-  .toc-grid { display: flex; flex-direction: column; gap: 7px; }
-  .toc-btn { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid var(--c-acento-bg); border-radius: var(--radio); padding: 9px 12px; text-decoration: none; color: var(--c-texto); font-size: 15px; font-family: var(--font-body); transition: all 0.15s; cursor: pointer; }
-  .toc-btn:hover { background: var(--c-acento-palido); border-color: var(--c-acento-suave); transform: translateX(4px); }
-  .toc-num { width: 26px; height: 26px; border-radius: 50%; background: var(--c-acento-palido); border: 1px solid var(--c-acento-bg); color: var(--c-acento); font-size: 11px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: var(--font-body); }
-  .toc-arrow { margin-left: auto; color: var(--c-acento-claro); font-size: 12px; }
+/* ── Curaduría ── */
+.eval-grid { display: flex; flex-direction: column; gap: 1rem; margin: 1.25rem 0; }
+.eval-item { margin: 1.1rem 0; padding: 1.25rem 1.4rem; background: var(--card); border: 1px solid var(--rule); border-radius: var(--radius); box-shadow: var(--shadow-card); }
+.eval-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .6rem 1rem; margin-bottom: .85rem; }
+.eval-titulo { font-family: var(--font-serif); font-size: 1.16em; font-weight: 600; line-height: 1.25; color: var(--head); }
+.eval-scores { display: flex; flex-wrap: wrap; gap: .4rem; }
+.eval-score { font: 600 11.5px/1 var(--font-ui); letter-spacing: .02em; padding: .42rem .7rem; border-radius: 99px; white-space: nowrap; }
+.eval-score.fid { background: var(--tint); color: var(--head); border: 1px solid var(--rule-2); }
+.eval-score.apl { background: rgba(63,193,176,.14); color: var(--mark-ink); border: 1px solid rgba(63,193,176,.34); }
+.eval-text { font-size: inherit; line-height: 1.7; }
+.eval-text p { font-size: .96em; }
+.eval-text p:last-child { margin-bottom: 0; }
 
-  hr.rule { border: none; text-align: center; margin: 2.5rem 0; }
-  hr.rule::before { content: '— ✦ —'; font-size: 11px; color: var(--c-acento-bg); letter-spacing: 0.3em; }
+/* ── Evaluación del autor ── */
+.com-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; margin: 1.25rem 0; }
+.com-leyenda { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; font: 600 10.5px/1.4 var(--font-ui); letter-spacing: .16em; text-transform: uppercase; color: var(--text-3); padding-bottom: .5rem; border-bottom: 1px solid var(--rule); }
+.com-item { padding: 1rem 1.1rem 1.05rem; background: var(--card); border: 1px solid var(--rule); border-radius: 12px; box-shadow: var(--shadow-card); }
+.com-dim { margin-bottom: .25rem; font: 700 11px/1.35 var(--font-ui); letter-spacing: .12em; text-transform: uppercase; color: var(--text-2); }
+.com-dim strong { font-weight: 700; }
+.com-score { margin-bottom: .4rem; font-family: var(--font-serif); font-size: 1.55em; font-weight: 600; line-height: 1.1; letter-spacing: -.01em; color: var(--head); }
+.com-obs { font-size: .88em; line-height: 1.58; color: var(--text-2); }
+.com-item.gl { text-align: center; padding: 1.15rem 1rem; background: var(--tint); }
+.com-item.gl .com-score { margin: 0; font-size: 1.2em; }
 
-  .eyebrow { font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--c-acento-medio); margin-bottom: 0.6rem; display: block; padding-top: 0.4rem; font-family: var(--font-body); }
+/* ── Índice dentro de la página ── */
+.toc { margin: 0 0 2.4rem; padding: 1.3rem 1.2rem .9rem; background: var(--card); border: 1px solid var(--rule); border-radius: var(--radius); }
+.toc-titulo { margin: 0 0 .5rem .35rem; font: 700 10.5px/1 var(--font-ui); letter-spacing: .22em; text-transform: uppercase; color: var(--head-2); }
+.toc-grid { display: flex; flex-direction: column; }
+.toc-btn { display: flex; align-items: center; gap: .85rem; width: 100%; padding: .62rem .35rem; text-align: left; background: none; border: 0; border-top: 1px solid var(--rule); color: var(--text); font-family: var(--font-serif); font-size: .96em; line-height: 1.3; transition: color .15s, padding-left .2s ease; }
+.toc-grid .toc-btn:first-child { border-top: 0; }
+.toc-btn:hover { color: var(--mark-ink); padding-left: .6rem; }
+.toc-num { flex: none; width: 1.7rem; height: 1.7rem; border-radius: 50%; display: grid; place-items: center; background: var(--tint); border: 1px solid var(--rule-2); color: var(--head); font: 700 11px/1 var(--font-ui); }
+.toc-arrow { margin-left: auto; color: var(--mark-soft); font-size: .8em; }
 
-  .filtro-header { border-left: 3px solid var(--c-acento-suave); padding: 0.85rem 1.35rem; background: var(--c-acento-palido); border-radius: 0 var(--radio) var(--radio) 0; margin-bottom: 2.25rem; }
-  .filtro-label { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-acento-medio); margin-bottom: 4px; font-family: var(--font-body); }
-  .filtro-title { font-family: var(--font-serif); font-size: 1.1rem; font-style: italic; font-weight: 300; color: var(--c-texto); line-height: 1.55; }
+/* ── Tarjeta de autor ── */
+.author-card { display: flex; align-items: flex-start; gap: 1.1rem; margin: 0 0 1.5rem; padding: 1.2rem 1.35rem; background: var(--card); border: 1px solid var(--rule); border-radius: var(--radius); box-shadow: var(--shadow-card); }
+.author-monogram { flex: none; width: 3.1rem; height: 3.1rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--tint); border: 1.5px solid var(--rule-2); font-family: var(--font-serif); font-style: italic; font-size: 1.25rem; color: var(--head); }
+.author-monogram::before { content: attr(data-m); }
+.author-name { margin-bottom: .35rem; font-family: var(--font-serif); font-size: 1.04em; font-weight: 600; line-height: 1.3; color: var(--head); }
+.author-bio { font-size: .93em; line-height: 1.68; color: var(--text-2); }
 
-  .author-card { display: flex; gap: 1.25rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radio); padding: 1.2rem 1.4rem; margin-bottom: 1.5rem; align-items: flex-start; }
-  .author-monogram { width: 52px; height: 52px; border-radius: 50%; background: var(--c-acento-palido); border: 1.5px solid var(--c-acento-bg); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 1.3rem; font-style: italic; color: var(--c-acento); flex-shrink: 0; }
-  .author-name { font-family: var(--font-serif); font-size: 1rem; font-weight: 600; color: var(--c-texto); margin-bottom: 5px; }
-  .author-bio { font-size: inherit; line-height: 1.75; }
+/* ── Elementos tipográficos generales ── */
+hr.rule { border: none; text-align: center; margin: 2.6rem 0; }
+hr.rule::before { content: '—  ✦  —'; font-size: 11px; color: var(--rule-2); letter-spacing: .3em; }
+.lista { margin: 0 0 1rem 1.2rem; line-height: 1.8; }
+.lista li { margin-bottom: .35rem; }
+.flecha { text-align: center; color: var(--c-accion); font-size: 1.4rem; margin: .2rem 0 .8rem; }
+.sec-titulo { margin: 0 0 1rem; font-family: var(--font-serif); font-size: 1.55em; font-weight: 600; line-height: 1.22; letter-spacing: -.012em; color: var(--head); text-wrap: balance; }
+.hdr-sec { margin-top: 2.6rem; }
+.sub { margin: 1.6rem 0 .6rem; font-family: var(--font-serif); font-size: 1.22em; font-weight: 600; color: var(--mark-ink); }
+.big { margin: 1.2rem 0 .6rem; font-family: var(--font-serif); font-size: 1.7em; font-weight: 600; letter-spacing: .04em; color: var(--head); }
+.dia-card { margin: 1.1rem 0; padding: 1.1rem 1.4rem; background: var(--card); border: 1px solid var(--rule); border-left: 3px solid var(--c-accion); border-radius: 6px 12px 12px 6px; }
+.dia-t { margin-bottom: .6rem; font-family: var(--font-serif); font-weight: 600; font-size: 1.15em; color: var(--head); }
+.basado { margin-bottom: 2rem; font-family: var(--font-serif); font-style: italic; color: var(--head-2); }
 
-  .problema { background: #FAF6EC; border: 1px solid var(--c-border); border-radius: var(--radio); padding: 1.1rem 1.4rem; font-size: inherit; line-height: 1.8; }
+/* ── Navegación al pie ── */
+.nav-final { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; margin-top: 2.2rem; padding: 1.8rem var(--gut) 1.2rem; border-top: 1px solid var(--rule); }
+.btn-nav {
+  display: flex; flex-direction: column; justify-content: center; gap: .2rem; min-height: 3.7rem; padding: .8rem 1.15rem;
+  border-radius: 12px; border: 1px solid transparent; font-family: var(--font-serif); font-size: 1.04rem; font-weight: 500; line-height: 1.2;
+  transition: transform .15s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+.btn-nav small { display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 500 11.5px/1.2 var(--font-ui); letter-spacing: .01em; opacity: .75; }
+.btn-regresar { align-items: flex-start; text-align: left; background: transparent; color: var(--head); border-color: var(--rule-2); }
+.btn-regresar:hover { background: var(--tint); border-color: var(--head-2); transform: translateX(-2px); }
+.btn-siguiente { align-items: flex-end; text-align: right; background: var(--btn-bg); color: var(--btn-ink); box-shadow: 0 8px 20px -10px color-mix(in srgb, var(--btn-bg) 70%, transparent); grid-column: 2; }
+.btn-siguiente:hover { transform: translateX(2px); filter: brightness(1.08); }
+.btn-nav:active { transform: scale(.985); }
+.nav-final .btn-siguiente:only-child { grid-column: 1 / -1; }
 
-  .tesis-block { background: var(--c-acento-palido); border-radius: var(--radio-lg); padding: 2rem 2.25rem; margin: 1.25rem 0; position: relative; overflow: hidden; }
-  .tesis-block::before { content: '\201C'; font-family: var(--font-serif); font-size: 7rem; color: var(--c-acento-suave); opacity: 0.2; position: absolute; top: -10px; left: 12px; line-height: 1; pointer-events: none; }
-  .tesis-label { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-acento-medio); margin-bottom: 0.75rem; position: relative; z-index: 1; font-family: var(--font-body); }
-  .tesis-text { font-family: var(--font-serif); font-size: 1.12rem; font-style: italic; font-weight: 300; color: #1F1B45; line-height: 1.78; position: relative; z-index: 1; }
+.book-footer { display: flex; flex-direction: column; align-items: center; gap: .35rem; padding: 1.2rem var(--gut) 3.5rem; text-align: center; }
+.footer-title { font-family: var(--font-serif); font-style: italic; font-size: .95rem; color: var(--head-2); }
+.footer-firma { font: 400 12px/1.4 var(--font-ui); letter-spacing: .03em; color: var(--text-2); }
+.footer-tag { font: 600 10px/1 var(--font-ui); letter-spacing: .2em; color: var(--text-3); text-transform: uppercase; margin-top: .2rem; }
 
-  .idea { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start; }
-  .idea-num { width: 30px; height: 30px; border-radius: 50%; background: var(--c-acento-palido); border: 1px solid var(--c-acento-bg); color: var(--c-acento); font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 3px; }
-  .idea-body { flex: 1; }
-  .idea-text { font-size: inherit; line-height: 1.8; }
+/* ── Lectura limpia ── */
+body.modo-lectura .libro-header, body.modo-lectura .lectura-meta, body.modo-lectura .book-footer { display: none; }
+body.modo-lectura .page { padding-top: calc(var(--barra) + var(--safe-t) + .6rem); }
+body.modo-lectura .nav-final { border-top-color: transparent; }
 
-  .dato-card { background: var(--c-accion-bg); border-radius: var(--radio-lg); padding: 1.75rem 2rem; margin: 1.25rem 0; }
-  .dato-label { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #5CD0C8; margin-bottom: 0.75rem; font-family: var(--font-body); }
-  .dato-text { font-family: var(--font-serif); font-size: 1.06rem; font-style: italic; font-weight: 300; color: var(--c-accion-txt); line-height: 1.8; }
+/* ── Panel de ajustes ── */
+#config-overlay { position: fixed; inset: 0; z-index: 9996; background: rgba(7,6,31,.18); opacity: 0; pointer-events: none; transition: opacity .2s; }
+#config-overlay.activo { opacity: 1; pointer-events: auto; }
+#config-panel {
+  position: fixed; top: calc(3.6rem + var(--safe-t)); right: max(.75rem, env(safe-area-inset-right, 0px)); z-index: 9999; width: 16rem;
+  background: var(--card); border: 1px solid var(--rule); border-radius: 16px; box-shadow: 0 22px 44px -14px rgba(7,6,31,.4);
+  display: none; flex-direction: column; overflow: hidden; transform: translateY(-6px); opacity: 0; transition: transform .2s ease, opacity .2s ease;
+}
+#config-panel.visible { display: flex; }
+#config-panel.abierto { transform: translateY(0); opacity: 1; }
+.config-seccion-label { padding: .95rem 1.1rem .25rem; font: 700 10px/1 var(--font-ui); letter-spacing: .22em; text-transform: uppercase; color: var(--text-3); }
+.config-row { display: flex; align-items: center; justify-content: space-between; gap: .6rem; padding: .6rem 1.1rem .75rem; }
+.config-row-label { font: 500 14px/1.2 var(--font-ui); color: var(--text); }
+.config-sep { height: 1px; margin: 0 1.1rem; background: var(--rule); }
+.toggle-wrap { position: relative; width: 44px; height: 26px; flex: none; }
+.toggle-wrap input { opacity: 0; width: 0; height: 0; position: absolute; }
+.toggle-track { position: absolute; inset: 0; background: var(--rule-2); border-radius: 26px; cursor: pointer; transition: background .2s; }
+.toggle-track::after { content: ''; position: absolute; width: 20px; height: 20px; top: 3px; left: 3px; background: #fff; border-radius: 50%; box-shadow: 0 1px 3px rgba(0,0,0,.3); transition: transform .2s ease; }
+.toggle-wrap input:checked + .toggle-track { background: var(--btn-bg); }
+.toggle-wrap input:checked + .toggle-track::after { transform: translateX(18px); }
+.toggle-wrap input:focus-visible + .toggle-track { outline: 2px solid var(--focus); outline-offset: 2px; }
+.fuente-ctrl { display: flex; align-items: center; border: 1px solid var(--rule-2); border-radius: 10px; overflow: hidden; }
+.fuente-btn { width: 38px; height: 34px; background: none; border: 0; color: var(--head); font: 700 .82rem var(--font-ui); display: flex; align-items: center; justify-content: center; transition: background .15s; }
+.fuente-btn:hover { background: var(--tint); }
+.fuente-btn:active { background: var(--rule); }
+.fuente-val { min-width: 32px; text-align: center; font: 600 11px/1 var(--font-ui); color: var(--text-2); border-left: 1px solid var(--rule); border-right: 1px solid var(--rule); padding: .65rem 4px; }
 
-  .accion-card { background: var(--c-surface); border: 1px solid #BFE0DD; border-top: 3px solid var(--c-accion); border-radius: var(--radio); padding: 1.5rem 1.75rem; margin: 1.25rem 0; }
-  .accion-label { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #0B6A68; margin-bottom: 0.75rem; font-family: var(--font-body); }
-  .accion-text { font-size: inherit; line-height: 1.8; }
-  .accion-question { font-family: var(--font-serif); font-style: italic; font-weight: 300; font-size: 1.05rem; color: #0B6A68; line-height: 1.7; border-left: 2.5px solid var(--c-accion); padding-left: 1rem; margin: 0.9rem 0; }
+/* ── Menú / índice ── */
+#menu-overlay { position: fixed; inset: 0; z-index: 10001; background: rgba(7,6,31,.55); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); opacity: 0; pointer-events: none; transition: opacity .28s ease; }
+#menu-overlay.activo { opacity: 1; pointer-events: auto; }
+#menu-panel {
+  position: fixed; top: 0; left: 0; bottom: 0; width: min(88vw, 22.5rem); z-index: 10002; background: var(--drawer);
+  border-right: 1px solid var(--rule); box-shadow: none; visibility: hidden;
+  transform: translateX(-102%); transition: transform .3s cubic-bezier(.4,0,.2,1), box-shadow .3s ease, visibility 0s linear .3s;
+  display: flex; flex-direction: column; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--rule-2) transparent;
+  padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+}
+#menu-panel.abierto { transform: translateX(0); visibility: visible; box-shadow: 8px 0 40px rgba(7,6,31,.35); transition: transform .3s cubic-bezier(.4,0,.2,1), box-shadow .3s ease, visibility 0s; }
+.menu-header { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: calc(1.1rem + var(--safe-t)) 1.25rem 1rem; background: var(--drawer); border-bottom: 1px solid var(--rule); }
+.menu-titulo { font-family: var(--font-serif); font-style: italic; font-weight: 500; font-size: 1.05rem; line-height: 1.25; color: var(--head); }
+.menu-close { flex: none; width: 36px; height: 36px; border-radius: 50%; background: transparent; border: 1px solid var(--rule); color: var(--text-2); font-size: .95rem; line-height: 1; display: grid; place-items: center; transition: border-color .15s, color .15s; }
+.menu-close:hover { border-color: var(--rule-2); color: var(--text); }
+.menu-seccion { padding: .35rem 0 .5rem; border-bottom: 1px solid var(--rule); }
+.menu-seccion:last-child { border-bottom: 0; }
+.menu-seccion-label { padding: .85rem 1.25rem .4rem; font: 700 10px/1 var(--font-ui); letter-spacing: .22em; text-transform: uppercase; color: var(--text-3); }
+.menu-item { display: flex; align-items: center; gap: .85rem; width: 100%; padding: .6rem 1.25rem .6rem 1.1rem; background: none; border: 0; border-left: 3px solid transparent; text-align: left; transition: background .15s; }
+.menu-item:hover { background: color-mix(in srgb, var(--mark-soft) 10%, transparent); }
+.menu-item.activo { background: color-mix(in srgb, var(--mark-soft) 15%, transparent); border-left-color: var(--mark-soft); }
+.menu-item-num { flex: none; width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; background: var(--tint); border: 1px solid var(--rule-2); color: var(--head); font: 700 11.5px/1 var(--font-ui); }
+.menu-item.activo .menu-item-num { background: var(--btn-bg); border-color: var(--btn-bg); color: var(--btn-ink); }
+.menu-item-titulo { font-family: var(--font-serif); font-size: 1rem; line-height: 1.3; color: var(--text); }
+.menu-item-sub { margin-top: 2px; font: 500 11px/1.2 var(--font-ui); color: var(--text-3); }
 
-  .alerta-card { background: #F3F6F2; border: 1px solid #CFE6E3; border-left: 3px solid var(--c-acento-suave); border-radius: var(--radio); padding: 1.25rem 1.5rem; margin: 1.25rem 0; }
-  .alerta-label { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-acento-medio); margin-bottom: 0.6rem; font-family: var(--font-body); }
-  .alerta-text { font-size: inherit; line-height: 1.75; font-style: italic; }
+/* ── AVANCE DE LECTURA ── */
+.p-continuar { width: min(100%, 21.5rem); margin-bottom: 1rem; display: none; flex-direction: column; align-items: stretch; gap: .7rem; opacity: 0; animation: entrar .9s cubic-bezier(.22,1,.36,1) 1.25s forwards; }
+.p-continuar.visible { display: flex; }
+.btn-cont {
+  display: flex; flex-direction: column; align-items: center; gap: .3rem; width: 100%; padding: .95rem 1.4rem 1rem;
+  background: var(--c-acento-suave); color: #100E38; border: 0; border-radius: 18px; text-align: center;
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.1) inset;
+  transition: transform .2s ease, background .2s ease;
+}
+.btn-cont:hover { background: #8FE3D6; transform: translateY(-2px); }
+.btn-cont:active { transform: scale(.985); }
+.bc-top { font: 700 .98rem/1.1 var(--font-ui); letter-spacing: .02em; }
+.bc-sub { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 500 .8rem/1.2 var(--font-ui); opacity: .78; }
+.bc-avance { display: flex; align-items: center; gap: .7rem; font: 600 10.5px/1 var(--font-ui); letter-spacing: .14em; text-transform: uppercase; color: #A9A7E0; }
+.bc-barra { flex: 1; height: 4px; border-radius: 4px; background: rgba(255,255,255,.14); overflow: hidden; }
+.bc-barra i { display: block; height: 100%; width: 0; border-radius: 4px; background: var(--c-acento-suave); transition: width .6s ease; }
+.btn-leer.sec { background: transparent; color: #C9C7EE; font-size: .88rem; padding: .8rem 1.5rem; box-shadow: none; border: 1px solid rgba(255,255,255,.2); }
+.btn-leer.sec:hover { background: rgba(255,255,255,.08); color: #fff; box-shadow: none; }
 
-  .veredicto-card { background: linear-gradient(135deg, #100E38 0%, #201C58 100%); border-radius: var(--radio-lg); padding: 2rem 2.25rem; margin: 1.25rem 0; }
-  .veredicto-label { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-acento-claro); margin-bottom: 0.6rem; font-family: var(--font-body); }
-  .veredicto-badge { display: inline-block; background: var(--c-acento); color: #fff; font-family: var(--font-serif); font-style: italic; font-size: 1rem; border-radius: 3px; padding: 4px 14px; margin-bottom: 1rem; }
-  .veredicto-text { font-size: inherit; line-height: 1.85; }
+.tb-book { color: var(--text-3); font-weight: 500; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tb-book b { color: var(--mark-ink); font-weight: 700; }
+.tb-book::before { content: '·'; margin-right: .65rem; color: var(--rule-2); }
+@media (max-width: 640px) { .tb-book-t { display: none; } }
 
-  .eval-grid { display: flex; flex-direction: column; gap: 1rem; margin: 1.25rem 0; }
-  .eval-item { background: #FAF6EC; border: 1px solid var(--c-border); border-radius: var(--radio); padding: 1rem 1.25rem; }
-  .eval-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
-  .eval-titulo { font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; color: var(--c-texto); }
-  .eval-scores { display: flex; gap: 0.5rem; }
-  .eval-score { font-size: 0.78rem; padding: 2px 8px; border-radius: 20px; font-family: var(--font-body); font-weight: 600; }
-  .eval-score.fid { background: var(--c-acento-palido); color: var(--c-acento); }
-  .eval-score.apl { background: #DDF1EF; color: #0B6A68; }
-  .eval-text { font-size: inherit; line-height: 1.7; }
+.menu-avance { padding: 1.1rem 1.25rem 1.2rem; border-bottom: 1px solid var(--rule); }
+.ma-fila { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: .7rem; }
+.ma-label { font: 700 10px/1 var(--font-ui); letter-spacing: .22em; text-transform: uppercase; color: var(--text-3); }
+.ma-pct { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 500; line-height: 1; color: var(--head); font-variant-numeric: tabular-nums; }
+.ma-riel { display: flex; gap: 3px; height: 8px; }
+.ma-riel i { flex: 1; border-radius: 2px; background: linear-gradient(90deg, var(--mark-soft) var(--f, 0%), var(--rule) var(--f, 0%)); }
+.ma-riel i.act { box-shadow: 0 0 0 1.5px var(--head-2); }
+.ma-cont { margin-top: .95rem; width: 100%; display: none; align-items: center; justify-content: space-between; gap: .6rem; padding: .7rem .95rem; border-radius: 12px; border: 1px solid var(--mark-soft); background: color-mix(in srgb, var(--mark-soft) 12%, transparent); color: var(--head); font: 600 13px/1.2 var(--font-ui); text-align: left; transition: background .15s; }
+.ma-cont.visible { display: flex; }
+.ma-cont:hover { background: color-mix(in srgb, var(--mark-soft) 22%, transparent); }
+.ma-cont small { display: block; margin-top: 3px; font-weight: 500; font-size: 11.5px; color: var(--text-2); }
 
-  .com-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1.25rem 0; }
-  .com-item { background: #FAF6EC; border: 1px solid var(--c-border); border-radius: var(--radio); padding: 0.9rem 1rem; }
-  .com-dim { font-size: 0.75rem; font-weight: 600; color: var(--c-texto-3); margin-bottom: 0.3rem; font-family: var(--font-body); }
-  .com-score { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 600; color: var(--c-acento); margin-bottom: 0.3rem; }
-  .com-obs { font-size: 0.82em; line-height: 1.55; }
+.menu-item { position: relative; }
+.menu-item-texto { flex: 1; min-width: 0; }
+.menu-item-estado { flex: none; margin-left: auto; font: 600 11px/1 var(--font-ui); color: var(--text-3); font-variant-numeric: tabular-nums; }
+.menu-item.leido .menu-item-estado { width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; background: var(--mark-soft); color: #072B35; font-size: 10px; }
+.menu-item.leido .menu-item-estado::before { content: '✓'; }
+.menu-item.parcial .menu-item-estado { color: var(--mark-ink); }
+.menu-item::after { content: ''; position: absolute; left: 1.1rem; bottom: 0; height: 2px; width: calc((100% - 2.35rem) * var(--pr, 0)); background: var(--mark-soft); opacity: .65; border-radius: 2px; transition: width .4s ease; }
 
-  .nav-final { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; padding: 2rem 3rem 2.5rem; border-top: 1px solid var(--c-border); }
-  .btn-nav { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-serif); font-style: italic; font-weight: 300; font-size: 1rem; padding: 0.8rem 1.75rem; border-radius: 4px; border: none; cursor: pointer; transition: all 0.15s; }
-  .btn-regresar { background: var(--c-acento-palido); color: var(--c-acento); border: 1px solid var(--c-acento-bg); }
-  .btn-regresar:hover { background: var(--c-acento-bg); transform: translateY(-1px); }
-  .btn-siguiente { background: var(--c-acento); color: #fff; box-shadow: 0 3px 12px rgba(46,42,122,0.3); }
-  .btn-siguiente:hover { background: #1F1B52; transform: translateY(-1px); }
+.btn-reset { border: 1px solid var(--rule-2); background: transparent; color: var(--text-2); border-radius: 10px; padding: .5rem .8rem; font: 600 12px/1 var(--font-ui); transition: border-color .15s, color .15s, background .15s; }
+.btn-reset:hover { border-color: var(--head-2); color: var(--head); }
+.btn-reset.confirmar { background: #B3402E; border-color: #B3402E; color: #fff; }
 
-  .book-footer { background: #100E38; padding: 1rem 3rem; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
-  .footer-title { font-family: var(--font-serif); font-style: italic; font-weight: 300; font-size: 0.88rem; color: var(--c-acento-suave); }
-  .footer-tag { font-size: 10px; letter-spacing: 0.15em; color: #4B4A88; text-transform: uppercase; font-family: var(--font-body); }
-  .footer-firma { font-size: 11px; color: #4B4A88; font-family: var(--font-body); letter-spacing: 0.04em; margin-top: 0.15rem; }
-
-  /* ── CONTROL TAMAÑO DE LETRA ── */
-  #ctrl-fuente {
-    position: fixed; bottom: 8.5rem; right: 1.5rem; z-index: 9999;
-    display: none; flex-direction: column; align-items: center;
-    background: #100E38; border: 1.5px solid rgba(63,193,176,0.3);
-    border-radius: 6px; overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
-  }
-  .ctrl-fuente-btn {
-    width: 44px; height: 36px; background: none; border: none;
-    color: #3FC1B0; cursor: pointer; font-family: var(--font-body);
-    font-size: 0.85rem; font-weight: 600;
-    display: flex; align-items: center; justify-content: center;
-    transition: background 0.15s; line-height: 1;
-  }
-  .ctrl-fuente-btn:hover { background: rgba(63,193,176,0.1); }
-  .ctrl-fuente-sep { width: 28px; height: 1px; background: rgba(63,193,176,0.15); }
-  .ctrl-fuente-nivel {
-    font-size: 9px; color: #7471AE; font-family: var(--font-body);
-    letter-spacing: 0.1em; padding: 3px 0 4px;
-  }
-  body.dark #ctrl-fuente { background: #FAF6EC; border-color: var(--c-acento-bg); }
-  body.dark .ctrl-fuente-btn { color: var(--c-acento); }
-  body.dark .ctrl-fuente-btn:hover { background: var(--c-acento-palido); }
-  body.dark .ctrl-fuente-nivel { color: var(--c-texto-3); }
-  body.dark .ctrl-fuente-sep { background: var(--c-border); }
-
-  /* Tamaños aplicables solo al cuerpo de lectura */
-  /* Tamaño de letra — escala todo el body de lectura */
-  .body { --escala: 1; font-size: calc(16px * var(--escala)); }
-  .body.fuente-s  { --escala: 0.875; }
-  .body.fuente-m  { --escala: 1; }
-  .body.fuente-l  { --escala: 1.125; }
-  .body.fuente-xl { --escala: 1.25; }
-
-  /* Todos los textos del body heredan la escala */
-  .body .problema      { font-size: inherit; }
-  .body .idea-text     { font-size: inherit; }
-  .body .tesis-text    { font-size: 1.05em; }
-  .body .filtro-title  { font-size: 1.05em; }
-  .body .dato-text     { font-size: inherit; }
-  .body .accion-text   { font-size: inherit; }
-  .body .accion-question { font-size: 1em; }
-  .body .alerta-text   { font-size: inherit; }
-  .body .veredicto-text { font-size: inherit; }
-  .body .eval-text     { font-size: inherit; }
-  .body .author-bio    { font-size: inherit; }
-  .body .author-name   { font-size: 1em; }
-  .body .eval-titulo   { font-size: 0.9em; }
-  .body .com-obs       { font-size: 0.82em; }
-
-  /* ── BOTÓN CONFIGURACIÓN ── */
-  #btn-config {
-    position: fixed; top: 1rem; right: 1rem; z-index: 9999;
-    width: 44px; height: 44px; border-radius: 4px;
-    background: rgba(16,14,56,0.88); border: 1px solid rgba(63,193,176,0.28);
-    backdrop-filter: blur(8px); color: #3FC1B0; font-size: 1.05rem;
-    display: none; align-items: center; justify-content: center;
-    cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 12px rgba(0,0,0,0.3);
-  }
-  #btn-config:hover { background: rgba(34,30,102,0.95); }
-  body.dark #btn-config { background: rgba(250,246,236,0.92); color: var(--c-acento); border-color: var(--c-acento-bg); }
-
-  /* ── PANEL CONFIGURACIÓN ── */
-  #config-overlay { position: fixed; inset: 0; z-index: 9998; background: rgba(0,0,0,0.2); opacity: 0; pointer-events: none; transition: opacity 0.2s; }
-  #config-overlay.activo { opacity: 1; pointer-events: auto; }
-
-  #config-panel {
-    position: fixed; top: 4rem; right: 1rem; z-index: 9999;
-    width: 210px; background: #100E38;
-    border: 1px solid rgba(63,193,176,0.22);
-    border-radius: 8px; box-shadow: 0 8px 32px rgba(0,0,0,0.45);
-    display: none; flex-direction: column; overflow: hidden;
-    transform: translateY(-6px); opacity: 0;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-  }
-  #config-panel.visible { display: flex; }
-  #config-panel.abierto { transform: translateY(0); opacity: 1; }
-  body.dark #config-panel { background: #FAF6EC; border-color: var(--c-acento-bg); }
-
-  .config-seccion-label {
-    font-size: 8.5px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: #7471AE; padding: 0.75rem 1rem 0.3rem; font-family: var(--font-body);
-  }
-  body.dark .config-seccion-label { color: var(--c-texto-3); }
-
-  .config-row {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0.5rem 1rem 0.75rem; gap: 0.5rem;
-  }
-  .config-row-label {
-    font-size: 13px; color: #D9D5EE; font-family: var(--font-body);
-  }
-  body.dark .config-row-label { color: var(--c-texto-2); }
-
-  /* Toggle switch */
-  .toggle-wrap { position: relative; width: 40px; height: 22px; flex-shrink: 0; }
-  .toggle-wrap input { opacity: 0; width: 0; height: 0; position: absolute; }
-  .toggle-track {
-    position: absolute; inset: 0; background: #2F2B6B;
-    border-radius: 22px; cursor: pointer; transition: background 0.2s;
-    border: 1px solid rgba(63,193,176,0.15);
-  }
-  .toggle-wrap input:checked + .toggle-track { background: var(--c-acento); }
-  .toggle-track::after {
-    content: ''; position: absolute; width: 16px; height: 16px;
-    background: #D9D5EE; border-radius: 50%; top: 2px; left: 2px;
-    transition: transform 0.2s;
-  }
-  .toggle-wrap input:checked + .toggle-track::after { transform: translateX(18px); background: #fff; }
-  body.dark .toggle-track { background: var(--c-border); border-color: var(--c-border); }
-  body.dark .toggle-track::after { background: var(--c-texto-3); }
-  body.dark .toggle-wrap input:checked + .toggle-track { background: var(--c-acento); }
-  body.dark .toggle-wrap input:checked + .toggle-track::after { background: #fff; }
-
-  /* Fuente control */
-  .fuente-ctrl { display: flex; align-items: center; gap: 0; border: 1px solid rgba(63,193,176,0.2); border-radius: 4px; overflow: hidden; }
-  .fuente-btn {
-    width: 32px; height: 28px; background: none; border: none;
-    color: #3FC1B0; cursor: pointer; font-family: var(--font-body);
-    font-size: 0.82rem; font-weight: 600; transition: background 0.15s;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .fuente-btn:hover { background: rgba(63,193,176,0.12); }
-  .fuente-val {
-    min-width: 28px; text-align: center; font-size: 11px;
-    color: #8E8BC9; font-family: var(--font-body); border-left: 1px solid rgba(63,193,176,0.15); border-right: 1px solid rgba(63,193,176,0.15); padding: 0 4px;
-  }
-  body.dark .fuente-btn { color: var(--c-acento); }
-  body.dark .fuente-val { color: var(--c-texto-3); border-color: var(--c-border); }
-  body.dark .fuente-ctrl { border-color: var(--c-border); }
-
-  .config-sep { height: 1px; background: rgba(63,193,176,0.1); margin: 0 0.75rem; }
-  body.dark .config-sep { background: var(--c-border); }
-
-  /* ── MENÚ ── */
-  #menu-btn { position: fixed; top: 1rem; left: 1rem; z-index: 9999; width: 44px; height: 44px; border-radius: 4px; background: rgba(16,14,56,0.85); border: 1px solid rgba(63,193,176,0.25); backdrop-filter: blur(8px); color: #3FC1B0; font-size: 1rem; display: none; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
-  #menu-btn:hover { background: rgba(34,30,102,0.9); }
-
-  #menu-overlay { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.4); opacity: 0; pointer-events: none; transition: opacity 0.28s ease; }
-  #menu-overlay.activo { opacity: 1; pointer-events: auto; }
-
-  #menu-panel { position: fixed; top: 0; left: 0; bottom: 0; width: 290px; z-index: 10000; background: #100E38; box-shadow: 4px 0 32px rgba(0,0,0,0.4); transform: translateX(-100%); transition: transform 0.28s cubic-bezier(0.4,0,0.2,1); display: flex; flex-direction: column; overflow-y: auto; }
-  #menu-panel.abierto { transform: translateX(0); }
-
-  .menu-header { padding: 1.5rem 1.5rem 1rem; border-bottom: 1px solid rgba(63,193,176,0.12); display: flex; align-items: center; justify-content: space-between; }
-  .menu-titulo { font-family: var(--font-serif); font-style: italic; font-weight: 300; font-size: 0.95rem; color: var(--c-acento-suave); }
-  .menu-close { background: none; border: none; cursor: pointer; color: var(--c-acento-medio); font-size: 1.1rem; padding: 4px; line-height: 1; }
-  .menu-seccion { padding: 0.5rem 0; border-bottom: 1px solid rgba(63,193,176,0.08); }
-  .menu-seccion-label { font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: #7471AE; padding: 0.5rem 1.5rem 0.25rem; font-family: var(--font-body); }
-  .menu-item { display: flex; align-items: center; gap: 0.85rem; width: 100%; padding: 0.7rem 1.5rem; background: none; border: none; cursor: pointer; text-align: left; transition: background 0.15s; font-family: var(--font-body); }
-  .menu-item:hover { background: rgba(63,193,176,0.06); }
-  .menu-item.activo { background: rgba(63,193,176,0.1); }
-  .menu-item-num { width: 26px; height: 26px; border-radius: 3px; flex-shrink: 0; background: rgba(63,193,176,0.1); border: 1px solid rgba(63,193,176,0.2); color: var(--c-acento-suave); font-size: 11px; display: flex; align-items: center; justify-content: center; }
-  .menu-item.activo .menu-item-num { background: var(--c-acento); border-color: var(--c-acento); color: #fff; }
-  .menu-item-titulo { font-size: 14px; color: #D9D5EE; line-height: 1.3; }
-  .menu-item-sub { font-size: 11px; color: #7471AE; margin-top: 1px; font-style: italic; }
-
-  /* ── MENÚ ── */
-  body.dark { background: #07061F; color: #D9D5EE; }
-  body.dark .page { background: #100E38; box-shadow: 0 4px 32px rgba(0,0,0,0.5); }
-  body.dark .libro-header { background: linear-gradient(135deg, #07061F 0%, #100E38 100%); }
-  body.dark .body { background: #100E38; }
-  body.dark .filtro-header { background: #1A1746; border-left-color: var(--c-acento-suave); }
-  body.dark .filtro-title { color: #D9D5EE; }
-  body.dark .tesis-block { background: #1A1746; }
-  body.dark .tesis-text { color: #D9D5EE; }
-  body.dark .problema { background: #1A1746; border-color: #2F2B6B; color: #B6B3D6; }
-  body.dark .idea-num { background: #201C58; border-color: #3C3786; color: var(--c-acento-suave); }
-  body.dark .idea-text { color: #B6B3D6; }
-  body.dark .toc { background: #1A1746; }
-  body.dark .toc-btn { background: #100E38; border-color: #2F2B6B; color: #D9D5EE; }
-  body.dark .toc-btn:hover { background: #201C58; }
-  body.dark .toc-num { background: #201C58; border-color: #3C3786; color: var(--c-acento-suave); }
-  body.dark .accion-card { background: #0A1F2C; border-color: #17394A; }
-  body.dark .alerta-card { background: #1A1746; border-color: #2F2B6B; }
-  body.dark .alerta-text { color: #B6B3D6; }
-  body.dark .eval-item { background: #1A1746; border-color: #2F2B6B; }
-  body.dark .eval-text { color: #B6B3D6; }
-  body.dark .com-item { background: #1A1746; border-color: #2F2B6B; }
-  body.dark .com-obs { color: #B6B3D6; }
-  body.dark .nav-final { border-top-color: #2F2B6B; background: #100E38; }
-  body.dark .btn-regresar { background: #201C58; color: var(--c-acento-suave); border-color: #3C3786; }
-  body.dark #btn-config { background: rgba(250,246,236,0.92); color: var(--c-acento); border-color: var(--c-acento-bg); }
-  body.dark hr.rule::before { color: #2F2B6B; }
-  body.dark .author-card { background: #100E38; border-color: #2F2B6B; }
-  body.dark .author-name { color: #D9D5EE; }
-  body.dark .author-bio { color: #B6B3D6; }
-
-  body.modo-lectura .libro-header { display: none; }
-  body.modo-lectura .lectura-meta { display: none; }
-  body.modo-lectura .book-footer { display: none; }
-  body.modo-lectura .nav-final { display: none; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 780px) { .page { border-radius: 0; } .body { padding: 2rem 2rem 3rem; } .libro-header { padding: 1.4rem 2rem; } .nav-final { padding: 1.75rem 2rem; } .book-footer { padding: 1rem 2rem; } .com-grid { grid-template-columns: 1fr; } }
-  @media (max-width: 600px) { .p-titulo { font-size: clamp(1.9rem, 7vw, 2.4rem); } .page { border-radius: 0; box-shadow: none; } .libro-header { padding: 1rem 1.25rem; flex-direction: column; align-items: flex-start; gap: 0.5rem; } .body { padding: 1.4rem 1.1rem 2rem; } .filtro-title { font-size: 1rem; } .tesis-text { font-size: 1rem; } .problema { font-size: 14.5px; } .idea-text { font-size: 14px; } .nav-final { padding: 1.4rem 1.1rem; gap: 0.75rem; } .btn-nav { font-size: 0.9rem; padding: 0.7rem 1.3rem; flex: 1; justify-content: center; } .book-footer { padding: 1rem 1.25rem; flex-direction: column; text-align: center; gap: 0.4rem; } #config-panel { right: 0.5rem; width: 195px; } }
-
-.libro-header-paso{color:#8FE3D6}.p-ornament svg{max-width:100%;height:auto}.p-footer{color:#7471AE}
-.p-sub{font-family:var(--font-serif);font-style:italic;font-size:1.1rem;color:#A9A7E0;margin-bottom:2.5rem;max-width:30ch;line-height:1.5;opacity:0;animation:entrar .8s ease 1.05s forwards}
-.body p{margin:0 0 1rem;line-height:1.85}.body p:last-child{margin-bottom:0}
-.lista{margin:0 0 1rem 1.2rem;line-height:1.8}.lista li{margin-bottom:.35rem}
-.blank{display:inline-block;min-width:5.5em;border-bottom:1.5px solid var(--c-acento-suave);margin:0 .15em}
-.campos{display:flex;flex-direction:column;gap:.7rem;margin:.9rem 0}
-.campo{display:flex;align-items:baseline;gap:.75rem;flex-wrap:wrap}
-.campo-l{font-size:.74em;letter-spacing:.12em;text-transform:uppercase;color:#0B6A68;font-weight:600;font-family:var(--font-body)}
-.campo .blank{flex:1;min-width:8em}
-.destacado{font-family:var(--font-serif);font-size:1.12em;font-style:italic;border-left:2.5px solid var(--c-accion);padding:.15rem 0 .15rem 1rem;margin:.9rem 0;line-height:1.65;color:#0B6A68}
-.destacado strong{font-weight:500}
-.clave{list-style:none;margin:1rem 0;padding:0;display:flex;flex-direction:column;gap:.5rem}
-.clave li{background:var(--c-acento-palido);border-left:3px solid var(--c-acento-suave);padding:.55rem .9rem;border-radius:0 6px 6px 0;line-height:1.55}
-.flecha{text-align:center;color:var(--c-accion);font-size:1.4rem;margin:.2rem 0 .8rem}
-.sec-titulo{font-family:var(--font-serif);font-size:1.7em;font-weight:600;color:var(--c-acento);line-height:1.25;margin:0 0 1rem}
-.hdr-sec{margin-top:2.2rem}
-.sub{font-family:var(--font-serif);font-size:1.25em;font-weight:600;color:var(--c-accion);margin:1.6rem 0 .6rem}
-.subtitulo{font-family:var(--font-serif);font-style:italic;font-size:1.2em;color:var(--c-acento-medio);margin:0 0 1.5rem;line-height:1.5}
-.big{font-family:var(--font-serif);font-size:1.7em;font-weight:600;letter-spacing:.04em;color:var(--c-acento);margin:1.2rem 0 .6rem}
-.dia-card{background:var(--c-surface);border:1px solid var(--c-border);border-left:3px solid var(--c-accion);border-radius:6px;padding:1.1rem 1.4rem;margin:1.1rem 0}
-.dia-t{font-family:var(--font-serif);font-weight:600;font-size:1.15em;color:var(--c-acento);margin-bottom:.6rem}
-.basado{font-family:var(--font-serif);font-style:italic;color:var(--c-acento-medio);margin-bottom:2rem}
-.tesis-text p,.dato-text p,.alerta-text p,.veredicto-text p{margin-bottom:.8rem}.tesis-text{font-style:normal}
-.tesis-text .destacado{color:#2A1F4E;border-left:0;padding:0;font-size:1em;margin:0 0 .8rem}.veredicto-text{color:#E6E2F5}
-.veredicto-text .destacado,.dato-text .destacado{color:#8FE3D6;border-color:#3FC1B0}
-.eyebrow{margin-top:1.4rem}.tesis-block,.dato-card,.veredicto-card{margin-top:1.4rem}
-body.dark .dia-card,body.dark .clave li{background:#1A1746;border-color:#2F2B6B}
-body.dark .destacado,body.dark .campo-l{color:#5CD0C8}body.dark .tesis-text .destacado{color:#8FE3D6}
-body.dark .sec-titulo,body.dark .dia-t,body.dark .big{color:#B9B6F0}body.dark .sub{color:#5CD0C8}
-body.dark .subtitulo,body.dark .basado{color:#A9A7E0}
-@media(max-width:600px){.sec-titulo,.big{font-size:1.45em}.dia-card{padding:1rem}.campo-l{font-size:.7em}}
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .tb-label { display: none; }
+  .libro-header-titulo { letter-spacing: .08em; font-size: 10.5px; }
+  .com-grid { grid-template-columns: 1fr; }
+  .com-item.gl + .com-item.gl { margin-top: 0; }
+}
+@media (max-width: 600px) {
+  .tesis-block { padding: 1.25rem 1.2rem 1.3rem; }
+  .dato-card, .veredicto-card { padding: 1.35rem 1.3rem; }
+  .alerta-card, .accion-card { padding: 1.2rem 1.25rem 1.3rem; }
+  .eval-item { padding: 1.1rem 1.15rem; }
+  .author-card { padding: 1.05rem 1.1rem; gap: .9rem; }
+  .toc { padding: 1.1rem .9rem .7rem; }
+  .nav-final { gap: .65rem; }
+  .btn-nav { padding: .75rem .95rem; font-size: 1rem; }
+}
+@media (max-width: 420px) {
+  .btn-nav small { display: none; }
+  #bookclub-home { padding: 0 .75rem; letter-spacing: .1em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001s !important; animation-delay: 0s !important; transition-duration: .001s !important; }
+  .portada-inner, .p-eyebrow, .p-ornament, .p-titulo, .p-rule, .p-autor, .p-fechas, .p-sub, .p-badge, .btn-leer, .p-footer { opacity: 1; transform: none; }
+}
+@media print {
+  #topbar, #menu-btn, #btn-config, #bookclub-home, #tb-info, #barra-progreso, .nav-final { display: none !important; }
+  html, body { height: auto; overflow: visible; }
+  .pagina { position: static; }
+}
 </style>
 </head>
-<body>
+<body class="en-portada">
+<a id="bookclub-home" href="../index.html" aria-label="Volver a BOOKCLUB">← BOOKCLUB</a>
+<div id="topbar" aria-hidden="true"></div>
+<div id="tb-info" aria-hidden="true"><span class="tb-label"></span><span class="tb-pos"></span><span class="tb-book"><b id="tb-book-pct">0 %</b><span class="tb-book-t"> del libro</span></span></div>
 <div id="menu-overlay" onclick="cerrarMenu()"></div>
-<div id="menu-panel"><div class="menu-header"><span class="menu-titulo">Gana la guerra en tu mente</span><button class="menu-close" onclick="cerrarMenu()" aria-label="Cerrar">✕</button></div><div class="menu-seccion"><div class="menu-seccion-label">Primera parte · Panorama</div><button class="menu-item" onclick="irA('p1')" data-page="p1"><span class="menu-item-num">1</span><span class="menu-item-texto"><div class="menu-item-titulo">Tesis, propósito y perfil</div><div class="menu-item-sub">Tesis · Propósito · Perfil · Mentalidad</div></span></button><button class="menu-item" onclick="irA('p2')" data-page="p2"><span class="menu-item-num">2</span><span class="menu-item-texto"><div class="menu-item-titulo">Modelo e introducción</div><div class="menu-item-sub">Entender · Interiorizar · Aplicar</div></span></button></div><div class="menu-seccion"><div class="menu-seccion-label">Ruta de cuatro semanas</div><button class="menu-item" onclick="irA('s1')" data-page="s1"><span class="menu-item-num">3</span><span class="menu-item-texto"><div class="menu-item-titulo">Semana 1 — Reemplazo</div><div class="menu-item-sub">Reemplazo</div></span></button><button class="menu-item" onclick="irA('s2')" data-page="s2"><span class="menu-item-num">4</span><span class="menu-item-texto"><div class="menu-item-titulo">Semana 2 — Recableado</div><div class="menu-item-sub">Recableado</div></span></button><button class="menu-item" onclick="irA('s3')" data-page="s3"><span class="menu-item-num">5</span><span class="menu-item-texto"><div class="menu-item-titulo">Semana 3 — Replanteamiento</div><div class="menu-item-sub">Replanteamiento</div></span></button><button class="menu-item" onclick="irA('s4')" data-page="s4"><span class="menu-item-num">6</span><span class="menu-item-texto"><div class="menu-item-titulo">Semana 4 — Regocijo</div><div class="menu-item-sub">Regocijo</div></span></button><button class="menu-item" onclick="irA('p3')" data-page="p3"><span class="menu-item-num">7</span><span class="menu-item-texto"><div class="menu-item-titulo">Progresión, resultado y fidelidad</div><div class="menu-item-sub">Cierre de la ruta</div></span></button></div><div class="menu-seccion"><div class="menu-seccion-label">Segunda parte · Versión final</div><button class="menu-item" onclick="irA('m0')" data-page="m0"><span class="menu-item-num">8</span><span class="menu-item-texto"><div class="menu-item-titulo">Fundamentos de la versión final</div><div class="menu-item-sub">Tesis · Propósito · Perfil · Modelo</div></span></button><button class="menu-item" onclick="irA('b1')" data-page="b1"><span class="menu-item-num">9</span><span class="menu-item-texto"><div class="menu-item-titulo">Bloque 1 · Reemplazo</div><div class="menu-item-sub">Reemplazo</div></span></button><button class="menu-item" onclick="irA('b2')" data-page="b2"><span class="menu-item-num">10</span><span class="menu-item-texto"><div class="menu-item-titulo">Bloque 2 · Recableado</div><div class="menu-item-sub">Recableado</div></span></button><button class="menu-item" onclick="irA('b3')" data-page="b3"><span class="menu-item-num">11</span><span class="menu-item-texto"><div class="menu-item-titulo">Bloque 3 · Replanteamiento</div><div class="menu-item-sub">Replanteamiento</div></span></button><button class="menu-item" onclick="irA('b4')" data-page="b4"><span class="menu-item-num">12</span><span class="menu-item-texto"><div class="menu-item-titulo">Bloque 4 · Regocijo</div><div class="menu-item-sub">Regocijo</div></span></button><button class="menu-item" onclick="irA('f1')" data-page="f1"><span class="menu-item-num">13</span><span class="menu-item-texto"><div class="menu-item-titulo">Progresión, resultado y fidelidad · versión final</div><div class="menu-item-sub">Progresión · Resultado · Fidelidad</div></span></button></div><div class="menu-seccion"><div class="menu-seccion-label">Cierre</div><button class="menu-item" onclick="irA('cierre')" data-page="cierre"><span class="menu-item-num">14</span><span class="menu-item-texto"><div class="menu-item-titulo">Cierre</div><div class="menu-item-sub">El corazón formativo</div></span></button></div></div>
+<div id="menu-panel"><div class="menu-header"><span class="menu-titulo">Gana la guerra en tu mente</span><button class="menu-close" onclick="cerrarMenu()" aria-label="Cerrar">✕</button></div><div class="menu-avance"><div class="ma-fila"><span class="ma-label">Avance del libro</span><span class="ma-pct" id="ma-pct">0 %</span></div><div class="ma-riel" id="ma-riel" aria-hidden="true"></div><button class="ma-cont" id="ma-cont" type="button" onclick="continuar()"><span>Continuar donde ibas<small id="ma-cont-sub"></small></span><span aria-hidden="true">→</span></button></div><div class="menu-seccion"><div class="menu-seccion-label">Primera parte · Panorama</div><button class="menu-item" onclick="irA('p1')" data-page="p1"><span class="menu-item-num">1</span><span class="menu-item-texto"><div class="menu-item-titulo">Tesis, propósito y perfil</div><div class="menu-item-sub">Tesis · Propósito · Perfil · Mentalidad</div></span></button><button class="menu-item" onclick="irA('p2')" data-page="p2"><span class="menu-item-num">2</span><span class="menu-item-texto"><div class="menu-item-titulo">Modelo e introducción</div><div class="menu-item-sub">Entender · Interiorizar · Aplicar</div></span></button></div><div class="menu-seccion"><div class="menu-seccion-label">Ruta de cuatro semanas</div><button class="menu-item" onclick="irA('s1')" data-page="s1"><span class="menu-item-num">3</span><span class="menu-item-texto"><div class="menu-item-titulo">Semana 1 — Reemplazo</div><div class="menu-item-sub">Reemplazo</div></span></button><button class="menu-item" onclick="irA('s2')" data-page="s2"><span class="menu-item-num">4</span><span class="menu-item-texto"><div class="menu-item-titulo">Semana 2 — Recableado</div><div class="menu-item-sub">Recableado</div></span></button><button class="menu-item" onclick="irA('s3')" data-page="s3"><span class="menu-item-num">5</span><span class="menu-item-texto"><div class="menu-item-titulo">Semana 3 — Replanteamiento</div><div class="menu-item-sub">Replanteamiento</div></span></button><button class="menu-item" onclick="irA('s4')" data-page="s4"><span class="menu-item-num">6</span><span class="menu-item-texto"><div class="menu-item-titulo">Semana 4 — Regocijo</div><div class="menu-item-sub">Regocijo</div></span></button><button class="menu-item" onclick="irA('p3')" data-page="p3"><span class="menu-item-num">7</span><span class="menu-item-texto"><div class="menu-item-titulo">Progresión, resultado y fidelidad</div><div class="menu-item-sub">Cierre de la ruta</div></span></button></div><div class="menu-seccion"><div class="menu-seccion-label">Segunda parte · Versión final</div><button class="menu-item" onclick="irA('m0')" data-page="m0"><span class="menu-item-num">8</span><span class="menu-item-texto"><div class="menu-item-titulo">Fundamentos de la versión final</div><div class="menu-item-sub">Tesis · Propósito · Perfil · Modelo</div></span></button><button class="menu-item" onclick="irA('b1')" data-page="b1"><span class="menu-item-num">9</span><span class="menu-item-texto"><div class="menu-item-titulo">Bloque 1 · Reemplazo</div><div class="menu-item-sub">Reemplazo</div></span></button><button class="menu-item" onclick="irA('b2')" data-page="b2"><span class="menu-item-num">10</span><span class="menu-item-texto"><div class="menu-item-titulo">Bloque 2 · Recableado</div><div class="menu-item-sub">Recableado</div></span></button><button class="menu-item" onclick="irA('b3')" data-page="b3"><span class="menu-item-num">11</span><span class="menu-item-texto"><div class="menu-item-titulo">Bloque 3 · Replanteamiento</div><div class="menu-item-sub">Replanteamiento</div></span></button><button class="menu-item" onclick="irA('b4')" data-page="b4"><span class="menu-item-num">12</span><span class="menu-item-texto"><div class="menu-item-titulo">Bloque 4 · Regocijo</div><div class="menu-item-sub">Regocijo</div></span></button><button class="menu-item" onclick="irA('f1')" data-page="f1"><span class="menu-item-num">13</span><span class="menu-item-texto"><div class="menu-item-titulo">Progresión, resultado y fidelidad · versión final</div><div class="menu-item-sub">Progresión · Resultado · Fidelidad</div></span></button></div><div class="menu-seccion"><div class="menu-seccion-label">Cierre</div><button class="menu-item" onclick="irA('cierre')" data-page="cierre"><span class="menu-item-num">14</span><span class="menu-item-texto"><div class="menu-item-titulo">Cierre</div><div class="menu-item-sub">El corazón formativo</div></span></button></div></div>
 <button id="menu-btn" onclick="abrirMenu()" aria-label="Índice">☰</button>
 <button id="btn-config" onclick="toggleConfig()" aria-label="Ajustes de lectura">⚙︎</button>
 <div id="config-overlay" onclick="cerrarConfig()"></div>
@@ -422,10 +621,13 @@ body.dark .subtitulo,body.dark .basado{color:#A9A7E0}
   <div class="config-sep"></div>
   <div class="config-seccion-label">Tamaño de letra</div>
   <div class="config-row"><span class="config-row-label">Texto</span><div class="fuente-ctrl"><button class="fuente-btn" onclick="cambiarFuente(-1)">A−</button><span class="fuente-val" id="fuente-nivel">M</span><button class="fuente-btn" onclick="cambiarFuente(1)">A+</button></div></div>
+  <div class="config-sep"></div>
+  <div class="config-seccion-label">Avance de lectura</div>
+  <div class="config-row"><span class="config-row-label">Mi progreso</span><button class="btn-reset" id="btn-reset" type="button" onclick="reiniciarAvance()">Borrar</button></div>
 </div>
 <div id="barra-progreso"></div>
 <div id="portada" class="pagina visible">
-<section style="min-height:100vh;background:var(--portada-grad);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem 2rem;position:relative;overflow:hidden;">
+<section class="portada-sec">
   <div class="c1"></div><div class="c2"></div><div class="c3"></div>
   <div class="portada-inner">
     <div class="p-eyebrow">Resumen Editorial · Mentor de Conocimiento</div>
@@ -435,14 +637,15 @@ body.dark .subtitulo,body.dark .basado{color:#A9A7E0}
     <div class="p-autor">Craig Groeschel</div>
     <div class="p-sub">De pensamientos automáticos a una vida dirigida por la verdad</div>
     <div class="p-badge">Mentalidad → Renovación</div>
-    <button class="btn-leer" onclick="irA('p1')">Leer resumen &nbsp;→</button>
+    <div class="p-continuar" id="p-continuar"><button class="btn-cont" type="button" onclick="continuar()"><span class="bc-top">Continuar donde ibas</span><span class="bc-sub" id="bc-sub"></span></button><div class="bc-avance"><span>Avance</span><div class="bc-barra"><i id="bc-fill"></i></div><span id="bc-pct">0 %</span></div></div>
+    <button class="btn-leer" id="btn-leer" onclick="irA('p1')">Leer resumen &nbsp;→</button>
   </div>
   <div class="p-footer">Gana la guerra en tu mente · Craig Groeschel</div>
 </section>
 </div>
 
 <div id="p1" class="pagina oculta">
-<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+<section class="hoja">
   <div class="page">
     <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Panorama</div></div>
     <div class="lectura-meta">⏱ Tiempo estimado: <span>2 min</span></div>
@@ -453,7 +656,7 @@ body.dark .subtitulo,body.dark .basado{color:#A9A7E0}
 </section>
 </div>
 <div id="p2" class="pagina oculta">
-<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+<section class="hoja">
   <div class="page">
     <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Panorama</div></div>
     <div class="lectura-meta">⏱ Tiempo estimado: <span>2 min</span></div>
@@ -464,7 +667,7 @@ body.dark .subtitulo,body.dark .basado{color:#A9A7E0}
 </section>
 </div>
 <div id="s1" class="pagina oculta">
-<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+<section class="hoja">
   <div class="page">
     <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Ruta de cuatro semanas</div></div>
     <div class="lectura-meta">⏱ Tiempo estimado: <span>2 min</span></div>
@@ -475,7 +678,7 @@ body.dark .subtitulo,body.dark .basado{color:#A9A7E0}
 </section>
 </div>
 <div id="s2" class="pagina oculta">
-<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+<section class="hoja">
   <div class="page">
     <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Ruta de cuatro semanas</div></div>
     <div class="lectura-meta">⏱ Tiempo estimado: <span>2 min</span></div>
@@ -486,7 +689,7 @@ body.dark .subtitulo,body.dark .basado{color:#A9A7E0}
 </section>
 </div>
 <div id="s3" class="pagina oculta">
-<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+<section class="hoja">
   <div class="page">
     <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Ruta de cuatro semanas</div></div>
     <div class="lectura-meta">⏱ Tiempo estimado: <span>2 min</span></div>
@@ -497,7 +700,7 @@ body.dark .subtitulo,body.dark .basado{color:#A9A7E0}
 </section>
 </div>
 <div id="s4" class="pagina oculta">
-<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+<section class="hoja">
   <div class="page">
     <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Ruta de cuatro semanas</div></div>
     <div class="lectura-meta">⏱ Tiempo estimado: <span>2 min</span></div>
@@ -508,7 +711,7 @@ body.dark .subtitulo,body.dark .basado{color:#A9A7E0}
 </section>
 </div>
 <div id="p3" class="pagina oculta">
-<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+<section class="hoja">
   <div class="page">
     <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Ruta de cuatro semanas</div></div>
     <div class="lectura-meta">⏱ Tiempo estimado: <span>2 min</span></div>
@@ -519,7 +722,7 @@ body.dark .subtitulo,body.dark .basado{color:#A9A7E0}
 </section>
 </div>
 <div id="m0" class="pagina oculta">
-<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+<section class="hoja">
   <div class="page">
     <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Versión final</div></div>
     <div class="lectura-meta">⏱ Tiempo estimado: <span>3 min</span></div>
@@ -530,51 +733,51 @@ body.dark .subtitulo,body.dark .basado{color:#A9A7E0}
 </section>
 </div>
 <div id="b1" class="pagina oculta">
-<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+<section class="hoja">
   <div class="page">
     <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Versión final</div></div>
     <div class="lectura-meta">⏱ Tiempo estimado: <span>2 min</span></div>
-    <div class="body"><div class="filtro-header"><div class="filtro-label">Versión final</div><div class="filtro-title" data-s>Bloque 1 · Reemplazo</div></div><div data-s><div class="subtitulo">No creas automáticamente todo lo que piensas</div><div class="tesis-block"><div class="tesis-label">Tesis</div><div class="tesis-text"><div class="destacado"><strong>Una mentira creída puede dirigir tu vida como si fuera verdad; por eso, la renovación comienza identificando la mentira y confrontándola con verdad.</strong></div></div></div><div class="dato-card"><div class="dato-label">Propósito</div><div class="dato-text"><p>Que el lector descubra qué pensamientos dominantes están operando actualmente en su vida y pueda identificar al menos una mentira raíz que esté afectando emociones, decisiones o comportamientos.</p></div></div><span class="eyebrow">Desarrollo</span><div class="problema"><p>Groeschel comienza estableciendo que nuestros pensamientos dominantes influyen profundamente en la dirección de nuestra vida. El problema aparece cuando dejamos de distinguir entre <strong>tener un pensamiento</strong> y <strong>poseer una verdad</strong>.</p><p>Una idea falsa puede producir consecuencias reales si la aceptamos durante suficiente tiempo.</p><p>Por eso el primer movimiento consiste en observar.</p><p>Antes de intentar cambiar una conducta, el lector necesita reconocer qué narrativa interior acompaña esa conducta.</p><p>La auditoría mental propuesta en el libro convierte pensamientos difusos en palabras visibles. Groeschel invita a registrar los pensamientos habituales, observar cuándo aparecen y descubrir sus patrones.</p><p>Después comienza el descenso hacia la raíz:</p><ul class="clave"><li><strong>¿Qué pienso?</strong></li><li><strong>¿Qué siento cuando lo pienso?</strong></li><li><strong>¿Qué hago cuando lo creo?</strong></li><li><strong>¿Qué mentira tendría que creer para que esta conducta tuviera sentido?</strong></li></ul><p>El objetivo no es condenarse por tener determinados pensamientos.</p><p>El objetivo es aprender a identificarlos antes de que sigan gobernando automáticamente.</p><p>Una vez descubierta la mentira, se busca una verdad que responda exactamente a ella.</p><p>No una frase motivacional.</p><p>No una declaración desconectada de la realidad.</p><p>Una verdad capaz de confrontar la mentira específica.</p></div><span class="eyebrow">Qué entender</span><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">No todo pensamiento merece ser creído.</div></div></div><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Pensar algo muchas veces no lo convierte en verdad.</div></div></div><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La conducta visible puede ser el resultado de una creencia más profunda.</div></div></div><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Una mentira sin identificar conserva poder porque opera sin ser examinada.</div></div></div><div class="veredicto-card"><div class="veredicto-label">Qué interiorizar</div><div class="veredicto-text"><div class="destacado"><strong>“Puedo observar mis pensamientos sin someterme automáticamente a ellos.”</strong></div></div></div><div class="alerta-card"><div class="alerta-label">Qué cambiar</div><div class="alerta-text"><p>Pasar de:</p><div class="destacado"><strong>“Yo soy así.”</strong></div><p>a:</p><div class="destacado"><strong>“Esto es algo que estoy pensando o creyendo, y puedo examinarlo.”</strong></div></div></div><div class="accion-card"><div class="accion-label">Aplicación</div><div class="accion-text"><p>Completar:</p><div class="campos"><div class="campo"><span class="campo-l">PENSAMIENTO RECURRENTE</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LO QUE SIENTO CUANDO LO CREO</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LO QUE TERMINO HACIENDO</span><span class="blank"></span></div><div class="campo"><span class="campo-l">MENTIRA RAÍZ</span><span class="blank"></span></div><div class="campo"><span class="campo-l">VERDAD QUE LA CONFRONTA</span><span class="blank"></span></div><div class="campo"><span class="campo-l">DECLARACIÓN PERSONAL</span><span class="blank"></span></div></div></div></div></div></div>
+    <div class="body"><div class="filtro-header"><div class="filtro-label">Versión final</div><div class="filtro-title" data-s>Bloque 1 · Reemplazo</div></div><div data-s><div class="subtitulo">No creas automáticamente todo lo que piensas</div><div class="tesis-block"><div class="tesis-label">Tesis</div><div class="tesis-text"><div class="destacado"><strong>Una mentira creída puede dirigir tu vida como si fuera verdad; por eso, la renovación comienza identificando la mentira y confrontándola con verdad.</strong></div></div></div><div class="dato-card"><div class="dato-label">Propósito</div><div class="dato-text"><p>Que el lector descubra qué pensamientos dominantes están operando actualmente en su vida y pueda identificar al menos una mentira raíz que esté afectando emociones, decisiones o comportamientos.</p></div></div><span class="eyebrow">Desarrollo</span><div class="problema"><p>Groeschel comienza estableciendo que nuestros pensamientos dominantes influyen profundamente en la dirección de nuestra vida. El problema aparece cuando dejamos de distinguir entre <strong>tener un pensamiento</strong> y <strong>poseer una verdad</strong>.</p><p>Una idea falsa puede producir consecuencias reales si la aceptamos durante suficiente tiempo.</p><p>Por eso el primer movimiento consiste en observar.</p><p>Antes de intentar cambiar una conducta, el lector necesita reconocer qué narrativa interior acompaña esa conducta.</p><p>La auditoría mental propuesta en el libro convierte pensamientos difusos en palabras visibles. Groeschel invita a registrar los pensamientos habituales, observar cuándo aparecen y descubrir sus patrones.</p><p>Después comienza el descenso hacia la raíz:</p><ul class="clave"><li><strong>¿Qué pienso?</strong></li><li><strong>¿Qué siento cuando lo pienso?</strong></li><li><strong>¿Qué hago cuando lo creo?</strong></li><li><strong>¿Qué mentira tendría que creer para que esta conducta tuviera sentido?</strong></li></ul><p>El objetivo no es condenarse por tener determinados pensamientos.</p><p>El objetivo es aprender a identificarlos antes de que sigan gobernando automáticamente.</p><p>Una vez descubierta la mentira, se busca una verdad que responda exactamente a ella.</p><p>No una frase motivacional.</p><p>No una declaración desconectada de la realidad.</p><p>Una verdad capaz de confrontar la mentira específica.</p></div><span class="eyebrow">Qué entender</span><div class="idea"><div class="idea-num dot">·</div><div class="idea-body"><div class="idea-text">No todo pensamiento merece ser creído.</div></div></div><div class="idea"><div class="idea-num dot">·</div><div class="idea-body"><div class="idea-text">Pensar algo muchas veces no lo convierte en verdad.</div></div></div><div class="idea"><div class="idea-num dot">·</div><div class="idea-body"><div class="idea-text">La conducta visible puede ser el resultado de una creencia más profunda.</div></div></div><div class="idea"><div class="idea-num dot">·</div><div class="idea-body"><div class="idea-text">Una mentira sin identificar conserva poder porque opera sin ser examinada.</div></div></div><div class="veredicto-card"><div class="veredicto-label">Qué interiorizar</div><div class="veredicto-text"><div class="destacado"><strong>“Puedo observar mis pensamientos sin someterme automáticamente a ellos.”</strong></div></div></div><div class="alerta-card"><div class="alerta-label">Qué cambiar</div><div class="alerta-text"><p>Pasar de:</p><div class="destacado"><strong>“Yo soy así.”</strong></div><p>a:</p><div class="destacado"><strong>“Esto es algo que estoy pensando o creyendo, y puedo examinarlo.”</strong></div></div></div><div class="accion-card"><div class="accion-label">Aplicación</div><div class="accion-text"><p>Completar:</p><div class="campos"><div class="campo"><span class="campo-l">PENSAMIENTO RECURRENTE</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LO QUE SIENTO CUANDO LO CREO</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LO QUE TERMINO HACIENDO</span><span class="blank"></span></div><div class="campo"><span class="campo-l">MENTIRA RAÍZ</span><span class="blank"></span></div><div class="campo"><span class="campo-l">VERDAD QUE LA CONFRONTA</span><span class="blank"></span></div><div class="campo"><span class="campo-l">DECLARACIÓN PERSONAL</span><span class="blank"></span></div></div></div></div></div></div>
     <div class="nav-final"><button onclick="irA('m0')" class="btn-nav btn-regresar">← Anterior</button><button onclick="irA('b2')" class="btn-nav btn-siguiente">Siguiente →</button></div>
     <div class="book-footer"><div class="footer-title">Gana la guerra en tu mente · Craig Groeschel</div><div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div><div class="footer-tag">Bloque 1 · Reemplazo</div></div>
   </div>
 </section>
 </div>
 <div id="b2" class="pagina oculta">
-<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+<section class="hoja">
   <div class="page">
     <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Versión final</div></div>
     <div class="lectura-meta">⏱ Tiempo estimado: <span>2 min</span></div>
-    <div class="body"><div class="filtro-header"><div class="filtro-label">Versión final</div><div class="filtro-title" data-s>Bloque 2 · Recableado</div></div><div data-s><div class="subtitulo">Construye un camino nuevo para la verdad</div><div class="tesis-block"><div class="tesis-label">Tesis</div><div class="tesis-text"><div class="destacado"><strong>Los pensamientos repetidos se vuelven cada vez más familiares; por eso renovar la mente requiere practicar deliberadamente una nueva forma de pensar.</strong></div></div></div><div class="dato-card"><div class="dato-label">Propósito</div><div class="dato-text"><p>Que el lector deje de pensar únicamente en “eliminar” pensamientos dañinos y aprenda a construir una nueva respuesta mental mediante verdad, repetición y meditación.</p></div></div><span class="eyebrow">Desarrollo</span><div class="problema"><p>Groeschel utiliza la imagen de los <strong>surcos</strong>.</p><p>Cuando un vehículo pasa repetidamente por el mismo lugar, termina creando un camino que después resulta más fácil recorrer.</p><p>El libro utiliza esa imagen para explicar lo que ocurre con pensamientos y respuestas repetidas.</p><p>El antiguo camino se vuelve familiar.</p><p>Ante determinado detonante, la mente ya sabe adónde ir.</p><p>El problema no se resuelve solamente diciendo:</p><div class="destacado"><strong>“Ya no voy a pensar esto.”</strong></div><p>Necesitamos otro camino.</p><p>Groeschel llama a ese nuevo camino una <strong>trinchera de verdad</strong>: una ruta construida deliberadamente mediante una verdad específica repetida hasta convertirse en una respuesta cada vez más disponible.</p><p>Aquí aparece la importancia de la meditación.</p><p>El libro utiliza la imagen de “rumiar”: tomar una verdad, volver a ella, observarla, pensarla, relacionarla con la propia vida y regresar nuevamente.</p><p>No basta con conocer una verdad.</p><p>Necesitamos familiarizarnos con ella.</p><p>Groeschel propone escribir declaraciones, leerlas, pensarlas y repetirlas. La intención no es producir autosugestión, sino llevar una verdad conocida hacia una convicción practicada.</p><p>La meta práctica es reducir progresivamente la distancia entre:</p><div class="destacado"><strong>DETONANTE → VIEJA MENTIRA</strong></div><p>y construir:</p><div class="destacado"><strong>DETONANTE → VERDAD → NUEVA RESPUESTA.</strong></div></div><span class="eyebrow">Qué entender</span><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La repetición puede fortalecer tanto pensamientos saludables como destructivos.</div></div></div><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Abandonar una vieja respuesta no significa haber construido automáticamente una nueva.</div></div></div><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La verdad necesita ser accesible precisamente cuando aparece el detonante.</div></div></div><div class="veredicto-card"><div class="veredicto-label">Qué interiorizar</div><div class="veredicto-text"><div class="destacado"><strong>“Lo que he practicado durante años puede sentirse natural sin ser inevitable.”</strong></div></div></div><div class="alerta-card"><div class="alerta-label">Qué cambiar</div><div class="alerta-text"><p>Pasar de:</p><div class="destacado"><strong>“Espero recordar la verdad cuando la necesite.”</strong></div><p>a:</p><div class="destacado"><strong>“Voy a entrenar la verdad antes de necesitarla.”</strong></div></div></div><div class="accion-card"><div class="accion-label">Aplicación</div><div class="accion-text"><p>Construir la propia trinchera:</p><div class="campos"><div class="campo"><span class="campo-l">MI DETONANTE</span><span class="blank"></span></div><div class="campo"><span class="campo-l">MI VIEJO PENSAMIENTO</span><span class="blank"></span></div><div class="campo"><span class="campo-l">MI VIEJA RESPUESTA</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LA VERDAD QUE QUIERO INTERIORIZAR</span><span class="blank"></span></div><div class="campo"><span class="campo-l">MI NUEVA DECLARACIÓN</span><span class="blank"></span></div><div class="campo"><span class="campo-l">MI NUEVA RESPUESTA DESEADA</span><span class="blank"></span></div></div><p>Practicarla conscientemente al comenzar el día, frente al detonante y antes de dormir.</p></div></div></div></div>
+    <div class="body"><div class="filtro-header"><div class="filtro-label">Versión final</div><div class="filtro-title" data-s>Bloque 2 · Recableado</div></div><div data-s><div class="subtitulo">Construye un camino nuevo para la verdad</div><div class="tesis-block"><div class="tesis-label">Tesis</div><div class="tesis-text"><div class="destacado"><strong>Los pensamientos repetidos se vuelven cada vez más familiares; por eso renovar la mente requiere practicar deliberadamente una nueva forma de pensar.</strong></div></div></div><div class="dato-card"><div class="dato-label">Propósito</div><div class="dato-text"><p>Que el lector deje de pensar únicamente en “eliminar” pensamientos dañinos y aprenda a construir una nueva respuesta mental mediante verdad, repetición y meditación.</p></div></div><span class="eyebrow">Desarrollo</span><div class="problema"><p>Groeschel utiliza la imagen de los <strong>surcos</strong>.</p><p>Cuando un vehículo pasa repetidamente por el mismo lugar, termina creando un camino que después resulta más fácil recorrer.</p><p>El libro utiliza esa imagen para explicar lo que ocurre con pensamientos y respuestas repetidas.</p><p>El antiguo camino se vuelve familiar.</p><p>Ante determinado detonante, la mente ya sabe adónde ir.</p><p>El problema no se resuelve solamente diciendo:</p><div class="destacado"><strong>“Ya no voy a pensar esto.”</strong></div><p>Necesitamos otro camino.</p><p>Groeschel llama a ese nuevo camino una <strong>trinchera de verdad</strong>: una ruta construida deliberadamente mediante una verdad específica repetida hasta convertirse en una respuesta cada vez más disponible.</p><p>Aquí aparece la importancia de la meditación.</p><p>El libro utiliza la imagen de “rumiar”: tomar una verdad, volver a ella, observarla, pensarla, relacionarla con la propia vida y regresar nuevamente.</p><p>No basta con conocer una verdad.</p><p>Necesitamos familiarizarnos con ella.</p><p>Groeschel propone escribir declaraciones, leerlas, pensarlas y repetirlas. La intención no es producir autosugestión, sino llevar una verdad conocida hacia una convicción practicada.</p><p>La meta práctica es reducir progresivamente la distancia entre:</p><div class="destacado"><strong>DETONANTE → VIEJA MENTIRA</strong></div><p>y construir:</p><div class="destacado"><strong>DETONANTE → VERDAD → NUEVA RESPUESTA.</strong></div></div><span class="eyebrow">Qué entender</span><div class="idea"><div class="idea-num dot">·</div><div class="idea-body"><div class="idea-text">La repetición puede fortalecer tanto pensamientos saludables como destructivos.</div></div></div><div class="idea"><div class="idea-num dot">·</div><div class="idea-body"><div class="idea-text">Abandonar una vieja respuesta no significa haber construido automáticamente una nueva.</div></div></div><div class="idea"><div class="idea-num dot">·</div><div class="idea-body"><div class="idea-text">La verdad necesita ser accesible precisamente cuando aparece el detonante.</div></div></div><div class="veredicto-card"><div class="veredicto-label">Qué interiorizar</div><div class="veredicto-text"><div class="destacado"><strong>“Lo que he practicado durante años puede sentirse natural sin ser inevitable.”</strong></div></div></div><div class="alerta-card"><div class="alerta-label">Qué cambiar</div><div class="alerta-text"><p>Pasar de:</p><div class="destacado"><strong>“Espero recordar la verdad cuando la necesite.”</strong></div><p>a:</p><div class="destacado"><strong>“Voy a entrenar la verdad antes de necesitarla.”</strong></div></div></div><div class="accion-card"><div class="accion-label">Aplicación</div><div class="accion-text"><p>Construir la propia trinchera:</p><div class="campos"><div class="campo"><span class="campo-l">MI DETONANTE</span><span class="blank"></span></div><div class="campo"><span class="campo-l">MI VIEJO PENSAMIENTO</span><span class="blank"></span></div><div class="campo"><span class="campo-l">MI VIEJA RESPUESTA</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LA VERDAD QUE QUIERO INTERIORIZAR</span><span class="blank"></span></div><div class="campo"><span class="campo-l">MI NUEVA DECLARACIÓN</span><span class="blank"></span></div><div class="campo"><span class="campo-l">MI NUEVA RESPUESTA DESEADA</span><span class="blank"></span></div></div><p>Practicarla conscientemente al comenzar el día, frente al detonante y antes de dormir.</p></div></div></div></div>
     <div class="nav-final"><button onclick="irA('b1')" class="btn-nav btn-regresar">← Anterior</button><button onclick="irA('b3')" class="btn-nav btn-siguiente">Siguiente →</button></div>
     <div class="book-footer"><div class="footer-title">Gana la guerra en tu mente · Craig Groeschel</div><div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div><div class="footer-tag">Bloque 2 · Recableado</div></div>
   </div>
 </section>
 </div>
 <div id="b3" class="pagina oculta">
-<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+<section class="hoja">
   <div class="page">
     <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Versión final</div></div>
     <div class="lectura-meta">⏱ Tiempo estimado: <span>3 min</span></div>
-    <div class="body"><div class="filtro-header"><div class="filtro-label">Versión final</div><div class="filtro-title" data-s>Bloque 3 · Replanteamiento</div></div><div data-s><div class="subtitulo">Cambia el marco desde el que interpretas tu realidad</div><div class="tesis-block"><div class="tesis-label">Tesis</div><div class="tesis-text"><div class="destacado"><strong>No podemos controlar todo lo que nos sucede, pero podemos examinar los filtros desde los cuales estamos interpretando aquello que sucede.</strong></div></div></div><div class="dato-card"><div class="dato-label">Propósito</div><div class="dato-text"><p>Que el lector aprenda a separar los hechos de sus interpretaciones, reconocer sesgos personales y construir una mirada más verdadera y saludable sobre pasado, presente y futuro.</p></div></div><span class="eyebrow">Desarrollo</span><div class="problema"><p>Groeschel utiliza la imagen de unos lentes defectuosos.</p><p>Si los lentes alteran la imagen, el problema no necesariamente está en aquello que estamos mirando.</p><p>Puede estar en el filtro.</p><p>Los seres humanos no procesamos cada experiencia de manera neutral. Nuestra historia, expectativas, heridas, temores y creencias participan en la interpretación.</p><p>Eso significa que dos personas pueden vivir una situación semejante y producir conclusiones completamente distintas.</p><p>Groeschel conecta esta realidad con los <strong>sesgos cognitivos</strong> y con el replanteamiento: detener la reacción automática, identificar la interpretación y buscar una lectura más objetiva y saludable.</p><p>Una de las prácticas centrales consiste en distinguir:</p><p><strong>HECHO</strong> de <strong>HISTORIA</strong>.</p><p>El hecho responde:</p><div class="destacado"><strong>¿Qué ocurrió realmente?</strong></div><p>La historia responde:</p><div class="destacado"><strong>¿Qué significado estoy atribuyendo a lo ocurrido?</strong></div><p>Esa distinción permite revisar experiencias del pasado.</p><p>El libro invita incluso a observar algunas oraciones no contestadas desde la distancia y reconocer ocasiones en las que aquello que parecía una pérdida terminó produciendo resultados inesperados.</p><p>No significa inventar una explicación espiritual para cada tragedia.</p><p>Significa reconocer que nuestra primera interpretación no siempre es la interpretación final.</p><p>Groeschel extiende la idea hacia el futuro mediante la <strong>preestructuración</strong>.</p><p>Así como podemos replantear algo que ya ocurrió, podemos decidir anticipadamente desde qué postura entraremos a una situación que todavía no ha sucedido.</p><p>No controlamos el resultado.</p><p>Podemos preparar nuestra perspectiva.</p></div><span class="eyebrow">Qué entender</span><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Los hechos y la interpretación de los hechos no son exactamente lo mismo.</div></div></div><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Una experiencia anterior puede convertirse en el filtro con el que interpretamos nuevas experiencias.</div></div></div><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">No todo pensamiento automático representa objetivamente la realidad.</div></div></div><div class="veredicto-card"><div class="veredicto-label">Qué interiorizar</div><div class="veredicto-text"><div class="destacado"><strong>“Puedo revisar la historia que me estoy contando sin negar lo que realmente ocurrió.”</strong></div></div></div><div class="alerta-card"><div class="alerta-label">Qué cambiar</div><div class="alerta-text"><p>Pasar de:</p><div class="destacado"><strong>“Esto ocurrió, por lo tanto significa esto.”</strong></div><p>a:</p><div class="destacado"><strong>“Esto ocurrió. Ahora necesito examinar qué significado estoy atribuyéndole.”</strong></div></div></div><div class="accion-card"><div class="accion-label">Aplicación</div><div class="accion-text"><p>Trabajar una circunstancia real:</p><div class="campos"><div class="campo"><span class="campo-l">HECHO</span><span class="blank"></span></div><div class="campo"><span class="campo-l">MI INTERPRETACIÓN AUTOMÁTICA</span><span class="blank"></span></div><div class="campo"><span class="campo-l">EMOCIÓN QUE PRODUCE</span><span class="blank"></span></div><div class="campo"><span class="campo-l">POSIBLE SESGO O FILTRO</span><span class="blank"></span></div><div class="campo"><span class="campo-l">QUÉ OTRA INFORMACIÓN DEBO CONSIDERAR</span><span class="blank"></span></div><div class="campo"><span class="campo-l">NUEVA PERSPECTIVA</span><span class="blank"></span></div><div class="campo"><span class="campo-l">NUEVA RESPUESTA</span><span class="blank"></span></div></div><p>Y ante una situación futura:</p><div class="destacado"><strong>“No puedo controlar lo que sucederá, pero entraré recordando <span class="blank"></span>.”</strong></div></div></div></div></div>
+    <div class="body"><div class="filtro-header"><div class="filtro-label">Versión final</div><div class="filtro-title" data-s>Bloque 3 · Replanteamiento</div></div><div data-s><div class="subtitulo">Cambia el marco desde el que interpretas tu realidad</div><div class="tesis-block"><div class="tesis-label">Tesis</div><div class="tesis-text"><div class="destacado"><strong>No podemos controlar todo lo que nos sucede, pero podemos examinar los filtros desde los cuales estamos interpretando aquello que sucede.</strong></div></div></div><div class="dato-card"><div class="dato-label">Propósito</div><div class="dato-text"><p>Que el lector aprenda a separar los hechos de sus interpretaciones, reconocer sesgos personales y construir una mirada más verdadera y saludable sobre pasado, presente y futuro.</p></div></div><span class="eyebrow">Desarrollo</span><div class="problema"><p>Groeschel utiliza la imagen de unos lentes defectuosos.</p><p>Si los lentes alteran la imagen, el problema no necesariamente está en aquello que estamos mirando.</p><p>Puede estar en el filtro.</p><p>Los seres humanos no procesamos cada experiencia de manera neutral. Nuestra historia, expectativas, heridas, temores y creencias participan en la interpretación.</p><p>Eso significa que dos personas pueden vivir una situación semejante y producir conclusiones completamente distintas.</p><p>Groeschel conecta esta realidad con los <strong>sesgos cognitivos</strong> y con el replanteamiento: detener la reacción automática, identificar la interpretación y buscar una lectura más objetiva y saludable.</p><p>Una de las prácticas centrales consiste en distinguir:</p><p><strong>HECHO</strong> de <strong>HISTORIA</strong>.</p><p>El hecho responde:</p><div class="destacado"><strong>¿Qué ocurrió realmente?</strong></div><p>La historia responde:</p><div class="destacado"><strong>¿Qué significado estoy atribuyendo a lo ocurrido?</strong></div><p>Esa distinción permite revisar experiencias del pasado.</p><p>El libro invita incluso a observar algunas oraciones no contestadas desde la distancia y reconocer ocasiones en las que aquello que parecía una pérdida terminó produciendo resultados inesperados.</p><p>No significa inventar una explicación espiritual para cada tragedia.</p><p>Significa reconocer que nuestra primera interpretación no siempre es la interpretación final.</p><p>Groeschel extiende la idea hacia el futuro mediante la <strong>preestructuración</strong>.</p><p>Así como podemos replantear algo que ya ocurrió, podemos decidir anticipadamente desde qué postura entraremos a una situación que todavía no ha sucedido.</p><p>No controlamos el resultado.</p><p>Podemos preparar nuestra perspectiva.</p></div><span class="eyebrow">Qué entender</span><div class="idea"><div class="idea-num dot">·</div><div class="idea-body"><div class="idea-text">Los hechos y la interpretación de los hechos no son exactamente lo mismo.</div></div></div><div class="idea"><div class="idea-num dot">·</div><div class="idea-body"><div class="idea-text">Una experiencia anterior puede convertirse en el filtro con el que interpretamos nuevas experiencias.</div></div></div><div class="idea"><div class="idea-num dot">·</div><div class="idea-body"><div class="idea-text">No todo pensamiento automático representa objetivamente la realidad.</div></div></div><div class="veredicto-card"><div class="veredicto-label">Qué interiorizar</div><div class="veredicto-text"><div class="destacado"><strong>“Puedo revisar la historia que me estoy contando sin negar lo que realmente ocurrió.”</strong></div></div></div><div class="alerta-card"><div class="alerta-label">Qué cambiar</div><div class="alerta-text"><p>Pasar de:</p><div class="destacado"><strong>“Esto ocurrió, por lo tanto significa esto.”</strong></div><p>a:</p><div class="destacado"><strong>“Esto ocurrió. Ahora necesito examinar qué significado estoy atribuyéndole.”</strong></div></div></div><div class="accion-card"><div class="accion-label">Aplicación</div><div class="accion-text"><p>Trabajar una circunstancia real:</p><div class="campos"><div class="campo"><span class="campo-l">HECHO</span><span class="blank"></span></div><div class="campo"><span class="campo-l">MI INTERPRETACIÓN AUTOMÁTICA</span><span class="blank"></span></div><div class="campo"><span class="campo-l">EMOCIÓN QUE PRODUCE</span><span class="blank"></span></div><div class="campo"><span class="campo-l">POSIBLE SESGO O FILTRO</span><span class="blank"></span></div><div class="campo"><span class="campo-l">QUÉ OTRA INFORMACIÓN DEBO CONSIDERAR</span><span class="blank"></span></div><div class="campo"><span class="campo-l">NUEVA PERSPECTIVA</span><span class="blank"></span></div><div class="campo"><span class="campo-l">NUEVA RESPUESTA</span><span class="blank"></span></div></div><p>Y ante una situación futura:</p><div class="destacado"><strong>“No puedo controlar lo que sucederá, pero entraré recordando <span class="blank"></span>.”</strong></div></div></div></div></div>
     <div class="nav-final"><button onclick="irA('b2')" class="btn-nav btn-regresar">← Anterior</button><button onclick="irA('b4')" class="btn-nav btn-siguiente">Siguiente →</button></div>
     <div class="book-footer"><div class="footer-title">Gana la guerra en tu mente · Craig Groeschel</div><div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div><div class="footer-tag">Bloque 3 · Replanteamiento</div></div>
   </div>
 </section>
 </div>
 <div id="b4" class="pagina oculta">
-<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+<section class="hoja">
   <div class="page">
     <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Versión final</div></div>
     <div class="lectura-meta">⏱ Tiempo estimado: <span>3 min</span></div>
-    <div class="body"><div class="filtro-header"><div class="filtro-label">Versión final</div><div class="filtro-title" data-s>Bloque 4 · Regocijo</div></div><div data-s><div class="subtitulo">Cuando el problema llena tu visión, recuerda quién sigue cerca</div><div class="tesis-block"><div class="tesis-label">Tesis</div><div class="tesis-text"><div class="destacado"><strong>Cuando la presión estrecha nuestra atención alrededor del problema, oración y alabanza vuelven a colocar ese problema dentro de una realidad mayor: la presencia de Dios.</strong></div></div></div><div class="dato-card"><div class="dato-label">Propósito</div><div class="dato-text"><p>Que el lector aprenda a reconocer sus detonantes de ansiedad o pánico y responda mediante conciencia de la presencia de Dios, oración, entrega y una perspectiva de alabanza.</p></div></div><span class="eyebrow">Desarrollo</span><div class="problema"><p>Groeschel comienza esta parte mostrando cómo una experiencia antigua puede crear un detonante presente.</p><p>Su ejemplo son las furgonetas azules.</p><p>Una situación de peligro durante su infancia produjo una asociación que permaneció incluso cuando aquella amenaza ya había desaparecido.</p><p>Todos tenemos nuestras propias “furgonetas azules”.</p><p>Situaciones que activan rápidamente miedo, control, enojo o ansiedad.</p><p>El problema se intensifica cuando nuestra atención queda absorbida por aquello que amenaza.</p><p>La historia de Elías ofrece la imagen central: después de una gran victoria llega al agotamiento, pierde perspectiva y pide morir.</p><p>Groeschel formula entonces una de sus principales ideas:</p><p>podemos obsesionarnos tanto con <strong>la presencia de nuestros problemas</strong> que perdemos conciencia de <strong>la presencia de Dios</strong>.</p><p>Elías encuentra a Dios no en el espectáculo sino en el susurro.</p><p>El susurro exige cercanía.</p><p>La oración aparece entonces como respuesta a la conciencia de que Dios está cerca.</p><p>No requiere palabras perfectas.</p><p>Requiere honestidad.</p><p>La <strong>caja de Dios</strong> convierte esa entrega en un gesto tangible: escribir aquello que preocupa, orar por ello y depositarlo en una caja como símbolo de confianza.</p><p>Después aparece la alabanza.</p><p>Groeschel utiliza a Pablo y Silas para mostrar una alabanza que ocurre <strong>antes</strong> de que cambien las circunstancias.</p><p>No se alaba porque todo salió como se esperaba.</p><p>Se alaba recordando quién es Dios incluso cuando el “qué” todavía duele.</p><p>El último movimiento consiste en aprender a <strong>mirar a través</strong>, no solamente hacia.</p><p>No negar el problema.</p><p>Ampliar nuevamente el campo visual.</p></div><span class="eyebrow">Qué entender</span><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">Una dificultad real puede convertirse mentalmente en toda la realidad.</div></div></div><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">El pánico estrecha nuestra atención.</div></div></div><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La oración no exige negar el problema; permite entregarlo.</div></div></div><div class="idea"><div class="idea-num">·</div><div class="idea-body"><div class="idea-text">La alabanza no necesita esperar hasta que las circunstancias cambien.</div></div></div><div class="veredicto-card"><div class="veredicto-label">Qué interiorizar</div><div class="veredicto-text"><div class="destacado"><strong>“La presencia de un problema no significa la ausencia de Dios.”</strong></div></div></div><div class="alerta-card"><div class="alerta-label">Qué cambiar</div><div class="alerta-text"><p>Pasar de:</p><div class="destacado"><strong>“Todo depende de mí.”</strong></div><p>a:</p><div class="destacado"><strong>“Haré responsablemente lo que me corresponde y entregaré a Dios aquello que no puedo controlar.”</strong></div></div></div><div class="accion-card"><div class="accion-label">Aplicación</div><div class="accion-text"><p>Completar el plan final:</p><div class="campos"><div class="campo"><span class="campo-l">MI DETONANTE PRINCIPAL</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LO QUE MI MIEDO ME DICE</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LO QUE ES VERDAD</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LO QUE PUEDO HACER RESPONSABLEMENTE</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LO QUE NECESITO ENTREGAR</span><span class="blank"></span></div><div class="campo"><span class="campo-l">MI ORACIÓN</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LO QUE PUEDO AGRADECER AUN AHORA</span><span class="blank"></span></div></div></div></div></div></div>
+    <div class="body"><div class="filtro-header"><div class="filtro-label">Versión final</div><div class="filtro-title" data-s>Bloque 4 · Regocijo</div></div><div data-s><div class="subtitulo">Cuando el problema llena tu visión, recuerda quién sigue cerca</div><div class="tesis-block"><div class="tesis-label">Tesis</div><div class="tesis-text"><div class="destacado"><strong>Cuando la presión estrecha nuestra atención alrededor del problema, oración y alabanza vuelven a colocar ese problema dentro de una realidad mayor: la presencia de Dios.</strong></div></div></div><div class="dato-card"><div class="dato-label">Propósito</div><div class="dato-text"><p>Que el lector aprenda a reconocer sus detonantes de ansiedad o pánico y responda mediante conciencia de la presencia de Dios, oración, entrega y una perspectiva de alabanza.</p></div></div><span class="eyebrow">Desarrollo</span><div class="problema"><p>Groeschel comienza esta parte mostrando cómo una experiencia antigua puede crear un detonante presente.</p><p>Su ejemplo son las furgonetas azules.</p><p>Una situación de peligro durante su infancia produjo una asociación que permaneció incluso cuando aquella amenaza ya había desaparecido.</p><p>Todos tenemos nuestras propias “furgonetas azules”.</p><p>Situaciones que activan rápidamente miedo, control, enojo o ansiedad.</p><p>El problema se intensifica cuando nuestra atención queda absorbida por aquello que amenaza.</p><p>La historia de Elías ofrece la imagen central: después de una gran victoria llega al agotamiento, pierde perspectiva y pide morir.</p><p>Groeschel formula entonces una de sus principales ideas:</p><p>podemos obsesionarnos tanto con <strong>la presencia de nuestros problemas</strong> que perdemos conciencia de <strong>la presencia de Dios</strong>.</p><p>Elías encuentra a Dios no en el espectáculo sino en el susurro.</p><p>El susurro exige cercanía.</p><p>La oración aparece entonces como respuesta a la conciencia de que Dios está cerca.</p><p>No requiere palabras perfectas.</p><p>Requiere honestidad.</p><p>La <strong>caja de Dios</strong> convierte esa entrega en un gesto tangible: escribir aquello que preocupa, orar por ello y depositarlo en una caja como símbolo de confianza.</p><p>Después aparece la alabanza.</p><p>Groeschel utiliza a Pablo y Silas para mostrar una alabanza que ocurre <strong>antes</strong> de que cambien las circunstancias.</p><p>No se alaba porque todo salió como se esperaba.</p><p>Se alaba recordando quién es Dios incluso cuando el “qué” todavía duele.</p><p>El último movimiento consiste en aprender a <strong>mirar a través</strong>, no solamente hacia.</p><p>No negar el problema.</p><p>Ampliar nuevamente el campo visual.</p></div><span class="eyebrow">Qué entender</span><div class="idea"><div class="idea-num dot">·</div><div class="idea-body"><div class="idea-text">Una dificultad real puede convertirse mentalmente en toda la realidad.</div></div></div><div class="idea"><div class="idea-num dot">·</div><div class="idea-body"><div class="idea-text">El pánico estrecha nuestra atención.</div></div></div><div class="idea"><div class="idea-num dot">·</div><div class="idea-body"><div class="idea-text">La oración no exige negar el problema; permite entregarlo.</div></div></div><div class="idea"><div class="idea-num dot">·</div><div class="idea-body"><div class="idea-text">La alabanza no necesita esperar hasta que las circunstancias cambien.</div></div></div><div class="veredicto-card"><div class="veredicto-label">Qué interiorizar</div><div class="veredicto-text"><div class="destacado"><strong>“La presencia de un problema no significa la ausencia de Dios.”</strong></div></div></div><div class="alerta-card"><div class="alerta-label">Qué cambiar</div><div class="alerta-text"><p>Pasar de:</p><div class="destacado"><strong>“Todo depende de mí.”</strong></div><p>a:</p><div class="destacado"><strong>“Haré responsablemente lo que me corresponde y entregaré a Dios aquello que no puedo controlar.”</strong></div></div></div><div class="accion-card"><div class="accion-label">Aplicación</div><div class="accion-text"><p>Completar el plan final:</p><div class="campos"><div class="campo"><span class="campo-l">MI DETONANTE PRINCIPAL</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LO QUE MI MIEDO ME DICE</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LO QUE ES VERDAD</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LO QUE PUEDO HACER RESPONSABLEMENTE</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LO QUE NECESITO ENTREGAR</span><span class="blank"></span></div><div class="campo"><span class="campo-l">MI ORACIÓN</span><span class="blank"></span></div><div class="campo"><span class="campo-l">LO QUE PUEDO AGRADECER AUN AHORA</span><span class="blank"></span></div></div></div></div></div></div>
     <div class="nav-final"><button onclick="irA('b3')" class="btn-nav btn-regresar">← Anterior</button><button onclick="irA('f1')" class="btn-nav btn-siguiente">Siguiente →</button></div>
     <div class="book-footer"><div class="footer-title">Gana la guerra en tu mente · Craig Groeschel</div><div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div><div class="footer-tag">Bloque 4 · Regocijo</div></div>
   </div>
 </section>
 </div>
 <div id="f1" class="pagina oculta">
-<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+<section class="hoja">
   <div class="page">
     <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Versión final</div></div>
     <div class="lectura-meta">⏱ Tiempo estimado: <span>2 min</span></div>
@@ -585,7 +788,7 @@ body.dark .subtitulo,body.dark .basado{color:#A9A7E0}
 </section>
 </div>
 <div id="cierre" class="pagina oculta">
-<section style="background:var(--c-bg);padding:3rem 1rem 5rem;">
+<section class="hoja">
   <div class="page">
     <div class="libro-header"><div class="libro-header-titulo">Gana la guerra en tu mente · Craig Groeschel</div><div class="libro-header-paso">Cierre</div></div>
     <div class="lectura-meta">⏱ Tiempo estimado: <span>1 min</span></div>
@@ -603,6 +806,10 @@ body.dark .subtitulo,body.dark .basado{color:#A9A7E0}
   var PAGINAS = ["portada", "p1", "p2", "s1", "s2", "s3", "s4", "p3", "m0", "b1", "b2", "b3", "b4", "f1", "cierre"];
   var paginaActual = 'portada';
   var TIEMPOS = {"p1": "2 min", "p2": "2 min", "s1": "2 min", "s2": "2 min", "s3": "2 min", "s4": "2 min", "p3": "2 min", "m0": "3 min", "b1": "2 min", "b2": "2 min", "b3": "3 min", "b4": "3 min", "f1": "2 min", "cierre": "1 min"};
+  var ultimoScroll = 0;
+
+  function leerPref(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function guardarPref(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
 
   function toggleConfig() {
     var panel = document.getElementById('config-panel');
@@ -626,6 +833,7 @@ body.dark .subtitulo,body.dark .basado{color:#A9A7E0}
   function toggleDark() {
     var dark = document.body.classList.toggle('dark');
     document.getElementById('toggle-dark').checked = dark;
+    guardarPref('bookclub-theme', dark ? 'dark' : 'light');
   }
 
   function toggleLectura() {
@@ -633,10 +841,7 @@ body.dark .subtitulo,body.dark .basado{color:#A9A7E0}
     document.getElementById('toggle-lectura').checked = lectura;
   }
 
-  function cambiarFuente(dir) {
-    var nuevo = Math.max(0, Math.min(FUENTES.length - 1, fuenteIdx + dir));
-    if (nuevo === fuenteIdx) return;
-    fuenteIdx = nuevo;
+  function aplicarFuente() {
     document.querySelectorAll('.body').forEach(function(b) {
       FUENTES.forEach(function(c) { b.classList.remove(c); });
       b.classList.add(FUENTES[fuenteIdx]);
@@ -644,10 +849,22 @@ body.dark .subtitulo,body.dark .basado{color:#A9A7E0}
     document.getElementById('fuente-nivel').textContent = FUENTE_LABELS[fuenteIdx];
   }
 
+  function cambiarFuente(dir) {
+    var nuevo = Math.max(0, Math.min(FUENTES.length - 1, fuenteIdx + dir));
+    if (nuevo === fuenteIdx) return;
+    fuenteIdx = nuevo;
+    aplicarFuente();
+    guardarPref('bookclub-fuente', String(fuenteIdx));
+  }
+
   function abrirMenu() {
     document.getElementById('menu-panel').classList.add('abierto');
     document.getElementById('menu-overlay').classList.add('activo');
     cerrarConfig();
+    setTimeout(function() {
+      var a = document.querySelector('#menu-panel .menu-item.activo');
+      if (a && a.scrollIntoView) a.scrollIntoView({ block: 'center' });
+    }, 80);
   }
 
   function cerrarMenu() {
@@ -655,14 +872,26 @@ body.dark .subtitulo,body.dark .basado{color:#A9A7E0}
     document.getElementById('menu-overlay').classList.remove('activo');
   }
 
+  function actualizarInfo(id, d) {
+    var idx = PAGINAS.indexOf(id), total = PAGINAS.length - 1;
+    var paso = d.querySelector('.libro-header-paso');
+    var lab = document.querySelector('#tb-info .tb-label'), pos = document.querySelector('#tb-info .tb-pos');
+    if (lab) lab.textContent = paso ? paso.textContent : '';
+    if (pos) pos.innerHTML = idx + '<i> / ' + total + '</i>';
+  }
+
   function irA(id) {
+    var d = document.getElementById(id);
+    if (!d) return;
     document.querySelectorAll('.pagina').forEach(function(p) {
       p.classList.remove('visible'); p.classList.add('oculta');
     });
-    var d = document.getElementById(id);
     d.classList.remove('oculta'); d.classList.add('visible'); d.scrollTop = 0;
     paginaActual = id;
     var esPortada = id === 'portada';
+    document.body.classList.toggle('en-portada', esPortada);
+    document.body.classList.remove('bar-oculta');
+    ultimoScroll = 0;
     document.getElementById('menu-btn').style.display = esPortada ? 'none' : 'flex';
     document.getElementById('btn-config').style.display = esPortada ? 'none' : 'flex';
     var barra = document.getElementById('barra-progreso');
@@ -670,12 +899,20 @@ body.dark .subtitulo,body.dark .basado{color:#A9A7E0}
     barra.style.width = '0%';
     if (TIEMPOS[id]) { var m = d.querySelector('.lectura-meta span'); if (m) m.textContent = TIEMPOS[id]; }
     document.querySelectorAll('.menu-item').forEach(function(b) { b.classList.toggle('activo', b.dataset.page === id); });
+    if (!esPortada) actualizarInfo(id, d);
     cerrarMenu();
     cerrarConfig();
     d.onscroll = function() {
-      var s = d.scrollHeight - d.clientHeight;
-      if (s <= 0) { barra.style.width = '100%'; return; }
-      barra.style.width = Math.min(100, Math.round((d.scrollTop / s) * 100)) + '%';
+      if (paginaActual !== id) return;
+      var y = d.scrollTop, s = d.scrollHeight - d.clientHeight;
+      barra.style.width = s <= 0 ? '100%' : Math.min(100, Math.round((y / s) * 100)) + '%';
+      registrarAvance(id, s <= 0 ? 1 : y / s);
+      var dy = y - ultimoScroll;
+      if (y < 60) { document.body.classList.remove('bar-oculta'); ultimoScroll = y; }
+      else if (Math.abs(dy) > 8) {
+        document.body.classList.toggle('bar-oculta', dy > 0 && y > 140);
+        ultimoScroll = y;
+      }
     };
   }
 
@@ -693,6 +930,18 @@ body.dark .subtitulo,body.dark .basado{color:#A9A7E0}
     else if (dx > 0 && idx > 0) irA(PAGINAS[idx - 1]);
   }, { passive: true });
 
+  document.addEventListener('keydown', function(e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var tag = e.target && e.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+    if (e.key === 'Escape') { cerrarMenu(); cerrarConfig(); return; }
+    if (document.getElementById('menu-panel').classList.contains('abierto')) return;
+    if (document.getElementById('config-panel').classList.contains('abierto')) return;
+    var idx = PAGINAS.indexOf(paginaActual);
+    if (e.key === 'ArrowRight' && idx < PAGINAS.length - 1) irA(PAGINAS[idx + 1]);
+    else if (e.key === 'ArrowLeft' && idx > 0) irA(PAGINAS[idx - 1]);
+  });
+
   document.addEventListener('click', function(e) {
     var a = e.target.closest('a[href^="#"]');
     if (!a) return;
@@ -706,6 +955,167 @@ body.dark .subtitulo,body.dark .basado{color:#A9A7E0}
       pv.scrollTo({ top: t.getBoundingClientRect().top - pv.getBoundingClientRect().top + pv.scrollTop - 16, behavior: 'smooth' });
     }
   });
+
+  /* Inicio: tema (compartido con la Home), tamaño de letra y rótulos de navegación */
+  (function() {
+    var tema = leerPref('bookclub-theme');
+    var oscuro = tema === 'dark' || (!tema && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if (oscuro) { document.body.classList.add('dark'); document.getElementById('toggle-dark').checked = true; }
+    var f = parseInt(leerPref('bookclub-fuente'), 10);
+    if (f >= 0 && f < FUENTES.length) fuenteIdx = f;
+    aplicarFuente();
+    var titulos = {};
+    document.querySelectorAll('.menu-item').forEach(function(b) {
+      var t = b.querySelector('.menu-item-titulo');
+      if (t) titulos[b.dataset.page] = t.textContent;
+    });
+    document.querySelectorAll('.nav-final .btn-nav').forEach(function(b) {
+      var m = /irA\('([^']+)'\)/.exec(b.getAttribute('onclick') || '');
+      if (m && m[1] !== 'portada' && titulos[m[1]]) {
+        var sm2 = document.createElement('small'); sm2.textContent = titulos[m[1]]; b.appendChild(sm2);
+      }
+    });
+  })();
+  /* ═══ Avance de lectura: dónde ibas, qué has leído, cuánto llevas ═══ */
+  var CLAVE_PROG = 'bookclub-gana-guerra-curso-progreso';
+  var CONT_PAGS = PAGINAS.slice(1);
+  var prog = { ult: null, r: 0, p: {} };
+  var guardaT = null, restauro = null, resetT = null, tituloDe = {}, numDe = {};
+
+  function cargarProg() {
+    try {
+      var j = JSON.parse(localStorage.getItem(CLAVE_PROG));
+      if (j && typeof j === 'object' && j.p) { prog = { ult: j.ult || null, r: +j.r || 0, p: j.p }; }
+    } catch (e) {}
+  }
+  var sucio = false;
+  function guardarProg() { if (!sucio) return; sucio = false; try { localStorage.setItem(CLAVE_PROG, JSON.stringify(prog)); } catch (e) {} }
+  function guardarPronto() { sucio = true; if (guardaT) return; guardaT = setTimeout(function() { guardaT = null; guardarProg(); }, 500); }
+  function ratioDe(id) { return Math.min(1, prog.p[id] || 0); }
+  function avanceLibro() {
+    var t = 0; CONT_PAGS.forEach(function(id) { t += ratioDe(id); });
+    return Math.floor((t / CONT_PAGS.length) * 100);
+  }
+  function etiquetaPag(id) {
+    var n = numDe[id];
+    return tituloDe[id] || '';
+  }
+  function destinoContinuar() {
+    var id = prog.ult, r = prog.r || 0;
+    if (!id || CONT_PAGS.indexOf(id) < 0) return null;
+    var i = CONT_PAGS.indexOf(id);
+    if (r >= 0.95 && i < CONT_PAGS.length - 1) return { id: CONT_PAGS[i + 1], r: 0 };
+    return { id: id, r: r };
+  }
+  function hayAvance() {
+    var d = destinoContinuar();
+    if (!d) return false;
+    return avanceLibro() > 0 || d.id !== 'p1' || d.r > 0.02;
+  }
+
+  function pintarProg() {
+    var pct = avanceLibro(), actual = PAGINAS.indexOf(paginaActual) > 0 ? paginaActual : null;
+    var set = function(id, txt) { var e = document.getElementById(id); if (e) e.textContent = txt; };
+    set('ma-pct', pct + ' %'); set('tb-book-pct', pct + ' %'); set('bc-pct', pct + ' %');
+    var fill = document.getElementById('bc-fill'); if (fill) fill.style.width = pct + '%';
+    var riel = document.getElementById('ma-riel');
+    if (riel) {
+      if (!riel.children.length) CONT_PAGS.forEach(function() { riel.appendChild(document.createElement('i')); });
+      CONT_PAGS.forEach(function(id, i) {
+        var seg = riel.children[i];
+        seg.style.setProperty('--f', Math.round(ratioDe(id) * 100) + '%');
+        seg.classList.toggle('act', id === actual);
+      });
+    }
+    document.querySelectorAll('.menu-item').forEach(function(b) {
+      var id = b.dataset.page, r = ratioDe(id), est = b.querySelector('.menu-item-estado');
+      b.style.setProperty('--pr', r >= 0.95 ? 0 : r);
+      b.classList.toggle('leido', r >= 0.95);
+      b.classList.toggle('parcial', r > 0.02 && r < 0.95);
+      if (est) est.textContent = (r > 0.02 && r < 0.95) ? Math.round(r * 100) + ' %' : '';
+    });
+    var d = hayAvance() ? destinoContinuar() : null;
+    var pc = document.getElementById('p-continuar'), bl = document.getElementById('btn-leer'), mc = document.getElementById('ma-cont');
+    if (pc) pc.classList.toggle('visible', !!d);
+    if (bl) bl.classList.toggle('sec', !!d);
+    if (mc) mc.classList.toggle('visible', !!d);
+    if (d) {
+      var sub = etiquetaPag(d.id) + (d.r > 0.02 ? ' · ' + Math.round(d.r * 100) + ' %' : '');
+      set('bc-sub', sub); set('ma-cont-sub', sub);
+    }
+  }
+
+  function registrarAvance(id, ratio) {
+    ratio = Math.max(0, Math.min(1, ratio));
+    var cambio = false;
+    if (ratio > (prog.p[id] || 0) + 0.004 || (ratio >= 0.95 && (prog.p[id] || 0) < 1)) {
+      prog.p[id] = ratio >= 0.95 ? 1 : ratio; cambio = true;
+    }
+    if (prog.ult === id && Math.abs((prog.r || 0) - ratio) > 0.004) { prog.r = ratio; cambio = true; }
+    if (cambio) { set_tb(); guardarPronto(); }
+  }
+  function set_tb() { var e = document.getElementById('tb-book-pct'); if (e) e.textContent = avanceLibro() + ' %'; }
+
+  function restaurarPos(id, r) {
+    restauro = { id: id, r: r, t: Date.now(), tocado: false };
+    var ap = function() {
+      if (!restauro || restauro.id !== id || restauro.tocado || paginaActual !== id) return;
+      var d = document.getElementById(id), sc = d.scrollHeight - d.clientHeight;
+      if (sc > 0) { d.scrollTop = sc * r; ultimoScroll = d.scrollTop; document.body.classList.remove('bar-oculta'); }
+    };
+    requestAnimationFrame(ap); setTimeout(ap, 200); setTimeout(ap, 700);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function() { if (Date.now() - restauro.t < 2500) ap(); });
+  }
+  ['touchstart', 'wheel', 'keydown', 'pointerdown'].forEach(function(ev) {
+    document.addEventListener(ev, function() { if (restauro) restauro.tocado = true; }, { passive: true });
+  });
+
+  function continuar() {
+    var d = destinoContinuar();
+    if (!d) { irA('p1'); return; }
+    irA(d.id, d.r);
+  }
+
+  function reiniciarAvance() {
+    var b = document.getElementById('btn-reset');
+    if (!b.classList.contains('confirmar')) {
+      b.classList.add('confirmar'); b.textContent = '¿Seguro? Toca otra vez';
+      resetT = setTimeout(function() { b.classList.remove('confirmar'); b.textContent = 'Borrar'; }, 3500);
+      return;
+    }
+    clearTimeout(resetT); b.classList.remove('confirmar'); b.textContent = 'Borrado ✓';
+    prog = { ult: null, r: 0, p: {} }; sucio = true; guardarProg(); pintarProg();
+    setTimeout(function() { b.textContent = 'Borrar'; }, 1800);
+  }
+
+  var irAOrig = irA;
+  irA = function(id, r) {
+    irAOrig(id);
+    if (id !== 'portada') {
+      prog.ult = id; prog.r = r || 0; guardarPronto();
+      setTimeout(function() {
+        var d = document.getElementById(id), sc = d.scrollHeight - d.clientHeight;
+        if (sc <= 0 && paginaActual === id) registrarAvance(id, 1);
+      }, 350);
+      if (r > 0) restaurarPos(id, r); else restauro = null;
+    } else { restauro = null; }
+    pintarProg();
+  };
+  var abrirMenuOrig = abrirMenu;
+  abrirMenu = function() { pintarProg(); abrirMenuOrig(); };
+
+  window.addEventListener('pagehide', guardarProg);
+  document.addEventListener('visibilitychange', function() { if (document.hidden) guardarProg(); });
+
+  (function() {
+    cargarProg();
+    document.querySelectorAll('.menu-item').forEach(function(b) {
+      var t = b.querySelector('.menu-item-titulo'), n = b.querySelector('.menu-item-num');
+      tituloDe[b.dataset.page] = t ? t.textContent : ''; numDe[b.dataset.page] = n ? n.textContent : '';
+      var e = document.createElement('span'); e.className = 'menu-item-estado'; b.appendChild(e);
+    });
+    pintarProg();
+  })();
 </script>
 </body>
 </html>
