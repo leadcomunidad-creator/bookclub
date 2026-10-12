@@ -1290,5 +1290,24 @@ body.dark .menu-item.leido .menu-item-estado { color: #1A0F0D; }
 
 <!-- BOOKCLUB PWA REGISTRATION -->
 <script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}</script>
+<script>
+/* Agrupa el menú por la estructura real del libro. */
+(function(){
+  var panel=document.getElementById('menu-panel'); if(!panel)return;
+  var cap=Array.prototype.filter.call(panel.children,function(s){var l=s.querySelector('.menu-seccion-label');return l&&l.textContent.trim()==='Capítulos';})[0];
+  if(!cap)return;
+  var porPagina={}; Array.prototype.forEach.call(cap.querySelectorAll('.menu-item'),function(b){porPagina[b.dataset.page]=b;});
+  var grupos=[
+    ['Primera parte · El problema',['cap1','cap2','cap3']],
+    ['Segunda parte · La solución',['cap4','cap5','cap6']],
+    ['Interludio',['interv']],
+    ['Tercera parte · Cuatro prácticas para desacelerar',['cap7','cap8','cap9','cap10']],
+    ['Cierre del libro',['epi']]
+  ];
+  var frag=document.createDocumentFragment();
+  grupos.forEach(function(grupo){var s=document.createElement('div');s.className='menu-seccion';var l=document.createElement('div');l.className='menu-seccion-label';l.textContent=grupo[0];s.appendChild(l);grupo[1].forEach(function(id){if(porPagina[id])s.appendChild(porPagina[id]);});if(s.querySelector('.menu-item'))frag.appendChild(s);});
+  cap.parentNode.replaceChild(frag,cap);
+})();
+</script>
 </body>
 </html>
