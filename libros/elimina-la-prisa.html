@@ -60,6 +60,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Literata:ital,opsz,wght@0,7..72,300..800;1,7..72,300..800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../bookclub-sync.js"></script>
 <style>
 
 
@@ -1290,6 +1292,7 @@ body.dark .menu-item.leido .menu-item-estado { color: #1A0F0D; }
 
 <!-- BOOKCLUB PWA REGISTRATION -->
 <script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}</script>
+<script>window.addEventListener('bookclub-sync-ready',function(){if(typeof cargarProg==='function'){cargarProg();if(typeof pintarProg==='function')pintarProg();}});</script>
 <script>
 /* Agrupa el menú por la estructura real del libro. */
 (function(){

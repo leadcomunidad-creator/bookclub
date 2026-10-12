@@ -1,10 +1,11 @@
-const CACHE_VERSION = 'bookclub-v3-20261009';
+const CACHE_VERSION = 'bookclub-v4-20261012';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [
   './',
   './index.html',
   './libros.json',
+  './bookclub-sync.js',
   './manifest.webmanifest',
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',

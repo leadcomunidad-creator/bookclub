@@ -61,6 +61,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Hanken+Grotesk:wght@400;500;600;700&family=Montserrat:wght@700;800&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../bookclub-sync.js"></script>
 <style>
 
 
@@ -1229,6 +1231,7 @@ body.en-portada #bookclub-home { top: calc(1rem + var(--safe-t)); left: 1rem; }
 
 <!-- BOOKCLUB PWA REGISTRATION -->
 <script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}</script>
+<script>window.addEventListener('bookclub-sync-ready',function(){if(typeof cargarProg==='function'){cargarProg();if(typeof pintarProg==='function')pintarProg();}});</script>
 <script>
 /* Agrupa el menú por las cuatro partes del libro. */
 (function(){

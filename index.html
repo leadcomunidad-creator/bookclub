@@ -28,6 +28,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="bookclub-sync.js"></script>
 <style>
 :root{
   --bg:#F3F4F6;--surface:#FFFFFF;--sunk:#E9EBEF;--line:#DDE0E6;--line-2:#C3C8D1;
@@ -57,11 +59,12 @@ button{cursor:pointer}
 .mark i{display:block;width:5px;background:var(--ink);border-radius:1px}
 .mark i:nth-child(1){height:70%}.mark i:nth-child(2){height:100%;background:var(--accent)}.mark i:nth-child(3){height:55%}
 .actions{display:flex;gap:.5rem;align-items:center}
-.icon-btn,.install-btn{border:1px solid var(--line);background:var(--surface);color:var(--ink-2);transition:border-color .15s,color .15s}
+.icon-btn,.install-btn,.account-btn{border:1px solid var(--line);background:var(--surface);color:var(--ink-2);transition:border-color .15s,color .15s}
 .icon-btn{width:38px;height:38px;border-radius:50%;font-size:1rem;display:grid;place-items:center}
 .install-btn{display:none;border-radius:var(--r-pill);padding:.5rem .95rem;font-size:.8rem;font-weight:500}
 .install-btn.visible{display:block}
-.icon-btn:hover,.install-btn:hover{border-color:var(--line-2);color:var(--ink)}
+.account-btn{border-radius:var(--r-pill);padding:.5rem .8rem;font-size:.8rem;font-weight:600}
+.icon-btn:hover,.install-btn:hover,.account-btn:hover{border-color:var(--line-2);color:var(--ink)}
 
 /* Hero (vertical spacing only: never touches the .wrap side padding) */
 .hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:2rem 3rem;align-items:end;padding-top:clamp(2.5rem,7vw,5.5rem);padding-bottom:clamp(2rem,4vw,3.2rem)}
@@ -251,6 +254,7 @@ button{cursor:pointer}
     <div class="brand"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>BOOKCLUB</div>
     <div class="actions">
       <button id="btn-install" class="install-btn" type="button">Instalar BOOKCLUB</button>
+      <button id="btn-account" class="account-btn" type="button">Entrar</button>
       <button id="btn-dark" class="icon-btn" type="button" aria-label="Cambiar apariencia">☽</button>
     </div>
   </div>
@@ -316,7 +320,7 @@ button{cursor:pointer}
 <script>
 (function(){
 'use strict';
-var libros=[],mode='todos',selection=null,routeMajor=null,search='',view='explorar',libFilter='todos';
+var catalogo=[],libros=[],mode='todos',selection=null,routeMajor=null,search='',view='explorar',libFilter='todos';
 var lib={},progMap={},menuFor=null,menuBtn=null,menuT=0,menuY=0;
 var LIB_KEY='bookclub-biblioteca';
 var labelsExp={mentalidad:'Mentalidad',capacidad:'Capacidad',habilidad:'Habilidad'};
@@ -336,6 +340,8 @@ function grad(l,deg){return 'linear-gradient('+(deg||160)+'deg,'+esc(l.color_por
 function chip(cls,attr,val,label,on){return '<button type="button" class="'+cls+(on?' active':'')+'" '+attr+'="'+esc(val)+'">'+esc(label)+'</button>';}
 function lsGet(k){try{return localStorage.getItem(k);}catch(e){return null;}}
 function lsSet(k,v){try{localStorage.setItem(k,v);return true;}catch(e){return false;}}
+function conAcceso(){return !!(window.BookclubSync&&window.BookclubSync.isAuthorized&&window.BookclubSync.isAuthorized());}
+function actualizarCatalogo(){libros=catalogo.filter(function(l){return tipoDe(l)!=='libro'||conAcceso();});}
 
 /* ── Formato del título: resumen · libro completo · curso ── */
 function tipoDe(l){
@@ -458,13 +464,15 @@ function card(l){
   var meta='<div class="book-meta"><div class="book-line"><span><b>'+esc(l.autor)+'</b> · '+esc(l.anio)+'</span><span>'+esc(l.tiempo_lectura_min)+' min</span></div>'+prog+'<div class="book-desc">'+esc(l.descripcion)+'</div><div class="tags"><span class="tag">'+esc(labelsExp[l.expedicion]||'')+'</span><span class="tag">'+esc(labelsSub[l.sub_expedicion]||'')+'</span></div></div>';
   var label=tipoLabels[t]+': '+l.titulo+', '+l.autor+', '+l.tiempo_lectura_min+' minutos'+(e?'. '+estLabels[e]:'');
   var btn='<button class="save" type="button" data-id="'+esc(id)+'" data-e="'+(e||'')+'" aria-haspopup="menu" aria-expanded="false" aria-label="'+esc(e?'Estado: '+estLabels[e]+'. Cambiar':'Guardar en Mi biblioteca: '+l.titulo)+'">'+(e?ICON[e]:ICON.vacio)+'</button>';
-  return '<div class="bk"><a class="book" href="'+esc(id)+'" target="_blank" rel="noopener noreferrer" aria-label="'+esc(label)+'">'+cover+meta+'</a>'+btn+'</div>';
+  var privado=t==='libro',destino=privado?'#libro-privado':id,attrs=privado?' data-private-book="'+esc(l.archivo_privado||'')+'"':'';
+  return '<div class="bk"><a class="book" href="'+esc(destino)+'"'+attrs+(privado?'':' target="_blank" rel="noopener noreferrer"')+' aria-label="'+esc(label)+'">'+cover+meta+'</a>'+btn+'</div>';
 }
 function renderShelf(){
   var s=document.getElementById('shelf'),maxT=Math.max.apply(null,libros.map(function(l){return l.tiempo_lectura_min;}).concat([1]));
   s.innerHTML=libros.map(function(l,i){
     var h=150+Math.round((l.tiempo_lectura_min/maxT)*130),w=46+Math.min(l.capitulos||1,16)*2;
-    return '<a class="spine" data-href="'+esc(l.archivo)+'" href="'+esc(l.archivo)+'" target="_blank" rel="noopener noreferrer" title="'+esc(tipoLabels[tipoDe(l)]+': '+l.titulo+' — '+l.autor)+'" style="--i:'+i+';--h:'+h+';--w:'+w+';background:'+grad(l,180)+'"><span>'+esc(l.titulo)+'</span><i class="sd" aria-hidden="true"></i></a>';
+    var privado=tipoDe(l)==='libro',destino=privado?'#libro-privado':l.archivo,attrs=privado?' data-private-book="'+esc(l.archivo_privado||'')+'"':'';
+    return '<a class="spine" data-href="'+esc(l.archivo)+'" href="'+esc(destino)+'"'+attrs+(privado?'':' target="_blank" rel="noopener noreferrer"')+' title="'+esc(tipoLabels[tipoDe(l)]+': '+l.titulo+' — '+l.autor)+'" style="--i:'+i+';--h:'+h+';--w:'+w+';background:'+grad(l,180)+'"><span>'+esc(l.titulo)+'</span><i class="sd" aria-hidden="true"></i></a>';
   }).join('');
   s.classList.add('intro');
   var by={};libros.forEach(function(l){by[l.archivo]=l;});
@@ -517,7 +525,8 @@ function renderLib(){
     });
     if(!shown)h+='<div class="lib-empty"><h3>Nada coincide.</h3><p>Prueba otra búsqueda o cambia el filtro de estado.</p></div>';
   }
-  h+='<div class="lib-tools"><p>Tu biblioteca y tu avance se guardan en este navegador. Para llevarlos a otro dispositivo, exporta un respaldo y súbelo allá.</p><button type="button" id="lib-export">Exportar respaldo</button><button type="button" id="lib-import">Importar respaldo</button><input type="file" id="lib-file" accept="application/json,.json" hidden><div class="lib-msg" id="lib-msg" aria-live="polite"></div></div>';
+  var syncText=conAcceso()?'Tu biblioteca y tu avance se sincronizan de forma privada con tu cuenta.':'Inicia sesión para sincronizar tu biblioteca y tu avance entre dispositivos.';
+  h+='<div class="lib-tools"><p>'+syncText+'</p><button type="button" id="lib-export">Exportar respaldo</button><button type="button" id="lib-import">Importar respaldo</button><input type="file" id="lib-file" accept="application/json,.json" hidden><div class="lib-msg" id="lib-msg" aria-live="polite"></div></div>';
   box.innerHTML=h;
   var ok={};saved.filter(textMatch).forEach(function(l){ok[l.archivo]=1;});
   shelfMarks(ok);
@@ -623,6 +632,8 @@ document.getElementById('explore-panel').addEventListener('click',function(e){
 });
 document.querySelector('.view-tabs').addEventListener('click',function(e){var b=e.target.closest('[data-view]');if(b&&b.dataset.view!==view)setView(b.dataset.view);});
 document.addEventListener('click',function(e){
+  var privado=e.target.closest('[data-private-book]');
+  if(privado){e.preventDefault();var ruta=privado.dataset.privateBook;if(!ruta)return;window.BookclubSync.openPrivateBook(ruta).catch(function(err){alert(err&&err.message?err.message:'No fue posible abrir el libro.');});return;}
   var sv=e.target.closest('.save');
   if(sv){e.preventDefault();e.stopPropagation();if(menuBtn===sv){closeMenu();}else{openMenu(sv);}return;}
   var lf=e.target.closest('[data-lf]');if(lf){libFilter=lf.dataset.lf;renderLib();return;}
@@ -638,6 +649,25 @@ function rerender(){if(view==='biblioteca')renderLib();else render();}
 inp.addEventListener('input',function(){search=this.value.trim();clr.classList.toggle('visible',!!search);rerender();});
 clr.addEventListener('click',function(){inp.value='';search='';clr.classList.remove('visible');inp.focus();rerender();});
 document.getElementById('reset-all').addEventListener('click',function(){inp.value='';search='';clr.classList.remove('visible');setMode('todos');});
+
+function actualizarCuenta(){
+  var b=document.getElementById('btn-account'),u=window.BookclubSync&&window.BookclubSync.getUser?window.BookclubSync.getUser():null;
+  b.textContent=conAcceso()?(u&&u.email?'Cuenta':'Mi cuenta'):'Entrar';
+}
+document.getElementById('btn-account').addEventListener('click',function(){
+  if(conAcceso()){
+    if(confirm('¿Deseas cerrar la sesión de BOOKCLUB en este dispositivo?'))window.BookclubSync.signOut();
+    return;
+  }
+  var email=prompt('Escribe tu correo para recibir un enlace de acceso:');
+  if(!email)return;
+  window.BookclubSync.signIn(email.trim()).then(function(){alert('Revisa tu correo: te enviamos un enlace para entrar a BOOKCLUB.');}).catch(function(err){alert(err&&err.message?err.message:'No fue posible enviar el enlace.');});
+});
+window.addEventListener('bookclub-auth-change',function(){
+  actualizarCatalogo();actualizarCuenta();
+  if(libros.length){syncAuto();renderShelf();refreshAll();}
+});
+window.addEventListener('bookclub-sync-ready',function(){if(!libros.length)return;loadLib();syncAuto();refreshAll();});
 
 /* Al volver desde un libro (otra pestaña) se actualiza el avance */
 function volver(){if(!libros.length||document.hidden)return;syncAuto();refreshAll();}
@@ -663,7 +693,7 @@ window.addEventListener('appinstalled',function(){ib.classList.remove('visible')
 
 loadLib();
 fetch('libros.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error();return r.json();}).then(function(d){
-  libros=d.libros||[];
+  catalogo=d.libros||[];actualizarCatalogo();actualizarCuenta();
   syncAuto();renderShelf();
   setView(location.hash==='#biblioteca'?'biblioteca':'explorar',true);
 }).catch(function(){document.getElementById('result-state').textContent='No se pudo cargar la biblioteca.';document.getElementById('empty').classList.add('visible');});
