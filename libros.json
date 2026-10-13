@@ -91,6 +91,27 @@
       "preview_titulo": "Gana la guerra en tu mente",
       "preview_subtitulo": "Libro completo",
       "preview_imagen": "assets/previews/gana-la-guerra-en-tu-mente.jpg"
+    },
+    {
+      "tipo": "resumen",
+      "titulo": "Enciende tu cerebro",
+      "autor": "Caroline Leaf",
+      "anio": 2013,
+      "expedicion": "mentalidad",
+      "sub_expedicion": "renovacion",
+      "temas": ["Neuroplasticidad", "Hábitos mentales", "Atención", "Pensamiento tóxico", "Fe y ciencia"],
+      "quiero": ["Renovar mi mente", "Transformar mis hábitos de pensamiento", "Aprender a dirigir mi atención", "Evaluar con criterio la relación entre ciencia y fe"],
+      "color_acento": "#0B3E8F",
+      "color_portada_inicio": "#0E86C2",
+      "color_portada_fin": "#0A5F94",
+      "tiempo_lectura_min": 132,
+      "capitulos": 15,
+      "paginas_virtuales": 20,
+      "archivo": "libros/enciende-tu-cerebro.html",
+      "clave_progreso": "bookclub-enciende-tu-cerebro-progreso",
+      "descripcion": "La transformación de nuestra manera de pensar, mediante decisiones conscientes y prácticas sostenidas, puede modificar nuestros hábitos mentales, producir cambios en el cerebro e influir en nuestra manera de vivir.",
+      "preview_titulo": "Enciende tu cerebro",
+      "preview_subtitulo": "La clave para la felicidad, la manera de pensar y la salud"
     }
   ]
 }
