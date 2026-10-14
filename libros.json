@@ -22,7 +22,7 @@
       "descripcion": "No podemos experimentar plenamente la vida que Jesús ofrece mientras mantengamos un ritmo que destruye nuestra atención, nuestras relaciones y nuestra capacidad de permanecer en su presencia.",
       "preview_titulo": "Elimina la prisa de tu vida",
       "preview_subtitulo": "Cómo mantenerte espiritual y emocionalmente saludable en el caos del mundo moderno.",
-      "preview_imagen": "assets/previews/elimina-la-prisa.jpg"
+      "preview_imagen": "assets/previews/elimina-la-prisa.png"
     },
     {
       "tipo": "resumen",
@@ -44,7 +44,7 @@
       "descripcion": "Una guía práctica para identificar las mentiras que gobiernan la mente, reemplazarlas por verdad y entrenar nuevas respuestas mediante reemplazo, recableado, replanteamiento y regocijo.",
       "preview_titulo": "Gana la guerra en tu mente",
       "preview_subtitulo": "Cambia tus pensamientos, cambia tu vida",
-      "preview_imagen": "assets/previews/gana-la-guerra-en-tu-mente.jpg"
+      "preview_imagen": "assets/previews/gana-la-guerra-en-tu-mente.png"
     },
     {
       "tipo": "resumen",
@@ -65,7 +65,8 @@
       "clave_progreso": "bookclub-enciende-tu-cerebro-progreso",
       "descripcion": "La transformación de nuestra manera de pensar, mediante decisiones conscientes y prácticas sostenidas, puede modificar nuestros hábitos mentales, producir cambios en el cerebro e influir en nuestra manera de vivir.",
       "preview_titulo": "Enciende tu cerebro",
-      "preview_subtitulo": "La clave para la felicidad, la manera de pensar y la salud"
+      "preview_subtitulo": "La clave para la felicidad, la manera de pensar y la salud",
+      "preview_imagen": "assets/previews/enciende-tu-cerebro.png"
     },
     {
       "tipo": "resumen",
