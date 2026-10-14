@@ -6,7 +6,7 @@
   var CONFIG = {
     url: 'https://dgllysqskzpjtmflfnew.supabase.co',
     publishableKey: 'sb_publishable_In8S8O4wx4mPdR75-jrRSg_fu6MWbqv',
-    redirectTo: 'https://thewaybookclub.netlify.app',
+    redirectTo: 'https://bookclublhscol.netlify.app',
     bucket: 'bookclub-private'
   };
   var client = null, active = false, user = null, readyResolve;
@@ -111,10 +111,13 @@
     notify('bookclub-sync-ready');
   }
 
-  async function signIn(email) {
+  async function signInWithGoogle() {
     var db = getClient();
     if (!db) throw new Error('No se pudo iniciar el servicio de acceso.');
-    var result = await db.auth.signInWithOtp({ email: email, options: { emailRedirectTo: CONFIG.redirectTo } });
+    var result = await db.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: CONFIG.redirectTo }
+    });
     if (result.error) throw result.error;
   }
 
@@ -125,8 +128,8 @@
   }
 
   function injectBook(html) {
-    var sync = '<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"><\/script><script src="https://thewaybookclub.netlify.app/bookclub-sync.js"><\/script>';
-    var home = '<script>(function(){var a=document.getElementById("bookclub-home");if(a)a.href="https://thewaybookclub.netlify.app/";window.addEventListener("bookclub-sync-ready",function(){if(typeof cargarProg==="function"){cargarProg();if(typeof pintarProg==="function")pintarProg();}});})();<\/script>';
+    var sync = '<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"><\/script><script src="https://bookclublhscol.netlify.app/bookclub-sync.js"><\/script>';
+    var home = '<script>(function(){var a=document.getElementById("bookclub-home");if(a)a.href="https://bookclublhscol.netlify.app/";window.addEventListener("bookclub-sync-ready",function(){if(typeof cargarProg==="function"){cargarProg();if(typeof pintarProg==="function")pintarProg();}});})();<\/script>';
     return html.replace('</head>', sync + '</head>').replace('</body>', home + '</body>');
   }
 
@@ -155,7 +158,7 @@
     ready: ready,
     isAuthorized: function () { return active; },
     getUser: function () { return user; },
-    signIn: signIn,
+    signInWithGoogle: signInWithGoogle,
     signOut: signOut,
     openPrivateBook: openPrivateBook
   };

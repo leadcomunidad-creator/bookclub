@@ -13,16 +13,16 @@
 <meta property="og:site_name" content="BOOKCLUB">
 <meta property="og:title" content="BOOKCLUB — Ideas que vale la pena conservar">
 <meta property="og:description" content="Descubre qué merece tu tiempo de lectura. Resúmenes, libros completos y cursos para pensar, crecer y enseñar.">
-<meta property="og:url" content="https://thewaybookclub.netlify.app/">
-<meta property="og:image" content="https://thewaybookclub.netlify.app/assets/icons/icon-512.png">
+<meta property="og:url" content="https://bookclublhscol.netlify.app/">
+<meta property="og:image" content="https://bookclublhscol.netlify.app/assets/icons/icon-512.png">
 <meta property="og:image:width" content="512">
 <meta property="og:image:height" content="512">
 <meta property="og:image:alt" content="BOOKCLUB">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="BOOKCLUB — Ideas que vale la pena conservar">
 <meta name="twitter:description" content="Descubre qué merece tu tiempo de lectura.">
-<meta name="twitter:image" content="https://thewaybookclub.netlify.app/assets/icons/icon-512.png">
-<link rel="canonical" href="https://thewaybookclub.netlify.app/">
+<meta name="twitter:image" content="https://bookclublhscol.netlify.app/assets/icons/icon-512.png">
+<link rel="canonical" href="https://bookclublhscol.netlify.app/">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/svg+xml" href="assets/icons/icon.svg" media="(prefers-color-scheme: light)">
 <link rel="icon" type="image/svg+xml" href="assets/icons/icon-dark.svg" media="(prefers-color-scheme: dark)">
@@ -663,16 +663,15 @@ document.getElementById('reset-all').addEventListener('click',function(){inp.val
 
 function actualizarCuenta(){
   var b=document.getElementById('btn-account'),u=window.BookclubSync&&window.BookclubSync.getUser?window.BookclubSync.getUser():null;
-  b.textContent=conAcceso()?(u&&u.email?'Cuenta':'Mi cuenta'):'Entrar';
+  b.textContent=conAcceso()?(u&&u.email?'Cuenta':'Mi cuenta'):'Entrar con Google';
 }
 document.getElementById('btn-account').addEventListener('click',function(){
   if(conAcceso()){
     if(confirm('¿Deseas cerrar la sesión de BOOKCLUB en este dispositivo?'))window.BookclubSync.signOut();
     return;
   }
-  var email=prompt('Escribe tu correo para recibir un enlace de acceso:');
-  if(!email)return;
-  window.BookclubSync.signIn(email.trim()).then(function(){alert('Revisa tu correo: te enviamos un enlace para entrar a BOOKCLUB.');}).catch(function(err){alert(err&&err.message?err.message:'No fue posible enviar el enlace.');});
+  var b=this;b.disabled=true;b.textContent='Abriendo Google…';
+  window.BookclubSync.signInWithGoogle().catch(function(err){b.disabled=false;actualizarCuenta();alert(err&&err.message?err.message:'No fue posible abrir el acceso con Google.');});
 });
 window.addEventListener('bookclub-auth-change',function(){
   actualizarCatalogo();actualizarCuenta();
