@@ -471,14 +471,14 @@ function card(l){
   var label=tipoLabels[t]+': '+l.titulo+', '+l.autor+', '+l.tiempo_lectura_min+' minutos'+(e?'. '+estLabels[e]:'');
   var btn='<button class="save" type="button" data-id="'+esc(id)+'" data-e="'+(e||'')+'" aria-haspopup="menu" aria-expanded="false" aria-label="'+esc(e?'Estado: '+estLabels[e]+'. Cambiar':'Guardar en Mi biblioteca: '+l.titulo)+'">'+(e?ICON[e]:ICON.vacio)+'</button>';
   var privado=t==='libro',destino=privado?'#libro-privado':id,attrs=privado?' data-private-book="'+esc(l.archivo_privado||'')+'"':'';
-  return '<div class="bk"><a class="book" href="'+esc(destino)+'"'+attrs+(privado?'':' target="_blank" rel="noopener noreferrer"')+' aria-label="'+esc(label)+'">'+cover+meta+'</a>'+btn+'</div>';
+  return '<div class="bk"><a class="book" href="'+esc(destino)+'"'+attrs+' aria-label="'+esc(label)+'">'+cover+meta+'</a>'+btn+'</div>';
 }
 function renderShelf(){
   var s=document.getElementById('shelf'),maxT=Math.max.apply(null,libros.map(function(l){return l.tiempo_lectura_min;}).concat([1]));
   s.innerHTML=libros.map(function(l,i){
     var h=150+Math.round((l.tiempo_lectura_min/maxT)*130),w=46+Math.min(l.capitulos||1,16)*2;
     var privado=tipoDe(l)==='libro',destino=privado?'#libro-privado':l.archivo,attrs=privado?' data-private-book="'+esc(l.archivo_privado||'')+'"':'';
-    return '<a class="spine" data-href="'+esc(l.archivo)+'" href="'+esc(destino)+'"'+attrs+(privado?'':' target="_blank" rel="noopener noreferrer"')+' title="'+esc(tipoLabels[tipoDe(l)]+': '+l.titulo+' — '+l.autor)+'" style="--i:'+i+';--h:'+h+';--w:'+w+';background:'+grad(l,180)+'"><span>'+esc(l.titulo)+'</span><i class="sd" aria-hidden="true"></i></a>';
+    return '<a class="spine" data-href="'+esc(l.archivo)+'" href="'+esc(destino)+'"'+attrs+' title="'+esc(tipoLabels[tipoDe(l)]+': '+l.titulo+' — '+l.autor)+'" style="--i:'+i+';--h:'+h+';--w:'+w+';background:'+grad(l,180)+'"><span>'+esc(l.titulo)+'</span><i class="sd" aria-hidden="true"></i></a>';
   }).join('');
   s.classList.add('intro');
   var by={};libros.forEach(function(l){by[l.archivo]=l;});
