@@ -66,6 +66,27 @@
       "descripcion": "La transformación de nuestra manera de pensar, mediante decisiones conscientes y prácticas sostenidas, puede modificar nuestros hábitos mentales, producir cambios en el cerebro e influir en nuestra manera de vivir.",
       "preview_titulo": "Enciende tu cerebro",
       "preview_subtitulo": "La clave para la felicidad, la manera de pensar y la salud"
+    },
+    {
+      "tipo": "resumen",
+      "titulo": "Practica el camino",
+      "autor": "John Mark Comer",
+      "anio": 2024,
+      "expedicion": "capacidad",
+      "sub_expedicion": "espiritual",
+      "temas": ["Discipulado", "Formación espiritual", "Regla de Vida", "Prácticas espirituales", "Comunidad"],
+      "quiero": ["Estar con Jesús", "Formar hábitos espirituales", "Diseñar una Regla de Vida", "Vivir el discipulado en lo cotidiano"],
+      "color_acento": "#6B5A33",
+      "color_portada_inicio": "#D8E3DC",
+      "color_portada_fin": "#6B5A33",
+      "tiempo_lectura_min": 68,
+      "capitulos": 6,
+      "paginas_virtuales": 13,
+      "archivo": "libros/practica-el-camino.html",
+      "clave_progreso": "bookclub-practica-el-camino-progreso",
+      "descripcion": "El discipulado no es una actividad adicional, sino una forma de reorganizar la vida para estar con Jesús, llegar a ser como él y hacer lo que él hizo.",
+      "preview_titulo": "Practica el camino",
+      "preview_subtitulo": "Del cristianismo declarado al discipulado practicado"
     }
   ]
 }
