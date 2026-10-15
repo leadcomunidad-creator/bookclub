@@ -8,11 +8,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="BOOKCLUB">
-<meta name="description" content="BOOKCLUB: una biblioteca de resúmenes, libros completos y cursos para pensar, crecer y enseñar. Descubre qué merece tu tiempo y lleva el control de lo que lees.">
+<meta name="description" content="BOOKCLUB: resúmenes y cursos basados en libros para pensar, crecer y enseñar. Descubre qué merece tu tiempo y lleva el control de lo que lees.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="BOOKCLUB">
 <meta property="og:title" content="BOOKCLUB — Ideas que vale la pena conservar">
-<meta property="og:description" content="Descubre qué merece tu tiempo de lectura. Resúmenes, libros completos y cursos para pensar, crecer y enseñar.">
+<meta property="og:description" content="Descubre qué merece tu tiempo de lectura. Resúmenes y cursos basados en libros para pensar, crecer y enseñar.">
 <meta property="og:url" content="https://bookclublhscol.netlify.app/">
 <meta property="og:image" content="https://bookclublhscol.netlify.app/assets/icons/icon-512.png">
 <meta property="og:image:width" content="512">
@@ -78,6 +78,9 @@ button{cursor:pointer}
 .hero-line{font-family:var(--serif);font-style:italic;font-size:clamp(1.05rem,2vw,1.3rem);color:var(--accent);margin-bottom:1.1rem}
 .hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.5rem,6.2vw,4.9rem);line-height:1;letter-spacing:-.03em;font-variation-settings:'opsz' 72;max-width:12ch}
 .hero-purpose{margin-top:1.5rem;font-size:1.02rem;color:var(--ink-2);max-width:40ch}
+.hero-audience{margin-top:1.55rem;padding-top:1.3rem;border-top:1px solid var(--line);max-width:40ch}
+.hero-audience h2{font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+.hero-audience p{font-size:.94rem;line-height:1.55;color:var(--ink-2)}
 
 /* Shelf: spines drawn from real catalog data (height = reading time, width = chapters) */
 .shelf-col{min-width:0}
@@ -274,7 +277,11 @@ button{cursor:pointer}
     <div class="hero-copy">
       <p class="hero-line">Ideas que vale la pena conservar.</p>
       <h1>Descubre qué merece tu tiempo de lectura.</h1>
-      <p class="hero-purpose">Resúmenes, libros completos y cursos para pensar, crecer y enseñar. Guarda lo que quieres leer y sigue tu avance en Mi biblioteca.</p>
+      <p class="hero-purpose">Resúmenes, y cursos basados en libros para pensar, crecer y enseñar. Guarda lo que quieres leer y sigue tu avance en Mi biblioteca.</p>
+      <div class="hero-audience">
+        <h2>Es para ti si…</h2>
+        <p>Quieres aprovechar mejor tu tiempo de lectura, discernir qué ideas vale la pena profundizar y guardar lo que aporta a tu proceso de formación.</p>
+      </div>
     </div>
     <div class="shelf-col">
       <div class="shelf" id="shelf" aria-label="Estantería de libros"></div>
@@ -324,7 +331,7 @@ button{cursor:pointer}
 <div class="st-scrim" id="st-scrim" hidden></div>
 <div class="st-menu" id="st-menu" role="menu" hidden></div>
 
-<footer class="footer"><div class="wrap"><span><b>BOOKCLUB</b> · Ideas que vale la pena conservar.</span><span>Resúmenes, libros completos y cursos para pensar, crecer y enseñar.</span></div></footer>
+<footer class="footer"><div class="wrap"><span><b>BOOKCLUB</b> · Ideas que vale la pena conservar.</span><span>Resúmenes y cursos basados en libros para pensar, crecer y enseñar.</span></div></footer>
 
 <script>
 (function(){
