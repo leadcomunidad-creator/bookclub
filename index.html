@@ -277,10 +277,10 @@ button{cursor:pointer}
     <div class="hero-copy">
       <p class="hero-line">Ideas que vale la pena conservar.</p>
       <h1>Descubre qué merece tu tiempo de lectura.</h1>
-      <p class="hero-purpose">Resúmenes, y cursos basados en libros para pensar, crecer y enseñar. Guarda lo que quieres leer y sigue tu avance en Mi biblioteca.</p>
+      <p class="hero-purpose">Resúmenes y cursos basados en libros para pensar, crecer y enseñar. Guarda lo que quieres leer y sigue tu avance en Mi biblioteca.</p>
       <div class="hero-audience">
-        <h2>Es para ti si…</h2>
-        <p>Quieres aprovechar mejor tu tiempo de lectura, discernir qué ideas vale la pena profundizar y guardar lo que aporta a tu proceso de formación.</p>
+        <h2>Es ideal para ti si:</h2>
+        <p>Quieres aprovechar mejor tu tiempo de lectura: descubrir qué libros vale la pena leer completos y cuáles no, y regresar a las ideas que quieres profundizar o guardar sin tener que releer el libro entero.</p>
       </div>
     </div>
     <div class="shelf-col">
@@ -443,7 +443,7 @@ function renderPanel(){
   if(mode==='autor'){h='<div class="panel-title">Autores</div><div class="chips">'+unique(libros.map(function(l){return l.autor;})).map(function(v){return chip('chip','data-select',v,v,selection===v);}).join('')+'</div>';}
   if(mode==='tema'){h='<div class="panel-title">Temas</div><div class="chips">'+unique(libros.flatMap(function(l){return l.temas||[];})).map(function(v){return chip('chip','data-select',v,v,selection===v);}).join('')+'</div>';}
   if(mode==='formato'){
-    h='<div class="panel-title">¿Qué formato prefieres?</div><div class="chips">'+['resumen','libro','curso'].filter(function(t){return libros.some(function(l){return tipoDe(l)===t;});}).map(function(t){var n=libros.filter(function(l){return tipoDe(l)===t;}).length;return chip('chip','data-select',t,tipoPlural[t]+' · '+n,selection===t);}).join('')+'</div>';
+    h='<div class="panel-title">¿Qué formato prefieres?</div><div class="chips">'+['resumen','curso'].filter(function(t){return libros.some(function(l){return tipoDe(l)===t;});}).map(function(t){var n=libros.filter(function(l){return tipoDe(l)===t;}).length;return chip('chip','data-select',t,tipoPlural[t]+' · '+n,selection===t);}).join('')+'</div>';
   }
   if(mode==='quiero'){h='<div class="panel-title">¿Qué quieres trabajar?</div><div class="wants">'+unique(libros.flatMap(function(l){return l.quiero||[];})).map(function(v){return chip('want','data-select',v,v,selection===v);}).join('')+'</div>';}
   p.innerHTML=h;
@@ -495,7 +495,7 @@ function renderShelf(){
   s.classList.add('intro');
   var by={};libros.forEach(function(l){by[l.archivo]=l;});
   document.querySelectorAll('.spine').forEach(function(sp){sp.dataset.tipo=tipoDe(by[sp.dataset.href]);});
-  document.getElementById('shelf-note').innerHTML='<span class="shelf-key"><span>'+libros.length+' títulos · cada lomo mide su tiempo de lectura</span><span>franja = curso · doble franja = libro completo · círculo = en Mi biblioteca</span></span>';
+  document.getElementById('shelf-note').innerHTML='<span class="shelf-key"><span>'+libros.length+' títulos · cada lomo mide su tiempo de lectura</span><span>franja = curso · círculo = en Mi biblioteca</span></span>';
 }
 function shelfMarks(okMap){
   var by={};libros.forEach(function(l){by[l.archivo]=l;});
