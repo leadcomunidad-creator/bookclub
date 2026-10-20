@@ -111,12 +111,12 @@
     notify('bookclub-sync-ready');
   }
 
-  async function signInWithGoogle() {
+  async function signInWithGoogle(redirectTo) {
     var db = getClient();
     if (!db) throw new Error('No se pudo iniciar el servicio de acceso.');
     var result = await db.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: CONFIG.redirectTo }
+      options: { redirectTo: redirectTo || CONFIG.redirectTo }
     });
     if (result.error) throw result.error;
   }
