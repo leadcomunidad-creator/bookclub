@@ -198,16 +198,6 @@ button{cursor:pointer}
 .st-opt[aria-checked=true]{color:var(--accent);font-weight:600}
 .st-opt[aria-checked=true]::after{content:'✓';margin-left:auto}
 .st-opt.quit{color:var(--ink-3);border-top:1px solid var(--line);border-radius:0 0 10px 10px;margin-top:2px}
-.auth-gate{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:1.25rem;background:var(--bg)}
-.auth-gate[hidden]{display:none}
-.auth-card{width:min(100%,430px);padding:clamp(1.5rem,4vw,2.4rem);border:1px solid var(--line-2);border-radius:20px;background:var(--surface);box-shadow:var(--lift)}
-.auth-card .eyebrow{margin-bottom:.7rem;color:var(--accent);font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
-.auth-card h2{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,6vw,2.6rem);line-height:1.04;letter-spacing:-.03em}
-.auth-card p{margin-top:.85rem;color:var(--ink-2);line-height:1.55}
-.auth-actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.55rem}
-.auth-actions button{border:1px solid var(--line-2);border-radius:var(--r-pill);padding:.7rem 1rem;font-size:.9rem;font-weight:600}
-.auth-google{background:var(--ink);color:var(--bg);border-color:var(--ink)!important}.auth-cancel{background:transparent;color:var(--ink-2)}
-.auth-error{min-height:1.25em;margin-top:.9rem;font-size:.82rem;color:#D65C50}
 .lib{padding-top:2rem;padding-bottom:5rem}
 .lib-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,4vw,2.5rem);line-height:1.05;letter-spacing:-.02em}
 .lib-stats{margin-top:.5rem;color:var(--ink-2);font-size:.95rem;max-width:60ch}
@@ -328,19 +318,6 @@ button{cursor:pointer}
 
 <div class="st-scrim" id="st-scrim" hidden></div>
 <div class="st-menu" id="st-menu" role="menu" hidden></div>
-<section class="auth-gate" id="auth-gate" role="dialog" aria-modal="true" aria-labelledby="auth-title" hidden>
-  <div class="auth-card">
-    <p class="eyebrow">Mi Biblioteca</p>
-    <h2 id="auth-title">Tu biblioteca es personal.</h2>
-    <p>Ingresa con tu correo de Google para guardar libros, continuar tus lecturas y ver tu avance en cualquier dispositivo.</p>
-    <div class="auth-actions">
-      <button class="auth-google" id="auth-google" type="button">Continuar con Google</button>
-      <button class="auth-cancel" id="auth-cancel" type="button">Seguir explorando</button>
-    </div>
-    <p class="auth-error" id="auth-error" aria-live="polite"></p>
-  </div>
-</section>
-
 <footer class="footer"><div class="wrap"><span><b>BOOKCLUB</b> · Ideas que vale la pena conservar.</span><span>Resúmenes y cursos basados en libros para pensar, crecer y enseñar.</span></div></footer>
 
 <script>
@@ -563,19 +540,17 @@ function refreshAll(){
   document.getElementById('lib-count').textContent=savedCount();
   if(view==='biblioteca')renderLib();else render();
 }
-function cerrarAccesoBiblioteca(){document.getElementById('auth-gate').hidden=true;document.getElementById('auth-error').textContent='';}
 function abrirAccesoBiblioteca(){
   if(conAcceso()){setView('biblioteca');return;}
   pendingLibraryAccess=true;
   try{sessionStorage.setItem('bookclub-open-library','1');}catch(e){}
-  document.getElementById('auth-gate').hidden=false;
-  setTimeout(function(){document.getElementById('auth-google').focus();},0);
+  iniciarAccesoBiblioteca();
 }
 function iniciarAccesoBiblioteca(){
-  var b=document.getElementById('auth-google'),error=document.getElementById('auth-error');
-  b.disabled=true;b.textContent='Abriendo Google…';error.textContent='';
+  var b=document.getElementById('btn-account'),label=b.textContent;
+  b.disabled=true;b.textContent='Abriendo Google…';
   var returnTo=location.origin&&location.origin!=='null'?location.origin+location.pathname+'?access=biblioteca#biblioteca':null;
-  window.BookclubSync.signInWithGoogle(returnTo).catch(function(err){b.disabled=false;b.textContent='Continuar con Google';error.textContent=err&&err.message?err.message:'No fue posible abrir el acceso con Google.';});
+  window.BookclubSync.signInWithGoogle(returnTo).catch(function(err){b.disabled=false;b.textContent=label;console.error('No fue posible abrir el acceso con Google.',err);});
 }
 function setView(v,keepHash){
   view=v;
@@ -703,17 +678,13 @@ document.getElementById('btn-account').addEventListener('click',function(){
   }
   abrirAccesoBiblioteca();
 });
-document.getElementById('auth-google').addEventListener('click',iniciarAccesoBiblioteca);
-document.getElementById('auth-cancel').addEventListener('click',function(){pendingLibraryAccess=false;try{sessionStorage.removeItem('bookclub-open-library');}catch(e){}cerrarAccesoBiblioteca();});
 window.addEventListener('bookclub-auth-change',function(){
   actualizarCatalogo();actualizarCuenta();
   if(libros.length){syncAuto();renderShelf();refreshAll();}
   var requested=pendingLibraryAccess||location.search.indexOf('access=biblioteca')!==-1||location.hash==='#biblioteca';
   if(requested&&conAcceso()){
     pendingLibraryAccess=false;try{sessionStorage.removeItem('bookclub-open-library');}catch(e){}
-    cerrarAccesoBiblioteca();if(libros.length)setView('biblioteca',true);
-  }else if(requested&&window.BookclubSync&&window.BookclubSync.getUser&&window.BookclubSync.getUser()){
-    document.getElementById('auth-error').textContent='Este correo aún no tiene acceso a BOOKCLUB.';
+    if(libros.length)setView('biblioteca',true);
   }
 });
 window.addEventListener('bookclub-sync-ready',function(){if(!libros.length)return;loadLib();syncAuto();refreshAll();});
@@ -741,8 +712,15 @@ fetch('libros.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Erro
   syncAuto();renderShelf();
   var requested=location.search.indexOf('access=biblioteca')!==-1||location.hash==='#biblioteca';
   try{requested=requested||sessionStorage.getItem('bookclub-open-library')==='1';}catch(e){}
-  if(requested){pendingLibraryAccess=true;if(conAcceso())setView('biblioteca',true);else{setView('explorar',true);abrirAccesoBiblioteca();}}
-  else setView('explorar',true);
+  function abrirDestinoInicial(){
+    if(!requested){setView('explorar',true);return;}
+    pendingLibraryAccess=true;
+    if(conAcceso()){setView('biblioteca',true);return;}
+    setView('explorar',true);
+    var usuario=window.BookclubSync&&window.BookclubSync.getUser&&window.BookclubSync.getUser();
+    if(!usuario)iniciarAccesoBiblioteca();
+  }
+  if(window.BookclubSync&&window.BookclubSync.ready)window.BookclubSync.ready.then(abrirDestinoInicial);else abrirDestinoInicial();
 }).catch(function(){document.getElementById('result-state').textContent='No se pudo cargar la biblioteca.';document.getElementById('empty').classList.add('visible');});
 if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
 })();
