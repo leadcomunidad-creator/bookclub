@@ -6,7 +6,7 @@
   var CONFIG = {
     url: 'https://dgllysqskzpjtmflfnew.supabase.co',
     publishableKey: 'sb_publishable_In8S8O4wx4mPdR75-jrRSg_fu6MWbqv',
-    redirectTo: 'https://bookclublhscol.netlify.app/biblioteca/',
+    redirectTo: 'https://bookclublhscol.netlify.app/',
     bucket: 'bookclub-private'
   };
   var client = null, active = false, user = null, readyResolve;
@@ -125,6 +125,7 @@
     var db = getClient();
     if (db) await db.auth.signOut();
     active = false; user = null; notify('bookclub-auth-change');
+    if (window.parent && window.parent !== window) window.parent.postMessage({ type: 'bookclub-signout' }, window.location.origin);
   }
 
   function injectBook(html) {

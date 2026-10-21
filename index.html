@@ -188,6 +188,13 @@ section.band{border-top:1px solid var(--line)}
   .grid{gap:2rem 1rem}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+#bookclub-app{display:none;position:fixed;inset:0;z-index:1000;background:#0B0C10}
+#bookclub-app iframe{display:block;width:100%;height:100%;border:0}
+body.bookclub-app-open{overflow:hidden}
+body.bookclub-app-open>header,body.bookclub-app-open>main,body.bookclub-app-open>footer{display:none!important}
+body.bookclub-app-open #bookclub-app{display:block}
+
 </style>
 
 </head>
@@ -202,10 +209,10 @@ section.band{border-top:1px solid var(--line)}
       <a href="https://collegelhscol.netlify.app/#staff" target="_blank" rel="noopener">STAFF</a>
       <a href="#inicio" aria-current="page">BOOKCLUB</a>
       <a class="pb-extra" href="https://lhscolweb.netlify.app/">Volver a LHSCOL</a>
-      <a class="hcta hcta-m" href="https://bookclublhscol.netlify.app/acceso.html" target="_blank" rel="noopener">Mi Biblioteca</a>
+      <a class="hcta hcta-m" href="#mi-biblioteca" data-library-access>Mi Biblioteca</a>
     </div>
     <div class="hright">
-      <a class="hcta hcta-d" href="https://bookclublhscol.netlify.app/acceso.html" target="_blank" rel="noopener">Mi Biblioteca</a>
+      <a class="hcta hcta-d" href="#mi-biblioteca" data-library-access>Mi Biblioteca</a>
       <button id="theme" class="icon-btn" type="button" aria-label="Cambiar apariencia">☽</button>
       <button class="hburger" type="button" aria-expanded="false" aria-controls="pbMenu" aria-label="Abrir menú"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg></button>
     </div>
@@ -220,7 +227,7 @@ section.band{border-top:1px solid var(--line)}
       <h1>Descubre qué <span class="accent">merece tu tiempo</span> de lectura.</h1>
       <p class="lead">No todo libro merece el mismo tiempo, pero una buena idea puede acompañarte durante años. BOOKCLUB reúne resúmenes y cursos basados en libros que te ayudan a pensar, crecer y enseñar; para que descubras qué vale la pena leer completo, qué ideas necesitas guardar y dónde quieres profundizar.</p>
       <div class="cta-row">
-        <a class="btn" href="https://bookclublhscol.netlify.app/biblioteca/" target="_blank" rel="noopener">Explorar BookClub
+        <a class="btn" href="https://bookclublhscol.netlify.app/" target="_blank" rel="noopener">Explorar BookClub
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <a class="link" href="#como-funciona">Cómo funciona</a>
       </div>
@@ -331,22 +338,22 @@ section.band{border-top:1px solid var(--line)}
       </div>
       <div class="grid">
         <article class="book">
-          <div class="cover"><img src="assets/previews/elimina-la-prisa.png" alt="Portada de Elimina la prisa de tu vida" width="520" height="693"></div>
+          <div class="cover"><img src="img/elimina-la-prisa.jpg" alt="Portada de Elimina la prisa de tu vida" width="520" height="693"></div>
           <div><div class="book-line"><span><b>John Mark Comer</b></span><span>96 min</span></div></div>
           <span class="tag">Capacidad · Inteligencia Espiritual</span>
         </article>
         <article class="book">
-          <div class="cover"><img src="assets/previews/gana-la-guerra-en-tu-mente.png" alt="Portada de Gana la guerra en tu mente" width="520" height="693"></div>
+          <div class="cover"><img src="img/gana-la-guerra-en-tu-mente.jpg" alt="Portada de Gana la guerra en tu mente" width="520" height="693"></div>
           <div><div class="book-line"><span><b>Craig Groeschel</b></span><span>75 min</span></div></div>
           <span class="tag">Mentalidad · Renovación</span>
         </article>
         <article class="book">
-          <div class="cover"><img src="assets/previews/enciende-tu-cerebro.png" alt="Portada de Enciende tu cerebro" width="520" height="693"></div>
+          <div class="cover"><img src="img/enciende-tu-cerebro.jpg" alt="Portada de Enciende tu cerebro" width="520" height="693"></div>
           <div><div class="book-line"><span><b>Caroline Leaf</b></span><span>132 min</span></div></div>
           <span class="tag">Mentalidad · Renovación</span>
         </article>
         <article class="book">
-          <div class="cover"><img src="assets/previews/practica-el-camino.png" alt="Portada de Practica el camino" width="520" height="693"></div>
+          <div class="cover"><img src="img/practica-el-camino.jpg" alt="Portada de Practica el camino" width="520" height="693"></div>
           <div><div class="book-line"><span><b>John Mark Comer</b></span><span>68 min</span></div></div>
           <span class="tag">Capacidad · Inteligencia Espiritual</span>
         </article>
@@ -361,9 +368,9 @@ section.band{border-top:1px solid var(--line)}
       <h2>Las ideas correctas merecen un lugar para permanecer.</h2>
       <p class="lead">Entra a BOOKCLUB, explora la colección y empieza a construir una biblioteca de ideas que puedan acompañarte a pensar, vivir y enseñar mejor.</p>
       <div class="cta-row">
-        <a class="btn" href="https://bookclublhscol.netlify.app/biblioteca/" target="_blank" rel="noopener">Explorar BookClub
+        <a class="btn" href="https://bookclublhscol.netlify.app/" target="_blank" rel="noopener">Explorar BookClub
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a class="link" href="https://bookclublhscol.netlify.app/acceso.html" target="_blank" rel="noopener">Entrar a Mi Biblioteca</a>
+        <a class="link" href="#mi-biblioteca" data-library-access>Entrar a Mi Biblioteca</a>
       </div>
     </div>
   </section>
@@ -416,6 +423,32 @@ section.band{border-top:1px solid var(--line)}
   window.addEventListener('resize',function(){if(window.innerWidth>899)set(false)});
 })();
 </script>
+
+<section id="bookclub-app" aria-label="Mi Biblioteca"><iframe id="bookclub-frame" title="Mi Biblioteca"></iframe></section>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="bookclub-sync.js"></script>
+<script>
+(function(){
+  var shell=document.getElementById('bookclub-app'),frame=document.getElementById('bookclub-frame');
+  function actualizarVista(){
+    var conSesion=!!(window.BookclubSync&&window.BookclubSync.getUser&&window.BookclubSync.getUser());
+    document.body.classList.toggle('bookclub-app-open',conSesion);
+    if(conSesion&&!frame.src)frame.src='/biblioteca/';
+  }
+  document.querySelectorAll('[data-library-access]').forEach(function(link){
+    link.addEventListener('click',function(event){
+      event.preventDefault();
+      window.BookclubSync.signInWithGoogle().catch(function(error){console.error('No fue posible abrir Google.',error);});
+    });
+  });
+  window.addEventListener('bookclub-auth-change',actualizarVista);
+  window.addEventListener('message',function(event){
+    if(event.origin===location.origin&&event.data&&event.data.type==='bookclub-signout')window.BookclubSync.signOut();
+  });
+  if(window.BookclubSync&&window.BookclubSync.ready)window.BookclubSync.ready.then(actualizarVista);
+})();
+</script>
 </body>
 </html>
+
 
