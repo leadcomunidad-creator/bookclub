@@ -3,701 +3,419 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#F3F4F6" id="theme-color-meta">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="BOOKCLUB">
-<meta name="description" content="BOOKCLUB: resúmenes y cursos basados en libros para pensar, crecer y enseñar. Descubre qué merece tu tiempo y lleva el control de lo que lees.">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="BOOKCLUB">
-<meta property="og:title" content="BOOKCLUB — Ideas que vale la pena conservar">
-<meta property="og:description" content="Descubre qué merece tu tiempo de lectura. Resúmenes y cursos basados en libros para pensar, crecer y enseñar.">
-<meta property="og:url" content="https://bookclublhscol.netlify.app/">
-<meta property="og:image" content="https://bookclublhscol.netlify.app/assets/icons/icon-512.png">
-<meta property="og:image:width" content="512">
-<meta property="og:image:height" content="512">
-<meta property="og:image:alt" content="BOOKCLUB">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="BOOKCLUB — Ideas que vale la pena conservar">
-<meta name="twitter:description" content="Descubre qué merece tu tiempo de lectura.">
-<meta name="twitter:image" content="https://bookclublhscol.netlify.app/assets/icons/icon-512.png">
-<link rel="canonical" href="https://bookclublhscol.netlify.app/">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" type="image/svg+xml" href="assets/icons/icon.svg" media="(prefers-color-scheme: light)">
-<link rel="icon" type="image/svg+xml" href="assets/icons/icon-dark.svg" media="(prefers-color-scheme: dark)">
-<link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png" media="(prefers-color-scheme: light)">
-<link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-dark-192.png" media="(prefers-color-scheme: dark)">
-<link rel="icon" type="image/png" sizes="512x512" href="assets/icons/icon-512.png">
-<link rel="apple-touch-icon" href="assets/icons/icon-192.png">
-<title>BOOKCLUB — Ideas que vale la pena conservar</title>
+<title>BOOKCLUB</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="BOOKCLUB, una experiencia de El College: resúmenes y cursos basados en libros para pensar, crecer y enseñar.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="bookclub-sync.js"></script>
 <style>
+/* Layout: una sola columna de lectura con rejillas asimétricas; la estantería de lomos (lenguaje de la app) abre la página. Tokens heredados de la app BookClub. */
 :root{
   --bg:#F3F4F6;--surface:#FFFFFF;--sunk:#E9EBEF;--line:#DDE0E6;--line-2:#C3C8D1;
-  --ink:#14161C;--ink-2:#4A505C;--ink-3:#7B8290;--accent:#3B3FD8;--accent-soft:#E7E8FB;--on-accent:#fff;
-  --serif:'Newsreader',Georgia,'Times New Roman',serif;--sans:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --r-md:10px;--r-pill:99px;--pad:clamp(1.1rem,4vw,3rem);
-  --lift:0 2px 4px rgba(20,22,28,.10),0 14px 28px -10px rgba(20,22,28,.28)
+  --ink:#14161C;--ink-2:#4A505C;--ink-3:#6B7280;--accent:#3B3FD8;--accent-soft:#E7E8FB;--on-accent:#FFFFFF;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --sans:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --r-md:10px;--r-pill:99px;
+  --lift:0 2px 4px rgba(20,22,28,.10),0 14px 28px -10px rgba(20,22,28,.28);
+  --gutter:max(16px,env(safe-area-inset-left,0px));
+  --gutter-r:max(16px,env(safe-area-inset-right,0px));
 }
-body.dark{
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#0B0C10;--surface:#14161C;--sunk:#101217;--line:#23262F;--line-2:#363A46;
-  --ink:#ECEEF3;--ink-2:#A6ACB9;--ink-3:#6E7482;--accent:#9CA0FF;--accent-soft:#1C1E3A;--on-accent:#0B0C10;
-  --lift:0 2px 4px rgba(0,0,0,.5),0 16px 30px -10px rgba(0,0,0,.7)
-}
+  --ink:#ECEEF3;--ink-2:#A6ACB9;--ink-3:#8A90A0;--accent:#9CA0FF;--accent-soft:#1C1E3A;--on-accent:#0B0C10;
+  --lift:0 2px 4px rgba(0,0,0,.5),0 16px 30px -10px rgba(0,0,0,.7);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B0C10;--surface:#14161C;--sunk:#101217;--line:#23262F;--line-2:#363A46;
+  --ink:#ECEEF3;--ink-2:#A6ACB9;--ink-3:#8A90A0;--accent:#9CA0FF;--accent-soft:#1C1E3A;--on-accent:#0B0C10;
+  --lift:0 2px 4px rgba(0,0,0,.5),0 16px 30px -10px rgba(0,0,0,.7);color-scheme:dark}
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .25s,color .25s}
-button,input{font:inherit;color:inherit}
-button{cursor:pointer}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.wrap{max-width:1240px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .25s,color .25s}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter-r)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;text-wrap:balance}
+.eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--accent)}
+.lead{font-size:1.05rem;color:var(--ink-2);max-width:62ch}
 
-/* Header */
-.header{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-.header .wrap{height:60px;display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:.6rem;font-family:var(--serif);font-weight:600;font-size:1.2rem;letter-spacing:.06em}
+/* Botones */
+.btn{display:inline-flex;align-items:center;gap:.55rem;border-radius:var(--r-pill);padding:.8rem 1.4rem;font-size:.95rem;font-weight:600;text-decoration:none;border:1px solid var(--ink);background:var(--ink);color:var(--bg);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:var(--lift)}
+.btn svg{transition:transform .15s}
+.btn:hover svg{transform:translateX(3px)}
+.link{font-size:.95rem;font-weight:600;color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:1px}
+.link:hover{border-bottom-color:var(--accent)}
+.cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.6rem}
+
+/* Header · barra El College (mismas entradas y comportamiento del hub, adaptada a BookClub) */
+.header{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:70;background:var(--bg)}
+.hbar{display:flex;align-items:center;justify-content:space-between;gap:12px 28px;min-height:62px;padding-block:8px}
+.brand{display:flex;align-items:center;gap:.6rem;font-family:var(--serif);font-weight:600;font-size:1.2rem;letter-spacing:.06em;text-decoration:none;flex-shrink:0}
 .mark{width:22px;height:22px;display:flex;align-items:flex-end;gap:2px}
 .mark i{display:block;width:5px;background:var(--ink);border-radius:1px}
 .mark i:nth-child(1){height:70%}.mark i:nth-child(2){height:100%;background:var(--accent)}.mark i:nth-child(3){height:55%}
-.actions{display:flex;gap:.5rem;align-items:center}
-.icon-btn,.account-btn{border:1px solid var(--line);background:var(--surface);color:var(--ink-2);transition:border-color .15s,color .15s}
-.icon-btn{width:38px;height:38px;border-radius:50%;font-size:1rem;display:grid;place-items:center}
-.account-btn{border-radius:var(--r-pill);padding:.5rem .8rem;font-size:.8rem;font-weight:600}
-.icon-btn:hover,.account-btn:hover{border-color:var(--line-2);color:var(--ink)}
+.hnav{display:flex;gap:6px 30px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.hnav a{color:var(--ink-2);text-decoration:none;transition:color .2s;padding:6px 0}
+.hnav a:hover{color:var(--accent)}
+.hnav a[aria-current="page"]{color:var(--accent);text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:8px}
+.pb-m,.pb-extra,.hburger,.hcta.hcta-m{display:none}
+.hright{display:flex;align-items:center;gap:.6rem}
+.hcta{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 22px;border-radius:999px;background:var(--ink);color:var(--bg)!important;font-size:14px;font-weight:600;letter-spacing:0;text-transform:none;text-decoration:none;white-space:nowrap;transition:transform .15s,box-shadow .15s}
+.hcta:hover{transform:translateY(-1px);box-shadow:var(--lift)}
+.icon-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);font-size:1rem;display:grid;place-items:center;cursor:pointer}
+.icon-btn:hover{border-color:var(--line-2);color:var(--ink)}
+.hburger{width:44px;height:44px;border:0;background:none;color:var(--ink);align-items:center;justify-content:center;cursor:pointer;padding:0;margin-right:-8px}
+@media(max-width:1099px){.hnav{gap:6px 20px;font-size:11.5px}.hcta{padding:0 18px}}
+@media(max-width:899px){
+  .header{max-height:calc(100dvh - env(safe-area-inset-top,0px));overflow-y:auto}
+  .hbar{flex-wrap:wrap;min-height:58px;gap:0 10px}
+  .hcta.hcta-d{display:none}
+  .hburger{display:inline-flex}
+  .hnav{display:none;order:3;flex-basis:100%;flex-direction:column;gap:0;padding:6px 0 18px;font-size:13px;letter-spacing:.08em}
+  .header.open .hnav{display:flex}
+  .hnav a:not(.hcta){display:flex;align-items:center;justify-content:space-between;padding:16px 4px;border-bottom:1px solid var(--line)}
+  .hnav a:not(.hcta)::after{content:'\2192';color:var(--accent);font-weight:400}
+  .pb-d{display:none}.pb-m{display:inline}
+  .pb-extra{display:flex}
+  .hnav a[aria-current="page"]{text-decoration:none;box-shadow:inset 3px 0 0 var(--accent);padding-left:14px}
+  .hcta.hcta-m{display:inline-flex;margin-top:18px;width:100%}
+}
 
-/* Hero (vertical spacing only: never touches the .wrap side padding) */
-.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:2rem 3rem;align-items:end;padding-top:clamp(3rem,8vw,6.3rem);padding-bottom:clamp(2.6rem,5vw,4rem)}
-.hero-copy{padding-bottom:.6rem;min-width:0}
+/* 1. Portada */
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:2.5rem 3.5rem;align-items:end;padding-block:clamp(2.5rem,7vw,5.5rem) clamp(2.5rem,5vw,4rem)}
+.hero-copy{min-width:0}
 .hero-line{font-family:var(--serif);font-style:italic;font-size:clamp(1.05rem,2vw,1.3rem);color:var(--accent);margin-bottom:1.1rem}
-.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.5rem,6.2vw,4.9rem);line-height:1;letter-spacing:-.03em;font-variation-settings:'opsz' 72;max-width:12ch}
-.hero-purpose{margin-top:1.5rem;font-size:1.02rem;line-height:1.55;color:var(--ink-2);max-width:35ch}
-
-/* Shelf: spines drawn from real catalog data (height = reading time, width = chapters) */
+.hero h1{font-size:clamp(2.5rem,6vw,4.7rem);line-height:1;letter-spacing:-.03em;font-variation-settings:'opsz' 72;max-width:12ch}
+.hero h1 .accent{color:var(--accent)}
+.hero .lead{margin-top:1.6rem;max-width:46ch}
+.hero .cta-row{margin-top:2rem}
 .shelf-col{min-width:0}
-.shelf{--s:1;position:relative;display:flex;align-items:flex-end;justify-content:flex-end;gap:6px;height:calc(300px*var(--s));padding:0;border-bottom:3px solid var(--ink)}
-.spine{position:relative;display:flex;align-items:center;justify-content:center;flex:0 0 auto;height:calc(var(--h)*1px*var(--s));width:calc(var(--w)*1px*var(--s));border-radius:3px 3px 1px 1px;text-decoration:none;overflow:hidden;transition:transform .25s cubic-bezier(.2,.8,.2,1),opacity .25s,filter .25s,box-shadow .25s}
+.shelf{--s:1;display:flex;align-items:flex-end;justify-content:flex-end;gap:6px;height:calc(300px*var(--s));border-bottom:3px solid var(--ink)}
+.spine{position:relative;display:flex;align-items:center;justify-content:center;flex:0 0 auto;height:calc(var(--h)*1px*var(--s));width:calc(var(--w)*1px*var(--s));border-radius:3px 3px 1px 1px;overflow:hidden;animation:rise .7s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i)*80ms)}
 .spine::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.16),transparent 22%,transparent 78%,rgba(0,0,0,.22))}
-.spine span{position:relative;writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--serif);font-weight:500;font-size:calc(.92rem*var(--s));letter-spacing:.02em;color:rgba(255,255,255,.95);white-space:nowrap;max-height:88%;overflow:hidden;text-overflow:ellipsis}
-.spine:hover,.spine:focus-visible{transform:translateY(-14px);box-shadow:var(--lift)}
-.spine.dim{opacity:.22;filter:grayscale(.8)}
-.shelf-note{margin-top:.8rem;font-size:.78rem;color:var(--ink-3);text-align:right}
+.spine span{position:relative;writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--serif);font-weight:500;font-size:calc(.92rem*var(--s));letter-spacing:.02em;white-space:nowrap;max-height:92%;overflow:hidden;text-overflow:ellipsis;color:var(--tx,rgba(255,255,255,.95))}
 @keyframes rise{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
-.shelf.intro .spine{animation:rise .7s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i)*70ms)}
+.shelf-note{margin-top:.8rem;font-size:.78rem;color:var(--ink-3);text-align:right}
 
-/* Toolbar */
-.toolbar{position:sticky;top:60px;z-index:50;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.toolbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-top:.7rem;padding-bottom:.7rem}
-.modes{display:flex;gap:2px;padding:3px;min-width:0;background:var(--sunk);border:1px solid var(--line);border-radius:var(--r-pill);overflow-x:auto;scrollbar-width:none}
-.modes::-webkit-scrollbar{display:none}
-.mode{flex:0 0 auto;border:0;background:transparent;color:var(--ink-2);padding:.45rem 1rem;border-radius:var(--r-pill);font-size:.78rem;font-weight:600;letter-spacing:.06em;white-space:nowrap;transition:background .2s,color .2s}
-.mode:hover{color:var(--ink)}
-.mode.active{background:var(--ink);color:var(--bg)}
-.search{position:relative;flex:0 1 340px;min-width:0;width:100%}
-.search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-3);pointer-events:none}
-.search input{width:100%;height:42px;padding:0 2.6rem;border:1px solid var(--line);border-radius:var(--r-pill);background:var(--surface);outline:none;font-size:.9rem;transition:border-color .15s,box-shadow .15s}
-.search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 16%,transparent)}
-.search input::placeholder{color:var(--ink-3)}
-.search input::-webkit-search-cancel-button{display:none}
-.search-clear{display:none;position:absolute;right:6px;top:50%;transform:translateY(-50%);width:30px;height:30px;border:0;border-radius:50%;background:transparent;color:var(--ink-3);font-size:1.1rem}
-.search-clear.visible{display:block}
-.search-clear:hover{color:var(--ink)}
+/* Secciones */
+section.band{border-top:1px solid var(--line)}
+.sec{padding-block:clamp(3rem,7vw,5.5rem)}
+.sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.5rem 3.5rem;align-items:start}
+.sec-head h2{font-size:clamp(1.9rem,4vw,3rem);line-height:1.05;letter-spacing:-.02em;max-width:16ch}
+.sec-head .eyebrow{margin-bottom:1rem}
+.sec-head .lead{padding-top:.3rem}
+.aside-note{margin-top:1.4rem;padding:1rem 1.2rem;border-left:2px solid var(--accent);background:var(--accent-soft);border-radius:0 var(--r-md) var(--r-md) 0;font-size:.95rem;color:var(--ink);max-width:62ch}
 
-/* Filter panel */
-.panel{display:none;padding:1.4rem 0 0}
-.panel.visible{display:block;animation:open .22s ease-out}
-@keyframes open{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
-.panel-title{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--ink-2);margin-bottom:.8rem}
-.chips{display:flex;flex-wrap:wrap;gap:.5rem}
-.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink-2);border-radius:var(--r-pill);padding:.45rem .95rem;font-size:.84rem;transition:border-color .15s,color .15s,background .15s}
-.chip:hover{border-color:var(--line-2);color:var(--ink)}
-.chip.active{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:500}
-.sub{margin-top:1.2rem;padding-left:1rem;border-left:2px solid var(--accent)}
-.wants{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr));gap:.6rem}
-.want{border:1px solid var(--line);background:var(--surface);color:var(--ink-2);border-radius:var(--r-md);padding:.85rem 1rem;text-align:left;font-family:var(--serif);font-size:1.02rem;line-height:1.3;transition:border-color .15s,color .15s,background .15s}
-.want:hover{border-color:var(--line-2);color:var(--ink)}
-.want.active{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+/* 3. Qué encontrarás */
+.finds{margin-top:2.8rem;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--line)}
+.find{display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 1.2rem;padding:1.7rem 0;border-bottom:1px solid var(--line)}
+.find:nth-child(odd){padding-right:2rem}
+.find:nth-child(even){padding-left:2rem;border-left:1px solid var(--line)}
+.glyph{width:44px;height:64px;border-radius:3px 6px 6px 3px;position:relative;overflow:hidden;color:#fff;flex:none}
+.glyph::before{content:'';position:absolute;inset:0 auto 0 0;width:6px;background:linear-gradient(90deg,rgba(0,0,0,.3),rgba(255,255,255,.1))}
+.glyph.g1{background:var(--ink)}
+.glyph.g2{background:var(--accent)}
+.glyph.g2::after{content:'';position:absolute;left:0;right:0;top:0;height:6px;background:rgba(255,255,255,.8)}
+.glyph.g3{background:var(--ink-3)}
+.glyph.g3::after{content:'';position:absolute;left:0;right:0;top:0;height:7px;border-top:2px solid rgba(255,255,255,.8);border-bottom:2px solid rgba(255,255,255,.8)}
+.glyph.g4{background:var(--surface);border:1.5px solid var(--ink)}
+.glyph.g4::after{content:'';position:absolute;left:50%;bottom:9px;transform:translateX(-50%);width:15px;height:15px;border-radius:50%;border:1.5px solid var(--ink)}
+.find h3{font-size:1.5rem;line-height:1.15;margin-bottom:.4rem;font-weight:500}
+.find p{color:var(--ink-2);font-size:.97rem;max-width:44ch}
+.find .small{display:block;margin-top:.55rem;font-size:.82rem;color:var(--ink-3)}
 
-/* Results */
-.results{padding-top:2rem;padding-bottom:5rem}
-.state{min-height:30px;display:flex;align-items:center;flex-wrap:wrap;gap:.6rem;margin-bottom:1.6rem;font-size:.86rem;color:var(--ink-3)}
-.state strong{color:var(--ink);font-weight:600}
-.clear-filter{border:1px solid var(--line);background:var(--surface);color:var(--accent);border-radius:var(--r-pill);padding:.2rem .7rem;font-size:.78rem;font-weight:500}
-.clear-filter:hover{border-color:var(--accent)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:2.4rem 1.6rem}
-.book{display:flex;flex-direction:column;gap:.9rem;min-width:0;color:inherit;text-decoration:none}
-.cover{position:relative;aspect-ratio:2/3;display:flex;flex-direction:column;justify-content:space-between;padding:1.3rem 1.1rem 1.1rem 1.5rem;border-radius:3px 8px 8px 3px;overflow:hidden;color:#fff;box-shadow:0 1px 2px rgba(20,22,28,.18),0 10px 22px -12px rgba(20,22,28,.5);transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s}
-.cover::before{content:'';position:absolute;inset:0 auto 0 0;width:12px;background:linear-gradient(90deg,rgba(0,0,0,.28),rgba(255,255,255,.1) 60%,transparent)}
-.cover::after{content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,.12),transparent 45%,rgba(0,0,0,.18));pointer-events:none}
-.cover.has-preview{padding:0}
-.cover.has-preview::before,.cover.has-preview::after{z-index:1}
-.cover.has-preview img{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;display:block}
-.cover-title{position:relative;z-index:1;font-family:var(--serif);font-weight:500;font-size:clamp(1.35rem,2.2vw,1.7rem);line-height:1.08;letter-spacing:-.01em;text-shadow:0 1px 8px rgba(0,0,0,.25);overflow-wrap:anywhere}
-.cover-author{position:relative;z-index:1;font-size:.78rem;font-weight:500;opacity:.88}
-.cover-rule{position:relative;z-index:1;width:28px;height:2px;background:rgba(255,255,255,.7);margin:.7rem 0}
-.book:hover .cover,.book:focus-visible .cover{transform:translateY(-6px) rotate(-.4deg);box-shadow:var(--lift)}
-.book-meta{display:flex;flex-direction:column;gap:.5rem;padding:0 .15rem}
-.book-line{display:flex;justify-content:space-between;gap:.6rem;font-size:.8rem;color:var(--ink-3)}
+/* 4. Cómo funciona */
+.steps{margin-top:2.8rem;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2.2rem;counter-reset:s;list-style:none}
+.step{border-top:3px solid var(--ink);padding-top:1.2rem}
+.step .n{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--accent);margin-bottom:.5rem;display:block}
+.step h3{font-size:1.8rem;margin-bottom:.6rem;font-weight:500;letter-spacing:-.01em}
+.step p{color:var(--ink-2);font-size:.97rem}
+
+/* 5. Colección */
+.grid{margin-top:2.8rem;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2.4rem 1.6rem}
+.book{display:flex;flex-direction:column;gap:.9rem;min-width:0}
+.cover{position:relative;aspect-ratio:3/4;max-width:100%;border-radius:3px 8px 8px 3px;overflow:hidden;box-shadow:0 1px 2px rgba(20,22,28,.18),0 10px 22px -12px rgba(20,22,28,.5);transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s;background:var(--sunk)}
+.cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.cover::before{content:'';position:absolute;inset:0 auto 0 0;width:12px;z-index:1;background:linear-gradient(90deg,rgba(0,0,0,.28),rgba(255,255,255,.1) 60%,transparent)}
+.cover::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(160deg,rgba(255,255,255,.12),transparent 45%,rgba(0,0,0,.18));pointer-events:none}
+.book:hover .cover{transform:translateY(-6px) rotate(-.4deg);box-shadow:var(--lift)}
+.book-line{display:flex;justify-content:space-between;gap:.6rem;font-size:.82rem;color:var(--ink-3)}
 .book-line b{color:var(--ink);font-weight:600}
-.book-desc{font-size:.88rem;line-height:1.55;color:var(--ink-2);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.tags{display:flex;flex-wrap:wrap;gap:.35rem}
-.tag{font-size:.72rem;font-weight:500;color:var(--accent);background:var(--accent-soft);border-radius:var(--r-pill);padding:.2rem .6rem}
-.empty{display:none;max-width:420px;padding:3rem 0}
-.empty.visible{display:block}
-.empty h2{font-family:var(--serif);font-weight:400;font-size:1.7rem;line-height:1.15;margin-bottom:.6rem}
-.empty p{color:var(--ink-2);margin-bottom:1.1rem}
-.empty button{border:1px solid var(--ink);background:var(--ink);color:var(--bg);border-radius:var(--r-pill);padding:.55rem 1.1rem;font-size:.85rem;font-weight:500}
-.footer{border-top:1px solid var(--line);padding-top:2rem;padding-bottom:2rem;color:var(--ink-3);font-size:.82rem}
-.footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
-.footer b{font-family:var(--serif);font-weight:600;letter-spacing:.06em;color:var(--ink)}
+.tag{align-self:flex-start;font-size:.72rem;font-weight:500;color:var(--accent);background:var(--accent-soft);border-radius:var(--r-pill);padding:.2rem .65rem}
+.routes{margin-top:2.4rem;display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center;font-size:.9rem;color:var(--ink-2)}
+.routes .lbl{font-family:var(--serif);font-style:italic;font-size:1.05rem}
+.growing{margin-top:1.4rem;font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--ink-2)}
 
+/* 6. Cierre */
+.close{padding-block:clamp(3.5rem,9vw,7rem);text-align:left}
+.close h2{font-size:clamp(2.1rem,5vw,3.7rem);line-height:1.02;letter-spacing:-.025em;max-width:18ch}
+.close .lead{margin-top:1.4rem}
+.close .cta-row{margin-top:2rem}
 
-/* ── Formato, biblioteca personal ── */
-[hidden]{display:none!important}
-.spine span{max-height:calc(100% - 38px)}
-.spine[data-tipo=curso]::after{content:'';position:absolute;left:0;right:0;top:0;height:6px;background:rgba(255,255,255,.8)}
-.spine[data-tipo=libro]::after{content:'';position:absolute;left:0;right:0;top:0;height:7px;border-top:2px solid rgba(255,255,255,.8);border-bottom:2px solid rgba(255,255,255,.8)}
-.sd{position:absolute;left:50%;bottom:9px;transform:translateX(-50%);width:15px;height:15px;border-radius:50%;display:none;border:1.5px solid #fff;font-style:normal;font-size:9px;line-height:12px;text-align:center;color:#fff;z-index:1}
-.spine[data-st=porleer] .sd{display:block;background:transparent}
-.spine[data-st=leyendo] .sd{display:block;background:var(--accent)}
-.spine[data-st=leido] .sd{display:block;background:#1F8F6B}
-.spine[data-st=leido] .sd::before{content:'✓'}
-.shelf-key{display:inline-flex;gap:.9rem;flex-wrap:wrap;justify-content:flex-end}
-.views-row{padding-top:.7rem;padding-bottom:.1rem}
-.view-tabs{display:inline-flex;gap:2px;padding:3px;background:var(--sunk);border:1px solid var(--line);border-radius:var(--r-pill)}
-.view-tab{border:0;background:transparent;color:var(--ink-2);padding:.5rem 1.15rem;border-radius:var(--r-pill);font-size:.84rem;font-weight:600;letter-spacing:.02em;white-space:nowrap;display:inline-flex;align-items:center;gap:.5rem;transition:background .2s,color .2s}
-.view-tab:hover{color:var(--ink)}
-.view-tab[aria-selected=true]{background:var(--accent);color:var(--on-accent)}
-.view-tab .count{min-width:1.35rem;height:1.35rem;padding:0 .35rem;border-radius:99px;background:color-mix(in srgb,currentColor 18%,transparent);font-size:.74rem;display:inline-grid;place-items:center}
-.toolbar.in-lib .modes{display:none}
-@media(min-width:701px){.toolbar.in-lib .search{flex:1 1 340px}}
-.bk{position:relative;min-width:0;display:flex;flex-direction:column}
-.bk>.book{flex:1}
-.bk .cover{padding-top:2.6rem}
-.fmt{position:absolute;z-index:2;top:.65rem;left:1.45rem;font-family:var(--sans);font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.34);border:1px solid rgba(255,255,255,.4);border-radius:var(--r-pill);padding:.18rem .55rem;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
-.save{position:absolute;z-index:3;top:.5rem;right:.5rem;width:38px;height:38px;border:0;border-radius:50%;display:grid;place-items:center;background:rgba(20,22,28,.55);color:#fff;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:transform .15s,background .2s}
-.save:hover{transform:scale(1.08)}
-.save svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-.save[data-e=porleer]{background:rgba(255,255,255,.94);color:#14161C}.save[data-e=porleer] svg{fill:currentColor}
-.save[data-e=leyendo]{background:var(--accent);color:var(--on-accent)}
-.save[data-e=leido]{background:#1F8F6B;color:#fff}
-.pline{display:flex;justify-content:space-between;gap:.5rem;font-size:.78rem;font-weight:600;color:var(--accent)}
-.pline.ok{color:#1F8F6B}
-.pbar{height:4px;border-radius:4px;background:var(--line);overflow:hidden}
-.pbar i{display:block;height:100%;background:var(--accent);border-radius:4px}
-.st-scrim{position:fixed;inset:0;z-index:90;background:transparent}
-.st-menu{position:fixed;z-index:91;width:212px;padding:.4rem;background:var(--surface);border:1px solid var(--line-2);border-radius:14px;box-shadow:var(--lift);display:flex;flex-direction:column;gap:2px}
-.st-menu .st-title{padding:.4rem .7rem .3rem;font-family:var(--serif);font-style:italic;font-size:.9rem;color:var(--ink-3)}
-.st-opt{display:flex;align-items:center;gap:.7rem;border:0;background:transparent;color:var(--ink);text-align:left;padding:.65rem .7rem;border-radius:10px;font-size:.92rem;font-weight:500}
-.st-opt:hover,.st-opt:focus-visible{background:var(--sunk)}
-.st-opt svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
-.st-opt[aria-checked=true]{color:var(--accent);font-weight:600}
-.st-opt[aria-checked=true]::after{content:'✓';margin-left:auto}
-.st-opt.quit{color:var(--ink-3);border-top:1px solid var(--line);border-radius:0 0 10px 10px;margin-top:2px}
-.lib{padding-top:2rem;padding-bottom:5rem}
-.lib-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,4vw,2.5rem);line-height:1.05;letter-spacing:-.02em}
-.lib-stats{margin-top:.5rem;color:var(--ink-2);font-size:.95rem;max-width:60ch}
-.lib-filters{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.4rem 0 .4rem}
-.lib-sec{margin-top:2.6rem}
-.lib-sec>h3{display:flex;align-items:baseline;gap:.6rem;font-family:var(--serif);font-weight:500;font-size:1.45rem;margin-bottom:1.3rem;padding-bottom:.6rem;border-bottom:1px solid var(--line)}
-.lib-sec>h3 span{font-family:var(--sans);font-size:.8rem;font-weight:600;color:var(--ink-3)}
-.lib-empty{max-width:460px;padding:2.5rem 0}
-.lib-empty h3{font-family:var(--serif);font-weight:400;font-size:1.7rem;line-height:1.15;margin-bottom:.6rem}
-.lib-empty p{color:var(--ink-2);margin-bottom:1.1rem}
-.lib-empty button,.lib-tools button{border:1px solid var(--line-2);background:var(--surface);color:var(--ink);border-radius:var(--r-pill);padding:.5rem 1rem;font-size:.84rem;font-weight:500}
-.lib-empty button.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.lib-tools{margin-top:3.2rem;padding-top:1.4rem;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:center;gap:.6rem}
-.lib-tools p{flex:1 1 100%;font-size:.8rem;color:var(--ink-3);max-width:62ch}
-.lib-msg{font-size:.82rem;color:var(--accent);min-height:1.2em;margin-top:.6rem;width:100%}
-@media(max-width:700px){
-  .views-row{padding-bottom:0}
-  .view-tabs{display:flex;width:100%}.view-tab{flex:1;justify-content:center}
-  .bk .cover{padding-top:2.8rem}
-  .save{width:36px;height:36px;top:.4rem;right:.4rem}
-  .fmt{left:.95rem;top:.55rem;font-size:.58rem;letter-spacing:.07em}
-  .st-scrim{background:rgba(20,22,28,.45)}
-  .st-menu{left:0!important;right:0;top:auto!important;bottom:0;width:auto;border-radius:20px 20px 0 0;padding:.6rem .6rem calc(.8rem + env(safe-area-inset-bottom,0px))}
-  .st-opt{padding:.9rem .8rem;font-size:1rem}
-  .shelf-key{justify-content:flex-start}
-}
+/* Footer · barra inferior El College */
+.footer{background:var(--sunk);border-top:1px solid var(--line)}
+.pf-wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:30px 48px;padding-block:48px 52px}
+.pf-col{flex:1 1 300px;min-width:0}
+.pf-brand{display:flex;align-items:center;gap:14px}
+.ec-logo{display:block;width:52px;height:52px;flex-shrink:0}
+.ec-logo svg{display:block;width:100%;height:100%}
+.pb-sep{width:1px;height:16px;background:var(--ink);opacity:.35;flex-shrink:0}
+.pb-name{font-family:var(--serif);font-style:italic;font-size:21px;line-height:1;color:var(--ink);white-space:nowrap}
+.pf-tag{max-width:340px;margin-top:16px;font-size:15px;line-height:1.55;color:var(--ink-2)}
+.pf-nav{flex:2 1 440px;min-width:0;display:flex;flex-wrap:wrap;gap:12px 28px;align-content:flex-start;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.pf-nav a{color:var(--ink-2);text-decoration:none;transition:color .2s}
+.pf-nav a:hover{color:var(--accent)}
+.pf-nav a[aria-current="page"]{color:var(--accent)}
+.pf-legal{flex-basis:100%;font-size:13px;line-height:1.7;color:var(--ink-3)}
+@media(max-width:699px){.pf-wrap{padding-block:40px 44px;gap:26px}.ec-logo{width:48px;height:48px}.pf-nav{gap:14px 22px}}
 
-/* Tablet */
-@media(max-width:900px){
-  .hero{grid-template-columns:minmax(0,1fr);align-items:start}
-  .hero h1{max-width:14ch}
-  .shelf{--s:.82;justify-content:flex-start;overflow-x:auto;overflow-y:hidden;padding-top:18px;height:calc(300px*var(--s) + 18px);scrollbar-width:none}
-  .shelf::-webkit-scrollbar{display:none}
+@media (max-width:900px){
+  .hero{grid-template-columns:minmax(0,1fr)}
+  .shelf-col{order:2}
+  .shelf{--s:.82;justify-content:flex-start}
   .shelf-note{text-align:left}
-  .toolbar .wrap{flex-wrap:wrap}
-  .search{flex:1 1 280px}
-  .modes{flex:0 0 auto;max-width:100%}
+  .sec-head{grid-template-columns:minmax(0,1fr)}
+  .steps{grid-template-columns:minmax(0,1fr);gap:1.8rem}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .finds{grid-template-columns:minmax(0,1fr)}
+  .find:nth-child(odd),.find:nth-child(even){padding-left:0;padding-right:0;border-left:0}
 }
-/* Mobile */
-@media(max-width:700px){
-  .toolbar{position:static}
-  .toolbar .wrap{flex-direction:column-reverse;align-items:stretch;gap:.7rem}
-  .search{flex-basis:auto}
-  .shelf{--s:.7}
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:1.8rem .9rem}
-  .cover{padding:1rem .8rem .85rem 1.15rem}
-  .cover-title{font-size:1.12rem}
-  .book-desc{display:none}
-  .book-line{flex-direction:column;gap:0}
+@media (max-width:480px){
+  .shelf{--s:.62;gap:4px}
+  .grid{gap:2rem 1rem}
 }
-@media(max-width:480px){.fmt .x{display:none}}
-@media(max-width:360px){.grid{grid-template-columns:minmax(0,1fr)}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
+
 </head>
 <body>
-<header class="header">
-  <div class="wrap">
-    <div class="brand"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>BOOKCLUB</div>
-    <div class="actions">
-      <button id="btn-account" class="account-btn" type="button">Entrar</button>
-      <button id="btn-dark" class="icon-btn" type="button" aria-label="Cambiar apariencia">☽</button>
+<header class="header" id="parentBar">
+  <div class="wrap hbar">
+    <a class="brand" href="#inicio" aria-label="BOOKCLUB, inicio"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>BOOKCLUB</a>
+    <div class="hnav" id="pbMenu" role="navigation" aria-label="Entradas del College">
+      <a href="https://mayorquemirealidad.netlify.app/" target="_blank" rel="noopener"><span class="pb-d">TEMPORADA 2026</span><span class="pb-m">MAYOR QUE MI REALIDAD</span></a>
+      <a href="https://starsmsgapp.netlify.app/" target="_blank" rel="noopener">S.T.A.R.S.</a>
+      <a href="https://thewaylhscol.netlify.app/" target="_blank" rel="noopener">THE WAY</a>
+      <a href="https://collegelhscol.netlify.app/#staff" target="_blank" rel="noopener">STAFF</a>
+      <a href="#inicio" aria-current="page">BOOKCLUB</a>
+      <a class="pb-extra" href="https://lhscolweb.netlify.app/">Volver a LHSCOL</a>
+      <a class="hcta hcta-m" href="https://bookclublhscol.netlify.app/acceso.html" target="_blank" rel="noopener">Mi Biblioteca</a>
+    </div>
+    <div class="hright">
+      <a class="hcta hcta-d" href="https://bookclublhscol.netlify.app/acceso.html" target="_blank" rel="noopener">Mi Biblioteca</a>
+      <button id="theme" class="icon-btn" type="button" aria-label="Cambiar apariencia">☽</button>
+      <button class="hburger" type="button" aria-expanded="false" aria-controls="pbMenu" aria-label="Abrir menú"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg></button>
     </div>
   </div>
 </header>
 
-<main>
+<main id="inicio">
+  <!-- 1. Portada / invitación -->
   <section class="wrap hero">
     <div class="hero-copy">
       <p class="hero-line">Ideas que vale la pena conservar.</p>
-      <h1>Descubre qué merece tu tiempo de lectura.</h1>
-      <p class="hero-purpose">Resúmenes y cursos basados en libros para pensar, crecer y enseñar. Guarda lo que quieres leer y sigue tu avance en Mi biblioteca.</p>
+      <h1>Descubre qué <span class="accent">merece tu tiempo</span> de lectura.</h1>
+      <p class="lead">No todo libro merece el mismo tiempo, pero una buena idea puede acompañarte durante años. BOOKCLUB reúne resúmenes y cursos basados en libros que te ayudan a pensar, crecer y enseñar; para que descubras qué vale la pena leer completo, qué ideas necesitas guardar y dónde quieres profundizar.</p>
+      <div class="cta-row">
+        <a class="btn" href="https://bookclublhscol.netlify.app/biblioteca/" target="_blank" rel="noopener">Explorar BookClub
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="link" href="#como-funciona">Cómo funciona</a>
+      </div>
     </div>
     <div class="shelf-col">
-      <div class="shelf" id="shelf" aria-label="Estantería de libros"></div>
-      <p class="shelf-note" id="shelf-note"></p>
+      <div class="shelf" role="img" aria-label="Estantería con los cuatro títulos de la colección actual">
+        <div class="spine" style="--h:226;--w:46;--i:0;background:linear-gradient(180deg,#D63A30,#B0261E)"><span>Elimina la prisa de tu vida</span></div>
+        <div class="spine" style="--h:186;--w:52;--i:1;background:linear-gradient(180deg,#F5F3EC,#E6DFC9);--tx:#7A5718"><span>Gana la guerra en tu mente</span></div>
+        <div class="spine" style="--h:290;--w:58;--i:2;background:linear-gradient(180deg,#0E86C2,#0A5F94)"><span>Enciende tu cerebro</span></div>
+        <div class="spine" style="--h:168;--w:40;--i:3;background:linear-gradient(180deg,#D8E3DC,#6B5A33)"><span>Practica el camino</span></div>
+      </div>
+      <p class="shelf-note">Cada lomo mide el tiempo de lectura de su resumen.</p>
     </div>
   </section>
 
-  <div class="toolbar" id="toolbar">
-    <div class="wrap views-row">
-      <div class="view-tabs" role="tablist" aria-label="Vista">
-        <button class="view-tab" role="tab" id="tab-explorar" data-view="explorar" aria-selected="true" type="button">Explorar</button>
-        <button class="view-tab" role="tab" id="tab-biblioteca" data-view="biblioteca" aria-selected="false" type="button">Mi biblioteca <span class="count" id="lib-count">0</span></button>
+  <!-- 2. El problema -->
+  <section class="band">
+    <div class="wrap sec">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">Para qué existe</p>
+          <h2>Leer más no siempre significa ir más profundo.</h2>
+        </div>
+        <div>
+          <p class="lead">Hay libros que queremos leer, otros que empezamos y no terminamos, y muchas ideas valiosas que olvidamos con el tiempo. BOOKCLUB existe para ayudarte a seleccionar mejor, recuperar lo esencial y volver a lo que necesitas profundizar, sin tener que empezar de cero cada vez.</p>
+          <p class="aside-note">No todos los libros merecen leerse completos. Con el resumen decides: a veces es más que suficiente, y otras te confirma que vale la pena ir al libro. Si lo lees completo, el resumen es la herramienta para volver a sus ideas más profundas sin leerlo de nuevo.</p>
+        </div>
       </div>
-    </div>
-    <div class="wrap">
-      <div class="modes" id="mode-row" aria-label="Explorar por">
-        <button class="mode active" data-mode="todos" type="button">TODOS</button>
-        <button class="mode" data-mode="ruta" type="button">RUTA</button>
-        <button class="mode" data-mode="autor" type="button">AUTOR</button>
-        <button class="mode" data-mode="tema" type="button">TEMA</button>
-        <button class="mode" data-mode="formato" type="button">FORMATO</button>
-        <button class="mode" data-mode="quiero" type="button">QUIERO…</button>
-      </div>
-      <div class="search">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input id="search-input" type="search" placeholder="Buscar por título o autor…" autocomplete="off" aria-label="Buscar por título o autor">
-        <button id="search-clear" class="search-clear" type="button" aria-label="Borrar búsqueda">×</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="wrap">
-    <div id="explore-panel" class="panel"></div>
-  </div>
-  <section class="wrap results" id="results">
-    <div id="result-state" class="state" aria-live="polite">Cargando…</div>
-    <div id="grid" class="grid"></div>
-    <div id="empty" class="empty">
-      <h2>No encontramos títulos para esta búsqueda.</h2>
-      <p>Prueba otro término o vuelve a Todos.</p>
-      <button id="reset-all" type="button">Ver todos los títulos</button>
     </div>
   </section>
-  <section class="wrap lib" id="lib-view" hidden aria-labelledby="tab-biblioteca"></section>
+
+  <!-- 3. Qué encontrarás -->
+  <section class="band">
+    <div class="wrap sec">
+      <p class="eyebrow">Qué encontrarás en BookClub</p>
+      <div class="finds">
+        <article class="find">
+          <div class="glyph g1" aria-hidden="true"></div>
+          <div>
+            <h3>Libros seleccionados</h3>
+            <p>Títulos elegidos por su capacidad de aportar a la formación, la vida y el servicio.</p>
+          </div>
+        </article>
+        <article class="find">
+          <div class="glyph g3" aria-hidden="true"></div>
+          <div>
+            <h3>Resúmenes para volver a lo esencial</h3>
+            <p>Una síntesis clara de la idea central de cada libro y de sus aportes más importantes, para decidir si el resumen te basta o si quieres leer el libro completo.</p>
+          </div>
+        </article>
+        <article class="find">
+          <div class="glyph g2" aria-hidden="true"></div>
+          <div>
+            <h3>Cursos para profundizar</h3>
+            <p>Algunos libros tienen un recorrido de formación para llevar sus ideas a la práctica.</p>
+            <span class="small">No todos los libros tienen curso.</span>
+          </div>
+        </article>
+        <article class="find">
+          <div class="glyph g4" aria-hidden="true"></div>
+          <div>
+            <h3>Mi Biblioteca</h3>
+            <p>Un espacio personal para guardar los libros que quieres leer y seguir tu avance.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Cómo funciona -->
+  <section class="band" id="como-funciona">
+    <div class="wrap sec">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">Cómo funciona</p>
+          <h2>Una idea puede ser el inicio de un camino.</h2>
+        </div>
+      </div>
+      <ol class="steps">
+        <li class="step">
+          <span class="n">Primero</span>
+          <h3>Explora</h3>
+          <p>Encuentra libros por ruta, autor, tema, formato o aquello que estás buscando.</p>
+        </li>
+        <li class="step">
+          <span class="n">Después</span>
+          <h3>Decide</h3>
+          <p>Conoce la idea central, el tiempo estimado y el aporte de cada libro para decidir si quieres leerlo completo, guardar sus ideas o profundizar.</p>
+        </li>
+        <li class="step">
+          <span class="n">Por último</span>
+          <h3>Profundiza</h3>
+          <p>Lee el resumen, toma el curso cuando esté disponible y guarda el libro en Mi Biblioteca para volver a él cuando lo necesites.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 5. La colección actual -->
+  <section class="band">
+    <div class="wrap sec">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">La colección actual</p>
+          <h2>Algunos de los títulos que ya puedes explorar.</h2>
+        </div>
+        <p class="lead">Una muestra real de lo que vas a encontrar. Vendrán muchos más.</p>
+      </div>
+      <div class="grid">
+        <article class="book">
+          <div class="cover"><img src="img/elimina-la-prisa.jpg" alt="Portada de Elimina la prisa de tu vida" width="520" height="693"></div>
+          <div><div class="book-line"><span><b>John Mark Comer</b></span><span>96 min</span></div></div>
+          <span class="tag">Capacidad · Inteligencia Espiritual</span>
+        </article>
+        <article class="book">
+          <div class="cover"><img src="img/gana-la-guerra-en-tu-mente.jpg" alt="Portada de Gana la guerra en tu mente" width="520" height="693"></div>
+          <div><div class="book-line"><span><b>Craig Groeschel</b></span><span>75 min</span></div></div>
+          <span class="tag">Mentalidad · Renovación</span>
+        </article>
+        <article class="book">
+          <div class="cover"><img src="img/enciende-tu-cerebro.jpg" alt="Portada de Enciende tu cerebro" width="520" height="693"></div>
+          <div><div class="book-line"><span><b>Caroline Leaf</b></span><span>132 min</span></div></div>
+          <span class="tag">Mentalidad · Renovación</span>
+        </article>
+        <article class="book">
+          <div class="cover"><img src="img/practica-el-camino.jpg" alt="Portada de Practica el camino" width="520" height="693"></div>
+          <div><div class="book-line"><span><b>John Mark Comer</b></span><span>68 min</span></div></div>
+          <span class="tag">Capacidad · Inteligencia Espiritual</span>
+        </article>
+      </div>
+      <p class="growing">Cada título pertenece a una ruta formativa de El College. La colección está viva y vendrán muchos títulos más.</p>
+    </div>
+  </section>
+
+  <!-- 6. Cierre -->
+  <section class="band">
+    <div class="wrap close">
+      <h2>Las ideas correctas merecen un lugar para permanecer.</h2>
+      <p class="lead">Entra a BOOKCLUB, explora la colección y empieza a construir una biblioteca de ideas que puedan acompañarte a pensar, vivir y enseñar mejor.</p>
+      <div class="cta-row">
+        <a class="btn" href="https://bookclublhscol.netlify.app/biblioteca/" target="_blank" rel="noopener">Explorar BookClub
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="link" href="https://bookclublhscol.netlify.app/acceso.html" target="_blank" rel="noopener">Entrar a Mi Biblioteca</a>
+      </div>
+    </div>
+  </section>
 </main>
 
-<div class="st-scrim" id="st-scrim" hidden></div>
-<div class="st-menu" id="st-menu" role="menu" hidden></div>
-<footer class="footer"><div class="wrap"><span><b>BOOKCLUB</b> · Ideas que vale la pena conservar.</span><span>Resúmenes y cursos basados en libros para pensar, crecer y enseñar.</span></div></footer>
+<footer class="footer">
+  <div class="wrap pf-wrap">
+    <div class="pf-col">
+      <div class="pf-brand"><span class="ec-logo"><svg viewBox="0 0 56 56" aria-hidden="true" focusable="false"><rect width="56" height="56" rx="12" fill="#D9923B"/><rect x="4" y="4" width="48" height="48" rx="9" fill="#62686F"/><rect x="7" y="7" width="42" height="42" rx="7" fill="#1F3A5F"/><rect x="12.5" y="12.5" width="31" height="31" rx="4.5" fill="#9DB69A"/><rect x="18" y="18" width="20" height="20" rx="2.5" fill="#1E2420"/></svg></span><span class="pb-sep" aria-hidden="true"></span><span class="pb-name">El College</span></div>
+      <p class="pf-tag">Todo lo que necesitas para ir más profundo.</p>
+    </div>
+    <div class="pf-nav" role="navigation" aria-label="Pie de página">
+      <a href="https://lhscolweb.netlify.app/" target="_blank" rel="noopener">LHSCOL</a>
+      <a href="https://mayorquemirealidad.netlify.app/" target="_blank" rel="noopener">MAYOR QUE MI REALIDAD</a>
+      <a href="https://starsmsgapp.netlify.app/" target="_blank" rel="noopener">S.T.A.R.S.</a>
+      <a href="https://thewaylhscol.netlify.app/" target="_blank" rel="noopener">THE WAY</a>
+      <a href="https://collegelhscol.netlify.app/#staff" target="_blank" rel="noopener">STAFF</a>
+      <a href="#inicio" aria-current="page">BOOKCLUB</a>
+      <a href="https://www.instagram.com/lhscol/" target="_blank" rel="noopener">INSTAGRAM</a>
+      <a href="https://www.youtube.com/@lhscol?sub_confirmation=1" target="_blank" rel="noopener">YOUTUBE</a>
+      <a href="https://linktr.ee/lhscol" target="_blank" rel="noopener">LINKTREE</a>
+    </div>
+    <div class="pf-legal">© 2026 LHSCOL · Manizales, Colombia. Hecho con ♥ en el Eje Cafetero.</div>
+  </div>
+</footer>
 
 <script>
 (function(){
-'use strict';
-var catalogo=[],libros=[],mode='todos',selection=null,routeMajor=null,search='',view='explorar',libFilter='todos';
-var lib={},progMap={},menuFor=null,menuBtn=null,menuT=0,menuY=0;
-var LIB_KEY='bookclub-biblioteca';
-var labelsExp={mentalidad:'Mentalidad',capacidad:'Capacidad',habilidad:'Habilidad'};
-var labelsSub={identidad:'Identidad',sanidad:'Sanidad',renovacion:'Renovación',espiritual:'Inteligencia Espiritual',emocional:'Inteligencia Emocional',fisica:'Inteligencia Física',personal:'Personal',relacional:'Relacional',vocacional:'Vocacional'};
-var routeSubs={mentalidad:['identidad','sanidad','renovacion'],capacidad:['espiritual','emocional','fisica'],habilidad:['personal','relacional','vocacional']};
-var tipoLabels={resumen:'Resumen',libro:'Libro completo',curso:'Curso'};
-var tipoPlural={resumen:'Resúmenes',libro:'Libros completos',curso:'Cursos'};
-var estLabels={porleer:'Por leer',leyendo:'Leyendo',leido:'Leído'};
-var ESTADOS=['leyendo','porleer','leido'];
-/* Libros cuyo archivo no coincide con la clave de avance que guarda su propia página */
-var SLUG_PROGRESO={'gana-la-guerra-en-tu-mente':'gana-guerra'};
-
-function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-function norm(s){return String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();}
-function unique(arr){return Array.from(new Set(arr)).sort(function(a,b){return a.localeCompare(b,'es',{sensitivity:'base'});});}
-function grad(l,deg){return 'linear-gradient('+(deg||160)+'deg,'+esc(l.color_portada_inicio)+' 0%,'+esc(l.color_portada_fin)+' 100%)';}
-function chip(cls,attr,val,label,on){return '<button type="button" class="'+cls+(on?' active':'')+'" '+attr+'="'+esc(val)+'">'+esc(label)+'</button>';}
-function lsGet(k){try{return localStorage.getItem(k);}catch(e){return null;}}
-function lsSet(k,v){try{localStorage.setItem(k,v);return true;}catch(e){return false;}}
-function conAcceso(){return !!(window.BookclubSync&&window.BookclubSync.isAuthorized&&window.BookclubSync.isAuthorized());}
-function actualizarCatalogo(){libros=catalogo.filter(function(l){return tipoDe(l)!=='libro'||conAcceso();});}
-
-/* ── Formato del título: resumen · libro completo · curso ── */
-function tipoDe(l){
-  var t=norm(l.tipo||l.formato||'');
-  if(t==='curso'||t==='libro'||t==='resumen')return t;
-  if(t==='libro completo'||t==='completo')return 'libro';
-  var a=norm(l.archivo||'');
-  if(/(^|[\/_-])cursos?([\/_.-]|$)/.test(a))return 'curso';
-  if(/(^|[\/_-])completos?([\/_.-]|$)/.test(a))return 'libro';
-  return 'resumen';
-}
-
-/* ── Mi biblioteca: estados guardados en este navegador ── */
-function loadLib(){
-  lib={};
-  try{
-    var j=JSON.parse(lsGet(LIB_KEY));
-    if(j&&typeof j==='object'){Object.keys(j).forEach(function(k){var c=j[k];if(c&&(estLabels[c.e]||c.e==='no'))lib[k]={e:c.e,t:+c.t||0};});}
-  }catch(e){}
-}
-function saveLib(){lsSet(LIB_KEY,JSON.stringify(lib));}
-function stOf(l){var c=lib[l.archivo];return c&&estLabels[c.e]?c.e:null;}
-function savedCount(){return libros.filter(stOf).length;}
-
-/* ── Avance de lectura que guarda cada libro (misma clave que usa su página) ── */
-function clavesProg(l){
-  if(l.clave_progreso)return [l.clave_progreso];
-  var b=(l.archivo||'').split('/').pop().replace(/\.html?$/,''),slug=SLUG_PROGRESO[b]||b;
-  return [tipoDe(l)==='curso'?'bookclub-'+slug+'-curso-progreso':'bookclub-'+slug+'-progreso'];
-}
-function leerProg(l){
-  var ks=clavesProg(l),j=null;
-  for(var i=0;i<ks.length&&!j;i++){try{var x=JSON.parse(lsGet(ks[i]));if(x&&typeof x==='object'&&x.p)j=x;}catch(e){}}
-  if(!j)return {started:false,pct:null,done:false};
-  var sum=0,full=0,n=0;
-  Object.keys(j.p).forEach(function(k){var r=Math.max(0,Math.min(1,+j.p[k]||0));sum+=r;if(r>=.95)full++;});
-  var N=+l.paginas_virtuales||0;
-  return {started:!!j.ult||sum>0,pct:N?Math.min(100,Math.floor(sum/N*100)):null,done:!!N&&full>=N};
-}
-function syncAuto(){
-  var changed=false;
-  libros.forEach(function(l){
-    var pr=leerProg(l);progMap[l.archivo]=pr;
-    if(!pr.started)return;
-    var c=lib[l.archivo];
-    if(c&&c.e==='no')return;
-    if(!c||c.e==='porleer'){lib[l.archivo]={e:pr.done?'leido':'leyendo',t:Date.now()};changed=true;}
-    else if(c.e==='leyendo'&&pr.done){lib[l.archivo]={e:'leido',t:Date.now()};changed=true;}
+  var root=document.documentElement,btn=document.getElementById('theme');
+  function isDark(){var t=root.getAttribute('data-theme');return t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches}
+  function paint(){btn.textContent=isDark()?'☀':'☽'}
+  try{var s=localStorage.getItem('bc-landing-theme');if(s)root.setAttribute('data-theme',s)}catch(e){}
+  btn.addEventListener('click',function(){
+    var n=isDark()?'light':'dark';root.setAttribute('data-theme',n);
+    try{localStorage.setItem('bc-landing-theme',n)}catch(e){}
+    paint();
   });
-  if(changed)saveLib();
-}
-function setEstado(id,e){
-  if(e==='quitar'){
-    var pr=progMap[id];
-    if(pr&&pr.started)lib[id]={e:'no',t:Date.now()};else delete lib[id];
-  }else lib[id]={e:e,t:Date.now()};
-  saveLib();refreshAll();
-}
+  paint();
+})();
 
-/* ── Iconos ── */
-var ICON={
-  porleer:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h11v17l-5.5-3.8-5.5 3.8z"/></svg>',
-  leyendo:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6.5C9.8 5 6.8 4.5 3.5 5v13c3.3-.5 6.3 0 8.5 1.5 2.2-1.5 5.2-2 8.5-1.5V5c-3.3-.5-6.3 0-8.5 1.5z"/><path d="M12 6.5v13"/></svg>',
-  leido:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="m8.3 12.4 2.7 2.7 4.8-5.2"/></svg>',
-  quitar:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>',
-  vacio:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h11v17l-5.5-3.8-5.5 3.8z"/><path d="M12 8.5v5M9.5 11h5"/></svg>'
-};
-
-/* ── Explorar ── */
-function setMode(m){mode=m;selection=null;routeMajor=null;document.querySelectorAll('[data-mode]').forEach(function(b){b.classList.toggle('active',b.dataset.mode===m);});renderPanel();render();}
-function selectValue(v){selection=v;renderPanel();render();}
-function selectRouteMajor(v){routeMajor=v;selection=null;renderPanel();render();}
-function resetFilters(){selection=null;routeMajor=null;renderPanel();render();}
-
-function renderPanel(){
-  var p=document.getElementById('explore-panel'),h='';
-  if(mode==='todos'||view!=='explorar'){p.className='panel';p.innerHTML='';return;}
-  p.className='panel visible';
-  if(mode==='ruta'){
-    h='<div class="panel-title">Elige una ruta formativa</div><div class="chips">'+['mentalidad','capacidad','habilidad'].map(function(x){return chip('chip','data-route',x,labelsExp[x],routeMajor===x);}).join('')+'</div>';
-    if(routeMajor){h+='<div class="sub"><div class="panel-title">'+labelsExp[routeMajor]+'</div><div class="chips">'+chip('chip','data-subroute','','Todas',selection===null)+routeSubs[routeMajor].map(function(x){return chip('chip','data-subroute',x,labelsSub[x],selection===x);}).join('')+'</div></div>';}
-  }
-  if(mode==='autor'){h='<div class="panel-title">Autores</div><div class="chips">'+unique(libros.map(function(l){return l.autor;})).map(function(v){return chip('chip','data-select',v,v,selection===v);}).join('')+'</div>';}
-  if(mode==='tema'){h='<div class="panel-title">Temas</div><div class="chips">'+unique(libros.flatMap(function(l){return l.temas||[];})).map(function(v){return chip('chip','data-select',v,v,selection===v);}).join('')+'</div>';}
-  if(mode==='formato'){
-    h='<div class="panel-title">¿Qué formato prefieres?</div><div class="chips">'+['resumen','curso'].filter(function(t){return libros.some(function(l){return tipoDe(l)===t;});}).map(function(t){var n=libros.filter(function(l){return tipoDe(l)===t;}).length;return chip('chip','data-select',t,tipoPlural[t]+' · '+n,selection===t);}).join('')+'</div>';
-  }
-  if(mode==='quiero'){h='<div class="panel-title">¿Qué quieres trabajar?</div><div class="wants">'+unique(libros.flatMap(function(l){return l.quiero||[];})).map(function(v){return chip('want','data-select',v,v,selection===v);}).join('')+'</div>';}
-  p.innerHTML=h;
-}
-function textMatch(l){return !search||norm(l.titulo+' '+l.autor).includes(norm(search));}
-function matches(l){
-  if(!textMatch(l))return false;
-  if(mode==='ruta'){if(routeMajor&&l.expedicion!==routeMajor)return false;if(selection&&l.sub_expedicion!==selection)return false;}
-  if(mode==='autor'&&selection&&l.autor!==selection)return false;
-  if(mode==='tema'&&selection&&!(l.temas||[]).includes(selection))return false;
-  if(mode==='formato'&&selection&&tipoDe(l)!==selection)return false;
-  if(mode==='quiero'&&selection&&!(l.quiero||[]).includes(selection))return false;
-  return true;
-}
-function stateText(total){
-  var bits=[];
-  if(mode==='ruta'&&routeMajor){bits.push(labelsExp[routeMajor]+(selection?' → '+labelsSub[selection]:''));}
-  else if(mode==='autor'&&selection){bits.push('Autor: '+selection);}
-  else if(mode==='tema'&&selection){bits.push('Tema: '+selection);}
-  else if(mode==='formato'&&selection){bits.push('Formato: '+tipoPlural[selection]);}
-  else if(mode==='quiero'&&selection){bits.push('Quiero: '+selection);}
-  if(search)bits.push('buscando “'+search+'”');
-  var prefix=bits.length?'<strong>'+esc(bits.join(' · '))+'</strong> · ':'';
-  var clear=(mode!=='todos'&&(routeMajor||selection))?'<button class="clear-filter" id="clear-filter" type="button">Limpiar filtro</button>':'';
-  return prefix+'<span><strong>'+total+'</strong> '+(total===1?'título':'títulos')+'</span>'+clear;
-}
-function card(l){
-  var id=l.archivo,e=stOf(l),pr=progMap[id]||{},t=tipoDe(l);
-  var cover=l.preview_imagen
-    ? '<div class="cover has-preview"><img src="'+esc(l.preview_imagen)+'" alt="Portada de '+esc(l.titulo)+'" loading="lazy"></div>'
-    : '<div class="cover" style="background:'+grad(l)+'"><span class="fmt">'+(t==='libro'?'Libro<span class="x"> completo</span>':esc(tipoLabels[t]))+'</span><div class="cover-title">'+esc(l.titulo)+'</div><div><div class="cover-rule"></div><div class="cover-author">'+esc(l.autor)+'</div></div></div>';
-  var prog='';
-  if(e==='leyendo'){prog='<div class="pline"><span>Leyendo'+(pr.pct!=null?' · '+pr.pct+' %':'')+'</span></div>'+(pr.pct!=null?'<div class="pbar"><i style="width:'+pr.pct+'%"></i></div>':'');}
-  else if(e==='leido'){prog='<div class="pline ok"><span>✓ Leído</span></div>';}
-  else if(e==='porleer'){prog='<div class="pline"><span>Por leer</span></div>';}
-  var meta='<div class="book-meta"><div class="book-line"><span><b>'+esc(l.autor)+'</b> · '+esc(l.anio)+'</span><span>'+esc(l.tiempo_lectura_min)+' min</span></div>'+prog+'<div class="book-desc">'+esc(l.descripcion)+'</div><div class="tags"><span class="tag">'+esc(labelsExp[l.expedicion]||'')+'</span><span class="tag">'+esc(labelsSub[l.sub_expedicion]||'')+'</span></div></div>';
-  var label=tipoLabels[t]+': '+l.titulo+', '+l.autor+', '+l.tiempo_lectura_min+' minutos'+(e?'. '+estLabels[e]:'');
-  var btn='<button class="save" type="button" data-id="'+esc(id)+'" data-e="'+(e||'')+'" aria-haspopup="menu" aria-expanded="false" aria-label="'+esc(e?'Estado: '+estLabels[e]+'. Cambiar':'Guardar en Mi biblioteca: '+l.titulo)+'">'+(e?ICON[e]:ICON.vacio)+'</button>';
-  var privado=t==='libro',destino=privado?'#libro-privado':id,attrs=privado?' data-private-book="'+esc(l.archivo_privado||'')+'"':'';
-  return '<div class="bk"><a class="book" href="'+esc(destino)+'"'+attrs+' aria-label="'+esc(label)+'">'+cover+meta+'</a>'+btn+'</div>';
-}
-function renderShelf(){
-  var s=document.getElementById('shelf'),maxT=Math.max.apply(null,libros.map(function(l){return l.tiempo_lectura_min;}).concat([1]));
-  s.innerHTML=libros.map(function(l,i){
-    var h=150+Math.round((l.tiempo_lectura_min/maxT)*130),w=46+Math.min(l.capitulos||1,16)*2;
-    var privado=tipoDe(l)==='libro',destino=privado?'#libro-privado':l.archivo,attrs=privado?' data-private-book="'+esc(l.archivo_privado||'')+'"':'';
-    return '<a class="spine" data-href="'+esc(l.archivo)+'" href="'+esc(destino)+'"'+attrs+' title="'+esc(tipoLabels[tipoDe(l)]+': '+l.titulo+' — '+l.autor)+'" style="--i:'+i+';--h:'+h+';--w:'+w+';background:'+grad(l,180)+'"><span>'+esc(l.titulo)+'</span><i class="sd" aria-hidden="true"></i></a>';
-  }).join('');
-  s.classList.add('intro');
-  var by={};libros.forEach(function(l){by[l.archivo]=l;});
-  document.querySelectorAll('.spine').forEach(function(sp){sp.dataset.tipo=tipoDe(by[sp.dataset.href]);});
-  document.getElementById('shelf-note').innerHTML='<span class="shelf-key"><span>'+libros.length+' títulos · cada lomo mide su tiempo de lectura</span><span>franja = curso · círculo = en Mi biblioteca</span></span>';
-}
-function shelfMarks(okMap){
-  var by={};libros.forEach(function(l){by[l.archivo]=l;});
-  document.querySelectorAll('.spine').forEach(function(sp){
-    var l=by[sp.dataset.href],e=l&&stOf(l);
-    if(e)sp.dataset.st=e;else delete sp.dataset.st;
-    sp.classList.toggle('dim',!okMap[sp.dataset.href]);
-  });
-}
-function render(){
-  var filtered=libros.filter(matches),g=document.getElementById('grid'),e=document.getElementById('empty');
-  document.getElementById('result-state').innerHTML=stateText(filtered.length);
-  if(filtered.length){g.innerHTML=filtered.map(card).join('');e.classList.remove('visible');}
-  else{g.innerHTML='';e.classList.add('visible');}
-  var ok={};
-  if(view==='explorar')filtered.forEach(function(l){ok[l.archivo]=1;});
-  shelfMarks(ok);
-  var c=document.getElementById('clear-filter');if(c)c.onclick=resetFilters;
-}
-
-/* ── Vista Mi biblioteca ── */
-function fmtMin(m){var h=Math.floor(m/60),r=Math.round(m%60);return h?h+' h'+(r?' '+r+' min':''):r+' min';}
-function renderLib(){
-  var box=document.getElementById('lib-view');
-  var saved=libros.filter(stOf),by={leyendo:[],porleer:[],leido:[]};
-  saved.forEach(function(l){by[stOf(l)].push(l);});
-  ESTADOS.forEach(function(e){by[e].sort(function(a,b){return (lib[b.archivo].t||0)-(lib[a.archivo].t||0);});});
-  var pend=0;
-  by.porleer.forEach(function(l){pend+=+l.tiempo_lectura_min||0;});
-  by.leyendo.forEach(function(l){var p=progMap[l.archivo];pend+=(+l.tiempo_lectura_min||0)*(p&&p.pct!=null?(100-p.pct)/100:1);});
-  var h='<div class="lib-head"><h2>Mi biblioteca</h2>';
-  if(!saved.length){
-    h+='<p class="lib-stats">Aquí reúnes lo que quieres leer, lo que estás leyendo y lo que ya leíste.</p></div>'+
-      '<div class="lib-empty"><h3>Todavía no has guardado nada.</h3><p>Toca el marcador en la esquina de cualquier portada para guardarla como <b>Por leer</b>, <b>Leyendo</b> o <b>Leído</b>. Si abres un libro y avanzas en su lectura, pasa solo a <b>Leyendo</b>.</p><button class="primary" type="button" data-go="explorar">Explorar títulos</button></div>';
-  }else{
-    h+='<p class="lib-stats"><b>'+by.leyendo.length+'</b> leyendo · <b>'+by.porleer.length+'</b> por leer · <b>'+by.leido.length+'</b> '+(by.leido.length===1?'leído':'leídos')+(pend>0?' · unas <b>'+fmtMin(pend)+'</b> de lectura por delante':'')+'</p></div>';
-    h+='<div class="lib-filters" role="group" aria-label="Filtrar por estado">'+chip('chip','data-lf','todos','Todos · '+saved.length,libFilter==='todos')+ESTADOS.map(function(e){return chip('chip','data-lf',e,estLabels[e]+' · '+by[e].length,libFilter===e);}).join('')+'</div>';
-    var shown=0;
-    ESTADOS.forEach(function(e){
-      if(libFilter!=='todos'&&libFilter!==e)return;
-      var items=by[e].filter(textMatch);
-      if(!items.length)return;
-      shown+=items.length;
-      h+='<section class="lib-sec"><h3>'+estLabels[e]+'<span>'+items.length+'</span></h3><div class="grid">'+items.map(card).join('')+'</div></section>';
-    });
-    if(!shown)h+='<div class="lib-empty"><h3>Nada coincide.</h3><p>Prueba otra búsqueda o cambia el filtro de estado.</p></div>';
-  }
-  var syncText=conAcceso()?'Tu biblioteca y tu avance se sincronizan de forma privada con tu cuenta.':'Inicia sesión para sincronizar tu biblioteca y tu avance entre dispositivos.';
-  h+='<div class="lib-tools"><p>'+syncText+'</p><button type="button" id="lib-export">Exportar respaldo</button><button type="button" id="lib-import">Importar respaldo</button><input type="file" id="lib-file" accept="application/json,.json" hidden><div class="lib-msg" id="lib-msg" aria-live="polite"></div></div>';
-  box.innerHTML=h;
-  var ok={};saved.filter(textMatch).forEach(function(l){ok[l.archivo]=1;});
-  shelfMarks(ok);
-}
-function refreshAll(){
-  document.getElementById('lib-count').textContent=savedCount();
-  if(view==='biblioteca')renderLib();else render();
-}
-function setView(v,keepHash){
-  view=v;
-  document.querySelectorAll('[data-view]').forEach(function(b){b.setAttribute('aria-selected',b.dataset.view===v?'true':'false');});
-  document.getElementById('toolbar').classList.toggle('in-lib',v==='biblioteca');
-  document.getElementById('results').hidden=v!=='explorar';
-  document.getElementById('lib-view').hidden=v!=='biblioteca';
-  renderPanel();
-  refreshAll();
-  if(!keepHash){try{history.replaceState(null,'',v==='biblioteca'?'#biblioteca':location.pathname+location.search);}catch(e){}}
-}
-
-/* ── Menú de estado ── */
-function closeMenu(){
-  var m=document.getElementById('st-menu'),sc=document.getElementById('st-scrim');
-  m.hidden=true;sc.hidden=true;
-  if(menuBtn){menuBtn.setAttribute('aria-expanded','false');try{menuBtn.focus({preventScroll:true});}catch(e){}}
-  menuBtn=null;menuFor=null;
-}
-function openMenu(btn){
-  closeMenu();
-  var id=btn.dataset.id,l=libros.filter(function(x){return x.archivo===id;})[0];if(!l)return;
-  var cur=stOf(l),m=document.getElementById('st-menu'),sc=document.getElementById('st-scrim');
-  var h='<div class="st-title">'+esc(l.titulo)+'</div>'+['porleer','leyendo','leido'].map(function(e){return '<button class="st-opt" role="menuitemradio" aria-checked="'+(cur===e)+'" type="button" data-set="'+e+'">'+ICON[e]+estLabels[e]+'</button>';}).join('');
-  if(cur)h+='<button class="st-opt quit" role="menuitem" type="button" data-set="quitar">'+ICON.quitar+'Quitar de Mi biblioteca</button>';
-  m.innerHTML=h;m.hidden=false;sc.hidden=false;
-  menuFor=id;menuBtn=btn;menuT=Date.now();menuY=window.scrollY;btn.setAttribute('aria-expanded','true');
-  if(window.innerWidth>700){
-    var r=btn.getBoundingClientRect(),w=212,left=Math.max(8,Math.min(window.innerWidth-w-8,r.right-w)),top=r.bottom+6;
-    if(top+m.offsetHeight>window.innerHeight-8)top=Math.max(8,r.top-m.offsetHeight-6);
-    m.style.left=left+'px';m.style.top=top+'px';
-  }else{m.style.left='';m.style.top='';}
-  var first=m.querySelector('[aria-checked=true]')||m.querySelector('.st-opt');if(first)first.focus({preventScroll:true});
-}
-document.getElementById('st-menu').addEventListener('click',function(e){
-  var b=e.target.closest('[data-set]');if(!b)return;
-  var id=menuFor,v=b.dataset.set;
-  var m=document.getElementById('st-menu'),sc=document.getElementById('st-scrim');
-  m.hidden=true;sc.hidden=true;menuBtn=null;menuFor=null;
-  setEstado(id,v);
-});
-document.getElementById('st-menu').addEventListener('keydown',function(e){
-  if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
-  var o=Array.prototype.slice.call(this.querySelectorAll('.st-opt')),i=o.indexOf(document.activeElement);
-  e.preventDefault();o[(i+(e.key==='ArrowDown'?1:-1)+o.length)%o.length].focus();
-});
-document.getElementById('st-scrim').addEventListener('click',closeMenu);
-document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menuFor)closeMenu();});
-window.addEventListener('scroll',function(){if(menuFor&&window.innerWidth>700&&Date.now()-menuT>400&&Math.abs(window.scrollY-menuY)>40)closeMenu();},{passive:true});
-
-/* ── Respaldo ── */
-function exportar(){
-  var prog={};
-  try{for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(/^bookclub-.+-progreso$/.test(k))prog[k]=JSON.parse(localStorage.getItem(k));}}catch(e){}
-  var data={app:'bookclub',v:1,fecha:new Date().toISOString(),biblioteca:lib,progreso:prog};
-  var a=document.createElement('a');
-  a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,1)],{type:'application/json'}));
-  a.download='bookclub-mi-biblioteca.json';document.body.appendChild(a);a.click();
-  setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);
-  msg('Respaldo exportado.');
-}
-function importar(file){
-  var fr=new FileReader();
-  fr.onload=function(){
-    try{
-      var d=JSON.parse(fr.result);
-      if(!d||d.app!=='bookclub'||typeof d.biblioteca!=='object')throw new Error();
-      var n=0;
-      Object.keys(d.biblioteca).forEach(function(k){
-        var c=d.biblioteca[k];
-        if(!c||!(estLabels[c.e]||c.e==='no'))return;
-        if(!lib[k]||(+c.t||0)>(lib[k].t||0)){lib[k]={e:c.e,t:+c.t||0};n++;}
-      });
-      Object.keys(d.progreso||{}).forEach(function(k){
-        if(!/^bookclub-.+-progreso$/.test(k))return;
-        var inc=d.progreso[k];if(!inc||typeof inc.p!=='object')return;
-        var cur=null;try{cur=JSON.parse(lsGet(k));}catch(e){}
-        if(!cur||typeof cur.p!=='object'){lsSet(k,JSON.stringify({ult:inc.ult||null,r:+inc.r||0,p:inc.p}));return;}
-        Object.keys(inc.p).forEach(function(pg){cur.p[pg]=Math.max(+cur.p[pg]||0,+inc.p[pg]||0);});
-        lsSet(k,JSON.stringify(cur));
-      });
-      saveLib();syncAuto();refreshAll();
-      msg('Respaldo importado: '+n+(n===1?' cambio':' cambios')+' en tu biblioteca.');
-    }catch(e){msg('Ese archivo no es un respaldo de BOOKCLUB.');}
-  };
-  fr.readAsText(file);
-}
-function msg(t){var m=document.getElementById('lib-msg');if(m)m.textContent=t;}
-
-/* ── Eventos ── */
-document.getElementById('mode-row').addEventListener('click',function(e){var b=e.target.closest('[data-mode]');if(b)setMode(b.dataset.mode);});
-document.getElementById('explore-panel').addEventListener('click',function(e){
-  var r=e.target.closest('[data-route]');if(r){selectRouteMajor(r.dataset.route);return;}
-  var sr=e.target.closest('[data-subroute]');if(sr){selectValue(sr.dataset.subroute||null);return;}
-  var s=e.target.closest('[data-select]');if(s)selectValue(s.dataset.select);
-});
-document.querySelector('.view-tabs').addEventListener('click',function(e){var b=e.target.closest('[data-view]');if(b&&b.dataset.view!==view)setView(b.dataset.view);});
-document.addEventListener('click',function(e){
-  var privado=e.target.closest('[data-private-book]');
-  if(privado){e.preventDefault();var ruta=privado.dataset.privateBook;if(!ruta)return;window.BookclubSync.openPrivateBook(ruta).catch(function(err){alert(err&&err.message?err.message:'No fue posible abrir el libro.');});return;}
-  var sv=e.target.closest('.save');
-  if(sv){e.preventDefault();e.stopPropagation();if(menuBtn===sv){closeMenu();}else{openMenu(sv);}return;}
-  var lf=e.target.closest('[data-lf]');if(lf){libFilter=lf.dataset.lf;renderLib();return;}
-  var go=e.target.closest('[data-go]');if(go){setView(go.dataset.go);return;}
-  if(e.target.id==='lib-export'){exportar();return;}
-  if(e.target.id==='lib-import'){document.getElementById('lib-file').click();return;}
-});
-document.addEventListener('change',function(e){
-  if(e.target.id==='lib-file'&&e.target.files&&e.target.files[0]){importar(e.target.files[0]);e.target.value='';}
-});
-var inp=document.getElementById('search-input'),clr=document.getElementById('search-clear');
-function rerender(){if(view==='biblioteca')renderLib();else render();}
-inp.addEventListener('input',function(){search=this.value.trim();clr.classList.toggle('visible',!!search);rerender();});
-clr.addEventListener('click',function(){inp.value='';search='';clr.classList.remove('visible');inp.focus();rerender();});
-document.getElementById('reset-all').addEventListener('click',function(){inp.value='';search='';clr.classList.remove('visible');setMode('todos');});
-
-function actualizarCuenta(){
-  var b=document.getElementById('btn-account'),u=window.BookclubSync&&window.BookclubSync.getUser?window.BookclubSync.getUser():null;
-  b.textContent=conAcceso()?(u&&u.email?'Cuenta':'Mi cuenta'):'Entrar con Google';
-}
-document.getElementById('btn-account').addEventListener('click',function(){
-  if(conAcceso()){
-    if(confirm('¿Deseas cerrar la sesión de BOOKCLUB en este dispositivo?'))window.BookclubSync.signOut();
-    return;
-  }
-  var b=this;b.disabled=true;b.textContent='Abriendo Google…';
-  window.BookclubSync.signInWithGoogle().catch(function(err){b.disabled=false;actualizarCuenta();alert(err&&err.message?err.message:'No fue posible abrir el acceso con Google.');});
-});
-window.addEventListener('bookclub-auth-change',function(){
-  actualizarCatalogo();actualizarCuenta();
-  if(libros.length){syncAuto();renderShelf();refreshAll();}
-});
-window.addEventListener('bookclub-sync-ready',function(){if(!libros.length)return;loadLib();syncAuto();refreshAll();});
-
-/* Al volver desde un libro (otra pestaña) se actualiza el avance */
-function volver(){if(!libros.length||document.hidden)return;syncAuto();refreshAll();}
-document.addEventListener('visibilitychange',volver);
-window.addEventListener('focus',volver);
-window.addEventListener('pageshow',function(e){if(e.persisted)volver();});
-window.addEventListener('storage',function(e){if(e.key===LIB_KEY){loadLib();}if(libros.length){syncAuto();refreshAll();}});
-
-function applyTheme(dark){
-  document.body.classList.toggle('dark',dark);
-  document.getElementById('btn-dark').textContent=dark?'☀':'☽';
-  document.getElementById('theme-color-meta').setAttribute('content',dark?'#0B0C10':'#F3F4F6');
-  try{localStorage.setItem('bookclub-theme',dark?'dark':'light');}catch(e){}
-}
-var saved=null;try{saved=localStorage.getItem('bookclub-theme');}catch(e){}
-applyTheme(saved==='dark'||(!saved&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches));
-document.getElementById('btn-dark').addEventListener('click',function(){applyTheme(!document.body.classList.contains('dark'));});
-
-loadLib();
-fetch('libros.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error();return r.json();}).then(function(d){
-  catalogo=d.libros||[];actualizarCatalogo();actualizarCuenta();
-  syncAuto();renderShelf();
-  setView(location.hash==='#biblioteca'?'biblioteca':'explorar',true);
-}).catch(function(){document.getElementById('result-state').textContent='No se pudo cargar la biblioteca.';document.getElementById('empty').classList.add('visible');});
-if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
+/* Menú móvil de la barra El College */
+(function(){
+  var h=document.getElementById('parentBar');if(!h)return;
+  var b=h.querySelector('.hburger');
+  var ico={open:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>',closed:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>'};
+  function set(o){h.classList.toggle('open',o);b.setAttribute('aria-expanded',o?'true':'false');b.setAttribute('aria-label',o?'Cerrar menú':'Abrir menú');b.innerHTML=o?ico.open:ico.closed}
+  b.addEventListener('click',function(){set(!h.classList.contains('open'))});
+  h.querySelectorAll('.hnav a').forEach(function(a){a.addEventListener('click',function(){set(false)})});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&h.classList.contains('open')){set(false);b.focus()}});
+  window.addEventListener('resize',function(){if(window.innerWidth>899)set(false)});
 })();
 </script>
 </body>
 </html>
+

@@ -17,7 +17,7 @@
       var status=document.getElementById('status');
       try{
         var client=window.supabase.createClient('https://dgllysqskzpjtmflfnew.supabase.co','sb_publishable_In8S8O4wx4mPdR75-jrRSg_fu6MWbqv',{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
-        var result=await client.auth.signInWithOAuth({provider:'google',options:{redirectTo:'https://bookclublhscol.netlify.app/#biblioteca'}});
+        var result=await client.auth.signInWithOAuth({provider:'google',options:{redirectTo:'https://bookclublhscol.netlify.app/biblioteca/#biblioteca'}});
         if(result.error)throw result.error;
       }catch(error){
         status.className='error';

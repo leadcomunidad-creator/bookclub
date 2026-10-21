@@ -6,7 +6,7 @@
   var CONFIG = {
     url: 'https://dgllysqskzpjtmflfnew.supabase.co',
     publishableKey: 'sb_publishable_In8S8O4wx4mPdR75-jrRSg_fu6MWbqv',
-    redirectTo: 'https://bookclublhscol.netlify.app',
+    redirectTo: 'https://bookclublhscol.netlify.app/biblioteca/',
     bucket: 'bookclub-private'
   };
   var client = null, active = false, user = null, readyResolve;
@@ -129,7 +129,7 @@
 
   function injectBook(html) {
     var sync = '<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"><\/script><script src="https://bookclublhscol.netlify.app/bookclub-sync.js"><\/script>';
-    var home = '<script>(function(){var a=document.getElementById("bookclub-home");if(a)a.href="https://bookclublhscol.netlify.app/";window.addEventListener("bookclub-sync-ready",function(){if(typeof cargarProg==="function"){cargarProg();if(typeof pintarProg==="function")pintarProg();}});})();<\/script>';
+    var home = '<script>(function(){var a=document.getElementById("bookclub-home");if(a)a.href="https://bookclublhscol.netlify.app/biblioteca/";window.addEventListener("bookclub-sync-ready",function(){if(typeof cargarProg==="function"){cargarProg();if(typeof pintarProg==="function")pintarProg();}});})();<\/script>';
     return html.replace('</head>', sync + '</head>').replace('</body>', home + '</body>');
   }
 
