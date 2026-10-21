@@ -323,7 +323,7 @@ button{cursor:pointer}
 <script>
 (function(){
 'use strict';
-var catalogo=[],libros=[],mode='todos',selection=null,routeMajor=null,search='',view='explorar',libFilter='todos',pendingLibraryAccess=false;
+var catalogo=[],libros=[],mode='todos',selection=null,routeMajor=null,search='',view='explorar',libFilter='todos';
 var lib={},progMap={},menuFor=null,menuBtn=null,menuT=0,menuY=0;
 var LIB_KEY='bookclub-biblioteca';
 var labelsExp={mentalidad:'Mentalidad',capacidad:'Capacidad',habilidad:'Habilidad'};
@@ -540,18 +540,6 @@ function refreshAll(){
   document.getElementById('lib-count').textContent=savedCount();
   if(view==='biblioteca')renderLib();else render();
 }
-function abrirAccesoBiblioteca(){
-  if(conAcceso()){setView('biblioteca');return;}
-  pendingLibraryAccess=true;
-  try{sessionStorage.setItem('bookclub-open-library','1');}catch(e){}
-  iniciarAccesoBiblioteca();
-}
-function iniciarAccesoBiblioteca(){
-  var b=document.getElementById('btn-account'),label=b.textContent;
-  b.disabled=true;b.textContent='Abriendo Google…';
-  var returnTo=location.origin&&location.origin!=='null'?location.origin+location.pathname+'?access=biblioteca#biblioteca':null;
-  window.BookclubSync.signInWithGoogle(returnTo).catch(function(err){b.disabled=false;b.textContent=label;console.error('No fue posible abrir el acceso con Google.',err);});
-}
 function setView(v,keepHash){
   view=v;
   document.querySelectorAll('[data-view]').forEach(function(b){b.setAttribute('aria-selected',b.dataset.view===v?'true':'false');});
@@ -647,14 +635,14 @@ document.getElementById('explore-panel').addEventListener('click',function(e){
   var sr=e.target.closest('[data-subroute]');if(sr){selectValue(sr.dataset.subroute||null);return;}
   var s=e.target.closest('[data-select]');if(s)selectValue(s.dataset.select);
 });
-document.querySelector('.view-tabs').addEventListener('click',function(e){var b=e.target.closest('[data-view]');if(!b||b.dataset.view===view)return;if(b.dataset.view==='biblioteca'){abrirAccesoBiblioteca();return;}setView(b.dataset.view);});
+document.querySelector('.view-tabs').addEventListener('click',function(e){var b=e.target.closest('[data-view]');if(b&&b.dataset.view!==view)setView(b.dataset.view);});
 document.addEventListener('click',function(e){
   var privado=e.target.closest('[data-private-book]');
   if(privado){e.preventDefault();var ruta=privado.dataset.privateBook;if(!ruta)return;window.BookclubSync.openPrivateBook(ruta).catch(function(err){alert(err&&err.message?err.message:'No fue posible abrir el libro.');});return;}
   var sv=e.target.closest('.save');
   if(sv){e.preventDefault();e.stopPropagation();if(menuBtn===sv){closeMenu();}else{openMenu(sv);}return;}
   var lf=e.target.closest('[data-lf]');if(lf){libFilter=lf.dataset.lf;renderLib();return;}
-  var go=e.target.closest('[data-go]');if(go){if(go.dataset.go==='biblioteca')abrirAccesoBiblioteca();else setView(go.dataset.go);return;}
+  var go=e.target.closest('[data-go]');if(go){setView(go.dataset.go);return;}
   if(e.target.id==='lib-export'){exportar();return;}
   if(e.target.id==='lib-import'){document.getElementById('lib-file').click();return;}
 });
@@ -669,23 +657,19 @@ document.getElementById('reset-all').addEventListener('click',function(){inp.val
 
 function actualizarCuenta(){
   var b=document.getElementById('btn-account'),u=window.BookclubSync&&window.BookclubSync.getUser?window.BookclubSync.getUser():null;
-  b.textContent=conAcceso()?(u&&u.email?'Mi biblioteca':'Mi biblioteca'):'Mi Biblioteca';
+  b.textContent=conAcceso()?(u&&u.email?'Cuenta':'Mi cuenta'):'Entrar con Google';
 }
 document.getElementById('btn-account').addEventListener('click',function(){
   if(conAcceso()){
-    setView('biblioteca');
+    if(confirm('¿Deseas cerrar la sesión de BOOKCLUB en este dispositivo?'))window.BookclubSync.signOut();
     return;
   }
-  abrirAccesoBiblioteca();
+  var b=this;b.disabled=true;b.textContent='Abriendo Google…';
+  window.BookclubSync.signInWithGoogle().catch(function(err){b.disabled=false;actualizarCuenta();alert(err&&err.message?err.message:'No fue posible abrir el acceso con Google.');});
 });
 window.addEventListener('bookclub-auth-change',function(){
   actualizarCatalogo();actualizarCuenta();
   if(libros.length){syncAuto();renderShelf();refreshAll();}
-  var requested=pendingLibraryAccess||location.search.indexOf('access=biblioteca')!==-1||location.hash==='#biblioteca';
-  if(requested&&conAcceso()){
-    pendingLibraryAccess=false;try{sessionStorage.removeItem('bookclub-open-library');}catch(e){}
-    if(libros.length)setView('biblioteca',true);
-  }
 });
 window.addEventListener('bookclub-sync-ready',function(){if(!libros.length)return;loadLib();syncAuto();refreshAll();});
 
@@ -710,17 +694,7 @@ loadLib();
 fetch('libros.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error();return r.json();}).then(function(d){
   catalogo=d.libros||[];actualizarCatalogo();actualizarCuenta();
   syncAuto();renderShelf();
-  var requested=location.search.indexOf('access=biblioteca')!==-1||location.hash==='#biblioteca';
-  try{requested=requested||sessionStorage.getItem('bookclub-open-library')==='1';}catch(e){}
-  function abrirDestinoInicial(){
-    if(!requested){setView('explorar',true);return;}
-    pendingLibraryAccess=true;
-    if(conAcceso()){setView('biblioteca',true);return;}
-    setView('explorar',true);
-    var usuario=window.BookclubSync&&window.BookclubSync.getUser&&window.BookclubSync.getUser();
-    if(!usuario)iniciarAccesoBiblioteca();
-  }
-  if(window.BookclubSync&&window.BookclubSync.ready)window.BookclubSync.ready.then(abrirDestinoInicial);else abrirDestinoInicial();
+  setView(location.hash==='#biblioteca'?'biblioteca':'explorar',true);
 }).catch(function(){document.getElementById('result-state').textContent='No se pudo cargar la biblioteca.';document.getElementById('empty').classList.add('visible');});
 if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
 })();
