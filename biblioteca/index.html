@@ -695,7 +695,8 @@ loadLib();
 fetch('libros.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error();return r.json();}).then(function(d){
   catalogo=d.libros||[];actualizarCatalogo();actualizarCuenta();
   syncAuto();renderShelf();
-  setView(location.hash==='#biblioteca'?'biblioteca':'explorar',true);
+  var abrirBiblioteca=new URLSearchParams(location.search).get('open')==='biblioteca'||location.hash==='#biblioteca';
+  setView(abrirBiblioteca?'biblioteca':'explorar',true);
 }).catch(function(){document.getElementById('result-state').textContent='No se pudo cargar la biblioteca.';document.getElementById('empty').classList.add('visible');});
 if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
 })();
