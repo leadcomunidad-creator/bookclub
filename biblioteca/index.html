@@ -659,7 +659,7 @@ document.getElementById('reset-all').addEventListener('click',function(){inp.val
 
 function actualizarCuenta(){
   var b=document.getElementById('btn-account'),u=window.BookclubSync&&window.BookclubSync.getUser?window.BookclubSync.getUser():null;
-  b.textContent=conAcceso()?(u&&u.email?'Cuenta':'Mi cuenta'):'Entrar con Google';
+  b.textContent=conAcceso()?'Salir':'Entrar con Google';
 }
 document.getElementById('btn-account').addEventListener('click',function(){
   if(conAcceso()){
