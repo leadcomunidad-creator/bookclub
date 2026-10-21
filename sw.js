@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'bookclub-v6-firebase';
+const CACHE_VERSION = 'bookclub-v7-realtime-sync';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [

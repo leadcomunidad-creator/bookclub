@@ -10,7 +10,7 @@
     messagingSenderId: '138459401399',
     appId: '1:138459401399:web:aaee2ce217192390ae5132'
   };
-  var auth, db, fbAuth, fbStore, user = null, active = false, resolveReady, timer;
+  var auth, db, fbAuth, fbStore, user = null, active = false, resolveReady, timer, stopListening = null;
   var ready = new Promise(function (resolve) { resolveReady = resolve; });
   var originalSetItem = Storage.prototype.setItem;
 
@@ -40,24 +40,61 @@
     return { biblioteca: parse(rawGet('bookclub-biblioteca'), {}) || {}, progreso: progreso };
   }
 
+  function mergeState(local, cloud) {
+    local = local || { biblioteca: {}, progreso: {} };
+    cloud = cloud || { biblioteca: {}, progreso: {} };
+    var merged = { biblioteca: {}, progreso: {} };
+    var libraryKeys = Object.keys(Object.assign({}, cloud.biblioteca || {}, local.biblioteca || {}));
+    libraryKeys.forEach(function (key) {
+      var localItem = (local.biblioteca || {})[key];
+      var cloudItem = (cloud.biblioteca || {})[key];
+      if (!cloudItem || (localItem && (+localItem.t || 0) >= (+cloudItem.t || 0))) merged.biblioteca[key] = localItem;
+      else merged.biblioteca[key] = cloudItem;
+    });
+    var progressKeys = Object.keys(Object.assign({}, cloud.progreso || {}, local.progreso || {}));
+    progressKeys.forEach(function (key) {
+      merged.progreso[key] = mergeProgress(JSON.stringify((local.progreso || {})[key] || {}), (cloud.progreso || {})[key] || {});
+    });
+    return merged;
+  }
+
+  function applyState(state) {
+    Object.keys(state.progreso || {}).forEach(function (key) { rawSet(key, JSON.stringify(state.progreso[key])); });
+    rawSet('bookclub-biblioteca', JSON.stringify(state.biblioteca || {}));
+  }
+
+  async function saveMerged(state) {
+    var saved;
+    await fbStore.runTransaction(db, async function (transaction) {
+      var snapshot = await transaction.get(ref());
+      var cloud = (snapshot.data() || {}).bookclub || {};
+      saved = mergeState(state, cloud);
+      transaction.set(ref(), { bookclub: { biblioteca: saved.biblioteca, progreso: saved.progreso, actualizadoEn: Date.now() } }, { merge: true });
+    });
+    applyState(saved);
+    return saved;
+  }
+
   async function pull() {
     if (!active || !user) return;
     var snapshot = await fbStore.getDoc(ref());
-    if (!snapshot.exists()) return;
     var cloud = (snapshot.data() || {}).bookclub || {};
-    Object.keys(cloud.progreso || {}).forEach(function (key) { rawSet(key, JSON.stringify(mergeProgress(rawGet(key), cloud.progreso[key]))); });
-    var localLibrary = parse(rawGet('bookclub-biblioteca'), {}) || {};
-    Object.keys(cloud.biblioteca || {}).forEach(function (key) {
-      var local = localLibrary[key], remote = cloud.biblioteca[key] || {};
-      if (!local || (+local.t || 0) <= (+remote.t || 0)) localLibrary[key] = remote;
-    });
-    rawSet('bookclub-biblioteca', JSON.stringify(localLibrary));
+    var merged = mergeState(localState(), cloud);
+    applyState(merged);
+    await saveMerged(merged);
+  }
+
+  function listenForChanges() {
+    if (stopListening) stopListening();
+    stopListening = fbStore.onSnapshot(ref(), function (snapshot) {
+      if (!active || !snapshot.exists()) return;
+      applyState(mergeState(localState(), (snapshot.data() || {}).bookclub || {}));
+    }, function (error) { console.error('No fue posible recibir cambios de BookClub.', error); });
   }
 
   async function push() {
     if (!active || !user) return;
-    var state = localState();
-    await fbStore.setDoc(ref(), { bookclub: { biblioteca: state.biblioteca, progreso: state.progreso, actualizadoEn: Date.now() } }, { merge: true });
+    await saveMerged(localState());
   }
 
   function schedule() {
@@ -66,8 +103,9 @@
   }
 
   async function refresh(currentUser) {
+    if (stopListening) { stopListening(); stopListening = null; }
     user = currentUser || null; active = !!user;
-    if (active) { try { await pull(); } catch (error) { console.error('No fue posible sincronizar BookClub.', error); } }
+    if (active) { try { await pull(); listenForChanges(); } catch (error) { console.error('No fue posible sincronizar BookClub.', error); } }
     resolveReady(api); notify('bookclub-auth-change'); notify('bookclub-sync-ready');
   }
 
@@ -77,6 +115,7 @@
   }
   async function signOut() {
     if (auth) await fbAuth.signOut(auth);
+    if (stopListening) { stopListening(); stopListening = null; }
     active = false; user = null; notify('bookclub-auth-change');
     if (window.parent && window.parent !== window) window.parent.postMessage({ type: 'bookclub-signout' }, window.location.origin);
   }
