@@ -23,6 +23,10 @@
 
   function mergeProgress(localValue, cloudValue) {
     var local = parse(localValue, {}) || {}, cloud = cloudValue || {}, result = {};
+    var localReset = +local.resetAt || 0, cloudReset = +cloud.resetAt || 0;
+    var localTime = +local.t || 0, cloudTime = +cloud.t || 0;
+    if (cloudReset && cloudReset >= localReset && cloudReset >= localTime) return { ult: null, r: 0, p: {}, t: cloudReset, resetAt: cloudReset };
+    if (localReset && localReset > cloudReset && localReset >= cloudTime) return { ult: null, r: 0, p: {}, t: localReset, resetAt: localReset };
     Object.keys(cloud).forEach(function (key) { result[key] = cloud[key]; });
     Object.keys(local).forEach(function (key) { if (key !== 'p') result[key] = local[key]; });
     result.p = {};
@@ -31,6 +35,8 @@
     var localRatio = +local.r || 0, cloudRatio = +cloud.r || 0;
     result.r = Math.max(localRatio, cloudRatio);
     result.ult = cloudRatio > localRatio ? (cloud.ult || null) : (local.ult || cloud.ult || null);
+    result.t = Math.max(localTime, cloudTime);
+    if (Math.max(localReset, cloudReset)) result.resetAt = Math.max(localReset, cloudReset);
     return result;
   }
 
@@ -97,6 +103,12 @@
     await saveMerged(localState());
   }
 
+  async function resetProgress(key) {
+    var now = Date.now();
+    rawSet(key, JSON.stringify({ ult: null, r: 0, p: {}, t: now, resetAt: now }));
+    if (active && user) await saveMerged(localState());
+  }
+
   function schedule() {
     if (!active || !db) return;
     clearTimeout(timer); timer = setTimeout(function () { push().catch(function (error) { console.error('No fue posible guardar BookClub.', error); }); }, 500);
@@ -132,6 +144,8 @@
     getUser: function () { return user; },
     signInWithGoogle: signInWithGoogle,
     signOut: signOut,
+    flush: push,
+    resetProgress: resetProgress,
     openPrivateBook: function (path) { if (!active) return Promise.reject(new Error('Inicia sesión con Google para abrir los libros completos.')); window.location.assign(path); return Promise.resolve(); }
   };
 

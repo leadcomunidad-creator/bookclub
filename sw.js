@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'bookclub-v7-realtime-sync';
+const CACHE_VERSION = 'bookclub-v14-force-local-update';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [
@@ -6,6 +6,15 @@ const CORE_ASSETS = [
   './index.html',
   './libros.json',
   './bookclub-firebase.js',
+  './libros/gana-la-guerra-en-tu-mente-json-piloto.html',
+  './libros/gana-la-guerra-en-tu-mente-json-piloto.json',
+  './libros/elimina-la-prisa-json.html',
+  './libros/elimina-la-prisa-json.json',
+  './libros/enciende-tu-cerebro-json.html',
+  './libros/enciende-tu-cerebro-json.json',
+  './libros/practica-el-camino-json.html',
+  './libros/practica-el-camino-json.json',
+  './libros/json-reader-engine.js',
   './manifest.webmanifest',
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
