@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'bookclub-v16-reader-preload';
+const CACHE_VERSION = 'bookclub-v17-reader-ui';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [

@@ -451,11 +451,6 @@ hr.rule::before { content: '—  ✦  —'; font-size: 11px; color: var(--rule-2
 .footer-firma { font: 400 12px/1.4 var(--font-ui); letter-spacing: .03em; color: var(--text-2); }
 .footer-tag { font: 600 10px/1 var(--font-ui); letter-spacing: .2em; color: var(--text-3); text-transform: uppercase; margin-top: .2rem; }
 
-/* ── Lectura limpia ── */
-body.modo-lectura .libro-header, body.modo-lectura .lectura-meta, body.modo-lectura .book-footer { display: none; }
-body.modo-lectura .page { padding-top: calc(var(--barra) + var(--safe-t) + .6rem); }
-body.modo-lectura .nav-final { border-top-color: transparent; }
-
 /* ── Panel de ajustes ── */
 #config-overlay { position: fixed; inset: 0; z-index: 9996; background: rgba(20,19,17,.18); opacity: 0; pointer-events: none; transition: opacity .2s; }
 #config-overlay.activo { opacity: 1; pointer-events: auto; }
@@ -787,10 +782,30 @@ body.dark .eval-score.fid { color: var(--head-2); }
 .texto .eval-titulo { font-family: var(--font-display); font-style: normal; font-weight: 700; font-size: 1.02em; margin: 0; color: var(--head); }
 .toc-arrow { color: var(--text-3); }
 
+
+/* BOOKCLUB · Desplazamiento editorial, integrado con el tema del libro */
+.pagina, #menu-panel {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--c-accion) 40%, var(--rule-2) 60%) var(--paper);
+}
+#menu-panel { scrollbar-color: color-mix(in srgb, var(--c-accion) 40%, var(--rule-2) 60%) var(--drawer); }
+.pagina::-webkit-scrollbar, #menu-panel::-webkit-scrollbar { width: 10px; height: 10px; }
+.pagina::-webkit-scrollbar-track { background: var(--paper); }
+#menu-panel::-webkit-scrollbar-track { background: var(--drawer); }
+.pagina::-webkit-scrollbar-thumb, #menu-panel::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--c-accion) 40%, var(--rule-2) 60%);
+  border-radius: 999px;
+  border: 2px solid var(--paper);
+  min-height: 36px;
+}
+#menu-panel::-webkit-scrollbar-thumb { border-color: var(--drawer); }
+.pagina::-webkit-scrollbar-thumb:hover, #menu-panel::-webkit-scrollbar-thumb:hover { background: var(--c-accion); }
+.pagina::-webkit-scrollbar-button, #menu-panel::-webkit-scrollbar-button { display: none; height: 0; width: 0; }
+.pagina::-webkit-scrollbar-corner { background: var(--paper); }
 </style>
 </head>
 <body class="en-portada">
-<a id="bookclub-home" href="../index.html" aria-label="Volver a BOOKCLUB">← BOOKCLUB</a>
+<a id="bookclub-home" href="../biblioteca/" aria-label="Volver a BOOKCLUB">← BOOKCLUB</a>
 <div id="topbar" aria-hidden="true"></div>
 <div id="tb-info" aria-hidden="true"><span class="tb-label"></span><span class="tb-pos"></span><span class="tb-book"><b id="tb-book-pct">0 %</b><span class="tb-book-t"> del libro</span></span></div>
 
@@ -802,8 +817,6 @@ body.dark .eval-score.fid { color: var(--head-2); }
 <div id="config-panel">
   <div class="config-seccion-label">Apariencia</div>
   <div class="config-row"><span class="config-row-label">Modo oscuro</span><label class="toggle-wrap"><input type="checkbox" id="toggle-dark" onchange="toggleDark()" aria-label="Modo oscuro"><span class="toggle-track"></span></label></div>
-  <div class="config-sep"></div>
-  <div class="config-row"><span class="config-row-label">Lectura limpia</span><label class="toggle-wrap"><input type="checkbox" id="toggle-lectura" onchange="toggleLectura()" aria-label="Lectura limpia"><span class="toggle-track"></span></label></div>
   <div class="config-sep"></div>
   <div class="config-seccion-label">Tamaño de letra</div>
   <div class="config-row"><span class="config-row-label">Texto</span><div class="fuente-ctrl"><button class="fuente-btn" onclick="cambiarFuente(-1)" aria-label="Reducir letra">A−</button><span class="fuente-val" id="fuente-nivel">M</span><button class="fuente-btn" onclick="cambiarFuente(1)" aria-label="Aumentar letra">A+</button></div></div>
@@ -1071,7 +1084,7 @@ body.dark .eval-score.fid { color: var(--head-2); }
 <div class="dato-card"><div class="dato-label"><span class="nn" data-n="5" aria-hidden="true"></span>Si solo recordara una cosa</div><div class="dato-text"><p class="destacado">El discipulado no consiste en incorporar a Jesús a la vida que ya tenemos, sino en reorganizar nuestra vida alrededor de Jesús.</p></div></div>
 <div class="accion-card"><div class="accion-label"><span class="nn" data-n="6" aria-hidden="true"></span>Aplicación maestra</div><div class="accion-text"><p>Escribe y practica durante 30 días una Regla de Vida personal.</p><p>Debe incorporar un tiempo diario de comunión con Jesús, un ritmo semanal de descanso y una expresión concreta de amor hacia otras personas. Al terminar los 30 días, evalúa no solamente tu cumplimiento, sino especialmente tus cambios en paciencia, paz, generosidad y capacidad de amar.</p></div></div>
 <div class="veredicto-card"><div class="veredicto-label"><span class="nn" data-n="7" aria-hidden="true"></span>Nota concluyente</div><div class="veredicto-text"><p><span class="veredicto-badge">Veredicto: Conviene una lectura selectiva del libro original.</span></p><p>La reconstrucción realizada permite comprender su tesis y sus principales argumentos. Sin embargo, cuatro capítulos conservan un valor particular:</p><ul class="lista"><li>Capítulo 2 — Estar con Jesús: por la profundidad de su reflexión sobre la oración y la contemplación.</li><li>Capítulo 3 — Llegar a ser como Jesús: es el núcleo conceptual más importante del libro; desarrolla la formación del carácter.</li><li>Capítulo 5 — Una Regla de Vida: concentra su mayor utilidad práctica y las orientaciones para establecer hábitos sostenibles.</li><li>Capítulo 6 — Tomar la cruz: proporciona el fundamento de rendición y perseverancia que evita convertir las prácticas en simple autoayuda.</li></ul><p><strong>Sobre el ritmo:</strong> El libro comienza con una exposición relativamente extensa y reiterativa de la identidad del discípulo. Gana profundidad en el capítulo 3, alcanza su mayor aplicación en el capítulo 5 y concluye con fuerza en el capítulo 6.</p><p>Su aporte más significativo no está en una idea aislada, sino en la integración de identidad, comunión, formación, misión, prácticas y rendición como dimensiones inseparables del seguimiento de Jesús.</p></div></div></div>
-    <div class="nav-final"><button onclick="irA('autor')" class="btn-nav btn-regresar">← Anterior</button><button onclick="irA('portada')" class="btn-nav btn-siguiente">Volver a la portada</button></div>
+    <div class="nav-final"><button onclick="irA('autor')" class="btn-nav btn-regresar">← Anterior</button><button type="button" onclick="terminarLibro()" class="btn-nav btn-siguiente">Terminar ✓</button></div>
     <div class="book-footer"><div class="footer-title">Practica el camino · John Mark Comer</div><div class="footer-tag">Consolidación</div></div>
   </div>
 </section>
@@ -1113,11 +1126,6 @@ body.dark .eval-score.fid { color: var(--head-2); }
     var dark = document.body.classList.toggle('dark');
     document.getElementById('toggle-dark').checked = dark;
     guardarPref('bookclub-theme', dark ? 'dark' : 'light');
-  }
-
-  function toggleLectura() {
-    var lectura = document.body.classList.toggle('modo-lectura');
-    document.getElementById('toggle-lectura').checked = lectura;
   }
 
   function aplicarFuente() {
@@ -1409,6 +1417,19 @@ body.dark .eval-score.fid { color: var(--head-2); }
     });
   };
   pintarProg();
+</script>
+
+<script>
+/* Concluir el libro conserva el avance y regresa a la pantalla principal de BOOKCLUB. */
+function terminarLibro() {
+  CONT_PAGS.forEach(function (id) { prog.p[id] = 1; });
+  prog.ult = PAGINAS[PAGINAS.length - 1];
+  prog.r = 1;
+  prog.t = Date.now();
+  sucio = true;
+  guardarProg();
+  window.location.assign('../biblioteca/');
+}
 </script>
 </body>
 </html>

@@ -457,11 +457,6 @@ hr.rule::before { content: '—  ✦  —'; font-size: 11px; color: var(--rule-2
 .footer-firma { font: 400 12px/1.4 var(--font-ui); letter-spacing: .03em; color: var(--text-2); }
 .footer-tag { font: 600 10px/1 var(--font-ui); letter-spacing: .2em; color: var(--text-3); text-transform: uppercase; margin-top: .2rem; }
 
-/* ── Lectura limpia ── */
-body.modo-lectura .libro-header, body.modo-lectura .lectura-meta, body.modo-lectura .book-footer { display: none; }
-body.modo-lectura .page { padding-top: calc(var(--barra) + var(--safe-t) + .6rem); }
-body.modo-lectura .nav-final { border-top-color: transparent; }
-
 /* ── Panel de ajustes ── */
 #config-overlay { position: fixed; inset: 0; z-index: 9996; background: rgba(20,19,17,.18); opacity: 0; pointer-events: none; transition: opacity .2s; }
 #config-overlay.activo { opacity: 1; pointer-events: auto; }
@@ -623,6 +618,26 @@ body.en-portada #bookclub-home { top: calc(1rem + var(--safe-t)); left: 1rem; }
 .libro-header-titulo { overflow-wrap: anywhere; }
 @media (prefers-reduced-motion: reduce) { .portada-inner { opacity: 1; transform: none; } }
 
+
+/* BOOKCLUB · Desplazamiento editorial, integrado con el tema del libro */
+.pagina, #menu-panel {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--c-accion) 40%, var(--rule-2) 60%) var(--paper);
+}
+#menu-panel { scrollbar-color: color-mix(in srgb, var(--c-accion) 40%, var(--rule-2) 60%) var(--drawer); }
+.pagina::-webkit-scrollbar, #menu-panel::-webkit-scrollbar { width: 10px; height: 10px; }
+.pagina::-webkit-scrollbar-track { background: var(--paper); }
+#menu-panel::-webkit-scrollbar-track { background: var(--drawer); }
+.pagina::-webkit-scrollbar-thumb, #menu-panel::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--c-accion) 40%, var(--rule-2) 60%);
+  border-radius: 999px;
+  border: 2px solid var(--paper);
+  min-height: 36px;
+}
+#menu-panel::-webkit-scrollbar-thumb { border-color: var(--drawer); }
+.pagina::-webkit-scrollbar-thumb:hover, #menu-panel::-webkit-scrollbar-thumb:hover { background: var(--c-accion); }
+.pagina::-webkit-scrollbar-button, #menu-panel::-webkit-scrollbar-button { display: none; height: 0; width: 0; }
+.pagina::-webkit-scrollbar-corner { background: var(--paper); }
 </style>
 </head>
 <body class="en-portada">

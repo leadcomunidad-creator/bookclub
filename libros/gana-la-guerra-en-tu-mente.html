@@ -499,11 +499,6 @@ hr.rule::before { content: '—  ✦  —'; font-size: 11px; color: var(--rule-2
 .footer-firma { font: 400 12px/1.4 var(--font-ui); letter-spacing: .03em; color: var(--text-2); }
 .footer-tag { font: 600 10px/1 var(--font-ui); letter-spacing: .2em; color: var(--text-3); text-transform: uppercase; margin-top: .2rem; }
 
-/* ── Lectura limpia ── */
-body.modo-lectura .libro-header, body.modo-lectura .lectura-meta, body.modo-lectura .book-footer { display: none; }
-body.modo-lectura .page { padding-top: calc(var(--barra) + var(--safe-t) + .6rem); }
-body.modo-lectura .nav-final { border-top-color: transparent; }
-
 /* ── Panel de ajustes ── */
 #config-overlay { position: fixed; inset: 0; z-index: 9996; background: rgba(20,19,17,.18); opacity: 0; pointer-events: none; transition: opacity .2s; }
 #config-overlay.activo { opacity: 1; pointer-events: auto; }
@@ -665,10 +660,30 @@ body.en-portada #bookclub-home { top: calc(1rem + var(--safe-t)); left: 1rem; }
 .libro-header-titulo { overflow-wrap: anywhere; }
 @media (prefers-reduced-motion: reduce) { .portada-inner { opacity: 1; transform: none; } }
 
+
+/* BOOKCLUB · Desplazamiento editorial, integrado con el tema del libro */
+.pagina, #menu-panel {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--c-accion) 40%, var(--rule-2) 60%) var(--paper);
+}
+#menu-panel { scrollbar-color: color-mix(in srgb, var(--c-accion) 40%, var(--rule-2) 60%) var(--drawer); }
+.pagina::-webkit-scrollbar, #menu-panel::-webkit-scrollbar { width: 10px; height: 10px; }
+.pagina::-webkit-scrollbar-track { background: var(--paper); }
+#menu-panel::-webkit-scrollbar-track { background: var(--drawer); }
+.pagina::-webkit-scrollbar-thumb, #menu-panel::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--c-accion) 40%, var(--rule-2) 60%);
+  border-radius: 999px;
+  border: 2px solid var(--paper);
+  min-height: 36px;
+}
+#menu-panel::-webkit-scrollbar-thumb { border-color: var(--drawer); }
+.pagina::-webkit-scrollbar-thumb:hover, #menu-panel::-webkit-scrollbar-thumb:hover { background: var(--c-accion); }
+.pagina::-webkit-scrollbar-button, #menu-panel::-webkit-scrollbar-button { display: none; height: 0; width: 0; }
+.pagina::-webkit-scrollbar-corner { background: var(--paper); }
 </style>
 </head>
 <body class="en-portada">
-<a id="bookclub-home" href="../index.html" aria-label="Volver a BOOKCLUB">← BOOKCLUB</a>
+<a id="bookclub-home" href="../biblioteca/" aria-label="Volver a BOOKCLUB">← BOOKCLUB</a>
 <div id="topbar" aria-hidden="true"></div>
 <div id="tb-info" aria-hidden="true"><span class="tb-label"></span><span class="tb-pos"></span><span class="tb-book"><b id="tb-book-pct">0 %</b><span class="tb-book-t"> del libro</span></span></div>
 
@@ -680,8 +695,6 @@ body.en-portada #bookclub-home { top: calc(1rem + var(--safe-t)); left: 1rem; }
 <div id="config-panel">
   <div class="config-seccion-label">Apariencia</div>
   <div class="config-row"><span class="config-row-label">Modo oscuro</span><label class="toggle-wrap"><input type="checkbox" id="toggle-dark" onchange="toggleDark()"><span class="toggle-track"></span></label></div>
-  <div class="config-sep"></div>
-  <div class="config-row"><span class="config-row-label">Lectura limpia</span><label class="toggle-wrap"><input type="checkbox" id="toggle-lectura" onchange="toggleLectura()"><span class="toggle-track"></span></label></div>
   <div class="config-sep"></div>
   <div class="config-seccion-label">Tamaño de letra</div>
   <div class="config-row"><span class="config-row-label">Texto</span><div class="fuente-ctrl"><button class="fuente-btn" onclick="cambiarFuente(-1)">A−</button><span class="fuente-val" id="fuente-nivel">M</span><button class="fuente-btn" onclick="cambiarFuente(1)">A+</button></div></div>
@@ -893,7 +906,7 @@ body.en-portada #bookclub-home { top: calc(1rem + var(--safe-t)); left: 1rem; }
     <div class="lectura-meta">⏱ Tiempo estimado: <span>3 min</span></div>
     <div class="body"><div class="filtro-header"><svg class="sello" viewBox="0 0 84 42" width="84" height="42" aria-hidden="true"><line x1="51.0" y1="40.0" x2="80.0" y2="40.0" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.95"/><line x1="50.7" y1="37.7" x2="67.1" y2="33.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.95"/><line x1="49.8" y1="35.5" x2="74.9" y2="21.0" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.95"/><line x1="48.4" y1="33.6" x2="60.4" y2="21.6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.95"/><line x1="46.5" y1="32.2" x2="61.0" y2="7.1" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.95"/><line x1="44.3" y1="31.3" x2="48.7" y2="14.9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.95"/><line x1="42.0" y1="31.0" x2="42.0" y2="2.0" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.95"/><line x1="39.7" y1="31.3" x2="35.3" y2="14.9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.95"/><line x1="37.5" y1="32.2" x2="23.0" y2="7.1" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.95"/><line x1="35.6" y1="33.6" x2="23.6" y2="21.6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.95"/><line x1="34.2" y1="35.5" x2="9.1" y2="21.0" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.95"/><line x1="33.3" y1="37.7" x2="16.9" y2="33.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.95"/><line x1="33.0" y1="40.0" x2="4.0" y2="40.0" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.95"/><circle cx="42" cy="40" r="3.2" fill="currentColor"/></svg><div class="filtro-label" data-ui>Resumen final</div><div class="filtro-title">RESUMEN FINAL DE CONSOLIDACIÓN</div></div><div class="tesis-block"><div class="tesis-label">1. IDEA MADRE DEL LIBRO</div><div class="tesis-text"><div class="destacado"><strong>Tu vida puede cambiar cuando dejas de tratar cada pensamiento como verdad y permites que la verdad de Dios renueve deliberadamente la manera en que interpretas, reaccionas y vives.</strong></div></div></div><span class="eyebrow">2. MAPA DE LAS GRANDES IDEAS</span><div class="idea"><div class="idea-num dot" aria-hidden="true"></div><div class="idea-body"><div class="idea-text"><strong>Todo empieza por reconocer la mentira.</strong> No puedes derrotar un pensamiento que todavía consideras verdad. La primera batalla consiste en hacerlo visible y nombrarlo con precisión.</div></div></div><div class="idea"><div class="idea-num dot" aria-hidden="true"></div><div class="idea-body"><div class="idea-text"><strong>La conducta es muchas veces el fruto, no la raíz.</strong> Tratar solamente de dejar una acción sin examinar el pensamiento que la alimenta produce cambios frágiles. El libro insiste en descender de la conducta hacia la creencia.</div></div></div><div class="idea"><div class="idea-num dot" aria-hidden="true"></div><div class="idea-body"><div class="idea-text"><strong>La mente aprende caminos.</strong> Aquello que piensas y practicas repetidamente se vuelve más familiar. Por eso el objetivo no es únicamente abandonar el viejo surco, sino construir una nueva “trinchera” mediante verdad repetida e interiorizada.</div></div></div><div class="idea"><div class="idea-num dot" aria-hidden="true"></div><div class="idea-body"><div class="idea-text"><strong>La verdad debe pasar de información a convicción.</strong> Leer un versículo una vez no significa vivir desde él. Groeschel propone escribir, pensar, meditar y repetir hasta que la verdad se convierta en una respuesta cada vez más disponible.</div></div></div><div class="idea"><div class="idea-num dot" aria-hidden="true"></div><div class="idea-body"><div class="idea-text"><strong>No ves la realidad sin filtros.</strong> Experiencias, heridas, expectativas y sesgos influyen en tu interpretación. Reestructurar significa distinguir lo ocurrido de la historia que te estás contando acerca de lo ocurrido.</div></div></div><div class="idea"><div class="idea-num dot" aria-hidden="true"></div><div class="idea-body"><div class="idea-text"><strong>También puedes decidir anticipadamente cómo entrarás a una situación.</strong> La “preestructuración” permite enfrentar conversaciones, días difíciles y escenarios de presión desde una postura elegida, en vez de llegar completamente gobernado por la reacción automática.</div></div></div><div class="idea"><div class="idea-num dot" aria-hidden="true"></div><div class="idea-body"><div class="idea-text"><strong>La presencia de problemas no significa ausencia de Dios.</strong> El pánico estrecha la atención. La oración vuelve a introducir la conciencia de cercanía, entrega y dependencia dentro de la situación.</div></div></div><div class="idea"><div class="idea-num dot" aria-hidden="true"></div><div class="idea-body"><div class="idea-text"><strong>La alabanza cambia el foco.</strong> No elimina necesariamente la prisión, la pérdida o el problema, pero impide que aquello que está mal sea lo único visible. Oración y alabanza constituyen el último movimiento del recorrido.</div></div></div><span class="eyebrow">3. LO QUE ESTE LIBRO CAMBIA</span><p>Este libro cambia la pregunta de <strong>“¿cómo consigo dejar de hacer esto?”</strong> por una mucho más profunda:</p><div class="destacado"><strong>“¿Qué estoy creyendo que hace que esta manera de vivir tenga sentido para mí?”</strong></div><p>Desde allí desplaza la transformación desde el comportamiento hacia la interpretación, la creencia y el pensamiento habitual. Su gran aporte no es enseñar que debemos “pensar positivo”, sino que necesitamos examinar qué pensamientos tienen autoridad dentro de nosotros y decidir cuáles merecen conservarla.</p><span class="eyebrow">4. TRES FRASES QUE DEBEN QUEDAR VIVAS</span><div class="destacado"><strong>Una mentira no necesita ser cierta para dirigir tu vida; solamente necesita ser creída.</strong></div><div class="destacado"><strong>No basta salir del viejo surco: necesitas construir un camino nuevo para la verdad.</strong></div><div class="destacado"><strong>No siempre puedes escoger lo que ocurre, pero sí puedes aprender a escoger desde qué verdad lo interpretarás.</strong></div><div class="dato-card"><div class="dato-label">5. SI SOLO RECORDARA UNA COSA</div><div class="dato-text"><div class="destacado"><strong>No creas automáticamente todo lo que piensas.</strong></div></div></div><div class="accion-card"><div class="accion-label">6. APLICACIÓN MAESTRA</div><div class="accion-text"><p>Cada vez que detectes un pensamiento recurrente que esté produciendo miedo, autosabotaje, enojo, control o desesperanza, no lo dejes pasar de manera automática.</p><p>Haz este recorrido:</p><div class="destacado"><strong>NÓMBRALO → IDENTIFICA LA MENTIRA → ENCUENTRA LA VERDAD → REPÍTELA → REPLANTEA LA SITUACIÓN → ORA → ACTÚA DESDE ESA VERDAD.</strong></div><p>Ese movimiento resume prácticamente todo el libro: las cuatro herramientas finales del autor son <strong>reemplazo, recableado, replanteamiento y regocijo</strong>.</p></div></div></div>
     <div class="body"><div class="veredicto-card"><div class="veredicto-label">RECOMENDACIÓN DE LECTURA</div><div class="veredicto-badge">Léelo completo</div><div class="veredicto-text"><p>El contenido central puede resumirse, pero buena parte del valor está en cómo Groeschel lleva al lector progresivamente desde reconocer sus pensamientos hasta examinarlos, confrontarlos y practicar una nueva manera de pensar.</p><p>Los ejercicios y la repetición intencional forman parte de la experiencia transformadora del libro, no son simples accesorios.</p></div></div></div>
-    <div class="nav-final"><button onclick="irA('comunicador')" class="btn-nav btn-regresar">← Anterior</button><button onclick="location.href='../index.html'" class="btn-nav btn-siguiente">Volver a BOOKCLUB →</button></div>
+    <div class="nav-final"><button onclick="irA('comunicador')" class="btn-nav btn-regresar">← Anterior</button><button type="button" onclick="terminarLibro()" class="btn-nav btn-siguiente">Terminar ✓</button></div>
     <div class="book-footer"><div class="footer-title">Gana la guerra en tu mente · Craig Groeschel</div><div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div><div class="footer-tag">Resumen final</div></div>
   </div>
 </section>
@@ -935,11 +948,6 @@ body.en-portada #bookclub-home { top: calc(1rem + var(--safe-t)); left: 1rem; }
     var dark = document.body.classList.toggle('dark');
     document.getElementById('toggle-dark').checked = dark;
     guardarPref('bookclub-theme', dark ? 'dark' : 'light');
-  }
-
-  function toggleLectura() {
-    var lectura = document.body.classList.toggle('modo-lectura');
-    document.getElementById('toggle-lectura').checked = lectura;
   }
 
   function aplicarFuente() {
@@ -1239,6 +1247,19 @@ body.en-portada #bookclub-home { top: calc(1rem + var(--safe-t)); left: 1rem; }
   grupos.forEach(function(grupo){var s=document.createElement('div');s.className='menu-seccion';var l=document.createElement('div');l.className='menu-seccion-label';l.textContent=grupo[0];s.appendChild(l);grupo[1].forEach(function(id){if(porPagina[id])s.appendChild(porPagina[id]);});if(s.querySelector('.menu-item'))frag.appendChild(s);});
   cap.parentNode.replaceChild(frag,cap);
 })();
+</script>
+
+<script>
+/* Concluir el libro conserva el avance y regresa a la pantalla principal de BOOKCLUB. */
+function terminarLibro() {
+  CONT_PAGS.forEach(function (id) { prog.p[id] = 1; });
+  prog.ult = PAGINAS[PAGINAS.length - 1];
+  prog.r = 1;
+  prog.t = Date.now();
+  sucio = true;
+  guardarProg();
+  window.location.assign('../biblioteca/');
+}
 </script>
 </body>
 </html>

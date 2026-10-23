@@ -499,11 +499,6 @@ hr.rule::before { content: '—  ✦  —'; font-size: 11px; color: var(--rule-2
 .footer-firma { font: 400 12px/1.4 var(--font-ui); letter-spacing: .03em; color: var(--text-2); }
 .footer-tag { font: 600 10px/1 var(--font-ui); letter-spacing: .2em; color: var(--text-3); text-transform: uppercase; margin-top: .2rem; }
 
-/* ── Lectura limpia ── */
-body.modo-lectura .libro-header, body.modo-lectura .lectura-meta, body.modo-lectura .book-footer { display: none; }
-body.modo-lectura .page { padding-top: calc(var(--barra) + var(--safe-t) + .6rem); }
-body.modo-lectura .nav-final { border-top-color: transparent; }
-
 /* ── Panel de ajustes ── */
 #config-overlay { position: fixed; inset: 0; z-index: 9996; background: rgba(20,11,10,.18); opacity: 0; pointer-events: none; transition: opacity .2s; }
 #config-overlay.activo { opacity: 1; pointer-events: auto; }
@@ -738,10 +733,30 @@ body.en-portada #bookclub-home:hover { background: rgba(35,26,24,.4); border-col
 body.dark .menu-item.leido .menu-item-estado { color: #1A0F0D; }
 .btn-reset.confirmar { background: #231A18; border-color: #231A18; }
 
+
+/* BOOKCLUB · Desplazamiento editorial, integrado con el tema del libro */
+.pagina, #menu-panel {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--c-accion) 40%, var(--rule-2) 60%) var(--paper);
+}
+#menu-panel { scrollbar-color: color-mix(in srgb, var(--c-accion) 40%, var(--rule-2) 60%) var(--drawer); }
+.pagina::-webkit-scrollbar, #menu-panel::-webkit-scrollbar { width: 10px; height: 10px; }
+.pagina::-webkit-scrollbar-track { background: var(--paper); }
+#menu-panel::-webkit-scrollbar-track { background: var(--drawer); }
+.pagina::-webkit-scrollbar-thumb, #menu-panel::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--c-accion) 40%, var(--rule-2) 60%);
+  border-radius: 999px;
+  border: 2px solid var(--paper);
+  min-height: 36px;
+}
+#menu-panel::-webkit-scrollbar-thumb { border-color: var(--drawer); }
+.pagina::-webkit-scrollbar-thumb:hover, #menu-panel::-webkit-scrollbar-thumb:hover { background: var(--c-accion); }
+.pagina::-webkit-scrollbar-button, #menu-panel::-webkit-scrollbar-button { display: none; height: 0; width: 0; }
+.pagina::-webkit-scrollbar-corner { background: var(--paper); }
 </style>
 </head>
 <body class="en-portada">
-<a id="bookclub-home" href="../index.html" aria-label="Volver a BOOKCLUB">← BOOKCLUB</a>
+<a id="bookclub-home" href="../biblioteca/" aria-label="Volver a BOOKCLUB">← BOOKCLUB</a>
 <div id="topbar" aria-hidden="true"></div>
 <div id="tb-info" aria-hidden="true"><span class="tb-label"></span><span class="tb-pos"></span><span class="tb-book"><b id="tb-book-pct">0 %</b><span class="tb-book-t"> del libro</span></span></div>
 
@@ -753,8 +768,6 @@ body.dark .menu-item.leido .menu-item-estado { color: #1A0F0D; }
 <div id="config-panel">
   <div class="config-seccion-label">Apariencia</div>
   <div class="config-row"><span class="config-row-label">Modo oscuro</span><label class="toggle-wrap"><input type="checkbox" id="toggle-dark" onchange="toggleDark()"><span class="toggle-track"></span></label></div>
-  <div class="config-sep"></div>
-  <div class="config-row"><span class="config-row-label">Lectura limpia</span><label class="toggle-wrap"><input type="checkbox" id="toggle-lectura" onchange="toggleLectura()"><span class="toggle-track"></span></label></div>
   <div class="config-sep"></div>
   <div class="config-seccion-label">Tamaño de letra</div>
   <div class="config-row"><span class="config-row-label">Texto</span><div class="fuente-ctrl"><button class="fuente-btn" onclick="cambiarFuente(-1)">A−</button><span class="fuente-val" id="fuente-nivel">M</span><button class="fuente-btn" onclick="cambiarFuente(1)">A+</button></div></div>
@@ -962,7 +975,7 @@ body.dark .menu-item.leido .menu-item-estado { color: #1A0F0D; }
     <div class="libro-header"><div class="libro-header-titulo">Elimina la prisa de tu vida · John Mark Comer</div><div class="libro-header-paso">Resumen final</div></div>
     <div class="lectura-meta">⏱ Tiempo estimado: <span>4 min</span></div>
     <div class="body"><div class="filtro-header"><div class="filtro-label"></div><h1 class="filtro-title caps">RESUMEN FINAL DE CONSOLIDACIÓN</h1></div><span class="eyebrow">1. IDEA MADRE DEL LIBRO</span><div class="tesis-block"><div class="tesis-text"><div class="destacado"><strong>La vida que Jesús nos invita a experimentar requiere aprender a vivir como Él vivió, porque nuestros hábitos y ritmos cotidianos pueden favorecer o impedir la transformación espiritual que deseamos.</strong></div></div></div><span class="eyebrow">2. MAPA DE LAS GRANDES IDEAS</span><div class="idea"><div class="idea-num mk">1</div><div class="idea-body"><div class="idea-text"><strong>La prisa es un problema de formación, no solamente de organización.</strong> No se trata únicamente de cuánto hacemos, sino de cómo nuestra velocidad transforma el carácter, deteriora las relaciones y reduce nuestra atención. Una persona puede ser productiva y estar profundamente desconectada de su propia vida.</div></div></div><div class="idea"><div class="idea-num mk">2</div><div class="idea-body"><div class="idea-text"><strong>La cultura moderna nos enseña a vivir insatisfechos.</strong> La tecnología, el consumismo y la obsesión con la productividad multiplican nuestras posibilidades, pero también nuestras expectativas. Cuanto más podemos hacer, más difícil resulta aceptar que no necesitamos hacerlo todo.</div></div></div><div class="idea"><div class="idea-num mk">3</div><div class="idea-body"><div class="idea-text"><strong>Los límites son parte de nuestra humanidad.</strong> No somos omnipresentes, no podemos desarrollar todas las capacidades ni aprovechar cada oportunidad. Madurar significa reconocer nuestras limitaciones, elegir prioridades y aceptar las renuncias necesarias para vivir fielmente.</div></div></div><div class="idea"><div class="idea-num mk">4</div><div class="idea-body"><div class="idea-text"><strong>El discipulado consiste en aprender la vida de Jesús.</strong> No basta con creer en sus enseñanzas o intentar imitar ocasionalmente su comportamiento. Es necesario incorporar prácticas que permitan desarrollar progresivamente su carácter. Estar con Jesús, ser como Jesús y vivir como Él viviría constituyen el centro de la propuesta.</div></div></div><div class="idea"><div class="idea-num mk">5</div><div class="idea-body"><div class="idea-text"><strong>El silencio y la solitud recuperan nuestra interioridad.</strong> Cuando desaparecen las distracciones, podemos reconocer pensamientos, emociones y necesidades que nuestra actividad constante mantenía escondidos. El objetivo no es simplemente relajarnos, sino cultivar una relación consciente con Dios.</div></div></div><div class="idea"><div class="idea-num mk">6</div><div class="idea-body"><div class="idea-text"><strong>El sabbat y la sencillez nos enseñan a vivir libres.</strong> El descanso semanal rompe nuestra dependencia de la productividad. La sencillez cuestiona la acumulación, el consumo y la necesidad de conseguir constantemente algo nuevo. Ambas prácticas nos enseñan a disfrutar sin depender de tener o producir más.</div></div></div><div class="idea"><div class="idea-num mk">7</div><div class="idea-body"><div class="idea-text"><strong>La transformación necesita decisiones visibles.</strong> Desacelerar implica modificar agendas, establecer límites digitales, aceptar las esperas, proteger las relaciones y reservar tiempo para lo esencial. Las buenas intenciones no sustituyen los hábitos. El resultado buscado es una vida tranquila, presente y arraigada en Jesús.</div></div></div><span class="eyebrow">3. LO QUE ESTE LIBRO CAMBIA</span><div class="problema"><p>Este libro modifica nuestra comprensión del crecimiento espiritual. Nos invita a dejar de medirlo exclusivamente mediante conocimientos, actividades religiosas o resultados visibles, y comenzar a observar cómo vivimos nuestras jornadas, cómo tratamos a las personas y qué gobierna nuestra atención. La transformación más importante ocurre cuando comprendemos que la forma en que organizamos nuestra vida también está formando nuestra alma.</p></div><span class="eyebrow">4. TRES FRASES QUE DEBEN QUEDAR VIVAS</span><div class="dato-card"><div class="dato-text"><div class="destacado"><strong>Puedes dedicar toda tu vida a trabajar para Jesús y terminar viviendo de una manera que te impide permanecer con Él.</strong></div><div class="destacado"><strong>La solución no es tener más tiempo, sino dejar de entregar el tiempo que tienes a cosas que no merecen gobernar tu vida.</strong></div><div class="destacado"><strong>El descanso comienza cuando dejas de necesitar producir algo para sentir que tu vida tiene valor.</strong></div></div></div><p class="nota-sint">Nota: Frases de síntesis elaboradas a partir de las ideas del libro; no son citas textuales.</p><span class="eyebrow">5. SI SOLO RECORDARA UNA COSA</span><div class="veredicto-card"><div class="veredicto-badge">No puedes experimentar consistentemente la vida interior de Jesús mientras te niegas a aprender su manera de vivir.</div></div><span class="eyebrow">6. APLICACIÓN MAESTRA</span><div class="accion-card"><div class="accion-text"><p><strong>Establece una regla de vida personal de 30 días.</strong></p><p>Organiza tus días y semanas para proteger cuatro prácticas esenciales del libro: silencio y solitud diarios, un período semanal de sabbat, sencillez en el consumo y decisiones concretas para desacelerar.</p><p>La condición es fundamental: no conviertas estas prácticas en nuevas obligaciones añadidas a una agenda saturada. Antes de incorporarlas, identifica qué compromisos, actividades y distracciones necesitas reducir o abandonar.</p></div></div><hr class="rule"><span class="eyebrow">7. NOTA CONCLUYENTE</span><div class="veredicto-card"><div class="veredicto-badge">VEREDICTO: CONVIENE UNA LECTURA SELECTIVA.</div><div class="veredicto-text"><p>El libro posee una propuesta suficientemente clara y consistente para comprenderla mediante el Introducción desarrollado. Sin embargo, algunos capítulos merecen una lectura directa por su profundidad formativa.</p></div></div><div class="lec-grid"><div class="lec-leyenda"><span>Capítulos</span><span>Valor de lectura</span></div><div class="lec-row"><div class="lec-cap">1–3</div><div class="lec-val">Diagnóstico valioso, aunque algunas ideas se reiteran.</div></div><div class="lec-row"><div class="lec-cap">4–6</div><div class="lec-val">Esenciales. Establecen la comprensión de los límites y el discipulado como forma de vida.</div></div><div class="lec-row"><div class="lec-cap">7–8</div><div class="lec-val">Especialmente recomendados. Desarrollan el silencio, la solitud y el sabbat con mayor profundidad.</div></div><div class="lec-row"><div class="lec-cap">9–10</div><div class="lec-val">Muy útiles para trasladar la propuesta a las finanzas, los hábitos y la vida cotidiana.</div></div><div class="lec-row"><div class="lec-cap">Epílogo</div><div class="lec-val">Breve cierre que reúne el sentido de la transformación.</div></div></div><p>El libro comienza con un diagnóstico relativamente extenso y alcanza su mayor valor desde el capítulo 5, cuando conecta el problema de la prisa con el discipulado y las prácticas concretas de Jesús.</p><p>Conclusión: No es indispensable leerlo completo para comprender su propuesta. Su mayor contribución tampoco está en ofrecer información novedosa, sino en demostrar que una espiritualidad profunda necesita una vida cotidiana organizada para cultivarla.</p></div>
-    <div class="nav-final"><button onclick="irA('comunicador')" class="btn-nav btn-regresar">← Anterior</button></div>
+    <div class="nav-final"><button onclick="irA('comunicador')" class="btn-nav btn-regresar">← Anterior</button><button type="button" onclick="terminarLibro()" class="btn-nav btn-siguiente">Terminar ✓</button></div>
     <div class="book-footer"><div class="footer-title">Elimina la prisa de tu vida · John Mark Comer</div><div class="footer-firma">Manizales, Colombia · hecho con ♥ en el Eje Cafetero</div><div class="footer-tag">Resumen final</div></div>
   </div>
 </section>
@@ -1004,11 +1017,6 @@ body.dark .menu-item.leido .menu-item-estado { color: #1A0F0D; }
     var dark = document.body.classList.toggle('dark');
     document.getElementById('toggle-dark').checked = dark;
     guardarPref('bookclub-theme', dark ? 'dark' : 'light');
-  }
-
-  function toggleLectura() {
-    var lectura = document.body.classList.toggle('modo-lectura');
-    document.getElementById('toggle-lectura').checked = lectura;
   }
 
   function aplicarFuente() {
@@ -1290,5 +1298,18 @@ body.dark .menu-item.leido .menu-item-estado { color: #1A0F0D; }
 
 <!-- BOOKCLUB PWA REGISTRATION -->
 <script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}</script>
+
+<script>
+/* Concluir el libro conserva el avance y regresa a la pantalla principal de BOOKCLUB. */
+function terminarLibro() {
+  CONT_PAGS.forEach(function (id) { prog.p[id] = 1; });
+  prog.ult = PAGINAS[PAGINAS.length - 1];
+  prog.r = 1;
+  prog.t = Date.now();
+  sucio = true;
+  guardarProg();
+  window.location.assign('../biblioteca/');
+}
+</script>
 </body>
 </html>

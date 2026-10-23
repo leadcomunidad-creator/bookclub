@@ -463,11 +463,6 @@ hr.rule::before { content: '—  ✦  —'; font-size: 11px; color: var(--rule-2
 .footer-firma { font: 400 12px/1.4 var(--font-ui); letter-spacing: .03em; color: var(--text-2); }
 .footer-tag { font: 600 10px/1 var(--font-ui); letter-spacing: .2em; color: var(--text-3); text-transform: uppercase; margin-top: .2rem; }
 
-/* ── Lectura limpia ── */
-body.modo-lectura .libro-header, body.modo-lectura .lectura-meta, body.modo-lectura .book-footer { display: none; }
-body.modo-lectura .page { padding-top: calc(var(--barra) + var(--safe-t) + .6rem); }
-body.modo-lectura .nav-final { border-top-color: transparent; }
-
 /* ── Panel de ajustes ── */
 #config-overlay { position: fixed; inset: 0; z-index: 9996; background: rgba(6,14,26,.18); opacity: 0; pointer-events: none; transition: opacity .2s; }
 #config-overlay.activo { opacity: 1; pointer-events: auto; }
@@ -663,12 +658,32 @@ body.en-portada #bookclub-home { background: rgba(4,34,62,.55); color: #fff; bor
 .toc-grupo { margin: 1rem 0 .15rem .35rem; font: 700 10px/1 var(--font-ui); letter-spacing: .22em; text-transform: uppercase; color: var(--text-3); }
 .toc-grupo:first-of-type { margin-top: .4rem; }
 .filtro-title, .sec-titulo { overflow-wrap: anywhere; }
+
+/* BOOKCLUB · Desplazamiento editorial, integrado con el tema del libro */
+.pagina, #menu-panel {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--c-accion) 40%, var(--rule-2) 60%) var(--paper);
+}
+#menu-panel { scrollbar-color: color-mix(in srgb, var(--c-accion) 40%, var(--rule-2) 60%) var(--drawer); }
+.pagina::-webkit-scrollbar, #menu-panel::-webkit-scrollbar { width: 10px; height: 10px; }
+.pagina::-webkit-scrollbar-track { background: var(--paper); }
+#menu-panel::-webkit-scrollbar-track { background: var(--drawer); }
+.pagina::-webkit-scrollbar-thumb, #menu-panel::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--c-accion) 40%, var(--rule-2) 60%);
+  border-radius: 999px;
+  border: 2px solid var(--paper);
+  min-height: 36px;
+}
+#menu-panel::-webkit-scrollbar-thumb { border-color: var(--drawer); }
+.pagina::-webkit-scrollbar-thumb:hover, #menu-panel::-webkit-scrollbar-thumb:hover { background: var(--c-accion); }
+.pagina::-webkit-scrollbar-button, #menu-panel::-webkit-scrollbar-button { display: none; height: 0; width: 0; }
+.pagina::-webkit-scrollbar-corner { background: var(--paper); }
 </style>
 
 <meta name="description" content="Version JSON de Enciende tu cerebro. El HTML original continua como referencia oficial.">
-<meta property="og:title" content="Enciende tu cerebro â€” JSON Â· Caroline Leaf">
+<meta property="og:title" content="Enciende tu cerebro — JSON · Caroline Leaf">
 <link rel="canonical" href="./enciende-tu-cerebro-json.html">
-<title>Enciende tu cerebro â€” JSON Â· Caroline Leaf</title>
+<title>Enciende tu cerebro — JSON · Caroline Leaf</title>
 <script type="application/json" id="libro-meta">{}</script>
 <script src="../bookclub-firebase.js"></script>
 </head>
