@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'bookclub-v15-direct-library-link';
+const CACHE_VERSION = 'bookclub-v17-catalog-encoding';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [
