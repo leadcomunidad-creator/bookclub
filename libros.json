@@ -12,7 +12,7 @@
       "temas": [
         "Pensamientos",
         "Verdad",
-        "Hábitos mentales",
+        "HÃ¡bitos mentales",
         "Ansiedad",
         "Perspectiva"
       ],
@@ -31,7 +31,7 @@
       "archivo": "libros/gana-la-guerra-en-tu-mente-json-piloto.html",
       "clave_progreso": "bookclub-gana-la-guerra-en-tu-mente-json-piloto-progreso",
       "edicion": "PILOTO · JSON",
-      "descripcion": "Una guía práctica para identificar las mentiras que gobiernan la mente, reemplazarlas por verdad y entrenar nuevas respuestas mediante reemplazo, recableado, replanteamiento y regocijo.",
+      "descripcion": "Una guÃ­a prÃ¡ctica para identificar las mentiras que gobiernan la mente, reemplazarlas por verdad y entrenar nuevas respuestas mediante reemplazo, recableado, replanteamiento y regocijo.",
       "preview_titulo": "Gana la guerra en tu mente",
       "preview_subtitulo": "Cambia tus pensamientos, cambia tu vida",
       "preview_imagen": "assets/previews/gana-la-guerra-en-tu-mente.png"
@@ -52,7 +52,7 @@
       ],
       "quiero": [
         "Desacelerar mi vida",
-        "Recuperar mi atención",
+        "Recuperar mi atenciÃ³n",
         "Descansar sin culpa",
         "Vivir el discipulado en lo cotidiano"
       ],
@@ -64,9 +64,9 @@
       "paginas_virtuales": 17,
       "archivo": "libros/elimina-la-prisa-json.html",
       "clave_progreso": "bookclub-elimina-la-prisa-json-progreso",
-      "descripcion": "No podemos experimentar plenamente la vida que Jesús ofrece mientras mantengamos un ritmo que destruye nuestra atención, nuestras relaciones y nuestra capacidad de permanecer en su presencia.",
+      "descripcion": "No podemos experimentar plenamente la vida que JesÃºs ofrece mientras mantengamos un ritmo que destruye nuestra atenciÃ³n, nuestras relaciones y nuestra capacidad de permanecer en su presencia.",
       "preview_titulo": "Elimina la prisa de tu vida",
-      "preview_subtitulo": "Cómo mantenerte espiritual y emocionalmente saludable en el caos del mundo moderno.",
+      "preview_subtitulo": "CÃ³mo mantenerte espiritual y emocionalmente saludable en el caos del mundo moderno.",
       "preview_imagen": "assets/previews/elimina-la-prisa.png",
       "edicion": "JSON"
     },
@@ -79,16 +79,16 @@
       "sub_expedicion": "renovacion",
       "temas": [
         "Neuroplasticidad",
-        "Hábitos mentales",
-        "Atención",
-        "Pensamiento tóxico",
+        "HÃ¡bitos mentales",
+        "AtenciÃ³n",
+        "Pensamiento tÃ³xico",
         "Fe y ciencia"
       ],
       "quiero": [
         "Renovar mi mente",
-        "Transformar mis hábitos de pensamiento",
-        "Aprender a dirigir mi atención",
-        "Evaluar con criterio la relación entre ciencia y fe"
+        "Transformar mis hÃ¡bitos de pensamiento",
+        "Aprender a dirigir mi atenciÃ³n",
+        "Evaluar con criterio la relaciÃ³n entre ciencia y fe"
       ],
       "color_acento": "#0B3E8F",
       "color_portada_inicio": "#0E86C2",
@@ -98,7 +98,7 @@
       "paginas_virtuales": 20,
       "archivo": "libros/enciende-tu-cerebro-json.html",
       "clave_progreso": "bookclub-enciende-tu-cerebro-json-progreso",
-      "descripcion": "La transformación de nuestra manera de pensar, mediante decisiones conscientes y prácticas sostenidas, puede modificar nuestros hábitos mentales, producir cambios en el cerebro e influir en nuestra manera de vivir.",
+      "descripcion": "La transformaciÃ³n de nuestra manera de pensar, mediante decisiones conscientes y prÃ¡cticas sostenidas, puede modificar nuestros hÃ¡bitos mentales, producir cambios en el cerebro e influir en nuestra manera de vivir.",
       "preview_titulo": "Enciende tu cerebro",
       "preview_subtitulo": "La clave para la felicidad, la manera de pensar y la salud",
       "preview_imagen": "assets/previews/enciende-tu-cerebro.png",
@@ -113,15 +113,15 @@
       "sub_expedicion": "espiritual",
       "temas": [
         "Discipulado",
-        "Formación espiritual",
+        "FormaciÃ³n espiritual",
         "Regla de Vida",
-        "Prácticas espirituales",
+        "PrÃ¡cticas espirituales",
         "Comunidad"
       ],
       "quiero": [
-        "Estar con Jesús",
-        "Formar hábitos espirituales",
-        "Diseñar una Regla de Vida",
+        "Estar con JesÃºs",
+        "Formar hÃ¡bitos espirituales",
+        "DiseÃ±ar una Regla de Vida",
         "Vivir el discipulado en lo cotidiano"
       ],
       "color_acento": "#6B5A33",
@@ -132,7 +132,7 @@
       "paginas_virtuales": 13,
       "archivo": "libros/practica-el-camino-json.html",
       "clave_progreso": "bookclub-practica-el-camino-json-progreso",
-      "descripcion": "El discipulado no es una actividad adicional, sino una forma de reorganizar la vida para estar con Jesús, llegar a ser como él y hacer lo que él hizo.",
+      "descripcion": "El discipulado no es una actividad adicional, sino una forma de reorganizar la vida para estar con JesÃºs, llegar a ser como Ã©l y hacer lo que Ã©l hizo.",
       "preview_titulo": "Practica el camino",
       "preview_subtitulo": "Del cristianismo declarado al discipulado practicado",
       "preview_imagen": "assets/previews/practica-el-camino.png",
