@@ -22,6 +22,7 @@
 <link rel="manifest" href="../manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="../assets/icons/icon-192.png">
 <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+<link rel="preload" href="./elimina-la-prisa-json.json" as="fetch" crossorigin="anonymous">
 <!-- BOOKCLUB META END -->
 
 
@@ -716,7 +717,7 @@ body.dark .menu-item.leido .menu-item-estado { color: #1A0F0D; }
 <script src="../bookclub-firebase.js"></script>
 </head>
 <body class="en-portada">
-<div id="json-reader-loading" role="status">Cargando lectorâ€¦</div>
+<div id="json-reader-loading" role="status" aria-label="Preparando lector" hidden></div>
 <script>window.BOOKCLUB_JSON_READER_DATA_URL = './elimina-la-prisa-json.json'; window.BOOKCLUB_JSON_READER_FALLBACK_URL = './elimina-la-prisa.html';</script>
 <script src="./json-reader-engine.js"></script>
 </body>

@@ -31,6 +31,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="../assets/icons/icon-192.png" media="(prefers-color-scheme: light)">
 <link rel="icon" type="image/png" sizes="192x192" href="../assets/icons/icon-dark-192.png" media="(prefers-color-scheme: dark)">
 <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+<link rel="preload" href="./practica-el-camino-json.json" as="fetch" crossorigin="anonymous">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -782,7 +783,7 @@ body.dark .eval-score.fid { color: var(--head-2); }
 <script src="../bookclub-firebase.js"></script>
 </head>
 <body class="en-portada">
-<div id="json-reader-loading" role="status">Cargando lectorâ€¦</div>
+<div id="json-reader-loading" role="status" aria-label="Preparando lector" hidden></div>
 <script>window.BOOKCLUB_JSON_READER_DATA_URL = './practica-el-camino-json.json'; window.BOOKCLUB_JSON_READER_FALLBACK_URL = './practica-el-camino.html';</script>
 <script src="./json-reader-engine.js"></script>
 </body>

@@ -13,6 +13,7 @@
 <link rel="manifest" href="../manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="../assets/icons/icon-192.png">
 <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+<link rel="preload" href="./gana-la-guerra-en-tu-mente-json-piloto.json" as="fetch" crossorigin="anonymous">
 <title>Gana la guerra en tu mente — JSON Piloto · Craig Groeschel</title>
 <script type="application/json" id="libro-meta">{}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -625,7 +626,7 @@ body.en-portada #bookclub-home { top: calc(1rem + var(--safe-t)); left: 1rem; }
 </style>
 </head>
 <body class="en-portada">
-<div id="json-reader-loading" role="status">Cargando lector…</div>
+<div id="json-reader-loading" role="status" aria-label="Preparando lector" hidden></div>
 <script src="./json-reader-engine.js"></script>
 </body>
 </html>
