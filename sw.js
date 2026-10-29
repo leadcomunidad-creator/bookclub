@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'bookclub-v17-reader-ui';
+const CACHE_VERSION = 'bookclub-v21-json-catalog-timing';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [
@@ -14,11 +14,23 @@ const CORE_ASSETS = [
   './libros/enciende-tu-cerebro-json.json',
   './libros/practica-el-camino-json.html',
   './libros/practica-el-camino-json.json',
+  './libros/jesus-es.html',
+  './libros/jesus-es-json.html',
+  './libros/jesus-es-json.json',
+  './libros/como-esta-tu-alma.html',
+  './libros/como-esta-tu-alma-json.html',
+  './libros/como-esta-tu-alma-json.json',
+  './libros/asegure-el-exito-en-su-matrimonio-antes-de-casarse.html',
+  './libros/asegure-el-exito-en-su-matrimonio-antes-de-casarse-json.html',
+  './libros/asegure-el-exito-en-su-matrimonio-antes-de-casarse-json.json',
   './libros/json-reader-engine.js',
   './manifest.webmanifest',
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
-  './assets/previews/bookclub.jpg'
+  './assets/previews/bookclub.jpg',
+  './assets/previews/jesus-es.jpg',
+  './assets/previews/como-esta-tu-alma.jpg',
+  './assets/previews/asegure-el-exito-en-su-matrimonio-antes-de-casarse.png'
 ];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CORE_CACHE).then(cache => cache.addAll(CORE_ASSETS)).then(() => self.skipWaiting()));

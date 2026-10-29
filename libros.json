@@ -137,6 +137,110 @@
       "preview_subtitulo": "Del cristianismo declarado al discipulado practicado",
       "preview_imagen": "assets/previews/practica-el-camino.png",
       "edicion": "JSON"
+    },
+    {
+      "tipo": "resumen",
+      "titulo": "Jesús es _____",
+      "autor": "Judah Smith",
+      "anio": 2013,
+      "expedicion": "capacidad",
+      "sub_expedicion": "espiritual",
+      "temas": [
+        "Gracia",
+        "Identidad",
+        "Religión y mérito",
+        "Gozo",
+        "Resurrección"
+      ],
+      "quiero": [
+        "Conocer mejor a Jesús",
+        "Soltar la culpa y la autoexigencia",
+        "Entender la gracia",
+        "Vivir desde mi identidad en Cristo"
+      ],
+      "color_acento": "#DD478B",
+      "color_portada_inicio": "#171615",
+      "color_portada_fin": "#171615",
+      "tiempo_lectura_min": 148,
+      "capitulos": 15,
+      "paginas_virtuales": 23,
+      "archivo": "libros/jesus-es-json.html",
+      "clave_progreso": "bookclub-jesus-es-json-progreso",
+      "descripcion": "El cristianismo no consiste en esforzarnos por ser suficientemente buenos para acercarnos a Dios, sino en descubrir quién es Jesús, recibir su gracia y permitir que esa relación transforme nuestra vida desde el interior.",
+      "preview_titulo": "Jesús es _____",
+      "preview_subtitulo": "Un nuevo camino para ser genuinamente humano",
+      "preview_imagen": "assets/previews/jesus-es.jpg",
+      "edicion": "JSON"
+    },
+    {
+      "titulo": "¿Cómo está tu alma?",
+      "subtitulo": "Por qué todo lo que deseas en la vida comienza en tu interior",
+      "autor": "Judah Smith",
+      "anio": 2016,
+      "paginas_virtuales": 17,
+      "capitulos": 10,
+      "expedicion": "mentalidad",
+      "sub_expedicion": "sanidad",
+      "color_acento": "#1F5A62",
+      "color_portada_inicio": "#ECEBE8",
+      "color_portada_fin": "#D9E3E4",
+      "tiempo_lectura_total_min": 91,
+      "archivo": "libros/como-esta-tu-alma-json.html",
+      "temas": [
+        "Alma",
+        "Identidad",
+        "Descanso",
+        "Emociones",
+        "Amor de Dios"
+      ],
+      "quiero": [
+        "Cuidar mi vida interior",
+        "Encontrar descanso y estabilidad",
+        "Entender mis emociones desde la fe",
+        "Vivir desde mi identidad en Cristo"
+      ],
+      "descripcion": "Una vida verdaderamente plena comienza cuando el alma encuentra su hogar en Dios y aprende a vivir desde esa relación, en lugar de depender de los resultados y circunstancias exteriores.",
+      "preview_titulo": "¿Cómo está tu alma?",
+      "preview_subtitulo": "Por qué todo lo que deseas en la vida comienza en tu interior",
+      "preview_imagen": "assets/previews/como-esta-tu-alma.jpg",
+      "edicion": "JSON",
+      "clave_progreso": "bookclub-como-esta-tu-alma-json-progreso",
+      "tiempo_lectura_min": 91
+    },
+    {
+      "titulo": "Asegure el éxito en su matrimonio antes de casarse",
+      "subtitulo": "Siete preguntas que hacer antes (y después) de casarse",
+      "autor": "Les Parrott III y Leslie Parrott",
+      "anio": 1995,
+      "paginas_virtuales": 13,
+      "capitulos": 7,
+      "expedicion": "habilidad",
+      "sub_expedicion": "relacional",
+      "color_acento": "#1F7F7A",
+      "color_portada_inicio": "#FFFFFF",
+      "color_portada_fin": "#E8F5F4",
+      "tiempo_lectura_total_min": 49,
+      "archivo": "libros/asegure-el-exito-en-su-matrimonio-antes-de-casarse-json.html",
+      "temas": [
+        "Matrimonio",
+        "Expectativas",
+        "Comunicación",
+        "Conflicto",
+        "Fe compartida"
+      ],
+      "quiero": [
+        "Prepararme para el matrimonio",
+        "Hablar de mis expectativas con mi pareja",
+        "Comunicarme mejor",
+        "Discutir sin destruir la relación"
+      ],
+      "descripcion": "Siete preguntas para preparar el matrimonio y no solo la boda: expectativas, amor, actitud, comunicación, diferencias, conflicto y fundamento espiritual.",
+      "preview_titulo": "Asegure el éxito en su matrimonio antes de casarse",
+      "preview_subtitulo": "Siete preguntas que hacer antes (y después) de casarse",
+      "preview_imagen": "assets/previews/asegure-el-exito-en-su-matrimonio-antes-de-casarse.png",
+      "edicion": "JSON",
+      "clave_progreso": "bookclub-asegure-el-exito-en-su-matrimonio-antes-de-casarse-json-progreso",
+      "tiempo_lectura_min": 49
     }
   ]
 }
