@@ -488,7 +488,7 @@ function card(l){
 function renderShelf(){
   var s=document.getElementById('shelf'),maxT=Math.max.apply(null,libros.map(function(l){return l.tiempo_lectura_min;}).concat([1])),maxC=Math.max.apply(null,libros.map(function(l){return l.capitulos||1;}).concat([1]));
   s.innerHTML=libros.map(function(l,i){
-    var h=150+Math.round((l.tiempo_lectura_min/maxT)*130),w=44+Math.round((Math.max(1,l.capitulos||1)/maxC)*22);
+    var h=150+Math.round((l.tiempo_lectura_min/maxT)*130),w=22+Math.round((Math.max(1,l.capitulos||1)/maxC)*18);
     var privado=tipoDe(l)==='libro',destino=privado?'#libro-privado':l.archivo,attrs=privado?' data-private-book="'+esc(l.archivo_privado||'')+'"':'';
     return '<a class="spine" data-href="'+esc(l.archivo)+'" href="'+esc(destino)+'"'+attrs+' title="'+esc(tipoLabels[tipoDe(l)]+': '+l.titulo+' — '+l.autor)+'" style="--i:'+i+';--h:'+h+';--w:'+w+';'+spineStyle(l)+';background:'+grad(l,180)+'"><span>'+esc(l.titulo)+'</span><i class="sd" aria-hidden="true"></i></a>';
   }).join('');

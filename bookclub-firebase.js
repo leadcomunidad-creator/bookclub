@@ -33,8 +33,10 @@
     var pages = Object.assign({}, cloud.p || {}, local.p || {});
     Object.keys(pages).forEach(function (page) { result.p[page] = Math.max(+((cloud.p || {})[page]) || 0, +((local.p || {})[page]) || 0); });
     var localRatio = +local.r || 0, cloudRatio = +cloud.r || 0;
-    result.r = Math.max(localRatio, cloudRatio);
-    result.ult = cloudRatio > localRatio ? (cloud.ult || null) : (local.ult || cloud.ult || null);
+    /* El porcentaje máximo conserva lo leído; la ubicación debe ser la última
+       guardada, no la que tenga el número más alto de desplazamiento. */
+    if (cloudTime > localTime) { result.ult = cloud.ult || null; result.r = cloudRatio; }
+    else { result.ult = local.ult || cloud.ult || null; result.r = localRatio; }
     result.t = Math.max(localTime, cloudTime);
     if (Math.max(localReset, cloudReset)) result.resetAt = Math.max(localReset, cloudReset);
     return result;
@@ -109,6 +111,13 @@
     if (active && user) await saveMerged(localState());
   }
 
+  async function setLibraryState(contentKey, state, updatedAt) {
+    var biblioteca = parse(rawGet('bookclub-biblioteca'), {}) || {};
+    biblioteca[contentKey] = { e: state, t: +updatedAt || Date.now() };
+    rawSet('bookclub-biblioteca', JSON.stringify(biblioteca));
+    if (active && user) await saveMerged(localState());
+  }
+
   function schedule() {
     if (!active || !db) return;
     clearTimeout(timer); timer = setTimeout(function () { push().catch(function (error) { console.error('No fue posible guardar BookClub.', error); }); }, 500);
@@ -146,6 +155,7 @@
     signOut: signOut,
     flush: push,
     resetProgress: resetProgress,
+    setLibraryState: setLibraryState,
     openPrivateBook: function (path) { if (!active) return Promise.reject(new Error('Inicia sesión con Google para abrir los libros completos.')); window.location.assign(path); return Promise.resolve(); }
   };
 

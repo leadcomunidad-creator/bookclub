@@ -38,6 +38,20 @@
       "  var guardarOriginal = guardarProg;\n" +
       "  guardarProg = function () { prog.t = Date.now(); guardarOriginal(); };\n" +
       "  function guardarInmediatamente() { sucio = true; guardarProg(); }\n" +
+      "  function marcarPorLeer() {\n" +
+      "    var archivo = (window.location.pathname || '').split('/').pop() || '';\n" +
+      "    var clave = 'libros/' + archivo, ahora = Date.now(), biblioteca = {};\n" +
+      "    try { biblioteca = JSON.parse(localStorage.getItem('bookclub-biblioteca') || '{}') || {}; } catch (error) {}\n" +
+      "    biblioteca[clave] = { e: 'porleer', t: ahora };\n" +
+      "    try { localStorage.setItem('bookclub-biblioteca', JSON.stringify(biblioteca)); } catch (error) {}\n" +
+      "    if (window.BookclubSync && typeof window.BookclubSync.setLibraryState === 'function') return window.BookclubSync.setLibraryState(clave, 'porleer', ahora);\n" +
+      "    return Promise.resolve();\n" +
+      "  }\n" +
+      "  hayAvance = function () {\n" +
+      "    var destino = destinoContinuar();\n" +
+      "    if (!destino) return false;\n" +
+      "    return avanceLibro() > 0 || destino.id !== CONT_PAGS[0] || destino.r > 0.02;\n" +
+      "  };\n" +
       "  function terminarLibro(event) {\n" +
       "    if (event) { event.preventDefault(); event.stopImmediatePropagation(); }\n" +
       "    CONT_PAGS.forEach(function (id) { prog.p[id] = 1; });\n" +
@@ -65,8 +79,10 @@
       "    try { localStorage.setItem(CLAVE_PROG, JSON.stringify(prog)); } catch (error) {}\n" +
       "    pintarProg(); boton.textContent = 'Borrado ✓';\n" +
       "    var salir = function () { volverABiblioteca(); };\n" +
-      "    if (window.BookclubSync && typeof window.BookclubSync.resetProgress === 'function') window.BookclubSync.resetProgress(CLAVE_PROG).then(salir, salir); else salir();\n" +
+      "    var terminado = function () { marcarPorLeer().then(salir, salir); };\n" +
+      "    if (window.BookclubSync && typeof window.BookclubSync.resetProgress === 'function') window.BookclubSync.resetProgress(CLAVE_PROG, JSON.stringify(prog)).then(terminado, terminado); else terminado();\n" +
       "  };\n" +
+      "  pintarProg();\n" +
       "})();";
     document.body.appendChild(mejoras);
     agruparMenu(payload.reader.menu_groups);
