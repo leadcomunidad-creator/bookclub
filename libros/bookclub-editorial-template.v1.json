@@ -1,0 +1,63 @@
+{
+  "schema": "bookclub.editorial-template.v1",
+  "product": "resumen",
+  "fixed_order": [
+    "contenido_y_mapa",
+    "resumen_ejecutivo",
+    "introduccion_y_mapa",
+    "desarrollo",
+    "curaduria",
+    "comunicador",
+    "consolidacion"
+  ],
+  "contenido_y_mapa": {
+    "page_kind": "indice",
+    "slots": ["titulo", "indice", "mapa"],
+    "placement": "despues_de_portada"
+  },
+  "resumen_ejecutivo": {
+    "slots": [
+      "ficha",
+      "autor",
+      "dirigido",
+      "problema",
+      "tesis",
+      "ideas",
+      "giro",
+      "accion"
+    ]
+  },
+  "introduccion_y_mapa": {
+    "slots": ["prosa"],
+    "forbidden_slots": ["ficha", "autor", "dirigido", "problema", "tesis"]
+  },
+  "desarrollo": {
+    "requires": ["movimientos_reales", "menu", "indice"],
+    "chapter_order": ["titulo", "subtitulo", "idea", "prosa", "impactos", "senal", "reflexion", "practica"]
+  },
+  "renderer": {
+    "mode": "canonical-slots",
+    "slot_attribute": "data-bookclub-component",
+    "group_attribute": "data-bookclub-group"
+  },
+  "utilities": {
+    "indice": {
+      "section": "contenido_y_mapa",
+      "placement": "own_page"
+    }
+  },
+  "navigation": {
+    "summary_menu_label": "Resumen ejecutivo",
+    "summary_back_label": "Contenido y mapa",
+    "content_page_label": "Contenido y mapa"
+  },
+  "visual_identity": {
+    "source": "book_design",
+    "content_page": {
+      "title_font_token": "--font-display",
+      "title_color_token": "--oro-t",
+      "label_color_token": "--mark-ink",
+      "symbol": "book_symbol"
+    }
+  }
+}

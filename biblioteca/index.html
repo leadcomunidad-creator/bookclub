@@ -450,7 +450,7 @@ function renderPanel(){
 function textMatch(l){return !search||norm(l.titulo+' '+l.autor).includes(norm(search));}
 function matches(l){
   if(!textMatch(l))return false;
-  if(mode==='ruta'){if(routeMajor&&l.expedicion!==routeMajor)return false;if(selection&&l.sub_expedicion!==selection)return false;}
+  if(mode==='ruta'){if(routeMajor&&(l.categoria||l.expedicion)!==routeMajor)return false;if(selection&&(l.subcategoria||l.sub_expedicion)!==selection)return false;}
   if(mode==='autor'&&selection&&l.autor!==selection)return false;
   if(mode==='tema'&&selection&&!(l.temas||[]).includes(selection))return false;
   if(mode==='formato'&&selection&&tipoDe(l)!==selection)return false;
@@ -479,7 +479,7 @@ function card(l){
   else if(e==='leido'){prog='<div class="pline ok"><span>✓ Leído</span></div>';}
   else if(e==='porleer'){prog='<div class="pline"><span>Por leer</span></div>';}
   var edition='';
-  var meta='<div class="book-meta"><div class="book-line"><span><b>'+esc(l.autor)+'</b> · '+esc(l.anio)+'</span><span>'+esc(l.tiempo_lectura_min)+' min</span></div>'+prog+'<div class="book-desc">'+esc(l.descripcion)+'</div><div class="tags">'+edition+'<span class="tag">'+esc(labelsExp[l.expedicion]||'')+'</span><span class="tag">'+esc(labelsSub[l.sub_expedicion]||'')+'</span></div></div>';
+  var meta='<div class="book-meta"><div class="book-line"><span><b>'+esc(l.autor)+'</b> · '+esc(l.anio)+'</span><span>'+esc(l.tiempo_lectura_min)+' min</span></div>'+prog+'<div class="book-desc">'+esc(l.descripcion)+'</div><div class="tags">'+edition+'<span class="tag">'+esc(labelsExp[l.categoria||l.expedicion]||'')+'</span><span class="tag">'+esc(labelsSub[l.subcategoria||l.sub_expedicion]||'')+'</span></div></div>';
   var label=tipoLabels[t]+': '+l.titulo+', '+l.autor+', '+l.tiempo_lectura_min+' minutos'+(e?'. '+estLabels[e]:'');
   var btn='<button class="save" type="button" data-id="'+esc(id)+'" data-e="'+(e||'')+'" aria-haspopup="menu" aria-expanded="false" aria-label="'+esc(e?'Estado: '+estLabels[e]+'. Cambiar':'Guardar en Mi biblioteca: '+l.titulo)+'">'+(e?ICON[e]:ICON.vacio)+'</button>';
   var privado=t==='libro',destino=privado?'#libro-privado':id,attrs=privado?' data-private-book="'+esc(l.archivo_privado||'')+'"':'';
