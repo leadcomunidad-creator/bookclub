@@ -346,7 +346,7 @@ body.bookclub-app-open #bookclub-app{display:block}
         </div>
         <p class="lead">Una muestra real de lo que vas a encontrar. Vendrán muchos más.</p>
       </div>
-      <div class="grid">
+      <div class="grid" id="collection-grid">
         <article class="book">
           <div class="cover"><img src="assets/previews/elimina-la-prisa.png" alt="Portada de Elimina la prisa de tu vida" width="520" height="693"></div>
           <div><div class="book-line"><span><b>John Mark Comer</b></span><span>96 min</span></div></div>
@@ -431,6 +431,50 @@ body.bookclub-app-open #bookclub-app{display:block}
   h.querySelectorAll('.hnav a').forEach(function(a){a.addEventListener('click',function(){set(false)})});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&h.classList.contains('open')){set(false);b.focus()}});
   window.addEventListener('resize',function(){if(window.innerWidth>899)set(false)});
+})();
+
+/* La colección se actualiza desde libros.json. Las tarjetas del HTML quedan
+   visibles como respaldo si el archivo no puede cargarse. */
+(function(){
+  var grid=document.getElementById('collection-grid');
+  if(!grid||!window.fetch)return;
+  var nombres={
+    mentalidad:'Mentalidad',capacidad:'Capacidad',habilidad:'Habilidad',
+    identidad:'Identidad',sanidad:'Sanidad',renovacion:'Renovación',
+    espiritual:'Inteligencia Espiritual',emocional:'Inteligencia Emocional',
+    fisica:'Inteligencia Física',personal:'Personal',relacional:'Relacional',vocacional:'Vocacional'
+  };
+  function etiqueta(libro){
+    var categoria=libro.categoria||libro.expedicion;
+    var subcategoria=libro.subcategoria||libro.sub_expedicion;
+    return [nombres[categoria]||categoria,nombres[subcategoria]||subcategoria].filter(Boolean).join(' · ');
+  }
+  function tarjeta(libro){
+    var article=document.createElement('article');article.className='book';
+    var cover=document.createElement('div');cover.className='cover';
+    var image=document.createElement('img');
+    image.src=libro.preview_imagen;
+    image.alt='Portada de '+libro.titulo;
+    image.width=1200;image.height=1600;
+    cover.appendChild(image);
+    var details=document.createElement('div');
+    var line=document.createElement('div');line.className='book-line';
+    var author=document.createElement('span');var strong=document.createElement('b');strong.textContent=libro.autor;author.appendChild(strong);
+    var minutes=document.createElement('span');minutes.textContent=libro.tiempo_lectura_min+' min';
+    line.append(author,minutes);details.appendChild(line);
+    var tag=document.createElement('span');tag.className='tag';tag.textContent=etiqueta(libro);
+    article.append(cover,details,tag);
+    return article;
+  }
+  fetch('libros.json',{credentials:'same-origin'}).then(function(response){
+    if(!response.ok)throw new Error('No se pudo cargar libros.json');
+    return response.json();
+  }).then(function(data){
+    if(!data||!Array.isArray(data.libros)||!data.libros.length)throw new Error('libros.json no contiene libros');
+    var cards=document.createDocumentFragment();
+    data.libros.forEach(function(libro){cards.appendChild(tarjeta(libro));});
+    grid.replaceChildren(cards);
+  }).catch(function(error){console.warn('La colección conserva las tarjetas de respaldo.',error);});
 })();
 </script>
 
