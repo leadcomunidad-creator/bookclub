@@ -220,7 +220,7 @@
   function iniciar(payload, plantilla) {
     if (!payload || !payload.reader || !payload.reader.body_html) { fail(); return; }
     window.BOOKCLUB_JSON_READER_CONFIG = payload.reader;
-    document.title = payload.meta && payload.meta.titulo ? payload.meta.titulo + ' — JSON Piloto · ' + payload.meta.autor : document.title;
+    document.title = payload.meta && payload.meta.titulo ? payload.meta.titulo + ' — ' + payload.meta.autor : document.title;
     var meta = document.getElementById('libro-meta'); if (meta && payload.meta) meta.textContent = JSON.stringify(payload.meta, null, 2);
     document.body.className = payload.reader.body_class || '';
     document.body.innerHTML = payload.reader.body_html;
