@@ -10,7 +10,7 @@
     messagingSenderId: '138459401399',
     appId: '1:138459401399:web:aaee2ce217192390ae5132'
   };
-  var auth, db, fbAuth, fbStore, user = null, active = false, resolveReady, timer, stopListening = null;
+  var auth, db, fbAuth, fbStore, user = null, active = false, cargado = false, resolveReady, timer, stopListening = null;
   var ready = new Promise(function (resolve) { resolveReady = resolve; });
   var originalSetItem = Storage.prototype.setItem;
 
@@ -149,6 +149,7 @@
 
   var api = window.BookclubSync = {
     ready: ready,
+    cargado: cargado,
     isAuthorized: function () { return active; },
     getUser: function () { return user; },
     signInWithGoogle: signInWithGoogle,
@@ -167,6 +168,7 @@
     fbAuth = modules[1]; fbStore = modules[2];
     var app = modules[0].initializeApp(CONFIG, 'bookclub');
     auth = fbAuth.getAuth(app);
+    cargado = true; api.cargado = true;
     db = fbStore.getFirestore(app);
     fbAuth.onAuthStateChanged(auth, refresh);
   }).catch(function (error) {

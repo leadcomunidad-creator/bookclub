@@ -515,7 +515,7 @@ html.bookclub-app-pending #bookclub-app{display:block}
   function actualizarVista(){
     var conSesion=!!(window.BookclubSync&&window.BookclubSync.getUser&&window.BookclubSync.getUser());
     if(conSesion){guardarMarca(true);abrirBiblioteca();return;}
-    if(sesionRecordada&&!navigator.onLine){abrirBiblioteca();return;}
+    if(sesionRecordada&&!(window.BookclubSync&&window.BookclubSync.cargado)){abrirBiblioteca();return;}
     guardarMarca(false);cerrarBiblioteca();
   }
   frame.addEventListener('load',function(){shell.classList.remove('is-loading');});
