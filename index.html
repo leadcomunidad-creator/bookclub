@@ -11,6 +11,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="BOOKCLUB">
+<script>
+try{if(localStorage.getItem('bookclub-sesion-recordada')==='1')document.documentElement.classList.add('bookclub-app-pending');}catch(e){}
+</script>
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="icon" type="image/svg+xml" href="/assets/icons/icon-dark.svg">
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/icon-dark-192.png">
@@ -200,10 +203,13 @@ section.band{border-top:1px solid var(--line)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 
 #bookclub-app{display:none;position:fixed;inset:0;z-index:1000;background:#0B0C10}
-#bookclub-app iframe{display:block;width:100%;height:100%;border:0}
+#bookclub-app iframe{display:block;position:relative;z-index:0;width:100%;height:100%;border:0}
+#bookclub-app.is-loading::before{content:'Abriendo tu biblioteca…';position:absolute;inset:0;z-index:1;display:grid;place-items:center;background:#0B0C10;color:#ECEEF3;font-family:var(--serif);font-size:clamp(1.2rem,4vw,1.7rem)}
 body.bookclub-app-open{overflow:hidden}
 body.bookclub-app-open>header,body.bookclub-app-open>main,body.bookclub-app-open>footer{display:none!important}
 body.bookclub-app-open #bookclub-app{display:block}
+html.bookclub-app-pending body>header,html.bookclub-app-pending body>main,html.bookclub-app-pending body>footer{display:none!important}
+html.bookclub-app-pending #bookclub-app{display:block}
 
 </style>
 
@@ -482,12 +488,38 @@ body.bookclub-app-open #bookclub-app{display:block}
 <script src="bookclub-firebase.js"></script>
 <script>
 (function(){
-  var shell=document.getElementById('bookclub-app'),frame=document.getElementById('bookclub-frame');
+  var shell=document.getElementById('bookclub-app'),frame=document.getElementById('bookclub-frame'),marca='bookclub-sesion-recordada';
+  var modoApp=new URLSearchParams(location.search).get('app')==='1';
+  var sesionRecordada=false;
+  try{sesionRecordada=localStorage.getItem(marca)==='1'}catch(e){}
+  if(modoApp)document.documentElement.classList.add('bookclub-app-mode');
+  function guardarMarca(activa){
+    try{if(activa)localStorage.setItem(marca,'1');else localStorage.removeItem(marca)}catch(e){}
+    sesionRecordada=!!activa;
+  }
+  function rutaBiblioteca(){return modoApp?'/biblioteca/?open=biblioteca':'/biblioteca/'}
+  function abrirBiblioteca(ruta,forzar){
+    document.body.classList.add('bookclub-app-open');
+    document.documentElement.classList.remove('bookclub-app-pending');
+    if(forzar||!frame.hasAttribute('src')){
+      shell.classList.add('is-loading');
+      frame.src=ruta||rutaBiblioteca();
+    }
+  }
+  function cerrarBiblioteca(){
+    shell.classList.remove('is-loading');
+    document.body.classList.remove('bookclub-app-open');
+    document.documentElement.classList.remove('bookclub-app-pending');
+    frame.removeAttribute('src');
+  }
   function actualizarVista(){
     var conSesion=!!(window.BookclubSync&&window.BookclubSync.getUser&&window.BookclubSync.getUser());
-    document.body.classList.toggle('bookclub-app-open',conSesion);
-    if(conSesion&&!frame.src)frame.src='/biblioteca/';
+    if(conSesion){guardarMarca(true);abrirBiblioteca();return;}
+    if(sesionRecordada&&!navigator.onLine){abrirBiblioteca();return;}
+    guardarMarca(false);cerrarBiblioteca();
   }
+  frame.addEventListener('load',function(){shell.classList.remove('is-loading');});
+  if(sesionRecordada)abrirBiblioteca();
   document.querySelectorAll('[data-library-access]').forEach(function(link){
     link.addEventListener('click',function(event){
       event.preventDefault();
@@ -497,10 +529,9 @@ body.bookclub-app-open #bookclub-app{display:block}
   window.addEventListener('bookclub-auth-change',actualizarVista);
   window.addEventListener('message',function(event){
     if(event.origin!==location.origin||!event.data)return;
-    if(event.data.type==='bookclub-signout')window.BookclubSync.signOut();
+    if(event.data.type==='bookclub-signout'){guardarMarca(false);cerrarBiblioteca();window.BookclubSync.signOut();}
     if(event.data.type==='bookclub-open-library'){
-      document.body.classList.add('bookclub-app-open');
-      frame.src='/biblioteca/?open=biblioteca';
+      abrirBiblioteca('/biblioteca/?open=biblioteca',true);
     }
   });
   if(window.BookclubSync&&window.BookclubSync.ready)window.BookclubSync.ready.then(actualizarVista);
