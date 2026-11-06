@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'bookclub-v27-firebase-unified-reading';
+const CACHE_VERSION = 'bookclub-v28-firebase-unified-reading';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [
@@ -46,13 +46,22 @@ self.addEventListener('activate', event => {
 async function networkFirst(request) {
   const cache = await caches.open(RUNTIME_CACHE);
   try {
-    const response = await fetch(request);
+    const response = request.mode === 'navigate'
+      ? await Promise.race([
+          fetch(request),
+          new Promise((_, reject) => setTimeout(() => reject(new Error('La red tardó demasiado.')), 4000))
+        ])
+      : await fetch(request);
     if (response && response.ok) cache.put(request, response.clone());
     return response;
   } catch (error) {
     const cached = await cache.match(request) || await caches.match(request);
     if (cached) return cached;
-    if (request.mode === 'navigate') return caches.match('./index.html');
+    if (request.mode === 'navigate') {
+      return new URL(request.url).pathname === '/biblioteca/'
+        ? caches.match('/biblioteca/', { ignoreSearch: true })
+        : caches.match('./index.html');
+    }
     throw error;
   }
 }
