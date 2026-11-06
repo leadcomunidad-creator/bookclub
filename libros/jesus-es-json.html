@@ -1,118 +1,134 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- BOOKCLUB META START -->
-<meta name="description" content="El cristianismo no consiste en esforzarnos por ser suficientemente buenos para acercarnos a Dios, sino en descubrir quién es Jesús, recibir su gracia y permitir que esa relación transforme nuestra vida desde el interior.">
-<meta name="theme-color" content="#F6F5F2" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#171615" media="(prefers-color-scheme: dark)">
+<meta name="description" content="Un recorrido por la vida de Jesús que mueve la fe del mérito a la gracia: su amistad con los rechazados, su presencia en el dolor y la resurrección como origen de una identidad nueva.">
+<meta name="theme-color" content="#FAF8F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141311" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="BOOKCLUB">
-<meta property="og:title" content="Jesús es _____ — Judah Smith">
-<meta property="og:description" content="El cristianismo no consiste en esforzarnos por ser suficientemente buenos para acercarnos a Dios, sino en descubrir quién es Jesús, recibir su gracia y permitir que esa relación transforme nuestra vida desde el interior.">
+<meta property="og:title" content="Jesús es _____. — Judah Smith">
+<meta property="og:description" content="Un recorrido por la vida de Jesús que mueve la fe del mérito a la gracia: su amistad con los rechazados, su presencia en el dolor y la resurrección como origen de una identidad nueva.">
 <meta property="og:image" content="https://raw.githubusercontent.com/leadcomunidad-creator/bookclub/main/assets/previews/jesus-es.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Jesús es _____ — Judah Smith">
-<meta name="twitter:description" content="El cristianismo no consiste en esforzarnos por ser suficientemente buenos para acercarnos a Dios, sino en descubrir quién es Jesús, recibir su gracia y permitir que esa relación transforme nuestra vida desde el interior.">
+<meta name="twitter:title" content="Jesús es _____. — Judah Smith">
+<meta name="twitter:description" content="Un recorrido por la vida de Jesús que mueve la fe del mérito a la gracia: su amistad con los rechazados, su presencia en el dolor y la resurrección como origen de una identidad nueva.">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/leadcomunidad-creator/bookclub/main/assets/previews/jesus-es.jpg">
-<link rel="canonical" href="./jesus-es.html">
 <link rel="manifest" href="../manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="../assets/icons/icon-192.png">
 <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
 <!-- BOOKCLUB META END -->
-<title>Jesús es _____ — Judah Smith</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400..700;1,400..700&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
-<script src="../bookclub-firebase.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Hanken+Grotesk:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,500;9..40,700;9..40,800&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
+
+/* ═══════════════════════════════════════════════════════════
+   JESÚS ES ___. · BOOKCLUB
+   Sistema de lectura — identidad derivada de la portada:
+   fondo carbón + mosaico de bloques de color (verde · rosa · turquesa · rojo · naranja · azul · vino)
+   ═══════════════════════════════════════════════════════════ */
+
 :root {
-  --oro:        #DD478B;   /* magenta de la portada (acento global) */
-  --oro-t:      #B0206A;
-  --espada:     #4A4845;
-  --c-acento:        #171615;
-  --c-acento-medio:  #171615;
-  --c-acento-suave:  #DD478B;
-  --c-acento-claro:  #F06BA6;
-  --c-acento-palido: #EDEBE6;
-  --c-acento-bg:     #E4E1DA;
-  --c-accion:        #171615;
-  --c-accion-bg:     #171615;
-  --c-accion-txt:    #F3F1EC;
-  --c-bg:            #F6F5F2;
-  --c-surface:       #FFFFFF;
-  --c-border:        #DAD7CF;
-  --c-texto:         #171615;
-  --c-texto-2:       #47443F;
-  --c-texto-3:       #66625B;
+  /* — Paleta de la portada (decorativa; los textos usan los tokens de abajo) — */
+  --c-fondo-portada: #171614;
+  --titulo-portada:  #FFFFFF;   /* color del título en la portada */
+  --c-verde:     #00AC3E;
+  --c-rosa:      #DD488C;
+  --c-turquesa:  #00ABAB;
+  --c-rojo:      #FE2E00;
+  --c-naranja:   #FF7A01;
+  --c-azul:      #0072B1;
+  --c-vino:      #903837;
+  --c-borde-punteado: #8E9296;
+  --acc: var(--c-rosa);          /* color de bloque de la página/sección en curso */
 
-  --font-sans:  'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-serif: var(--font-sans);
-  --font-body:  var(--font-sans);
-  --font-ui:    var(--font-sans);
-  --font-display: 'Barlow Condensed', 'Arial Narrow', 'Roboto Condensed', Impact, system-ui, sans-serif;
-  --font-cond:  var(--font-display);
+  /* — Botones de la portada (siempre sobre fondo oscuro) — */
+  --cv-btn-bg:  #FF7A01;
+  --cv-btn-ink: #171614;
+  --cv-texto:   #F2EEE6;
+  --cv-texto-2: #BDB8AD;
+  --cv-regla:   #3B3833;
 
-  --paper:   #F6F5F2;
+  --c-acento:        #0072B1;
+  --c-acento-suave:  var(--c-rosa);
+  --c-acento-claro:  #FF9B3D;
+  --c-dato:          #FF9B3D;      /* texto claro sobre tarjetas oscuras */
+  --c-accion:        var(--c-azul);
+  --c-accion-bg:     #171614;
+  --c-accion-txt:    #F2EEE6;
+
+  --font-serif:   'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-body:    var(--font-serif);
+  --font-ui:      'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'DM Sans', 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+  --font-cond:    'Barlow Condensed', 'Arial Narrow', 'Roboto Condensed', system-ui, sans-serif;
+
+  --paper:   #FAF8F4;
   --card:    #FFFFFF;
-  --tint:    #EDEBE6;
-  --rule:    #DAD7CF;
-  --rule-2:  #C2BEB3;
+  --tint:    #F3EFE8;
+  --rule:    #E5DFD5;
+  --rule-2:  #CFC7B9;
   --drawer:  #FFFFFF;
-  --text:    #171615;
-  --text-2:  #47443F;
-  --text-3:  #66625B;
-  --head:    #171615;
-  --head-2:  #47443F;
-  --mark:    #B0206A;
-  --mark-ink:#B0206A;
-  --mark-soft:#DD478B;
-  --focus:   #B0206A;
-  --btn-bg:  #171615;
+  --text:    #171614;
+  --text-2:  #46423C;
+  --text-3:  #6A655D;
+  --head:    #171614;
+  --head-2:  #005F94;
+  --mark:    var(--acc);
+  --mark-ink:#005F94;
+  --mark-soft: var(--acc);
+  --focus:   #005F94;
+  --btn-bg:  #0072B1;
   --btn-ink: #FFFFFF;
   --card-accion: #FFFFFF;
-  --card-accion-line: #DAD7CF;
-  --shadow-card: 0 1px 2px rgba(23,22,21,.05), 0 10px 26px -16px rgba(23,22,21,.28);
-  --veredicto: linear-gradient(135deg, #171615 0%, #2A2826 100%);
+  --card-accion-line: #E5DFD5;
+  --shadow-card: 0 1px 2px rgba(23,22,20,.05), 0 10px 26px -16px rgba(23,22,20,.28);
+  --veredicto: linear-gradient(135deg, #171614 0%, #2B2926 100%);
 
   --radius: 14px;
   --gut: clamp(1.25rem, 5vw, 2.6rem);
   --base: 1.125rem;
-  --lh: 1.7;
+  --lh: 1.74;
   --barra: 3.5rem;
   --safe-t: env(safe-area-inset-top, 0px);
 }
 body.dark {
-  --oro:        #DD478B;
-  --oro-t:      #F06BA6;
-  --espada:     #9B978F;
-  --c-accion-bg: #262421;
-  --paper:   #171615;
-  --card:    #201F1D;
-  --tint:    #262421;
-  --rule:    #3A3835;
-  --rule-2:  #4D4A45;
-  --drawer:  #111110;
-  --text:    #F3F1EC;
-  --text-2:  #CFCBC3;
-  --text-3:  #A9A59C;
-  --head:    #F3F1EC;
-  --head-2:  #CFCBC3;
-  --mark:    #F06BA6;
-  --mark-ink:#F06BA6;
-  --mark-soft:#DD478B;
-  --focus:   #F06BA6;
-  --btn-bg:  #F3F1EC;
-  --btn-ink: #171615;
-  --card-accion: #201F1D;
-  --card-accion-line: #3A3835;
+  --c-accion-bg: #0E0D0C;
+  --paper:   #141311;
+  --card:    #1E1D1A;
+  --tint:    #25231F;
+  --rule:    #34312B;
+  --rule-2:  #47433B;
+  --drawer:  #100F0E;
+  --text:    #F2EEE6;
+  --text-2:  #CFCAC0;
+  --text-3:  #A29D92;
+  --head:    #F7F3EB;
+  --head-2:  #6CC0F2;
+  --mark-ink:#6CC0F2;
+  --focus:   #6CC0F2;
+  --btn-bg:  #FF7A01;
+  --btn-ink: #171614;
+  --card-accion: #1E1D1A;
+  --card-accion-line: #47433B;
   --shadow-card: none;
-  --veredicto: linear-gradient(135deg, #262421 0%, #34312D 100%);
+  --veredicto: linear-gradient(135deg, #25231F 0%, #34312B 100%);
 }
+/* Cada sección del libro toma el color de uno de los bloques de la portada */
+[data-acc="verde"]    { --acc: var(--c-verde); }
+[data-acc="rosa"]     { --acc: var(--c-rosa); }
+[data-acc="turquesa"] { --acc: var(--c-turquesa); }
+[data-acc="rojo"]     { --acc: var(--c-rojo); }
+[data-acc="naranja"]  { --acc: var(--c-naranja); }
+[data-acc="azul"]     { --acc: var(--c-azul); }
+[data-acc="vino"]     { --acc: var(--c-vino); }
+.pagina, .menu-seccion, .toc-grupo, .mapa-parte { --mark: var(--acc); --mark-soft: var(--acc); --c-accion: var(--acc); }
 @media (min-width: 900px) { :root { --base: 1.2rem; } }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -141,7 +157,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 /* ── BARRA DE PROGRESO ── */
 #barra-progreso {
   position: fixed; top: 0; left: 0; z-index: 9992; height: 3px; width: 0%;
-  background: linear-gradient(90deg,#00AC3D,#00ABAB,#0071B3,#FE7A00,#903738,#FF2E00,#DD478B);
+  background: linear-gradient(90deg, var(--c-acento-suave), var(--c-accion));
   display: none; border-radius: 0 3px 3px 0; transition: width .12s linear;
 }
 
@@ -198,37 +214,57 @@ body.bar-oculta #menu-btn, body.bar-oculta #btn-config, body.bar-oculta #bookclu
   body.bar-oculta #tb-info { pointer-events: none; }
 }
 
-/* ── PORTADA (composición de la portada del libro) ── */
+
+/* ── PORTADA (composición de la portada del libro: carbón + mosaico de color) ── */
+@keyframes entrar { to { opacity: 1; transform: translateY(0); } }
+@keyframes subir { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+#portada { background: var(--c-fondo-portada); color: var(--cv-texto); }
 .portada-sec {
   min-height: 100vh; min-height: 100dvh; position: relative; overflow: hidden;
   display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
-  padding: 4.4rem 1.25rem 4rem; background: var(--paper);
+  padding: 3.6rem 1.25rem 4rem; background: var(--c-fondo-portada);
 }
-.portada-sec::before { content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(52% 34% at 50% 50%, color-mix(in srgb, var(--oro) 16%, transparent), transparent 72%); }
-@keyframes entrar { to { opacity: 1; transform: translateY(0); } }
-@keyframes subir { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
-.portada-inner { position: relative; z-index: 1; width: 100%; max-width: 30rem; display: flex; flex-direction: column; align-items: center; opacity: 0; transform: translateY(24px); animation: entrar 1s cubic-bezier(.22,1,.36,1) .15s forwards; }
-.p-eyebrow { font: 600 10px/1.4 var(--font-ui); letter-spacing: .3em; text-transform: uppercase; color: var(--text-3); margin-bottom: 1.5rem; }
-.p-autor { font: 700 clamp(1.2rem, 5.6vw, 1.7rem)/1 var(--font-cond); letter-spacing: .3em; padding-left: .3em; text-transform: uppercase; color: var(--head); }
-.p-sello-autor { font: 500 clamp(.68rem, 3vw, .82rem)/1.3 var(--font-cond); letter-spacing: .16em; text-transform: uppercase; color: var(--text-2); margin: .55rem 0 1.5rem; }
-.p-sello-autor em { font-style: italic; font-weight: 700; }
-.p-titulo { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; color: var(--oro-t); font-size: clamp(2.3rem, 11.4vw, 3.9rem); line-height: 1.04; letter-spacing: .01em; }
-.p-titulo span { display: block; }
-.arte { width: clamp(200px, 62vw, 320px); height: auto; margin: .7rem 0 .9rem; overflow: visible; }
-.p-sub { font: 600 clamp(.78rem, 3.5vw, 1rem)/1.65 var(--font-cond); letter-spacing: .26em; text-transform: uppercase; color: var(--text-2); margin: 1.3rem 0 1.5rem; }
-.p-fechas { font: 500 .78rem/1 var(--font-ui); color: var(--text-3); letter-spacing: .2em; margin-bottom: 1.3rem; }
-.p-badge { border: 1px solid var(--rule-2); color: var(--head); font: 600 10px/1 var(--font-ui); letter-spacing: .24em; padding: .6rem 1.15rem; border-radius: 99px; text-transform: uppercase; margin-bottom: 2rem; background: color-mix(in srgb, var(--oro) 10%, transparent); }
+.portada-inner { position: relative; z-index: 1; width: 100%; max-width: 26rem; display: flex; flex-direction: column; align-items: center; opacity: 0; transform: translateY(24px); animation: entrar 1s cubic-bezier(.22,1,.36,1) .15s forwards; }
+.p-eyebrow { font: 600 10px/1.4 var(--font-ui); letter-spacing: .2em; text-transform: uppercase; color: var(--cv-texto-2); margin-bottom: 1rem; }
+.cover-art {
+  position: relative; container-type: inline-size; aspect-ratio: 2 / 3;
+  width: min(100%, 24rem, calc((100vh - 17.5rem) * .6667));
+  width: min(100%, 24rem, calc((100dvh - 17.5rem) * .6667));
+  min-width: min(100%, 15rem); margin: 0 auto 1.15rem;
+}
+.cover-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.p-autor {
+  position: absolute; left: 49.17%; top: 2.22%; width: 34.67%; height: 23.33%; box-sizing: border-box; padding: 0 6% 0 6.2%;
+  display: flex; align-items: center; text-align: left;
+  font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; line-height: 1.04; letter-spacing: .005em;
+  font-size: 7.3cqw; text-transform: uppercase; color: var(--c-fondo-portada);
+}
+.p-titulo {
+  position: absolute; left: 3.4%; top: 26.2%; width: 93.4%; height: 16.4%; display: flex; align-items: center; text-align: left;
+  font-family: var(--font-display); font-weight: 700; font-size: 2.4rem; line-height: 1; letter-spacing: .005em;
+  font-size: 11.6cqw; text-transform: uppercase; color: var(--titulo-portada); white-space: nowrap;
+}
+.p-t-in { display: flex; align-items: baseline; width: 100%; gap: .2em; }
+.p-blank { flex: 1; min-width: 1.4em; height: .075em; margin-bottom: -.035em; background: currentColor; border-radius: .02em; }
+.p-sub {
+  position: absolute; left: 49.6%; top: 50.3%; width: 34%; height: 27.8%; box-sizing: border-box; padding: 0 1.6%;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  font-family: var(--font-cond); font-weight: 700; font-size: .9rem; line-height: 1.22; letter-spacing: .04em;
+  font-size: 4.3cqw; text-transform: uppercase; color: #D9DCDC; text-wrap: balance; overflow-wrap: normal;
+}
+.p-meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .6rem 1rem; margin-bottom: 1.3rem; }
+.p-fechas { font: 600 .8rem/1 var(--font-ui); color: var(--cv-texto-2); letter-spacing: .2em; padding-left: .2em; }
+.p-badge { border: 1px solid rgba(242,238,230,.34); color: var(--cv-texto); font: 600 10px/1 var(--font-ui); letter-spacing: .22em; padding: .6rem 1.1rem; border-radius: 99px; text-transform: uppercase; }
 .btn-leer {
-  display: inline-flex; align-items: center; gap: .6rem; background: var(--btn-bg); color: var(--btn-ink);
-  font: 600 .98rem/1 var(--font-ui); letter-spacing: .03em; padding: 1.05rem 2.2rem; border-radius: 99px; border: 0;
-  box-shadow: 0 10px 26px -12px rgba(31,30,28,.55);
+  display: inline-flex; align-items: center; gap: .6rem; background: var(--cv-btn-bg); color: var(--cv-btn-ink);
+  font: 700 .98rem/1 var(--font-ui); letter-spacing: .03em; padding: 1.05rem 2.2rem; border-radius: 99px; border: 0;
+  box-shadow: 0 10px 26px -12px rgba(0,0,0,.7);
   transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
 }
-.btn-leer:hover { filter: brightness(1.1); transform: translateY(-2px); }
+.btn-leer:hover { filter: brightness(1.08); transform: translateY(-2px); }
 .btn-leer:active { transform: translateY(0) scale(.98); }
-.p-footer { position: absolute; bottom: 1.3rem; left: 0; right: 0; padding: 0 1rem; text-align: center; font: 500 10px/1.4 var(--font-ui); letter-spacing: .2em; color: var(--text-3); text-transform: uppercase; }
-
+.p-footer { position: absolute; bottom: 1.2rem; left: 0; right: 0; padding: 0 1rem; text-align: center; font: 500 10px/1.4 var(--font-ui); letter-spacing: .2em; color: var(--cv-texto-2); text-transform: uppercase; overflow-wrap: anywhere; }
+#portada :focus-visible { outline-color: #FFB366; }
 /* ── LAYOUT DE LECTURA ── */
 .page { max-width: 46rem; margin: 0 auto; padding-top: calc(var(--barra) + var(--safe-t)); }
 
@@ -332,12 +368,12 @@ body.bar-oculta #menu-btn, body.bar-oculta #btn-config, body.bar-oculta #bookclu
   border: 1px solid #3D3A33; border-radius: var(--radius);
 }
 body.dark .dato-card { border-color: #4A463B; }
-.dato-label { display: flex; align-items: center; gap: .6rem; margin-bottom: .85rem; font: 700 10.5px/1 var(--font-ui); letter-spacing: .22em; text-transform: uppercase; color: var(--pc-hi); }
-.dato-label::before { content: ''; width: 18px; height: 1px; background: var(--pc-hi); }
+.dato-label { display: flex; align-items: center; gap: .6rem; margin-bottom: .85rem; font: 700 10.5px/1 var(--font-ui); letter-spacing: .22em; text-transform: uppercase; color: var(--c-dato); }
+.dato-label::before { content: ''; width: 18px; height: 1px; background: var(--c-dato); }
 .dato-text { font-family: var(--font-serif); font-size: 1em; line-height: 1.7; color: var(--c-accion-txt); }
-.dato-text .destacado { border: 0; padding: 0; margin: 0 0 1rem; font-size: 1.14em; line-height: 1.5; color: var(--pc-hi); }
+.dato-text .destacado { border: 0; padding: 0; margin: 0 0 1rem; font-size: 1.14em; line-height: 1.5; color: var(--c-dato); }
 .dato-text .destacado:last-child { margin-bottom: 0; }
-.dato-text .destacado + .destacado { padding-top: 1rem; border-top: 1px solid rgba(227,185,101,.18); }
+.dato-text .destacado + .destacado { padding-top: 1rem; border-top: 1px solid rgba(255,155,61,.22); }
 
 /* ── Reflexión ── */
 .alerta-card {
@@ -372,12 +408,12 @@ body.dark .dato-card { border-color: #4A463B; }
 .clave li { background: var(--tint); border: 1px solid var(--rule); border-left: 3px solid var(--mark-soft); padding: .6rem .95rem; border-radius: 4px 10px 10px 4px; line-height: 1.55; font-size: .96em; }
 
 /* ── Veredicto ── */
-.veredicto-card { margin: 1.5rem 0; padding: 1.75rem 1.8rem; background: var(--veredicto); border-radius: var(--radius); border: 1px solid rgba(227,185,101,.14); color: #EDEAE0; }
+.veredicto-card { margin: 1.5rem 0; padding: 1.75rem 1.8rem; background: var(--veredicto); border-radius: var(--radius); border: 1px solid rgba(255,155,61,.2); color: #EDEAE0; }
 .veredicto-label { margin-bottom: .75rem; font: 700 10.5px/1 var(--font-ui); letter-spacing: .22em; text-transform: uppercase; color: var(--c-acento-claro); }
-.veredicto-badge { display: inline-block; margin-bottom: 1rem; padding: .35rem .95rem; border-radius: 99px; background: color-mix(in srgb, var(--pc) 16%, transparent); border: 1px solid color-mix(in srgb, var(--pc) 38%, transparent); color: var(--pc-hi); font-family: var(--font-serif); font-style: italic; font-size: 1.02em; }
+.veredicto-badge { display: inline-block; margin-bottom: 1rem; padding: .35rem .95rem; border-radius: 99px; background: rgba(255,155,61,.16); border: 1px solid rgba(255,155,61,.4); color: var(--c-dato); font-family: var(--font-serif); font-style: italic; font-size: 1.02em; }
 .veredicto-text { font-size: inherit; line-height: 1.8; color: #EDEAE0; }
 .veredicto-text strong { color: #fff; }
-.veredicto-text .destacado { color: var(--pc-hi); border-color: var(--pc-hi); }
+.veredicto-text .destacado { color: var(--c-dato); border-color: var(--c-turquesa); }
 .veredicto-text p { margin-bottom: .9rem; }
 
 /* ── Curaduría ── */
@@ -388,7 +424,7 @@ body.dark .dato-card { border-color: #4A463B; }
 .eval-scores { display: flex; flex-wrap: wrap; gap: .4rem; }
 .eval-score { font: 600 11.5px/1 var(--font-ui); letter-spacing: .02em; padding: .42rem .7rem; border-radius: 99px; white-space: nowrap; }
 .eval-score.fid { background: var(--tint); color: var(--head); border: 1px solid var(--rule-2); }
-.eval-score.apl { background: color-mix(in srgb, var(--pc) 14%, transparent); color: var(--mark-ink); border: 1px solid color-mix(in srgb, var(--pc) 34%, transparent); }
+.eval-score.apl { background: rgba(0,114,177,.10); color: var(--mark-ink); border: 1px solid rgba(0,114,177,.32); }
 .eval-text { font-size: inherit; line-height: 1.7; }
 .eval-text p { font-size: .96em; }
 .eval-text p:last-child { margin-bottom: 0; }
@@ -453,14 +489,7 @@ hr.rule::before { content: '—  ✦  —'; font-size: 11px; color: var(--rule-2
 .book-footer { display: flex; flex-direction: column; align-items: center; gap: .35rem; padding: 1.2rem var(--gut) 3.5rem; text-align: center; }
 .footer-title { font-family: var(--font-serif); font-style: italic; font-size: .95rem; color: var(--head-2); }
 .footer-firma { font: 400 12px/1.4 var(--font-ui); letter-spacing: .03em; color: var(--text-2); }
-.footer-tag { font: 600 10px/1 var(--font-ui); letter-spacing: .2em; color: var(--text-3); text-transform: uppercase; margin-top: .2rem; }
-
-/* ── Lectura limpia ── */
-body.modo-lectura .libro-header, body.modo-lectura .lectura-meta, body.modo-lectura .book-footer { display: none; }
-body.modo-lectura .page { padding-top: calc(var(--barra) + var(--safe-t) + .6rem); }
-body.modo-lectura .nav-final { border-top-color: transparent; }
-
-/* ── Panel de ajustes ── */
+.footer-tag { font: 600 10px/1 var(--font-ui); letter-spacing: .2em; color: var(--text-3); text-transform: uppercase; margin-top: .2rem; }/* ── Panel de ajustes ── */
 #config-overlay { position: fixed; inset: 0; z-index: 9996; background: rgba(20,19,17,.18); opacity: 0; pointer-events: none; transition: opacity .2s; }
 #config-overlay.activo { opacity: 1; pointer-events: auto; }
 #config-panel {
@@ -528,7 +557,7 @@ body.modo-lectura .nav-final { border-top-color: transparent; }
 .bc-sub { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 500 .8rem/1.2 var(--font-ui); opacity: .78; }
 .bc-avance { display: flex; align-items: center; gap: .7rem; font: 600 10.5px/1 var(--font-ui); letter-spacing: .14em; text-transform: uppercase; color: var(--text-2); }
 .bc-barra { flex: 1; height: 4px; border-radius: 4px; background: var(--rule); overflow: hidden; }
-.bc-barra i { display: block; height: 100%; width: 0; border-radius: 4px; background: var(--oro); transition: width .6s ease; }
+.bc-barra i { display: block; height: 100%; width: 0; border-radius: 4px; background: var(--acc); transition: width .6s ease; }
 .btn-leer.sec { background: transparent; color: var(--text-2); font-size: .88rem; padding: .8rem 1.5rem; box-shadow: none; border: 1px solid var(--rule-2); }
 .btn-leer.sec:hover { background: var(--tint); color: var(--text); box-shadow: none; filter: none; }
 
@@ -552,7 +581,7 @@ body.modo-lectura .nav-final { border-top-color: transparent; }
 .menu-item { position: relative; }
 .menu-item-texto { flex: 1; min-width: 0; }
 .menu-item-estado { flex: none; margin-left: auto; font: 600 11px/1 var(--font-ui); color: var(--text-3); font-variant-numeric: tabular-nums; }
-.menu-item.leido .menu-item-estado { width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; background: var(--mark-soft); color: var(--pc-on); font-size: 10px; }
+.menu-item.leido .menu-item-estado { width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; background: var(--mark-soft); color: #1C1B19; font-size: 10px; }
 .menu-item.leido .menu-item-estado::before { content: '✓'; }
 .menu-item.parcial .menu-item-estado { color: var(--mark-ink); }
 .menu-item::after { content: ''; position: absolute; left: 1.1rem; bottom: 0; height: 2px; width: calc((100% - 2.35rem) * var(--pr, 0)); background: var(--mark-soft); opacity: .65; border-radius: 2px; transition: width .4s ease; }
@@ -593,20 +622,20 @@ body.modo-lectura .nav-final { border-top-color: transparent; }
 }
 
 body.en-portada #bookclub-home { top: calc(1rem + var(--safe-t)); left: 1rem; }
+
 /* ── Identidad de la portada aplicada a la lectura ── */
 .body { overflow-wrap: break-word; }
 .filtro-header { display: block; }
-.sello { display: block; width: 84px; height: auto; margin: 0 0 1rem; color: var(--oro); }
-.filtro-label { font: 700 12.5px/1 var(--font-cond); letter-spacing: .32em; color: var(--mark-ink); }
-.filtro-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.35rem, 6vw, 2.1rem); line-height: 1.16; letter-spacing: .004em; color: var(--head); overflow-wrap: anywhere; text-wrap: balance; }
-@media (min-width: 720px) { .filtro-title { font-size: 2.1rem; } }
-.sec-titulo { font-family: var(--font-display); font-weight: 800; font-size: 1.12em; letter-spacing: .01em; line-height: 1.25; color: var(--head); overflow-wrap: anywhere; }
+.sello { display: block; width: 84px; height: auto; margin: 0 0 1rem; }
+.filtro-label { align-items: center; font: 700 12.5px/1 var(--font-cond); letter-spacing: .32em; color: var(--mark-ink); }
+.filtro-label::before { content: ''; flex: none; width: .72rem; height: .72rem; background: var(--acc); }
+.filtro-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.35rem, 6vw, 2.05rem); line-height: 1.16; letter-spacing: -.004em; color: var(--head); overflow-wrap: anywhere; text-wrap: balance; }
+@media (min-width: 720px) { .filtro-title { font-size: 2.05rem; } }
+.sec-titulo { font-family: var(--font-display); font-weight: 700; font-size: 1.12em; letter-spacing: 0; line-height: 1.25; color: var(--head); overflow-wrap: anywhere; }
 .eyebrow, .tesis-label, .dato-label, .alerta-label, .accion-label, .veredicto-label, .toc-titulo, .com-dim, .campo-l { font-family: var(--font-cond); font-weight: 700; font-size: 13.5px; letter-spacing: .2em; overflow-wrap: anywhere; }
 .eyebrow { align-items: flex-start; }
 .eyebrow::after { margin-top: .45em; }
-.tesis-block { border-left-color: var(--oro); }
-.credito { margin: 0 0 1.4rem; font: 600 .86em/1.6 var(--font-ui); letter-spacing: .02em; color: var(--text-2); }
-.credito strong { color: var(--head); }
+.tesis-block { border-left-color: var(--acc); }
 .idea-num:not(.dot) { font-size: .66em; }
 .idea-text, .eval-text, .com-obs, .campo-v, .author-bio { overflow-wrap: anywhere; hyphens: auto; }
 .eval-titulo, .com-score { overflow-wrap: anywhere; }
@@ -614,147 +643,68 @@ body.en-portada #bookclub-home { top: calc(1rem + var(--safe-t)); left: 1rem; }
 .dia-card p { margin: 0; }
 .dia-card { margin: 1rem 0; }
 .menu-header { gap: .7rem; }
-.menu-marca { flex: none; width: 34px; height: 34px; display: block; }
-.arte-mini { width: 34px; height: 34px; display: block; overflow: visible; }
-.menu-titulo { flex: 1; min-width: 0; font-family: var(--font-display); font-style: normal; font-weight: 800; font-size: .86rem; letter-spacing: .03em; text-transform: uppercase; }
+.menu-marca { flex: none; width: 42px; height: 21px; display: block; }
+.arte-mini { width: 42px; height: 21px; display: block; overflow: visible; }
+.menu-titulo { flex: 1; min-width: 0; font-family: var(--font-display); font-style: normal; font-weight: 700; font-size: .95rem; line-height: 1.25; letter-spacing: 0; color: var(--head); overflow-wrap: anywhere; }
 .footer-title { overflow-wrap: anywhere; }
 .libro-header-titulo { overflow-wrap: anywhere; }
 @media (prefers-reduced-motion: reduce) { .portada-inner { opacity: 1; transform: none; } }
 
+/* Portada: los controles de avance sobre fondo oscuro */
+#portada .btn-cont { background: var(--cv-btn-bg); color: var(--cv-btn-ink); }
+#portada .bc-avance { color: var(--cv-texto-2); }
+#portada .bc-barra { background: var(--cv-regla); }
+#portada .bc-barra i { background: var(--c-naranja); }
+#portada .btn-leer.sec { background: transparent; color: var(--cv-texto); border: 1px solid rgba(242,238,230,.34); box-shadow: none; }
+#portada .btn-leer.sec:hover { background: rgba(242,238,230,.08); filter: none; }
 
-/* ── Identidad por parte (colores de los bloques de la portada) ── */
-.pt0 { --pc:#DD478B; --pc-on:#171615; --pc-ink:#B0206A; --pc-hi:#F06BA6; }
-body.dark .pt0 { --pc-ink:#F06BA6; }
-.pt1 { --pc:#00AC3D; --pc-on:#171615; --pc-ink:#006E28; --pc-hi:#2ED16A; }
-body.dark .pt1 { --pc-ink:#2ED16A; }
-.pt2 { --pc:#00ABAB; --pc-on:#171615; --pc-ink:#006F6F; --pc-hi:#1FD0D0; }
-body.dark .pt2 { --pc-ink:#1FD0D0; }
-.pt3 { --pc:#0071B3; --pc-on:#FFFFFF; --pc-ink:#0071B3; --pc-hi:#5DB1EE; }
-body.dark .pt3 { --pc-ink:#5DB1EE; }
-.pt4 { --pc:#FE7A00; --pc-on:#171615; --pc-ink:#A84B00; --pc-hi:#FF9A3D; }
-body.dark .pt4 { --pc-ink:#FF9A3D; }
-.pt5 { --pc:#903738; --pc-on:#FFFFFF; --pc-ink:#903738; --pc-hi:#E58A8C; }
-body.dark .pt5 { --pc-ink:#E58A8C; }
-.pt6 { --pc:#FF2E00; --pc-on:#171615; --pc-ink:#C21F00; --pc-hi:#FF6A4D; }
-body.dark .pt6 { --pc-ink:#FF6A4D; }
-.pt0, .pt1, .pt2, .pt3, .pt4, .pt5, .pt6 { --mark-soft: var(--pc); --mark: var(--pc-ink); --mark-ink: var(--pc-ink); --focus: var(--pc-ink); --btn-bg: var(--pc); --btn-ink: var(--pc-on); }
-
-/* ═════════ JESÚS ES _____ · identidad derivada de la portada (negro · mosaico de color · caja punteada) ═════════ */
-body, .body, .menu-item-titulo, .toc-btn { font-family: var(--font-sans); }
-.toc-arrow { color: var(--text-2); }
-.filtro-title, .sec-titulo, .parte-titulo, .cv-titulo, .cv-autor, .menu-titulo, .eval-titulo, .com-score, .big, .dia-t {
-  font-family: var(--font-display); font-style: normal;
+/* Títulos de parte y de capítulo: se muestran tal como están en el TXT (nunca en mayúsculas por CSS) */
+.menu-seccion[data-acc] .menu-seccion-label {
+  display: flex; align-items: flex-start; gap: .6rem;
+  font: 700 .86rem/1.3 var(--font-display); letter-spacing: 0; text-transform: none; color: var(--head);
 }
-.filtro-title { font-weight: 800; text-transform: uppercase; font-size: clamp(2rem, 9.4vw, 3.1rem); line-height: 1.0; letter-spacing: .01em; color: var(--text); overflow-wrap: anywhere; }
-@media (min-width: 720px) { .filtro-title { font-size: 3.1rem; } }
-.filtro-label, .eyebrow, .tesis-label, .dato-label, .alerta-label, .accion-label, .veredicto-label, .toc-titulo, .com-dim, .campo-l {
-  font-family: var(--font-display); font-weight: 700; font-size: 14.5px; letter-spacing: .16em; text-transform: uppercase;
-}
-.filtro-label, .eyebrow, .tesis-label, .dato-label, .alerta-label, .accion-label, .veredicto-label, .toc-titulo, .com-dim, .campo-l { line-height: 1.25; }
-.filtro-label { color: var(--pc-ink, var(--mark-ink)); letter-spacing: .2em; }
-.eval-titulo { font-weight: 700; font-size: 1.32em; line-height: 1.12; letter-spacing: .01em; text-transform: uppercase; color: var(--text); }
-.com-score { font-weight: 800; font-size: 1.9em; color: var(--text); }
-.menu-titulo { font-style: normal; font-weight: 800; font-size: 1.25rem; letter-spacing: .04em; text-transform: uppercase; color: var(--text); }
-.body strong { font-weight: 700; }
-.subtitulo { font-style: normal; font-weight: 500; font-size: 1.12em; color: var(--text-2); border-left: 4px solid var(--pc); }
-.subtitulo em { font-style: normal; }
-.tesis-block { border-left: 0; border-top: 6px solid var(--pc); border-radius: 0 0 var(--radius) var(--radius); }
-.tesis-text .destacado, .destacado { font-style: normal; font-weight: 600; color: var(--text); border-left: 4px solid var(--pc); }
-.tesis-text .destacado { border-left: 0; }
-.dato-card .destacado, .veredicto-text .destacado { color: var(--pc-hi); }
-.dato-card { border-radius: 0 var(--radius) 0 var(--radius); border: 2px dashed #6C6A66; background: var(--c-accion-bg); }
-.alerta-card { border-radius: var(--radius); border: 2px dashed var(--pc); background: transparent; }
-.alerta-text { font-style: normal; }
-.alerta-text .destacado { border-left: 0; padding-left: 0; font-weight: 600; }
-.accion-card { border-top: 0; border-left: 6px solid var(--pc); border-radius: 0 var(--radius) var(--radius) 0; }
-.accion-question { font-style: normal; font-weight: 600; border-left-color: var(--pc); color: var(--text); }
-.idea-num.dot::before { background: var(--pc); transform: none; border-radius: 0; width: .55rem; height: .55rem; }
-.problema.prosa > p:first-child::first-letter { font-family: var(--font-display); font-weight: 800; color: var(--pc-ink); font-size: 4.1em; line-height: .78; }
-.dia-card { border-left-color: var(--pc); }
-.dia-t { font-weight: 700; font-size: 1.25em; text-transform: uppercase; letter-spacing: .02em; }
-.veredicto-badge { font-family: var(--font-display); font-weight: 700; font-size: 15px; letter-spacing: .08em; text-transform: uppercase; color: var(--pc-hi); border: 1px solid var(--pc-hi); background: transparent; }
-.veredicto-text, .veredicto-text p { color: #F3F1EC; }
-.veredicto-label { color: var(--pc-hi); }
-.veredicto-text .lista { color: #F3F1EC; }
-.basado { font-style: normal; font-size: .9em; color: var(--text-2); margin-top: 1rem; }
-.credito { font-family: var(--font-sans); }
-.eval-score { font-family: var(--font-sans); }
-.eval-score.fid { color: var(--text); }
-.eval-score.apl { color: var(--mark-ink); }
-.nav-final .btn-siguiente { background: var(--btn-bg); color: var(--btn-ink); }
-.btn-nav { font-family: var(--font-display); font-weight: 700; font-size: 1.12rem; letter-spacing: .06em; text-transform: uppercase; border-radius: 0; }
-.btn-regresar { color: var(--text); border-color: var(--text-3); }
-.btn-regresar:hover { border-color: var(--text); }
-.sello { width: 84px; height: 42px; color: var(--text); }
-.menu-marca .arte-mini { width: 34px; height: 34px; }
-.footer-title { font-style: normal; font-weight: 600; color: var(--text-2); }
+.menu-seccion[data-acc] .menu-seccion-label::before { content: ''; flex: none; width: .72rem; height: .72rem; margin-top: .22em; background: var(--acc); }
+.menu-item-titulo, .toc-btn, .mapa-cap-t, .mapa-nom, .toc-grupo-t, .filtro-title { text-transform: none; }
 
-/* Apertura de parte */
-.parte-apertura { margin: .4rem calc(var(--gut) * -1) 1.8rem; padding: 1.35rem var(--gut) 1.2rem; background: var(--pc); color: var(--pc-on); }
-.parte-titulo { font-weight: 800; font-size: clamp(1.7rem, 8vw, 2.5rem); line-height: 1.02; letter-spacing: .02em; text-transform: uppercase; overflow-wrap: anywhere; }
+/* ── Contenido y mapa ── */
+.toc-grupo { margin-top: .35rem; border-top: 1px solid var(--rule); }
+.toc-grupo-t { display: flex; align-items: flex-start; gap: .6rem; padding: .75rem .35rem .3rem; font: 700 .95em/1.3 var(--font-display); color: var(--head); overflow-wrap: anywhere; }
+.toc-grupo-t::before { content: ''; flex: none; width: .72rem; height: .72rem; margin-top: .3em; background: var(--acc); }
+.toc-grupo .toc-btn { padding-left: 1.4rem; }
+.toc-grupo .toc-btn:hover { padding-left: 1.65rem; }
+.toc-grupo .toc-num { border-color: var(--acc); }
+.toc-btn { overflow-wrap: anywhere; }
+.mapa { margin: 0 0 2.4rem; }
+.mapa-titulo { margin: 0 0 .9rem .35rem; font: 700 13.5px/1 var(--font-cond); letter-spacing: .2em; text-transform: uppercase; color: var(--head-2); }
+.mapa-parte { display: grid; grid-template-columns: .85rem minmax(0, 1fr); margin: 0 0 1rem; background: var(--card); border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; }
+.mapa-franja { background: var(--acc); }
+.mapa-cab { display: flex; align-items: flex-start; justify-content: space-between; gap: .8rem; padding: 1rem 1.1rem .85rem; background: var(--tint); }
+.mapa-cab-t { min-width: 0; }
+.mapa-ord { font: 700 11px/1 var(--font-ui); letter-spacing: .2em; text-transform: uppercase; color: var(--head-2); margin-bottom: .45rem; }
+.mapa-nom { font: 700 1.05em/1.25 var(--font-display); color: var(--head); overflow-wrap: anywhere; }
+.mapa-tiles { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 3px; max-width: 4rem; padding-top: .15rem; }
+.mapa-tiles i { width: .7rem; height: .7rem; background: var(--acc); }
+.mapa-caps { display: flex; flex-direction: column; }
+.mapa-cap { display: flex; align-items: center; gap: .85rem; width: 100%; padding: .62rem 1.1rem; text-align: left; background: none; border: 0; border-top: 1px solid var(--rule); color: var(--text); font-family: var(--font-serif); font-size: .96em; line-height: 1.3; cursor: pointer; }
+.mapa-cap:hover, .mapa-cap:focus-visible { background: var(--tint); }
+.mapa-cap-n { flex: none; width: 1.7rem; height: 1.7rem; border-radius: 50%; display: grid; place-items: center; background: var(--tint); border: 2px solid var(--acc); color: var(--head); font: 700 11px/1 var(--font-ui); }
+.mapa-cap-t { flex: 1; min-width: 0; overflow-wrap: anywhere; }
 
-/* Menú e índice agrupados */
-.menu-seccion-label { font-family: var(--font-display); font-size: 14px; letter-spacing: .16em; color: var(--text-2); display: flex; align-items: center; gap: .6rem; }
-.menu-seccion-label::before { content: ''; width: 12px; height: 12px; flex: none; background: var(--pc, var(--text-3)); }
-.menu-item-num { border-radius: 0; }
-.menu-item.activo .menu-item-num { background: var(--btn-bg); border-color: var(--btn-bg); color: var(--btn-ink); }
-.toc-grupo { margin: 0 0 .5rem; }
-.toc-grupo + .toc-grupo { margin-top: 1rem; }
-.toc-glabel { display: flex; align-items: center; gap: .6rem; margin: 0 0 .35rem .35rem; font: 700 14px/1.2 var(--font-display); letter-spacing: .16em; text-transform: uppercase; color: var(--text-2); }
-.toc-glabel::before { content: ''; width: 12px; height: 12px; flex: none; background: var(--pc, var(--text-3)); }
-.toc-num { border-radius: 0; background: var(--pc, var(--tint)); border-color: var(--pc, var(--rule-2)); color: var(--pc-on, var(--head)); }
-.toc-btn { font-family: var(--font-sans); }
-.toc-arrow { color: var(--text-2); }
-.mapa-btn { display: block; width: 100%; padding: 0; margin: 0; background: none; border: 0; text-align: left; font: inherit; color: inherit; line-height: inherit; cursor: pointer; text-decoration: underline; text-decoration-color: var(--rule-2); text-underline-offset: .2em; }
-.mapa-btn:hover { color: var(--mark-ink); text-decoration-color: var(--mark-ink); }
-.clave li { border-left-color: var(--pc); overflow-wrap: anywhere; }
-
-/* ═════════ Portada: composición de la tapa (negro + mosaico) ═════════ */
-#portada { --paper:#171615; --card:#201F1D; --tint:#262421; --rule:#3A3835; --rule-2:#5A5750; --text:#F3F1EC; --text-2:#D0CEC8; --text-3:#B2AFA7; --head:#F3F1EC; --btn-bg:#FFFFFF; --btn-ink:#171615; --mark-soft:#DD478B; --focus:#F06BA6; }
-#portada .portada-sec::before { display: none; }
-#portada .portada-sec { justify-content: flex-start; padding: 4.6rem 1.1rem 2.2rem; }
-#portada .portada-inner { max-width: 27rem; }
-.p-eyebrow { font-family: var(--font-display); font-size: 14px; letter-spacing: .26em; color: var(--text-2); margin-bottom: 1rem; }
-.cv { width: 100%; display: grid; grid-template-columns: 1.25fr 1fr .3fr; gap: .5rem; text-align: left; }
-.cv > * { min-width: 0; }
-.cv-g { background: #00AC3D; min-height: 6.6rem; }
-.cv-a { background: #DD478B; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: .55rem .8rem; color: #171615; }
-.cv-autor { font-weight: 800; font-size: clamp(1.7rem, 8.8vw, 2.3rem); line-height: .94; text-transform: uppercase; letter-spacing: .01em; overflow-wrap: anywhere; }
-.cv-t { background: #00ABAB; }
-.cv-mid { grid-column: 1 / -1; padding: .9rem 0 .5rem; }
-.cv-nyt { font: 700 clamp(.82rem, 3.6vw, 1rem)/1 var(--font-display); letter-spacing: .06em; text-transform: uppercase; color: #F06BA6; margin-bottom: .35rem; }
-.cv-titulo { display: flex; align-items: flex-end; gap: .35em; font-weight: 800; font-size: clamp(2.7rem, 15vw, 4.1rem); line-height: .95; letter-spacing: .01em; text-transform: uppercase; color: #FFFFFF; }
-.cv-blank { flex: 1; min-width: 2ch; height: .09em; min-height: 4px; background: #FFFFFF; margin-bottom: .1em; }
-.cv-dot { width: .12em; height: .12em; min-width: 6px; min-height: 6px; background: #FFFFFF; margin-bottom: .1em; margin-left: -.15em; }
-.cv-s1 { background: #DD478B; height: 1.7rem; }
-.cv-s2 { background: #00ABAB; height: 1.7rem; }
-.cv-s3 { background: #903738; height: 1.7rem; }
-.cv-r { background: #FF2E00; min-height: 7.2rem; }
-.cv-box { border: 3px dashed #8C8A85; border-radius: 14px; padding: .8rem .6rem; display: flex; align-items: center; justify-content: center; text-align: center; font: 800 clamp(.95rem, 4.7vw, 1.2rem)/1.12 var(--font-display); letter-spacing: .04em; text-transform: uppercase; color: #D6D4CF; min-height: 7.2rem; }
-.cv-p { background: #DD478B; }
-.cv-b { background: #0071B3; min-height: 6rem; padding: .6rem .7rem; display: flex; flex-direction: column; justify-content: flex-end; color: #FFFFFF; font: 600 .78rem/1.2 var(--font-display); letter-spacing: .05em; text-transform: uppercase; }
-.cv-b strong { display: block; font-weight: 800; font-size: 1.15rem; letter-spacing: .04em; }
-.cv-o { background: #FE7A00; }
-.cv-b2 { background: #0071B3; }
-#portada .p-fechas { margin: 1.3rem 0 .9rem; }
-#portada .p-badge { background: transparent; color: #F3F1EC; border-color: #8C8A85; margin-bottom: 1.4rem; }
-#portada .btn-leer { border-radius: 0; font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; letter-spacing: .1em; text-transform: uppercase; }
-#portada .btn-cont { border-radius: 0; background: #FFFFFF; color: #171615; }
-#portada .btn-leer.sec { color: #F3F1EC; border-color: #8C8A85; }
-#portada .bc-barra i { background: linear-gradient(90deg,#00AC3D,#00ABAB,#0071B3,#FE7A00,#FF2E00,#DD478B); }
-#portada .p-footer { position: static; margin-top: 1.6rem; padding: 0; }
-#portada #bookclub-home { color: #F3F1EC; border-color: #5A5750; background: #201F1D; }
-#bookclub-home { color: var(--text-2); }
+/* ── Evaluación: la barra de cada dimensión la dibuja el HTML ── */
+.com-barra { height: 5px; margin: .15rem 0 .65rem; border-radius: 5px; background: var(--rule); overflow: hidden; }
+.com-barra i { display: block; height: 100%; border-radius: 5px; background: var(--acc); }
 
 </style>
 
-<meta name="description" content="Versión JSON de Jesús es _____. El HTML original continúa como referencia oficial.">
-<link rel="canonical" href="./jesus-es-json.html">
+<link rel="preload" href="./jesus-es-json.json" as="fetch" crossorigin="anonymous">
+<link rel="canonical" href="jesus-es-json.html">
+<title>Jesús es _____. — Judah Smith — JSON</title>
 <script type="application/json" id="libro-meta">{}</script>
+<script src="../bookclub-firebase.js"></script>
 </head>
 <body class="en-portada">
 <div id="json-reader-loading" role="status" aria-label="Preparando lector" hidden></div>
-<script>window.BOOKCLUB_JSON_READER_DATA_URL = "./jesus-es-json.json"; window.BOOKCLUB_JSON_READER_FALLBACK_URL = "./jesus-es.html";</script>
+<script>window.BOOKCLUB_JSON_READER_DATA_URL = "./jesus-es-json.json"; window.BOOKCLUB_JSON_READER_FALLBACK_URL = "./BOOKCLUB_jesus-es_HTML.html";</script>
 <script src="./json-reader-engine.js"></script>
 </body>
 </html>
