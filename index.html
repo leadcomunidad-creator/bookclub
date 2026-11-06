@@ -23,7 +23,7 @@
 /* Layout: una sola columna de lectura con rejillas asimétricas; la estantería de lomos (lenguaje de la app) abre la página. Tokens heredados de la app BookClub. */
 :root{
   --bg:#F3F4F6;--surface:#FFFFFF;--sunk:#E9EBEF;--line:#DDE0E6;--line-2:#C3C8D1;
-  --ink:#14161C;--ink-2:#4A505C;--ink-3:#6B7280;--accent:#3B3FD8;--accent-soft:#E7E8FB;--on-accent:#FFFFFF;
+  --ink:#14161C;--ink-2:#4A505C;--ink-3:#626974;--accent:#3B3FD8;--accent-soft:#E7E8FB;--on-accent:#FFFFFF;
   --serif:'Newsreader',Georgia,'Times New Roman',serif;
   --sans:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
   --r-md:10px;--r-pill:99px;
@@ -99,7 +99,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .hero-copy{min-width:0}
 .hero-line{font-family:var(--serif);font-style:italic;font-size:clamp(1.05rem,2vw,1.3rem);color:var(--accent);margin-bottom:1.1rem}
 .hero h1{font-size:clamp(2.5rem,6vw,4.7rem);line-height:1;letter-spacing:-.03em;font-variation-settings:'opsz' 72;max-width:12ch}
-.hero h1 .accent{color:#9CA0FF!important}
+.hero h1 .accent{color:var(--accent)!important}
 .hero .lead{margin-top:1.6rem;max-width:46ch}
 .hero .cta-row{margin-top:2rem}
 .shelf-col{min-width:0}
