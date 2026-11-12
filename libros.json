@@ -36,7 +36,12 @@
       "preview_titulo": "Gana la guerra en tu mente",
       "preview_subtitulo": "Cambia tus pensamientos, cambia tu vida",
       "preview_imagen": "assets/previews/gana-la-guerra-en-tu-mente-biblioteca.jpg",
-      "slug": "gana-la-guerra-en-tu-mente"
+      "slug": "gana-la-guerra-en-tu-mente",
+      "idea_1min": {
+        "titular": "Cambiar la vida empieza por cambiar lo que crees.",
+        "texto": "Identifica las mentiras que gobiernan tu manera de ver la realidad, confróntalas con la verdad de Dios y construye nuevos patrones de pensamiento.",
+        "fondo": "#6b4c16"
+      }
     },
     {
       "tipo": "resumen",
@@ -72,7 +77,12 @@
       "preview_titulo": "Elimina la prisa de tu vida",
       "preview_subtitulo": "Cómo mantenerte espiritual y emocionalmente saludable en el caos del mundo moderno.",
       "preview_imagen": "assets/previews/elimina-la-prisa-biblioteca.jpg",
-      "slug": "elimina-la-prisa"
+      "slug": "elimina-la-prisa",
+      "idea_1min": {
+        "titular": "La prisa no es un problema de agenda. Es de carácter.",
+        "texto": "La salud emocional y la profundidad espiritual exigen eliminar la prisa y aprender el ritmo de vida de Jesús, no administrar mejor una agenda saturada.",
+        "fondo": "#a52620"
+      }
     },
     {
       "tipo": "resumen",
@@ -108,7 +118,12 @@
       "preview_titulo": "Enciende tu cerebro",
       "preview_subtitulo": "La clave para la felicidad, la manera de pensar y la salud",
       "preview_imagen": "assets/previews/enciende-tu-cerebro-biblioteca.jpg",
-      "slug": "enciende-tu-cerebro"
+      "slug": "enciende-tu-cerebro",
+      "idea_1min": {
+        "titular": "Observa tus pensamientos antes de creerlos.",
+        "texto": "Un plan de veintiún días y cinco pasos para examinar lo que crees y practicar respuestas nuevas: Reúne, Reflexiona enfocado, Escribe, Vuelve y Actúa.",
+        "fondo": "#0b5f7b"
+      }
     },
     {
       "tipo": "resumen",
@@ -142,7 +157,12 @@
       "preview_titulo": "Practica el camino",
       "preview_subtitulo": "Del cristianismo declarado al discipulado practicado",
       "preview_imagen": "assets/previews/practica-el-camino.png",
-      "edicion": "JSON"
+      "edicion": "JSON",
+      "idea_1min": {
+        "titular": "Estar con Jesús, ser como él, hacer lo que él hizo.",
+        "texto": "El discipulado no es una actividad adicional, sino una forma de reorganizar la vida alrededor de Jesús.",
+        "fondo": "#4e4226"
+      }
     },
     {
       "tipo": "resumen",
@@ -179,7 +199,12 @@
       "preview_titulo": "Jesús es _____.",
       "preview_subtitulo": "Un nuevo camino para ser genuinamente humano",
       "preview_imagen": "assets/previews/jesus-es-biblioteca.jpg",
-      "edicion": "JSON"
+      "edicion": "JSON",
+      "idea_1min": {
+        "titular": "Jesús se acerca antes de que cambies.",
+        "texto": "No vino a premiar a quienes logran hacerse buenos por sus propios méritos, sino a acercarse a personas necesitadas de gracia y darles una identidad nueva.",
+        "fondo": "#1d1a19"
+      }
     },
     {
       "titulo": "¿Cómo está tu alma?",
@@ -214,7 +239,12 @@
       "preview_imagen": "assets/previews/como-esta-tu-alma.jpg",
       "edicion": "JSON",
       "clave_progreso": "bookclub-como-esta-tu-alma-json-progreso",
-      "tiempo_lectura_min": 91
+      "tiempo_lectura_min": 91,
+      "idea_1min": {
+        "titular": "Una vida plena empieza por dentro.",
+        "texto": "El alma encuentra su hogar en Dios y aprende a vivir desde esa relación, no desde los resultados ni las circunstancias exteriores.",
+        "fondo": "#1f5a62"
+      }
     },
     {
       "titulo": "Asegure el éxito en su matrimonio antes de casarse",
@@ -249,7 +279,12 @@
       "preview_imagen": "assets/previews/asegure-el-exito-en-su-matrimonio-antes-de-casarse.png",
       "edicion": "JSON",
       "clave_progreso": "bookclub-asegure-el-exito-en-su-matrimonio-antes-de-casarse-json-progreso",
-      "tiempo_lectura_min": 49
+      "tiempo_lectura_min": 49,
+      "idea_1min": {
+        "titular": "Prepara el matrimonio, no solo la boda.",
+        "texto": "Siete preguntas sobre expectativas, amor, actitud, comunicación, diferencias, conflicto y fundamento espiritual.",
+        "fondo": "#196a66"
+      }
     }
   ]
 }
