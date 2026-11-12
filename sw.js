@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'bookclub-v32-lector-rediseno-v3';
+const CACHE_VERSION = 'bookclub-v33-ideas-rediseno-v3';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [
@@ -25,6 +25,7 @@ const CORE_ASSETS = [
   './libros/asegure-el-exito-en-su-matrimonio-antes-de-casarse-json.json',
   './libros/json-reader-engine.js',
   './libros/lector-v3.js',
+  './libros/bookclub-editorial-template.v1.json',
   '/biblioteca/',
   './manifest.webmanifest',
   './assets/icons/icon-192.png',
@@ -38,8 +39,24 @@ const CORE_ASSETS = [
   './assets/previews/como-esta-tu-alma.jpg',
   './assets/previews/asegure-el-exito-en-su-matrimonio-antes-de-casarse.png'
 ];
+/* Los libros nuevos de libros.json también quedan disponibles sin conexión, sin editar esta lista. */
+async function precacheCatalogo(cache) {
+  try {
+    const response = await fetch('./libros.json', { cache: 'no-store' });
+    if (!response.ok) return;
+    const data = await response.json();
+    const rutas = new Set();
+    (data.libros || []).forEach(libro => {
+      if (!libro || !libro.archivo) return;
+      rutas.add('./' + libro.archivo);
+      if (/-json\.html$/.test(libro.archivo)) rutas.add('./' + libro.archivo.replace(/\.html$/, '.json'));
+      if (libro.preview_imagen) rutas.add('./' + libro.preview_imagen);
+    });
+    await Promise.all(Array.from(rutas).map(ruta => cache.add(ruta).catch(() => {})));
+  } catch (error) {}
+}
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CORE_CACHE).then(cache => cache.addAll(CORE_ASSETS)).then(() => self.skipWaiting()));
+  event.waitUntil(caches.open(CORE_CACHE).then(cache => cache.addAll(CORE_ASSETS).then(() => precacheCatalogo(cache))).then(() => self.skipWaiting()));
 });
 self.addEventListener('activate', event => {
   event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => ![CORE_CACHE, RUNTIME_CACHE].includes(k)).map(k => caches.delete(k)))).then(() => self.clients.claim()));
