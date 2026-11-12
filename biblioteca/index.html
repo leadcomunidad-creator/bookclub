@@ -435,7 +435,7 @@ function quitar(b){var pr=progMap[b.id];if(pr&&pr.started)lib[b.id]={e:'no',t:Da
 function misLibros(){return L.filter(stOf).map(function(b){return Object.assign({},b,{est:stOf(b),p:pct(b)})})}
 
 /* ═══ Ideas guardadas (se llenan desde el lector en la Fase 3) ═══ */
-function leerIdeas(){try{var x=JSON.parse(lsGet(IDEAS_KEY));return Array.isArray(x)?x.filter(function(i){return i&&i.q}):[]}catch(e){return[]}}
+function leerIdeas(){try{var x=JSON.parse(lsGet(IDEAS_KEY));return Array.isArray(x)?x.filter(function(i){return i&&i.q&&!i.borrada}):[]}catch(e){return[]}}
 
 /* ═══ Abrir un libro ═══ */
 function abrir(b){
@@ -615,7 +615,12 @@ function vIdeas(){
  if(!xs.length){app.innerHTML=cab+'<div class="vacio"><h3>Todavía no guardas ideas.</h3><p>Cuando una frase te hable, selecciónala mientras lees y elige «Guardar idea». Vivirá aquí, con tus notas.</p>'+(enCurso()?'<button class="btn btn-sm" type="button" data-abrir="'+esc(enCurso().id)+'">Seguir leyendo '+A+'</button>':'<button class="btn btn-sm" type="button" data-ir="descubrir">Ir a Descubrir '+A+'</button>')+'</div></div>';return}
  app.innerHTML=cab+'<div class="ideas-lista">'+orden.map(function(k){var b=B[k],g=grupos[k];
   return '<section class="idea-libro"><div class="idea-libro-head">'+(b?'<span class="mini">'+portada(b)+'</span>':'')+'<div><b>'+esc(b?b.t:(g[0].titulo||'Libro'))+'</b><p class="meta">'+g.length+(g.length===1?' idea':' ideas')+'</p></div></div>'+
-  g.map(function(x){var i=xs.indexOf(x);return '<article class="cita-card"><q>'+esc(x.q)+'</q>'+(x.n?'<p class="nota">'+esc(x.n)+'</p>':'')+'<div class="pie"><span>'+esc(x.pag||'')+'</span><button type="button" data-compartir="'+i+'">Compartir</button></div></article>'}).join('')+'</section>'}).join('')+'</div></div>';
+  g.map(function(x){var i=xs.indexOf(x);return '<article class="cita-card"><q>'+esc(x.q)+'</q>'+(x.n?'<p class="nota">'+esc(x.n)+'</p>':'')+'<div class="pie"><span>'+esc(x.pag||'')+'</span><span style="display:flex;gap:18px"><button type="button" data-borrar="'+i+'" style="color:var(--ink-3)">Borrar</button><button type="button" data-compartir="'+i+'">Compartir</button></span></div></article>'}).join('')+'</section>'}).join('')+'</div></div>';
+ app.querySelectorAll('[data-borrar]').forEach(function(btn){btn.onclick=function(){var x=xs[+btn.dataset.borrar];if(!x)return;
+  if(btn.dataset.seguro!=='1'){btn.dataset.seguro='1';btn.textContent='¿Borrar? Toca otra vez';setTimeout(function(){if(document.contains(btn)){btn.dataset.seguro='';btn.textContent='Borrar'}},3500);return}
+  var todas=[];try{todas=JSON.parse(lsGet(IDEAS_KEY))||[]}catch(e){}
+  todas=todas.map(function(y){return(x.id?y.id===x.id:(y.q===x.q&&y.t===x.t))?Object.assign({},y,{borrada:true,t:Date.now()}):y});
+  lsSet(IDEAS_KEY,JSON.stringify(todas));vIdeas();aviso('Idea borrada.')}});
  app.querySelectorAll('[data-compartir]').forEach(function(btn){btn.onclick=function(){var x=xs[+btn.dataset.compartir],b=B[x.libro];copiar('«'+x.q+'» — '+(b?b.t+', '+b.a:(x.titulo||''))+' · BOOKCLUB')}});
 }
 function copiar(t){

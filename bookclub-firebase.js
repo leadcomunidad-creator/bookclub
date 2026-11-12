@@ -45,13 +45,27 @@
   function localState() {
     var progreso = {};
     try { Object.keys(localStorage).forEach(function (key) { if (progressKey(key)) progreso[key] = parse(rawGet(key), {}); }); } catch (e) {}
-    return { biblioteca: parse(rawGet('bookclub-biblioteca'), {}) || {}, progreso: progreso };
+    var ideas = parse(rawGet('bookclub-ideas'), []);
+    return { biblioteca: parse(rawGet('bookclub-biblioteca'), {}) || {}, progreso: progreso, ideas: Array.isArray(ideas) ? ideas : [] };
+  }
+
+  /* Ideas guardadas: se suman las de cada dispositivo; por id gana la versión más reciente
+     (una idea borrada queda marcada con «borrada» para que no regrese). */
+  function mergeIdeas(local, cloud) {
+    var porId = {}, orden = [];
+    (Array.isArray(cloud) ? cloud : []).concat(Array.isArray(local) ? local : []).forEach(function (idea) {
+      if (!idea || !idea.id) return;
+      var actual = porId[idea.id];
+      if (!actual) { porId[idea.id] = idea; orden.push(idea.id); return; }
+      if ((+idea.t || 0) >= (+actual.t || 0)) porId[idea.id] = idea;
+    });
+    return orden.map(function (id) { return porId[id]; });
   }
 
   function mergeState(local, cloud) {
     local = local || { biblioteca: {}, progreso: {} };
     cloud = cloud || { biblioteca: {}, progreso: {} };
-    var merged = { biblioteca: {}, progreso: {} };
+    var merged = { biblioteca: {}, progreso: {}, ideas: mergeIdeas(local.ideas, cloud.ideas) };
     var libraryKeys = Object.keys(Object.assign({}, cloud.biblioteca || {}, local.biblioteca || {}));
     libraryKeys.forEach(function (key) {
       var localItem = (local.biblioteca || {})[key];
@@ -69,6 +83,7 @@
   function applyState(state) {
     Object.keys(state.progreso || {}).forEach(function (key) { rawSet(key, JSON.stringify(state.progreso[key])); });
     rawSet('bookclub-biblioteca', JSON.stringify(state.biblioteca || {}));
+    rawSet('bookclub-ideas', JSON.stringify(state.ideas || []));
   }
 
   async function saveMerged(state) {
@@ -77,7 +92,7 @@
       var snapshot = await transaction.get(ref());
       var cloud = (snapshot.data() || {}).bookclub || {};
       saved = mergeState(state, cloud);
-      transaction.set(ref(), { bookclub: { biblioteca: saved.biblioteca, progreso: saved.progreso, actualizadoEn: Date.now() } }, { merge: true });
+      transaction.set(ref(), { bookclub: { biblioteca: saved.biblioteca, progreso: saved.progreso, ideas: saved.ideas, actualizadoEn: Date.now() } }, { merge: true });
     });
     applyState(saved);
     return saved;
@@ -143,7 +158,7 @@
 
   Storage.prototype.setItem = function (key, value) {
     var output = originalSetItem.apply(this, arguments);
-    try { if (this === localStorage && (progressKey(key) || key === 'bookclub-biblioteca')) schedule(); } catch (e) {}
+    try { if (this === localStorage && (progressKey(key) || key === 'bookclub-biblioteca' || key === 'bookclub-ideas')) schedule(); } catch (e) {}
     return output;
   };
 

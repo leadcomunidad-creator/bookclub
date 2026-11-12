@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'bookclub-v31-app-rediseno-v3';
+const CACHE_VERSION = 'bookclub-v32-lector-rediseno-v3';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [
@@ -24,6 +24,7 @@ const CORE_ASSETS = [
   './libros/asegure-el-exito-en-su-matrimonio-antes-de-casarse-json.html',
   './libros/asegure-el-exito-en-su-matrimonio-antes-de-casarse-json.json',
   './libros/json-reader-engine.js',
+  './libros/lector-v3.js',
   '/biblioteca/',
   './manifest.webmanifest',
   './assets/icons/icon-192.png',

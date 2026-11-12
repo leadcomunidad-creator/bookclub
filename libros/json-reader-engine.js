@@ -308,6 +308,11 @@
       "})();";
     document.body.appendChild(mejoras);
     agruparMenu(payload.reader.menu_groups);
+    /* Lector v3 (rediseño): capa de presentación sobre este motor; no cambia el texto ni el avance. */
+    window.BOOKCLUB_LECTOR_META = payload.meta || {};
+    window.BOOKCLUB_LECTOR_READER = { identidad_visual: payload.reader.identidad_visual || null };
+    var lectorV3 = document.createElement('script'); lectorV3.src = './lector-v3.js';
+    document.body.appendChild(lectorV3);
     if ('serviceWorker' in navigator) window.addEventListener('load', function () { navigator.serviceWorker.register('../sw.js').catch(function () {}); });
     function refrescar() { if (typeof cargarProg==='function') { cargarProg(); if (typeof pintarProg==='function') pintarProg(); } }
     window.addEventListener('bookclub-sync-ready', refrescar);
