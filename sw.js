@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'bookclub-v33-ideas-rediseno-v3';
+const CACHE_VERSION = 'bookclub-v34-voz-latina';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [

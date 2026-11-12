@@ -384,10 +384,14 @@
   var voz = { on: false, i: 0, ps: [], vel: 1, voice: null, token: 0 };
   var velGuardada = parseFloat(lsGet(VEL_KEY)); if (VELS.indexOf(velGuardada) > -1) voz.vel = velGuardada;
   function velTxt(v) { return v.toLocaleString('es-CO', { minimumFractionDigits: 1, maximumFractionDigits: 2 }); }
+  var LATINAS = ['es-co', 'es-419', 'es-us', 'es-mx', 'es-ar', 'es-cl', 'es-pe', 'es-ec', 'es-ve', 'es-uy', 'es-py', 'es-bo', 'es-cr', 'es-pa', 'es-do', 'es-gt', 'es-hn', 'es-ni', 'es-sv', 'es-pr', 'es-cu'];
   function elegirVoz() {
     if (!HAY_VOZ) return;
     var vs = speechSynthesis.getVoices() || [], norm = function (v) { return String(v.lang || '').replace('_', '-').toLowerCase(); };
-    voz.voice = ['es-co', 'es-419', 'es-us'].reduce(function (hallada, l) { return hallada || vs.filter(function (v) { return norm(v) === l; })[0] || null; }, null) ||
+    /* Acento latino primero (Colombia, Latinoamérica, EE. UU., México y otros países);
+       la voz de España solo si el dispositivo no tiene ninguna otra en español. */
+    voz.voice = LATINAS.reduce(function (hallada, l) { return hallada || vs.filter(function (v) { return norm(v) === l; })[0] || null; }, null) ||
+      vs.filter(function (v) { return /^es-/.test(norm(v)) && norm(v) !== 'es-es'; })[0] ||
       vs.filter(function (v) { return /^es\b/.test(norm(v)); })[0] || null;
   }
   if (HAY_VOZ) { elegirVoz(); if ('onvoiceschanged' in speechSynthesis) speechSynthesis.addEventListener('voiceschanged', elegirVoz); }
@@ -428,7 +432,7 @@
     if (i >= voz.ps.length) { voz.on = false; voz.i = 0; resaltar(null); pintarAudio(); return; }
     voz.i = i; pintarAudio(); resaltar(voz.ps[i].el);
     var u = new SpeechSynthesisUtterance(voz.ps[i].t);
-    u.lang = voz.voice ? voz.voice.lang : 'es-419'; if (voz.voice) u.voice = voz.voice; u.rate = voz.vel;
+    u.lang = voz.voice ? String(voz.voice.lang).replace('_', '-') : 'es-US'; if (voz.voice) u.voice = voz.voice; u.rate = voz.vel;
     u.onend = function () { if (token !== voz.token || !voz.on) return; hablar(i + 1); };
     u.onerror = function (e) {
       if (token !== voz.token || e.error === 'interrupted' || e.error === 'canceled') return;
