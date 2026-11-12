@@ -2,16 +2,17 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>BOOKCLUB</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="BOOKCLUB, una experiencia de El College: resúmenes y cursos basados en libros para pensar, crecer y enseñar.">
-<meta name="theme-color" content="#0B0C10">
+<meta name="description" content="BOOKCLUB, la biblioteca de El College: resúmenes de libros elegidos para leer con propósito. Libros que te acercan a Jesús.">
+<meta name="theme-color" content="#0b0c10" id="theme-color-meta">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="BOOKCLUB">
 <script>
+/* Tema: Noche por defecto; Día solo si la persona lo eligió (clave compartida con la app). */
+try{var t=localStorage.getItem('bookclub-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);if(t==='light')document.getElementById('theme-color-meta').setAttribute('content','#f4f1ea');}catch(e){}
 try{if(localStorage.getItem('bookclub-sesion-recordada')==='1')document.documentElement.classList.add('bookclub-app-pending');}catch(e){}
 </script>
 <link rel="manifest" href="/manifest.webmanifest">
@@ -21,490 +22,511 @@ try{if(localStorage.getItem('bookclub-sesion-recordada')==='1')document.document
 <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* Layout: una sola columna de lectura con rejillas asimétricas; la estantería de lomos (lenguaje de la app) abre la página. Tokens heredados de la app BookClub. */
+/* Landing BOOKCLUB v3 · copiada del prototipo docs/rediseno/prototipo/app.html (vista «inicio»). */
+[hidden]{display:none!important}img{max-width:100%}
 :root{
-  --bg:#F3F4F6;--surface:#FFFFFF;--sunk:#E9EBEF;--line:#DDE0E6;--line-2:#C3C8D1;
-  --ink:#14161C;--ink-2:#4A505C;--ink-3:#626974;--accent:#3B3FD8;--accent-soft:#E7E8FB;--on-accent:#FFFFFF;
+  --bg:#0b0c10;--surface:#15171e;--sunk:#101217;--line:#23262f;--line-2:#626a7c;
+  --ink:#eceef3;--ink-2:#a6acb9;--ink-3:#8a90a0;
+  --accent:#9ca0ff;--accent-soft:#1c1e3a;--on-accent:#0b0c10;
+  --lumbre:#f2c879;--lumbre-soft:#2a2214;--on-lumbre:#17120a;--halo:rgba(242,200,121,.16);--estante:#2b251d;
+  --lift:0 2px 4px rgba(0,0,0,.5),0 16px 30px -10px rgba(0,0,0,.7);
+  --float:0 24px 60px -12px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.06);
   --serif:'Newsreader',Georgia,'Times New Roman',serif;
-  --sans:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --r-md:10px;--r-pill:99px;
-  --lift:0 2px 4px rgba(20,22,28,.10),0 14px 28px -10px rgba(20,22,28,.28);
-  --gutter:max(16px,env(safe-area-inset-left,0px));
-  --gutter-r:max(16px,env(safe-area-inset-right,0px));
+  --sans:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --r-sm:6px;--r-md:10px;--r-lg:16px;--pill:99px;--ease:cubic-bezier(.2,.8,.2,1);
+  color-scheme:dark;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#0B0C10;--surface:#14161C;--sunk:#101217;--line:#23262F;--line-2:#363A46;
-  --ink:#ECEEF3;--ink-2:#A6ACB9;--ink-3:#8A90A0;--accent:#9CA0FF;--accent-soft:#1C1E3A;--on-accent:#0B0C10;
-  --lift:0 2px 4px rgba(0,0,0,.5),0 16px 30px -10px rgba(0,0,0,.7);color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#0B0C10;--surface:#14161C;--sunk:#101217;--line:#23262F;--line-2:#363A46;
-  --ink:#ECEEF3;--ink-2:#A6ACB9;--ink-3:#8A90A0;--accent:#9CA0FF;--accent-soft:#1C1E3A;--on-accent:#0B0C10;
-  --lift:0 2px 4px rgba(0,0,0,.5),0 16px 30px -10px rgba(0,0,0,.7);color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#f4f1ea;--surface:#fffdf8;--sunk:#eae5da;--line:#ddd6c8;--line-2:#8f8778;
+  --ink:#17171a;--ink-2:#4a4b52;--ink-3:#62646c;--accent:#3b3fd8;--accent-soft:#e7e8fb;--on-accent:#fff;
+  --lumbre:#8a5a0b;--lumbre-soft:#f6ebd3;--on-lumbre:#fff;--halo:rgba(138,90,11,.07);--estante:#cbbfa6;
+  --lift:0 2px 4px rgba(20,22,28,.10),0 14px 28px -10px rgba(20,22,28,.28);
+  --float:0 24px 60px -16px rgba(60,44,20,.35),0 0 0 1px rgba(23,23,26,.06);color-scheme:light}
 
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+*,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .25s,color .25s}
+body{margin:0;font:400 16px/1.55 var(--sans);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;transition:background .25s,color .25s;overflow-x:clip}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:70;background:var(--bg)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;text-wrap:balance;margin:0}
+p{margin:0}
 a{color:inherit}
+button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.wrap{max-width:1180px;margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter-r)}
-h1,h2,h3{font-family:var(--serif);font-weight:400;text-wrap:balance}
-.eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--accent)}
 .lead{font-size:1.05rem;color:var(--ink-2);max-width:62ch}
+.frase{font-family:var(--serif);font-style:italic;font-size:clamp(1.05rem,2vw,1.3rem);color:var(--lumbre)}
+.luz,.luz-e{color:var(--lumbre)}
+.acc{color:var(--accent)}
+.meta{font-size:.82rem;color:var(--ink-3)}
+/* Sin barras de desplazamiento visibles */
+html,body,*{scrollbar-width:none}
+::-webkit-scrollbar{display:none;width:0;height:0}
 
 /* Botones */
-.btn{display:inline-flex;align-items:center;gap:.55rem;border-radius:var(--r-pill);padding:.8rem 1.4rem;font-size:.95rem;font-weight:600;text-decoration:none;border:1px solid var(--ink);background:var(--ink);color:var(--bg);transition:transform .15s,box-shadow .15s}
+.btn{display:inline-flex;align-items:center;gap:.55rem;border-radius:var(--pill);padding:.8rem 1.4rem;font:600 .95rem/1.2 var(--sans);text-decoration:none;border:1px solid var(--accent);background:var(--accent);color:var(--on-accent);cursor:pointer;transition:transform .15s,box-shadow .15s}
 .btn:hover{transform:translateY(-2px);box-shadow:var(--lift)}
-.btn svg{transition:transform .15s}
-.btn:hover svg{transform:translateX(3px)}
-.link{font-size:.95rem;font-weight:600;color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:1px}
+.btn svg{transition:transform .15s}.btn:hover svg{transform:translateX(3px)}
+.btn[aria-busy="true"],.hcta[aria-busy="true"]{opacity:.75;pointer-events:none}
+.btn-lg{min-height:52px;min-width:210px;justify-content:center;border-radius:12px;padding:0 26px;font-size:1rem}
+.btn-out{background:transparent;color:var(--ink);border-color:var(--line-2)}
+.btn-out:hover{border-color:var(--ink)}
+.btn-sm{padding:.55rem 1rem;font-size:.88rem;gap:.4rem;white-space:nowrap}
+.link{font:600 .95rem/1.2 var(--sans);color:var(--accent);text-decoration:none;border:0;border-bottom:1px solid transparent;padding:0 0 1px;background:none;cursor:pointer}
 .link:hover{border-bottom-color:var(--accent)}
-.cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.6rem}
+.duo{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+.icon-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line-2);background:var(--surface);color:var(--ink-2);display:grid;place-items:center;cursor:pointer;flex:none}
+.icon-btn:hover{border-color:var(--ink);color:var(--ink)}
 
-/* Header · barra El College (mismas entradas y comportamiento del hub, adaptada a BookClub) */
-.header{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:70;background:var(--bg)}
-.hbar{display:flex;align-items:center;justify-content:space-between;gap:12px 28px;min-height:62px;padding-block:8px}
-.brand{display:flex;align-items:center;gap:.6rem;font-family:var(--serif);font-weight:600;font-size:1.2rem;letter-spacing:.06em;text-decoration:none;flex-shrink:0}
+/* BarraLanding */
+.header{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;background:var(--bg);border-bottom:1px solid var(--line)}
+.hbar{display:flex;align-items:center;justify-content:space-between;gap:12px 28px;min-height:64px;padding-block:8px}
+.brand{display:flex;align-items:center;gap:.6rem;font:600 1.2rem/1 var(--serif);letter-spacing:.06em;text-decoration:none;color:var(--ink);flex-shrink:0}
 .mark{width:22px;height:22px;display:flex;align-items:flex-end;gap:2px}
 .mark i{display:block;width:5px;background:var(--ink);border-radius:1px}
 .mark i:nth-child(1){height:70%}.mark i:nth-child(2){height:100%;background:var(--accent)}.mark i:nth-child(3){height:55%}
-.hnav{display:flex;gap:6px 30px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
-.hnav a{color:var(--ink-2);text-decoration:none;transition:color .2s;padding:6px 0}
-.hnav a:hover{color:var(--accent)}
-.hnav a[aria-current="page"]{color:var(--accent);text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:8px}
-.pb-m,.pb-extra,.hburger,.hcta.hcta-m{display:none}
+.lnav{display:flex;gap:6px 34px;font:600 .95rem/1 var(--sans)}
+.lnav a{color:var(--ink-2);text-decoration:none;padding:8px 0}
+.lnav a:hover{color:var(--ink)}
 .hright{display:flex;align-items:center;gap:.6rem}
-.hcta{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 22px;border-radius:999px;background:var(--ink);color:var(--bg)!important;font-size:14px;font-weight:600;letter-spacing:0;text-transform:none;text-decoration:none;white-space:nowrap;transition:transform .15s,box-shadow .15s}
+.hcta{display:inline-flex;align-items:center;gap:.5rem;min-height:42px;padding:0 22px;border:0;border-radius:999px;background:var(--accent);color:var(--on-accent);font:700 14px/1 var(--sans);white-space:nowrap;cursor:pointer;transition:transform .15s,box-shadow .15s}
 .hcta:hover{transform:translateY(-1px);box-shadow:var(--lift)}
-.icon-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);font-size:1rem;display:grid;place-items:center;cursor:pointer}
-.icon-btn:hover{border-color:var(--line-2);color:var(--ink)}
-.hburger{width:44px;height:44px;border:0;background:none;color:var(--ink);align-items:center;justify-content:center;cursor:pointer;padding:0;margin-right:-8px}
-@media(max-width:1099px){.hnav{gap:6px 20px;font-size:11.5px}.hcta{padding:0 18px}}
-@media(max-width:899px){
-  .header{max-height:calc(100dvh - env(safe-area-inset-top,0px));overflow-y:auto}
-  .hbar{flex-wrap:wrap;min-height:58px;gap:0 10px}
-  .hcta.hcta-d{display:none}
-  .hburger{display:inline-flex}
-  .hnav{display:none;order:3;flex-basis:100%;flex-direction:column;gap:0;padding:6px 0 18px;font-size:13px;letter-spacing:.08em}
-  .header.open .hnav{display:flex}
-  .hnav a:not(.hcta){display:flex;align-items:center;justify-content:space-between;padding:16px 4px;border-bottom:1px solid var(--line)}
-  .hnav a:not(.hcta)::after{content:'\2192';color:var(--accent);font-weight:400}
-  .pb-d{display:none}.pb-m{display:inline}
-  .pb-extra{display:flex}
-  .hnav a[aria-current="page"]{text-decoration:none;box-shadow:inset 3px 0 0 var(--accent);padding-left:14px}
-  .hcta.hcta-m{display:inline-flex;margin-top:18px;width:100%}
-}
+.ingresar{min-height:46px;padding:0 26px;font-size:15px}
+@media(max-width:860px){.lnav{display:none}}
+@media(max-width:640px){.hbar{gap:8px}.ingresar{padding:0 18px;font-size:14px}}
+@media(max-width:420px){.brand{font-size:1.05rem;gap:.45rem}}
 
-/* 1. Portada */
-.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:2.5rem 3.5rem;align-items:end;padding-block:clamp(2.5rem,7vw,5.5rem) clamp(2.5rem,5vw,4rem)}
-.hero-copy{min-width:0}
-.hero-line{font-family:var(--serif);font-style:italic;font-size:clamp(1.05rem,2vw,1.3rem);color:var(--accent);margin-bottom:1.1rem}
-.hero h1{font-size:clamp(2.5rem,6vw,4.7rem);line-height:1;letter-spacing:-.03em;font-variation-settings:'opsz' 72;max-width:12ch}
-.hero h1 .accent{color:var(--accent)!important}
-.hero .lead{margin-top:1.6rem;max-width:46ch}
-.hero .cta-row{margin-top:2rem}
-.shelf-col{min-width:0}
-.shelf{--s:1;display:flex;align-items:flex-end;justify-content:flex-end;gap:6px;height:calc(300px*var(--s));border-bottom:3px solid var(--ink)}
-.spine{position:relative;display:flex;align-items:center;justify-content:center;flex:0 0 auto;height:calc(var(--h)*1px*var(--s));width:calc(var(--w)*1px*var(--s));border-radius:3px 3px 1px 1px;overflow:hidden;animation:rise .7s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i)*80ms)}
+/* Portada (hero) */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:3rem clamp(3rem,7vw,7rem);align-items:center;padding-block:clamp(3.5rem,9vw,7.5rem) clamp(3.5rem,8vw,6.5rem)}
+.wm{font:600 clamp(3.2rem,7.2vw,5.6rem)/.95 var(--serif);letter-spacing:.02em;font-variation-settings:'opsz' 72;margin:0}
+.wm span{color:var(--accent)}
+.tagline{margin:22px 0;font:italic clamp(1.3rem,2.4vw,1.75rem)/1.2 var(--serif);color:var(--lumbre)}
+.hero .lead{max-width:40ch}
+.hero .duo{margin-top:38px}
+.hero .nota{margin-top:18px;font-size:.82rem;color:var(--ink-3)}
+.shelf-col{position:relative;min-width:0;display:flex;flex-direction:column;align-items:center}
+.halo{position:absolute;pointer-events:none;inset:-12% 0 18%;background:radial-gradient(closest-side,var(--halo),transparent)}
+.lamp-h{position:relative;width:96px;height:96px;margin-bottom:6px}
+.lamp-h .lc,.tel-lamp .lc{stroke:var(--ink-3)}.lamp-h .ls{fill:var(--ink-3)}.lamp-h .lb{fill:var(--lumbre)}
+.shelf{--s:.82;position:relative;display:flex;align-items:flex-end;justify-content:center;gap:5px;width:max-content;max-width:100%;height:calc(300px*var(--s));padding:0 22px;border-bottom:6px solid var(--estante);box-shadow:0 3px 0 -1px var(--ink-3)}
+.spine{position:relative;display:flex;align-items:center;justify-content:center;flex:0 0 auto;height:calc(var(--h)*1px*var(--s));width:calc(var(--w)*1px*var(--s));border-radius:3px 3px 1px 1px;overflow:hidden;animation:rise .7s var(--ease) backwards;animation-delay:calc(var(--i)*70ms);border:0;padding:0;cursor:pointer;transition:transform .3s var(--ease)}
+.spine:hover{transform:translateY(-8px)}
 .spine::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.16),transparent 22%,transparent 78%,rgba(0,0,0,.22))}
-.spine span{position:relative;writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--serif);font-weight:500;font-size:calc(.92rem*var(--s));letter-spacing:.02em;white-space:nowrap;max-height:92%;overflow:hidden;text-overflow:ellipsis;color:var(--tx,rgba(255,255,255,.95))}
+.spine span{position:relative;writing-mode:vertical-rl;transform:rotate(180deg);font:500 calc(.92rem*var(--s))/1 var(--serif);letter-spacing:.02em;white-space:nowrap;max-height:90%;overflow:hidden;text-overflow:ellipsis;color:var(--tx,#fff)}
+.spine.pronto{background:var(--sunk);box-shadow:inset 0 0 0 1px var(--line);cursor:default}
+.spine.pronto:hover{transform:none}
+.spine.pronto span{color:var(--ink-3);font-style:italic}
 @keyframes rise{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
-.shelf-note{margin-top:.8rem;font-size:.78rem;color:var(--ink-3);text-align:right}
+.shelf-note{position:relative;margin-top:14px;font-size:.78rem;color:var(--ink-3);text-align:center}
 
 /* Secciones */
-section.band{border-top:1px solid var(--line)}
+.band{border-top:1px solid var(--line);scroll-margin-top:64px}
 .sec{padding-block:clamp(3rem,7vw,5.5rem)}
 .sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.5rem 3.5rem;align-items:start}
-.sec-head h2{font-size:clamp(1.9rem,4vw,3rem);line-height:1.05;letter-spacing:-.02em;max-width:16ch}
-.sec-head .eyebrow{margin-bottom:1rem}
-.sec-head .lead{padding-top:.3rem}
-.aside-note{margin-top:1.4rem;padding:1rem 1.2rem;border-left:2px solid var(--accent);background:var(--accent-soft);border-radius:0 var(--r-md) var(--r-md) 0;font-size:.95rem;color:var(--ink);max-width:62ch}
+.h-sec{font-size:clamp(2rem,4.6vw,3.3rem);line-height:1.04;letter-spacing:-.02em;margin-top:12px;max-width:15ch}
+.col-txt{display:grid;gap:14px;padding-top:6px}
 
-/* 3. Qué encontrarás */
-.finds{margin-top:2.8rem;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--line)}
-.find{display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 1.2rem;padding:1.7rem 0;border-bottom:1px solid var(--line)}
-.find:nth-child(odd){padding-right:2rem}
-.find:nth-child(even){padding-left:2rem;border-left:1px solid var(--line)}
-.glyph{width:44px;height:64px;border-radius:3px 6px 6px 3px;position:relative;overflow:hidden;color:#fff;flex:none}
-.glyph::before{content:'';position:absolute;inset:0 auto 0 0;width:6px;background:linear-gradient(90deg,rgba(0,0,0,.3),rgba(255,255,255,.1))}
-.glyph.g1{background:var(--ink)}
-.glyph.g2{background:var(--accent)}
-.glyph.g2::after{content:'';position:absolute;left:0;right:0;top:0;height:6px;background:rgba(255,255,255,.8)}
-.glyph.g3{background:var(--ink-3)}
-.glyph.g3::after{content:'';position:absolute;left:0;right:0;top:0;height:7px;border-top:2px solid rgba(255,255,255,.8);border-bottom:2px solid rgba(255,255,255,.8)}
-.glyph.g4{background:var(--surface);border:1.5px solid var(--ink)}
-.glyph.g4::after{content:'';position:absolute;left:50%;bottom:9px;transform:translateX(-50%);width:15px;height:15px;border-radius:50%;border:1.5px solid var(--ink)}
-.find h3{font-size:1.5rem;line-height:1.15;margin-bottom:.4rem;font-weight:500}
-.find p{color:var(--ink-2);font-size:.97rem;max-width:44ch}
-.find .small{display:block;margin-top:.55rem;font-size:.82rem;color:var(--ink-3)}
+/* La invitación */
+.contraste{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:40px}
+.contraste article{padding:24px 26px;border-radius:var(--r-lg);display:grid;gap:12px;align-content:start}
+.contraste .k{font:700 11.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase}
+.c-no{background:var(--surface);border:1px solid var(--line)}
+.c-no .k{color:var(--ink-3)}
+.c-no ul{margin:0;padding:0;list-style:none;display:grid;gap:10px;color:var(--ink-2)}
+.c-no li{position:relative;padding-left:22px}
+.c-no li::before{content:'';position:absolute;left:2px;top:.6em;width:8px;height:8px;border-radius:2px;background:var(--line-2)}
+.c-no b{color:var(--ink);font-weight:600}
+.c-si{background:var(--lumbre-soft);border:1px solid var(--lumbre)}
+.c-si .k{color:var(--lumbre)}
+.c-si p{font:400 1.12rem/1.55 var(--serif);color:var(--ink)}
 
-/* 4. Cómo funciona */
-.steps{margin-top:2.8rem;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2.2rem;counter-reset:s;list-style:none}
-.step{border-top:3px solid var(--ink);padding-top:1.2rem}
-.step .n{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--accent);margin-bottom:.5rem;display:block}
-.step h3{font-size:1.8rem;margin-bottom:.6rem;font-weight:500;letter-spacing:-.01em}
-.step p{color:var(--ink-2);font-size:.97rem}
+/* Cómo funciona y La colección */
+.tres{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:40px}
+.tarj{display:grid;gap:10px;align-content:start;padding:24px;border-radius:var(--r-lg);background:var(--surface);border:1px solid var(--line)}
+.t-ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
+.tarj h3,.exp h3{font:500 1.5rem/1.1 var(--serif)}
+.tarj p,.exp p{color:var(--ink-2);font-size:.96rem}
+.exp{border-radius:var(--r-lg);background:var(--sunk);overflow:hidden;border:1px solid var(--line)}
+.mshelf{position:relative;display:flex;align-items:flex-end;justify-content:center;gap:4px;height:150px;padding:0 16px;border-bottom:8px solid var(--estante);background:radial-gradient(ellipse 60% 90% at 50% 0%,var(--halo),transparent 70%)}
+.mspine{display:block;flex:none;width:calc(var(--w)*1px);height:calc(var(--h)*1px);border-radius:2px 2px 1px 1px;box-shadow:inset -2px 0 4px rgba(0,0,0,.25)}
+.mspine.pronto{background:var(--surface);box-shadow:inset 0 0 0 1px var(--line)}
+.exp-tx{display:grid;gap:6px;padding:18px 22px 22px}
 
-/* 5. Colección */
-.grid{margin-top:2.8rem;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2.4rem 1.6rem}
-.book{display:flex;flex-direction:column;gap:.9rem;min-width:0}
-.cover{position:relative;aspect-ratio:3/4;max-width:100%;border-radius:3px 8px 8px 3px;overflow:hidden;box-shadow:0 1px 2px rgba(20,22,28,.18),0 10px 22px -12px rgba(20,22,28,.5);transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s;background:var(--sunk)}
+/* Cierre */
+.cierre{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:40px;align-items:center}
+.cierre .lead{margin-top:1.3rem}
+.cierre .nota{margin-top:16px;color:var(--ink-3);font-size:.92rem}
+.cierre .nota .link{font-size:.92rem}
+.telefono{justify-self:center;width:250px;aspect-ratio:9/18.5;max-width:100%;padding:10px;border-radius:38px;background:#1a1c22;box-shadow:0 0 0 1px #2b2f39,0 40px 80px -30px rgba(0,0,0,.8),0 0 120px -20px var(--halo);transform:rotate(-4deg)}
+.tel-pant{position:relative;height:100%;border-radius:30px;background:#0b0c10;overflow:hidden;display:flex;flex-direction:column}
+.tel-top{display:flex;align-items:center;gap:8px;padding:22px 16px 6px;color:#eceef3;font:600 .82rem/1 var(--sans)}
+.tel-top .mark{width:14px;height:14px}.tel-top .mark i{width:3px;background:#eceef3}.tel-top .mark i:nth-child(2){background:#9ca0ff}
+.tel-lamp{display:flex;justify-content:center;margin-top:18px}
+.tel-lamp svg{width:70px;height:28px}
+.tel-lamp .lc{stroke:#8a90a0}.tel-lamp .ls{fill:#8a90a0}.tel-lamp .lb{fill:#f2c879}
+.tel-fila{flex:1;display:flex;align-items:flex-end;justify-content:center;gap:4px;padding:0 14px;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(242,200,121,.16),transparent 70%)}
+.tel-fila .up{transform:translateY(-12px) rotate(-3deg)}
+.tel-tabla{height:8px;margin:0 8px 60px;background:#2b251d;box-shadow:inset 0 1px 0 #8a90a0}
+.tel-tabs{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-around;padding:14px 10px 18px;border-top:1px solid #23262f}
+.tel-tabs i{width:18px;height:18px;border-radius:5px;border:1.5px solid #626a7c}
+.tel-tabs i.on{border-color:#eceef3}
+
+/* Versículo */
+.versiculo{padding-block:clamp(3.5rem,8vw,6rem);text-align:center;border-top:1px solid var(--line)}
+.versiculo p{font:italic clamp(1.4rem,3vw,2rem)/1.45 var(--serif);color:var(--ink)}
+.versiculo span{display:block;margin-top:14px;font:700 11.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--lumbre)}
+
+/* Pie (igual al de THE WAY) */
+.footer{background:var(--bg);border-top:1px solid var(--line)}
+.pf-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:28px 48px;padding-block:56px}
+.pf-col{display:grid;gap:16px;align-content:start;min-width:0}
+.pf-brand{display:flex;align-items:center;gap:14px}
+.ec-logo{width:52px;height:52px;flex:none}
+.pb-sep{width:1px;height:16px;background:var(--ink);opacity:.35}
+.pb-name{font:italic 21px/1 var(--serif)}
+.pf-tag{max-width:340px;font-size:15px;color:var(--ink-2)}
+.pf-legal{font-size:13px;color:var(--ink-3);margin-top:16px}
+.pf-nav{display:grid;gap:14px;min-width:0;font:700 12px/1.3 var(--sans);letter-spacing:.12em;text-transform:uppercase}
+.pf-nav .r{display:flex;flex-wrap:wrap;gap:12px 32px}
+.pf-nav a{color:var(--ink-2);text-decoration:none}.pf-nav a:hover{color:var(--accent)}
+.pf-nav a[aria-current="page"]{color:var(--accent)}
+@media(max-width:760px){.pf-wrap{grid-template-columns:minmax(0,1fr)}}
+
+/* Ficha del libro (al tocar un lomo) */
+.velo{position:fixed;inset:0;z-index:95;background:rgba(5,6,8,.6);display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.hoja{position:relative;width:min(760px,100%);max-height:100%;overflow:auto;display:grid;grid-template-columns:200px minmax(0,1fr);gap:28px;padding:28px;border-radius:var(--r-lg);background:var(--surface);box-shadow:var(--float);animation:aparecer .3s var(--ease)}
+.hoja h3{font:500 2rem/1.08 var(--serif);margin:10px 0 6px}
+.hoja .desc{color:var(--ink-2);margin:14px 0 18px}
+.hoja .cerrar{position:absolute;top:12px;right:12px}
+.hoja .cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.6rem}
+.tag{display:inline-block;font-size:.72rem;font-weight:500;color:var(--accent);background:var(--accent-soft);border-radius:var(--pill);padding:.2rem .65rem}
+.cover{position:relative;display:block;aspect-ratio:3/4;width:100%;border-radius:3px 8px 8px 3px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.25),0 10px 22px -12px rgba(0,0,0,.6);background:var(--sunk)}
 .cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .cover::before{content:'';position:absolute;inset:0 auto 0 0;width:12px;z-index:1;background:linear-gradient(90deg,rgba(0,0,0,.28),rgba(255,255,255,.1) 60%,transparent)}
 .cover::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(160deg,rgba(255,255,255,.12),transparent 45%,rgba(0,0,0,.18));pointer-events:none}
-.book:hover .cover{transform:translateY(-6px) rotate(-.4deg);box-shadow:var(--lift)}
-.book-line{display:flex;justify-content:space-between;gap:.6rem;font-size:.82rem;color:var(--ink-3)}
-.book-line b{color:var(--ink);font-weight:600}
-.tag{align-self:flex-start;font-size:.72rem;font-weight:500;color:var(--accent);background:var(--accent-soft);border-radius:var(--r-pill);padding:.2rem .65rem}
-.routes{margin-top:2.4rem;display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center;font-size:.9rem;color:var(--ink-2)}
-.routes .lbl{font-family:var(--serif);font-style:italic;font-size:1.05rem}
-.growing{margin-top:1.4rem;font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--ink-2)}
+@keyframes aparecer{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-/* 6. Cierre */
-.close{padding-block:clamp(3.5rem,9vw,7rem);text-align:left}
-.close h2{font-size:clamp(2.1rem,5vw,3.7rem);line-height:1.02;letter-spacing:-.025em;max-width:18ch}
-.close .lead{margin-top:1.4rem}
-.close .cta-row{margin-top:2rem}
+/* Aviso */
+.aviso{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:1100;display:flex;align-items:center;gap:.75rem;width:max-content;max-width:min(92vw,440px);padding:12px 18px;border-radius:12px;background:var(--surface);color:var(--ink);font:500 14px/1.4 var(--sans);box-shadow:var(--float);animation:aparecer .3s var(--ease)}
+.aviso .punto{flex:none;width:8px;height:8px;border-radius:50%;background:var(--accent)}
 
-/* Footer · barra inferior El College */
-.footer{background:var(--sunk);border-top:1px solid var(--line)}
-.pf-wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:30px 48px;padding-block:48px 52px}
-.pf-col{flex:1 1 300px;min-width:0}
-.pf-brand{display:flex;align-items:center;gap:14px}
-.ec-logo{display:block;width:52px;height:52px;flex-shrink:0}
-.ec-logo svg{display:block;width:100%;height:100%}
-.pb-sep{width:1px;height:16px;background:var(--ink);opacity:.35;flex-shrink:0}
-.pb-name{font-family:var(--serif);font-style:italic;font-size:21px;line-height:1;color:var(--ink);white-space:nowrap}
-.pf-tag{max-width:340px;margin-top:16px;font-size:15px;line-height:1.55;color:var(--ink-2)}
-.pf-nav{flex:2 1 440px;min-width:0;display:flex;flex-wrap:wrap;gap:12px 28px;align-content:flex-start;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
-.pf-nav a{color:var(--ink-2);text-decoration:none;transition:color .2s}
-.pf-nav a:hover{color:var(--accent)}
-.pf-nav a[aria-current="page"]{color:var(--accent)}
-.pf-legal{flex-basis:100%;font-size:13px;line-height:1.7;color:var(--ink-3)}
-@media(max-width:699px){.pf-wrap{padding-block:40px 44px;gap:26px}.ec-logo{width:48px;height:48px}.pf-nav{gap:14px 22px}}
-
-@media (max-width:900px){
-  .hero{grid-template-columns:minmax(0,1fr)}
-  .shelf-col{order:2}
-  .shelf{--s:.82;justify-content:flex-start}
-  .shelf-note{text-align:left}
-  .sec-head{grid-template-columns:minmax(0,1fr)}
-  .steps{grid-template-columns:minmax(0,1fr);gap:1.8rem}
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .finds{grid-template-columns:minmax(0,1fr)}
-  .find:nth-child(odd),.find:nth-child(even){padding-left:0;padding-right:0;border-left:0}
+/* Responsivo */
+@media(max-width:900px){
+  .sec-head,.contraste,.tres,.cierre{grid-template-columns:minmax(0,1fr)}
+  .telefono{transform:none}
+  .hero{grid-template-columns:minmax(0,1fr);gap:0;padding-block:2.6rem 3rem}
+  .hero > .hero-tx{display:contents}
+  .wm{order:1}.tagline{order:2;margin-bottom:6px}
+  .shelf-col{order:3;margin:6px 0 26px}
+  .hero .lead{order:4}.hero .duo{order:5;margin-top:28px}.hero .nota{order:6}
+  .shelf{--s:.72}
+  .lamp-h{width:72px;height:72px}
 }
-@media (max-width:480px){
-  .shelf{--s:.62;gap:4px}
-  .grid{gap:2rem 1rem}
+@media(max-width:640px){
+  .hoja{grid-template-columns:minmax(0,1fr);padding:22px}
+  .hoja .cover{max-width:160px}
 }
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+@media(max-width:520px){.duo{display:grid;grid-template-columns:minmax(0,1fr)}.btn-lg{min-width:0;width:100%}}
+@media(max-width:480px){.shelf{--s:.56;gap:4px;padding:0 6px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 
-#bookclub-app{display:none;position:fixed;inset:0;z-index:1000;background:#0B0C10}
+/* App dentro de la landing (sesión recordada) */
+#bookclub-app{display:none;position:fixed;inset:0;z-index:1000;background:var(--bg)}
 #bookclub-app iframe{display:block;position:relative;z-index:0;width:100%;height:100%;border:0}
-#bookclub-app.is-loading::before{content:'Abriendo tu biblioteca…';position:absolute;inset:0;z-index:1;display:grid;place-items:center;background:#0B0C10;color:#ECEEF3;font-family:var(--serif);font-size:clamp(1.2rem,4vw,1.7rem)}
+#bookclub-app.is-loading::before{content:'Abriendo tu biblioteca…';position:absolute;inset:0;z-index:1;display:grid;place-items:center;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:clamp(1.2rem,4vw,1.7rem)}
 body.bookclub-app-open{overflow:hidden}
 body.bookclub-app-open>header,body.bookclub-app-open>main,body.bookclub-app-open>footer{display:none!important}
 body.bookclub-app-open #bookclub-app{display:block}
 html.bookclub-app-pending body>header,html.bookclub-app-pending body>main,html.bookclub-app-pending body>footer{display:none!important}
 html.bookclub-app-pending #bookclub-app{display:block}
-
 </style>
-
 </head>
 <body>
-<header class="header" id="parentBar">
+<header class="header">
   <div class="wrap hbar">
     <a class="brand" href="#inicio" aria-label="BOOKCLUB, inicio"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>BOOKCLUB</a>
-    <div class="hnav" id="pbMenu" role="navigation" aria-label="Entradas del College">
-      <a href="https://mayorquemirealidad.netlify.app/" target="_blank" rel="noopener"><span class="pb-d">TEMPORADA 2026</span><span class="pb-m">MAYOR QUE MI REALIDAD</span></a>
-      <a href="https://starsmsgapp.netlify.app/" target="_blank" rel="noopener">S.T.A.R.S.</a>
-      <a href="https://thewaylhscol.netlify.app/" target="_blank" rel="noopener">THE WAY</a>
-      <a href="https://collegelhscol.netlify.app/#staff" target="_blank" rel="noopener">STAFF</a>
-      <a href="#inicio" aria-current="page">BOOKCLUB</a>
-      <a class="pb-extra" href="https://lhscolweb.netlify.app/">Volver a LHSCOL</a>
-      <a class="hcta hcta-m" href="#mi-biblioteca" data-library-access>Mi Biblioteca</a>
-    </div>
+    <nav class="lnav" aria-label="Secciones">
+      <a href="#invitacion">La invitación</a>
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#coleccion">La colección</a>
+    </nav>
     <div class="hright">
-      <a class="hcta hcta-d" href="#mi-biblioteca" data-library-access>Mi Biblioteca</a>
-      <button id="theme" class="icon-btn" type="button" aria-label="Cambiar apariencia">☽</button>
-      <button class="hburger" type="button" aria-expanded="false" aria-controls="pbMenu" aria-label="Abrir menú"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg></button>
+      <button class="hcta ingresar" type="button" data-ingresar data-label-visitante="Ingresar">Ingresar</button>
     </div>
   </div>
 </header>
 
 <main id="inicio">
-  <!-- 1. Portada / invitación -->
+  <!-- 1. Portada -->
   <section class="wrap hero">
-    <div class="hero-copy">
-      <p class="hero-line">Ideas que vale la pena conservar.</p>
-      <h1>Descubre qué <span class="accent">merece tu tiempo</span> de lectura.</h1>
-      <p class="lead">No todo libro merece el mismo tiempo, pero una buena idea puede acompañarte durante años. BOOKCLUB reúne resúmenes y cursos basados en libros que te ayudan a pensar, crecer y enseñar; para que descubras qué vale la pena leer completo, qué ideas necesitas guardar y dónde quieres profundizar.</p>
-      <div class="cta-row">
-        <a class="btn" href="https://bookclublhscol.netlify.app/" target="_blank" rel="noopener">Explorar BookClub
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a class="link" href="#como-funciona">Cómo funciona</a>
+    <div class="hero-tx">
+      <h1 class="wm">BOOK<span>CLUB</span></h1>
+      <p class="tagline">Libros que te acercan a Jesús.</p>
+      <p class="lead">Resúmenes de libros elegidos para que leas con propósito y cada idea te lleve a conocer, seguir y parecerte más a Jesús.</p>
+      <div class="duo">
+        <a class="btn btn-lg btn-out" href="#invitacion">Leer la invitación</a>
+        <button class="btn btn-lg" type="button" data-ingresar data-label-visitante="Empezar hoy">Empezar hoy</button>
       </div>
+      <p class="nota" data-nota-sesion>Entras con tu cuenta de Google de El College.</p>
     </div>
     <div class="shelf-col">
-      <div class="shelf" role="img" aria-label="Estantería con los cuatro títulos de la colección actual">
-        <div class="spine" style="--h:226;--w:46;--i:0;background:linear-gradient(180deg,#D63A30,#B0261E)"><span>Elimina la prisa de tu vida</span></div>
-        <div class="spine" style="--h:186;--w:52;--i:1;background:linear-gradient(180deg,#F5F3EC,#E6DFC9);--tx:#7A5718"><span>Gana la guerra en tu mente</span></div>
-        <div class="spine" style="--h:290;--w:58;--i:2;background:linear-gradient(180deg,#0E86C2,#0A5F94)"><span>Enciende tu cerebro</span></div>
-        <div class="spine" style="--h:168;--w:40;--i:3;background:linear-gradient(180deg,#D8E3DC,#6B5A33)"><span>Practica el camino</span></div>
-      </div>
-      <p class="shelf-note">Cada lomo mide el tiempo de lectura de su resumen.</p>
+      <div class="halo"></div>
+      <svg class="lamp-h" viewBox="0 0 120 120" aria-hidden="true"><path class="lc" d="M60 0v86" stroke-width="1.5"/><path class="ls" d="M38 106 L49 86 H71 L82 106 Z"/><ellipse class="lb" cx="60" cy="108" rx="8" ry="4.5"/></svg>
+      <div class="shelf" id="estanteria" role="group" aria-label="Estantería de la colección"></div>
+      <p class="shelf-note">Cada lomo mide el tiempo de lectura de su resumen. Toca uno.</p>
     </div>
   </section>
 
-  <!-- 2. El problema -->
-  <section class="band">
+  <!-- 2. La invitación -->
+  <section class="band" id="invitacion">
     <div class="wrap sec">
       <div class="sec-head">
         <div>
-          <p class="eyebrow">Para qué existe</p>
-          <h2>Leer más no siempre significa ir más profundo.</h2>
+          <p class="eyebrow luz-e">La invitación</p>
+          <h2 class="h-sec">Leer no es la meta. <span class="luz">Encontrarte con Él</span>, sí.</h2>
         </div>
-        <div>
-          <p class="lead">Hay libros que queremos leer, otros que empezamos y no terminamos, y muchas ideas valiosas que olvidamos con el tiempo. BOOKCLUB existe para ayudarte a seleccionar mejor, recuperar lo esencial y volver a lo que necesitas profundizar, sin tener que empezar de cero cada vez.</p>
-          <p class="aside-note">No todos los libros merecen leerse completos. Con el resumen decides: a veces es más que suficiente, y otras te confirma que vale la pena ir al libro. Si lo lees completo, el resumen es la herramienta para volver a sus ideas más profundas sin leerlo de nuevo.</p>
+        <div class="col-txt">
+          <p class="lead">Hay libros que queremos leer, otros que empezamos y no terminamos, y muchas ideas valiosas que se nos olvidan.</p>
+          <p class="lead">BOOKCLUB te ayuda a elegir mejor, recuperar lo esencial y llevar cada idea a la oración, a la vida y al servicio.</p>
+          <p class="frase">Una buena página puede ser un encuentro.</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- 3. Qué encontrarás -->
-  <section class="band">
-    <div class="wrap sec">
-      <p class="eyebrow">Qué encontrarás en BookClub</p>
-      <div class="finds">
-        <article class="find">
-          <div class="glyph g1" aria-hidden="true"></div>
-          <div>
-            <h3>Libros seleccionados</h3>
-            <p>Títulos elegidos por su capacidad de aportar a la formación, la vida y el servicio.</p>
-          </div>
+      <div class="contraste">
+        <article class="c-no">
+          <p class="k">BOOKCLUB no es</p>
+          <ul>
+            <li><b>Una app de lectura rápida</b> para acumular títulos.</li>
+            <li><b>Una competencia</b> de cuántos libros terminas.</li>
+            <li><b>Un reemplazo</b> de la Biblia ni del libro completo.</li>
+          </ul>
         </article>
-        <article class="find">
-          <div class="glyph g3" aria-hidden="true"></div>
-          <div>
-            <h3>Resúmenes para volver a lo esencial</h3>
-            <p>Una síntesis clara de la idea central de cada libro y de sus aportes más importantes, para decidir si el resumen te basta o si quieres leer el libro completo.</p>
-          </div>
-        </article>
-        <article class="find">
-          <div class="glyph g2" aria-hidden="true"></div>
-          <div>
-            <h3>Cursos para profundizar</h3>
-            <p>Algunos libros tienen un recorrido de formación para llevar sus ideas a la práctica.</p>
-            <span class="small">No todos los libros tienen curso.</span>
-          </div>
-        </article>
-        <article class="find">
-          <div class="glyph g4" aria-hidden="true"></div>
-          <div>
-            <h3>Mi Biblioteca</h3>
-            <p>Un espacio personal para guardar los libros que quieres leer y seguir tu avance.</p>
-          </div>
+        <article class="c-si">
+          <p class="k">BOOKCLUB es</p>
+          <p>La biblioteca de El College para leer con propósito: resúmenes de libros elegidos que te ayudan a decidir qué merece tu tiempo, conservar lo esencial y llevar cada idea a la oración, a la vida y al servicio.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- 4. Cómo funciona -->
+  <!-- 3. Cómo funciona -->
   <section class="band" id="como-funciona">
     <div class="wrap sec">
       <div class="sec-head">
         <div>
-          <p class="eyebrow">Cómo funciona</p>
-          <h2>Una idea puede ser el inicio de un camino.</h2>
+          <p class="eyebrow luz-e">Cómo funciona</p>
+          <h2 class="h-sec">No es una app de libros. <span class="acc">Es una biblioteca para el camino.</span></h2>
+        </div>
+        <div class="col-txt">
+          <p class="lead">Cada resumen está pensado para leerse con calma: una idea central, el desarrollo por capítulos, una reflexión y una práctica para el día.</p>
         </div>
       </div>
-      <ol class="steps">
-        <li class="step">
-          <span class="n">Primero</span>
-          <h3>Explora</h3>
-          <p>Encuentra libros por ruta, autor, tema, formato o aquello que estás buscando.</p>
-        </li>
-        <li class="step">
-          <span class="n">Después</span>
-          <h3>Decide</h3>
-          <p>Conoce la idea central, el tiempo estimado y el aporte de cada libro para decidir si quieres leerlo completo, guardar sus ideas o profundizar.</p>
-        </li>
-        <li class="step">
-          <span class="n">Por último</span>
-          <h3>Profundiza</h3>
-          <p>Lee el resumen, toma el curso cuando esté disponible y guarda el libro en Mi Biblioteca para volver a él cuando lo necesites.</p>
-        </li>
-      </ol>
+      <div class="tres">
+        <article class="tarj">
+          <span class="t-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l1.9 5.6 5.6 1.9-5.6 1.9L12 18.5l-1.9-5.6L4.5 11l5.6-1.9z"/></svg></span>
+          <h3>Descubre</h3>
+          <p>Una idea en 1 minuto por libro para decidir si quieres ir más profundo.</p>
+        </article>
+        <article class="tarj">
+          <span class="t-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5h6a2 2 0 012 2V20a2 2 0 00-2-2H4z"/><path d="M20 5.5h-6a2 2 0 00-2 2V20a2 2 0 012-2h6z"/></svg></span>
+          <h3>Lee o escucha</h3>
+          <p>Resúmenes por capítulos con idea central, reflexión y práctica. También puedes escucharlos.</p>
+        </article>
+        <article class="tarj">
+          <span class="t-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 00-3.6 10.8c.6.5 1 1.2 1 2V16h5.2v-.2c0-.8.4-1.5 1-2A6 6 0 0012 3z"/></svg></span>
+          <h3>Conserva</h3>
+          <p>Guarda frases y notas en Ideas, y vuelve a ellas cuando las necesites.</p>
+        </article>
+      </div>
     </div>
   </section>
 
-  <!-- 5. La colección actual -->
-  <section class="band">
+  <!-- 4. La colección -->
+  <section class="band" id="coleccion">
     <div class="wrap sec">
       <div class="sec-head">
         <div>
-          <p class="eyebrow">La colección actual</p>
-          <h2>Algunos de los títulos que ya puedes explorar.</h2>
+          <p class="eyebrow luz-e">La colección</p>
+          <h2 class="h-sec">Un estante. <span class="luz">Tres expediciones.</span></h2>
         </div>
-        <p class="lead">Una muestra real de lo que vas a encontrar. Vendrán muchos más.</p>
+        <div class="col-txt">
+          <p class="lead">Cada libro pertenece a una expedición de THE WAY. Así lo que lees en BOOKCLUB acompaña el camino que recorres en El College.</p>
+        </div>
       </div>
-      <div class="grid" id="collection-grid">
-        <article class="book">
-          <div class="cover"><img src="assets/previews/elimina-la-prisa-biblioteca.jpg" alt="Portada de Elimina la prisa de tu vida" width="1200" height="1600"></div>
-          <div><div class="book-line"><span><b>John Mark Comer</b></span><span>96 min</span></div></div>
-          <span class="tag">Capacidad · Inteligencia Espiritual</span>
-        </article>
-        <article class="book">
-          <div class="cover"><img src="assets/previews/gana-la-guerra-en-tu-mente-biblioteca.jpg" alt="Portada de Gana la guerra en tu mente" width="1200" height="1600"></div>
-          <div><div class="book-line"><span><b>Craig Groeschel</b></span><span>75 min</span></div></div>
-          <span class="tag">Mentalidad · Renovación</span>
-        </article>
-        <article class="book">
-          <div class="cover"><img src="assets/previews/enciende-tu-cerebro-biblioteca.jpg" alt="Portada de Enciende tu cerebro" width="1200" height="1600"></div>
-          <div><div class="book-line"><span><b>Caroline Leaf</b></span><span>132 min</span></div></div>
-          <span class="tag">Mentalidad · Renovación</span>
-        </article>
-        <article class="book">
-          <div class="cover"><img src="assets/previews/practica-el-camino.png" alt="Portada de Practica el camino" width="520" height="693"></div>
-          <div><div class="book-line"><span><b>John Mark Comer</b></span><span>68 min</span></div></div>
-          <span class="tag">Capacidad · Inteligencia Espiritual</span>
-        </article>
-      </div>
-      <p class="growing">Cada título pertenece a una ruta formativa de El College. La colección está viva y vendrán muchos títulos más.</p>
+      <div class="tres" id="expediciones"></div>
     </div>
   </section>
 
-  <!-- 6. Cierre -->
+  <!-- 5. Cierre -->
   <section class="band">
-    <div class="wrap close">
-      <h2>Las ideas correctas merecen un lugar para permanecer.</h2>
-      <p class="lead">Entra a BOOKCLUB, explora la colección y empieza a construir una biblioteca de ideas que puedan acompañarte a pensar, vivir y enseñar mejor.</p>
-      <div class="cta-row">
-        <a class="btn" href="https://bookclublhscol.netlify.app/" target="_blank" rel="noopener">Explorar BookClub
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a class="link" href="#mi-biblioteca" data-library-access>Entrar a Mi Biblioteca</a>
+    <div class="wrap sec cierre">
+      <div>
+        <p class="eyebrow luz-e">Tu estante te espera</p>
+        <h2 class="h-sec">Empieza por <span class="luz">una página</span>.</h2>
+        <p class="lead">Empieza con <i>Jesús es _____.</i>, el libro de entrada, y construye una biblioteca de ideas que te acompañen a pensar, vivir y servir mejor.</p>
+        <div class="duo"><button class="btn btn-lg" type="button" data-ingresar data-label-visitante="Empezar hoy">Empezar hoy</button></div>
+        <p class="nota">¿Tienes preguntas sobre BOOKCLUB? <a href="https://wa.me/573173708570?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20BOOKCLUB" target="_blank" rel="noopener" class="link">Escríbenos por WhatsApp</a></p>
+      </div>
+      <div class="telefono" aria-hidden="true">
+        <div class="tel-pant">
+          <div class="tel-top"><span class="mark"><i></i><i></i><i></i></span><b>Mi estante</b></div>
+          <div class="tel-lamp"><svg viewBox="0 0 120 46"><path class="lc" d="M60 0v16" stroke-width="2"/><path class="ls" d="M36 34 L48 16 H72 L84 34 Z"/><ellipse class="lb" cx="60" cy="36" rx="9" ry="5"/></svg></div>
+          <div class="tel-fila" id="tel-fila"></div>
+          <div class="tel-tabla"></div>
+          <div class="tel-tabs"><i></i><i></i><i class="on"></i><i></i></div>
+        </div>
       </div>
     </div>
+  </section>
+
+  <!-- 6. Versículo -->
+  <section class="versiculo">
+    <div class="wrap"><p>«Lámpara es a mis pies tu palabra,<br>y lumbrera a mi camino.»</p><span>Salmo 119:105</span></div>
   </section>
 </main>
 
 <footer class="footer">
   <div class="wrap pf-wrap">
     <div class="pf-col">
-      <div class="pf-brand"><span class="ec-logo"><svg viewBox="0 0 56 56" aria-hidden="true" focusable="false"><rect width="56" height="56" rx="12" fill="#D9923B"/><rect x="4" y="4" width="48" height="48" rx="9" fill="#62686F"/><rect x="7" y="7" width="42" height="42" rx="7" fill="#1F3A5F"/><rect x="12.5" y="12.5" width="31" height="31" rx="4.5" fill="#9DB69A"/><rect x="18" y="18" width="20" height="20" rx="2.5" fill="#1E2420"/></svg></span><span class="pb-sep" aria-hidden="true"></span><span class="pb-name">El College</span></div>
+      <div class="pf-brand"><svg class="ec-logo" viewBox="0 0 56 56" aria-hidden="true" focusable="false"><rect width="56" height="56" rx="12" fill="#D9923B"/><rect x="4" y="4" width="48" height="48" rx="9" fill="#62686F"/><rect x="7" y="7" width="42" height="42" rx="7" fill="#1F3A5F"/><rect x="12.5" y="12.5" width="31" height="31" rx="4.5" fill="#9DB69A"/><rect x="18" y="18" width="20" height="20" rx="2.5" fill="#1E2420"/></svg><span class="pb-sep" aria-hidden="true"></span><span class="pb-name">El College</span></div>
       <p class="pf-tag">Todo lo que necesitas para ir más profundo.</p>
+      <p class="pf-legal">© 2026 LHSCOL · Manizales, Colombia. Hecho con ♥ en el Eje Cafetero.</p>
     </div>
-    <div class="pf-nav" role="navigation" aria-label="Pie de página">
-      <a href="https://lhscolweb.netlify.app/" target="_blank" rel="noopener">LHSCOL</a>
-      <a href="https://mayorquemirealidad.netlify.app/" target="_blank" rel="noopener">MAYOR QUE MI REALIDAD</a>
-      <a href="https://starsmsgapp.netlify.app/" target="_blank" rel="noopener">S.T.A.R.S.</a>
-      <a href="https://thewaylhscol.netlify.app/" target="_blank" rel="noopener">THE WAY</a>
-      <a href="https://collegelhscol.netlify.app/#staff" target="_blank" rel="noopener">STAFF</a>
-      <a href="#inicio" aria-current="page">BOOKCLUB</a>
-      <a href="https://www.instagram.com/lhscol/" target="_blank" rel="noopener">INSTAGRAM</a>
-      <a href="https://www.youtube.com/@lhscol?sub_confirmation=1" target="_blank" rel="noopener">YOUTUBE</a>
-      <a href="https://linktr.ee/lhscol" target="_blank" rel="noopener">LINKTREE</a>
-    </div>
-    <div class="pf-legal">© 2026 LHSCOL · Manizales, Colombia. Hecho con ♥ en el Eje Cafetero.</div>
+    <nav class="pf-nav" aria-label="Pie de página">
+      <div class="r"><a href="https://lhscolweb.netlify.app/" target="_blank" rel="noopener">LHSCOL</a><a href="https://collegelhscol.netlify.app/" target="_blank" rel="noopener">EL COLLEGE</a></div>
+      <div class="r"><a href="https://mayorquemirealidad.netlify.app/" target="_blank" rel="noopener">MAYOR QUE MI REALIDAD</a><a href="https://starsmsgapp.netlify.app/" target="_blank" rel="noopener">S.T.A.R.S.</a><a href="https://thewaylhscol.netlify.app/" target="_blank" rel="noopener">THE WAY</a><a href="#inicio" aria-current="page">BOOKCLUB</a><a href="https://collegelhscol.netlify.app/#staff" target="_blank" rel="noopener">STAFF</a></div>
+      <div class="r"><a href="https://linktr.ee/lhscol" target="_blank" rel="noopener">LINKTREE</a><a href="https://www.instagram.com/lhscol/" target="_blank" rel="noopener">INSTAGRAM</a><a href="https://www.youtube.com/@lhscol?sub_confirmation=1" target="_blank" rel="noopener">YOUTUBE</a><a href="https://chat.whatsapp.com/Cns0HVMBa3C1PztdvhEn55" target="_blank" rel="noopener">COMUNIDAD · WHATSAPP</a></div>
+    </nav>
   </div>
 </footer>
 
+<section id="bookclub-app" aria-label="Mi Biblioteca"><iframe id="bookclub-frame" title="Mi Biblioteca"></iframe></section>
+
 <script>
-(function(){
-  var root=document.documentElement,btn=document.getElementById('theme');
-  function isDark(){var t=root.getAttribute('data-theme');return t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches}
-  function paint(){btn.textContent=isDark()?'☀':'☽'}
-  try{var s=localStorage.getItem('bc-landing-theme');if(s)root.setAttribute('data-theme',s)}catch(e){}
-  btn.addEventListener('click',function(){
-    var n=isDark()?'light':'dark';root.setAttribute('data-theme',n);
-    try{localStorage.setItem('bc-landing-theme',n)}catch(e){}
-    paint();
-  });
-  paint();
-})();
-
-/* Menú móvil de la barra El College */
-(function(){
-  var h=document.getElementById('parentBar');if(!h)return;
-  var b=h.querySelector('.hburger');
-  var ico={open:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>',closed:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>'};
-  function set(o){h.classList.toggle('open',o);b.setAttribute('aria-expanded',o?'true':'false');b.setAttribute('aria-label',o?'Cerrar menú':'Abrir menú');b.innerHTML=o?ico.open:ico.closed}
-  b.addEventListener('click',function(){set(!h.classList.contains('open'))});
-  h.querySelectorAll('.hnav a').forEach(function(a){a.addEventListener('click',function(){set(false)})});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&h.classList.contains('open')){set(false);b.focus()}});
-  window.addEventListener('resize',function(){if(window.innerWidth>899)set(false)});
-})();
-
-/* La colección se actualiza desde libros.json. Las tarjetas del HTML quedan
-   visibles como respaldo si el archivo no puede cargarse. */
-(function(){
-  var grid=document.getElementById('collection-grid');
-  if(!grid||!window.fetch)return;
-  var nombres={
-    mentalidad:'Mentalidad',capacidad:'Capacidad',habilidad:'Habilidad',
-    identidad:'Identidad',sanidad:'Sanidad',renovacion:'Renovación',
-    espiritual:'Inteligencia Espiritual',emocional:'Inteligencia Emocional',
-    fisica:'Inteligencia Física',personal:'Personal',relacional:'Relacional',vocacional:'Vocacional'
+/* Aviso: abajo al centro, desaparece a los 6 segundos (mismo patrón de THE WAY). */
+window.BookclubAviso=(function(){
+  var t;
+  return function(msg){
+    var el=document.getElementById('aviso');
+    if(!el){el=document.createElement('div');el.id='aviso';el.className='aviso';el.setAttribute('role','status');el.setAttribute('aria-live','polite');document.body.appendChild(el);}
+    el.innerHTML='<span class="punto" aria-hidden="true"></span>';el.appendChild(document.createTextNode(msg));
+    el.hidden=false;clearTimeout(t);t=setTimeout(function(){el.hidden=true},6000);
   };
-  function etiqueta(libro){
-    var categoria=libro.categoria||libro.expedicion;
-    var subcategoria=libro.subcategoria||libro.sub_expedicion;
-    return [nombres[categoria]||categoria,nombres[subcategoria]||subcategoria].filter(Boolean).join(' · ');
+})();
+
+/* Estantería, expediciones y celular de muestra: se generan desde libros.json.
+   Si el archivo no carga, se usa la copia de respaldo de abajo. */
+(function(){
+  var RESPALDO=[
+    {titulo:'Asegure el éxito en su matrimonio antes de casarse',autor:'Les Parrott III y Leslie Parrott',expedicion:'habilidad',sub_expedicion:'relacional',color_acento:'#1F7F7A',color_portada_inicio:'#FFFFFF',color_portada_fin:'#E8F5F4',tiempo_lectura_min:49,capitulos:7,archivo:'libros/asegure-el-exito-en-su-matrimonio-antes-de-casarse-json.html',preview_imagen:'assets/previews/asegure-el-exito-en-su-matrimonio-antes-de-casarse.png'},
+    {titulo:'Elimina la prisa de tu vida',autor:'John Mark Comer',categoria:'capacidad',subcategoria:'espiritual',color_acento:'#D53930',color_portada_inicio:'#DC4036',color_portada_fin:'#B32720',tiempo_lectura_min:143,capitulos:10,archivo:'libros/elimina-la-prisa-json.html',preview_imagen:'assets/previews/elimina-la-prisa-biblioteca.jpg'},
+    {titulo:'Gana la guerra en tu mente',autor:'Craig Groeschel',categoria:'mentalidad',subcategoria:'renovacion',color_acento:'#7A5718',color_portada_inicio:'#F5F3EC',color_portada_fin:'#E6DFC9',tiempo_lectura_min:80,capitulos:12,archivo:'libros/gana-la-guerra-en-tu-mente-json.html',preview_imagen:'assets/previews/gana-la-guerra-en-tu-mente-biblioteca.jpg'},
+    {titulo:'Jesús es _____.',autor:'Judah Smith',categoria:'capacidad',subcategoria:'espiritual',color_acento:'#DD488C',color_portada_inicio:'#171614',color_portada_fin:'#2B2926',tiempo_lectura_min:154,capitulos:15,archivo:'libros/jesus-es-json.html',preview_imagen:'assets/previews/jesus-es-biblioteca.jpg'},
+    {titulo:'Enciende tu cerebro',autor:'Caroline Leaf',categoria:'mentalidad',subcategoria:'renovacion',color_acento:'#0A6A87',color_portada_inicio:'#0993B5',color_portada_fin:'#0A4A66',tiempo_lectura_min:160,capitulos:15,archivo:'libros/enciende-tu-cerebro-json.html',preview_imagen:'assets/previews/enciende-tu-cerebro-biblioteca.jpg'},
+    {titulo:'¿Cómo está tu alma?',autor:'Judah Smith',expedicion:'mentalidad',sub_expedicion:'sanidad',color_acento:'#1F5A62',color_portada_inicio:'#ECEBE8',color_portada_fin:'#D9E3E4',tiempo_lectura_min:91,capitulos:10,archivo:'libros/como-esta-tu-alma-json.html',preview_imagen:'assets/previews/como-esta-tu-alma.jpg'},
+    {titulo:'Practica el camino',autor:'John Mark Comer',expedicion:'capacidad',sub_expedicion:'espiritual',color_acento:'#6B5A33',color_portada_inicio:'#D8E3DC',color_portada_fin:'#6B5A33',tiempo_lectura_min:68,capitulos:6,archivo:'libros/practica-el-camino-json.html',preview_imagen:'assets/previews/practica-el-camino.png'}
+  ];
+  /* Orden visual del prototipo; los libros nuevos se agregan después. */
+  var ORDEN=['asegure-el-exito-en-su-matrimonio-antes-de-casarse','elimina-la-prisa','gana-la-guerra-en-tu-mente','jesus-es','enciende-tu-cerebro','como-esta-tu-alma','practica-el-camino'];
+  var TELEFONO=['jesus-es','elimina-la-prisa','enciende-tu-cerebro','como-esta-tu-alma','practica-el-camino'];
+  var EXP={mentalidad:['Mentalidad','Identidad · Sanidad · Renovación'],capacidad:['Capacidad','Inteligencia espiritual, emocional y física'],habilidad:['Habilidad','Personal · Relacional · Vocacional']};
+  var SUB={identidad:'Identidad',sanidad:'Sanidad',renovacion:'Renovación',espiritual:'Inteligencia Espiritual',emocional:'Inteligencia Emocional',fisica:'Inteligencia Física',personal:'Personal',relacional:'Relacional',vocacional:'Vocacional'};
+  var MAX_LOMOS=9;
+
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function slug(b){if(b.slug)return b.slug;var m=/libros\/(.+?)(?:-json)?(?:-piloto)?\.html$/.exec(b.archivo||'');return m?m[1]:String(b.titulo||'').toLowerCase()}
+  function luz(hex){var h=String(hex||'').replace('#','');if(h.length!==6)return 0;var r=parseInt(h.slice(0,2),16)/255,g=parseInt(h.slice(2,4),16)/255,b=parseInt(h.slice(4,6),16)/255;return .2126*r+.7152*g+.0722*b}
+  function normal(b){
+    var c1=b.color_portada_inicio||'#2b2926',c2=b.color_portada_fin||c1,min=+b.tiempo_lectura_min||+b.tiempo_lectura_total_min||60,cap=+b.capitulos||8;
+    var clara=(luz(c1)+luz(c2))/2>.5;
+    return {id:slug(b),t:b.titulo,a:b.autor,min:min,cap:cap,c1:c1,c2:c2,tx:clara?(b.color_acento||'#17171a'):'#fff',
+      exp:b.expedicion||b.categoria,sub:SUB[b.sub_expedicion||b.subcategoria]||'',img:b.preview_imagen,
+      d:b.descripcion||b.preview_subtitulo||b.subtitulo||'',h:Math.round(140+min*.85),w:Math.round(30+cap*1.8)};
   }
-  function tarjeta(libro){
-    var article=document.createElement('article');article.className='book';
-    var cover=document.createElement('div');cover.className='cover';
-    var image=document.createElement('img');
-    image.src=libro.preview_imagen;
-    image.alt='Portada de '+libro.titulo;
-    image.width=1200;image.height=1600;
-    cover.appendChild(image);
-    var details=document.createElement('div');
-    var line=document.createElement('div');line.className='book-line';
-    var author=document.createElement('span');var strong=document.createElement('b');strong.textContent=libro.autor;author.appendChild(strong);
-    var minutes=document.createElement('span');minutes.textContent=libro.tiempo_lectura_min+' min';
-    line.append(author,minutes);details.appendChild(line);
-    var tag=document.createElement('span');tag.className='tag';tag.textContent=etiqueta(libro);
-    article.append(cover,details,tag);
-    return article;
+  function ordenar(xs){return xs.slice().sort(function(a,b){var i=ORDEN.indexOf(a.id),j=ORDEN.indexOf(b.id);return(i<0?999:i)-(j<0?999:j)})}
+
+  var LIBROS=[],POR_ID={};
+  function pintar(lista){
+    LIBROS=lista.filter(function(b){return b&&b.titulo}).map(normal);
+    POR_ID={};LIBROS.forEach(function(b){POR_ID[b.id]=b});
+    /* Estantería del hero */
+    var vis=ordenar(LIBROS).slice(0,MAX_LOMOS),huecos=Math.min(2,MAX_LOMOS-vis.length);
+    var html='';
+    if(huecos>0)html+='<div class="spine pronto" style="--h:170;--w:38;--i:0" aria-hidden="true"><span>Próximamente</span></div>';
+    html+=vis.map(function(b,i){return '<button class="spine" type="button" data-libro="'+esc(b.id)+'" aria-label="'+esc(b.t)+', '+b.min+' minutos" style="--h:'+b.h+';--w:'+b.w+';--i:'+(i+1)+';background:linear-gradient(180deg,'+b.c1+','+b.c2+');--tx:'+b.tx+'"><span>'+esc(b.t)+'</span></button>'}).join('');
+    if(huecos>1)html+='<div class="spine pronto" style="--h:205;--w:44;--i:'+(vis.length+1)+'" aria-hidden="true"><span>Próximamente</span></div>';
+    document.getElementById('estanteria').innerHTML=html;
+    /* Tres repisas, una por expedición */
+    document.getElementById('expediciones').innerHTML=['mentalidad','capacidad','habilidad'].map(function(k){
+      var xs=LIBROS.filter(function(b){return b.exp===k}),n=xs.length;
+      var sp=xs.slice(0,6).map(function(r){return '<span class="mspine" style="--h:'+Math.round(r.h*.5)+';--w:'+Math.round(r.w*.62)+';background:linear-gradient(180deg,'+r.c1+','+r.c2+')"></span>'}).join('');
+      for(var i=Math.min(n,6);i<4;i++)sp+='<span class="mspine pronto" style="--h:'+(78+i*9)+';--w:'+(24+i*2)+'"></span>';
+      return '<article class="exp"><div class="mshelf" aria-hidden="true">'+sp+'</div><div class="exp-tx"><h3>'+EXP[k][0]+'</h3><p>'+EXP[k][1]+'</p><span class="meta">'+n+(n===1?' libro':' libros')+' hoy</span></div></article>';
+    }).join('');
+    /* Celular de muestra */
+    var tel=TELEFONO.map(function(k){return POR_ID[k]}).filter(Boolean);
+    if(tel.length<5)tel=tel.concat(LIBROS.filter(function(b){return TELEFONO.indexOf(b.id)<0}).slice(0,5-tel.length));
+    document.getElementById('tel-fila').innerHTML=tel.map(function(r,i){return '<span class="mspine'+(i===0?' up':'')+'" style="--h:'+Math.round(r.h*.48)+';--w:'+Math.round(r.w*.6)+';background:linear-gradient(180deg,'+r.c1+','+r.c2+')"></span>'}).join('');
   }
-  fetch('libros.json',{credentials:'same-origin'}).then(function(response){
-    if(!response.ok)throw new Error('No se pudo cargar libros.json');
-    return response.json();
-  }).then(function(data){
+
+  /* Ficha del libro al tocar un lomo */
+  var origen=null;
+  function cerrarFicha(){var v=document.getElementById('velo');if(v)v.remove();document.removeEventListener('keydown',teclaFicha);if(origen){origen.focus({preventScroll:true});origen=null}}
+  function teclaFicha(e){
+    if(e.key==='Escape'){cerrarFicha();return}
+    if(e.key==='Tab'){var v=document.getElementById('velo');if(!v)return;var f=v.querySelectorAll('button,a[href]');if(!f.length)return;var a=f[0],z=f[f.length-1];
+      if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}
+  }
+  function ficha(id,btn){
+    var b=POR_ID[id];if(!b)return;cerrarFicha();origen=btn||null;
+    var conSesion=window.BookclubLanding&&window.BookclubLanding.conSesion();
+    var v=document.createElement('div');v.className='velo';v.id='velo';
+    v.innerHTML='<div class="hoja" role="dialog" aria-modal="true" aria-labelledby="h-t"><button class="icon-btn cerrar" type="button" aria-label="Cerrar">✕</button>'+
+      '<span class="cover">'+(b.img?'<img src="'+esc(b.img)+'" alt="Portada de '+esc(b.t)+'">':'')+'</span>'+
+      '<div style="min-width:0">'+(EXP[b.exp]?'<span class="tag">'+EXP[b.exp][0]+(b.sub?' · '+esc(b.sub):'')+'</span>':'')+
+      '<h3 id="h-t">'+esc(b.t)+'</h3><p class="meta">'+esc(b.a)+' · '+b.min+' min · '+b.cap+' capítulos</p><p class="desc">'+esc(b.d)+'</p>'+
+      '<div class="cta-row"><button class="btn btn-sm" type="button" data-ingresar data-label-visitante="Empezar hoy">'+(conSesion?'Ir a mi biblioteca':'Empezar hoy')+'</button></div></div></div>';
+    document.body.appendChild(v);
+    v.addEventListener('click',function(e){if(e.target===v||e.target.closest('.cerrar'))cerrarFicha()});
+    document.addEventListener('keydown',teclaFicha);
+    v.querySelector('.cerrar').focus({preventScroll:true});
+  }
+  window.BookclubFicha={cerrar:cerrarFicha};
+  document.getElementById('estanteria').addEventListener('click',function(e){var s=e.target.closest('[data-libro]');if(s)ficha(s.getAttribute('data-libro'),s)});
+
+  pintar(RESPALDO);
+  if(window.fetch)fetch('libros.json',{credentials:'same-origin'}).then(function(r){if(!r.ok)throw new Error('No se pudo cargar libros.json');return r.json()}).then(function(data){
     if(!data||!Array.isArray(data.libros)||!data.libros.length)throw new Error('libros.json no contiene libros');
-    var cards=document.createDocumentFragment();
-    data.libros.forEach(function(libro){cards.appendChild(tarjeta(libro));});
-    grid.replaceChildren(cards);
-  }).catch(function(error){console.warn('La colección conserva las tarjetas de respaldo.',error);});
+    pintar(data.libros);
+  }).catch(function(error){console.warn('La landing usa la colección de respaldo.',error)});
 })();
 </script>
 
-<section id="bookclub-app" aria-label="Mi Biblioteca"><iframe id="bookclub-frame" title="Mi Biblioteca"></iframe></section>
 <script src="bookclub-firebase.js"></script>
 <script>
+/* Ingreso: «Ingresar» y «Empezar hoy» llaman directo a Google dentro del gesto del clic.
+   Con sesión, la app (/biblioteca/) se abre en #bookclub-app. */
 (function(){
   var shell=document.getElementById('bookclub-app'),frame=document.getElementById('bookclub-frame'),marca='bookclub-sesion-recordada';
   var modoApp=new URLSearchParams(location.search).get('app')==='1';
   var sesionRecordada=false;
   try{sesionRecordada=localStorage.getItem(marca)==='1'}catch(e){}
   if(modoApp)document.documentElement.classList.add('bookclub-app-mode');
+  var CANCELADO=['auth/popup-closed-by-user','auth/cancelled-popup-request','auth/user-cancelled'];
+
+  function conSesion(){return !!(window.BookclubSync&&window.BookclubSync.getUser&&window.BookclubSync.getUser())}
+  window.BookclubLanding={conSesion:conSesion};
   function guardarMarca(activa){
     try{if(activa)localStorage.setItem(marca,'1');else localStorage.removeItem(marca)}catch(e){}
     sesionRecordada=!!activa;
   }
   function rutaBiblioteca(){return modoApp?'/biblioteca/?open=biblioteca':'/biblioteca/'}
   function abrirBiblioteca(ruta,forzar){
+    if(window.BookclubFicha)window.BookclubFicha.cerrar();
     document.body.classList.add('bookclub-app-open');
     document.documentElement.classList.remove('bookclub-app-pending');
-    if(forzar||!frame.hasAttribute('src')){
-      shell.classList.add('is-loading');
-      frame.src=ruta||rutaBiblioteca();
-    }
+    if(forzar||!frame.hasAttribute('src')){shell.classList.add('is-loading');frame.src=ruta||rutaBiblioteca();}
   }
   function cerrarBiblioteca(){
     shell.classList.remove('is-loading');
@@ -512,27 +534,41 @@ html.bookclub-app-pending #bookclub-app{display:block}
     document.documentElement.classList.remove('bookclub-app-pending');
     frame.removeAttribute('src');
   }
+  function pintarEtiquetas(){
+    var s=conSesion();
+    document.querySelectorAll('[data-ingresar]').forEach(function(b){if(b.getAttribute('aria-busy')!=='true')b.textContent=s?'Ir a mi biblioteca':b.getAttribute('data-label-visitante')});
+    var n=document.querySelector('[data-nota-sesion]');
+    if(n){var u=s&&window.BookclubSync.getUser();n.textContent=s?'Entraste como '+((u.displayName||'').split(' ')[0]||u.email||'tu cuenta')+'.':'Entras con tu cuenta de Google de El College.'}
+  }
   function actualizarVista(){
-    var conSesion=!!(window.BookclubSync&&window.BookclubSync.getUser&&window.BookclubSync.getUser());
-    if(conSesion){guardarMarca(true);abrirBiblioteca();return;}
+    pintarEtiquetas();
+    if(conSesion()){guardarMarca(true);abrirBiblioteca();return;}
     if(sesionRecordada&&!(window.BookclubSync&&window.BookclubSync.cargado)){abrirBiblioteca();return;}
     guardarMarca(false);cerrarBiblioteca();
   }
+  function restaurar(btn){btn.removeAttribute('aria-busy');pintarEtiquetas()}
+  function ingresar(btn){
+    if(conSesion()){abrirBiblioteca();return;}
+    if(btn.getAttribute('aria-busy')==='true')return;
+    btn.setAttribute('aria-busy','true');btn.textContent='Abriendo Google…';
+    var intento;
+    try{intento=window.BookclubSync.signInWithGoogle()}catch(error){intento=Promise.reject(error)}
+    Promise.resolve(intento).then(function(){restaurar(btn)},function(error){
+      restaurar(btn);
+      if(error&&CANCELADO.indexOf(error.code)>-1)return;
+      console.error('No fue posible abrir Google.',error);
+      window.BookclubAviso('No pudimos completar el ingreso. Inténtalo de nuevo.');
+    });
+  }
+  document.addEventListener('click',function(e){var b=e.target.closest('[data-ingresar]');if(b){e.preventDefault();ingresar(b)}});
+
   frame.addEventListener('load',function(){shell.classList.remove('is-loading');});
   if(sesionRecordada)abrirBiblioteca();
-  document.querySelectorAll('[data-library-access]').forEach(function(link){
-    link.addEventListener('click',function(event){
-      event.preventDefault();
-      window.BookclubSync.signInWithGoogle().catch(function(error){console.error('No fue posible abrir Google.',error);});
-    });
-  });
   window.addEventListener('bookclub-auth-change',actualizarVista);
   window.addEventListener('message',function(event){
     if(event.origin!==location.origin||!event.data)return;
-    if(event.data.type==='bookclub-signout'){guardarMarca(false);cerrarBiblioteca();window.BookclubSync.signOut();}
-    if(event.data.type==='bookclub-open-library'){
-      abrirBiblioteca('/biblioteca/?open=biblioteca',true);
-    }
+    if(event.data.type==='bookclub-signout'){guardarMarca(false);cerrarBiblioteca();window.BookclubSync.signOut();pintarEtiquetas();}
+    if(event.data.type==='bookclub-open-library')abrirBiblioteca('/biblioteca/?open=biblioteca',true);
   });
   if(window.BookclubSync&&window.BookclubSync.ready)window.BookclubSync.ready.then(actualizarVista);
 })();
@@ -542,5 +578,3 @@ if('serviceWorker' in navigator){
 </script>
 </body>
 </html>
-
-

@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'bookclub-v29-firebase-unified-reading';
+const CACHE_VERSION = 'bookclub-v30-landing-rediseno-v3';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [
